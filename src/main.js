@@ -2,6 +2,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import "./reset.css"; // Import the reset.css file
 import Home from "./views/Home.vue";
 import Bemutatkozás from "./views/AboutUs.vue";
 import Munkáink from "./views/OurWorks.vue";

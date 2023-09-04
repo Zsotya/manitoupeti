@@ -1,13 +1,29 @@
 <template>
   <nav>
     <ul>
-      <router-link to="/bemutatkozas"><li>Bemutatkozás</li></router-link>
-      <router-link to="/munkaink"><li>Munkáink</li></router-link>
-      <router-link to="/berelheto-gepeink"
+      <router-link
+        to="/bemutatkozas"
+        :class="{ active: $route.path === '/bemutatkozas' }"
+        ><li>Bemutatkozás</li></router-link
+      >
+      <router-link
+        to="/munkaink"
+        :class="{ active: $route.path === '/munkaink' }"
+        ><li>Munkáink</li></router-link
+      >
+      <router-link
+        to="/berelheto-gepeink"
+        :class="{ active: $route.path === '/berelheto-gepeink' }"
         ><li>Bérelhető gépeink</li></router-link
       >
-      <router-link to="/elerhetoseg"><li>Elérhetőség</li></router-link>
-      <router-link to="/karrier"><li>Karrier</li></router-link>
+      <router-link
+        to="/elerhetoseg"
+        :class="{ active: $route.path === '/elerhetoseg' }"
+        ><li>Elérhetőség</li></router-link
+      >
+      <router-link to="/karrier" :class="{ active: $route.path === '/karrier' }"
+        ><li>Karrier</li></router-link
+      >
     </ul>
   </nav>
 </template>
@@ -21,22 +37,47 @@ export default {
 <style scoped>
 nav {
   position: absolute;
-  right: 250px;
+  right: 200px;
   top: 20px;
 }
+
 ul {
   display: flex;
   list-style: none;
-  justify-content: right;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.338);
+  border: 1px solid red;
 }
 
 li {
-  padding: 0 25px;
-  border: 1px solid red;
-  background-color: rgba(0, 0, 0, 0.538);
   text-align: center;
-  background: transparent;
   margin: 0;
-  line-height: 68px;
+  line-height: 70px;
+  position: relative;
+}
+
+.router-link-active,
+a:hover {
+  background: white;
+  color: black;
+}
+
+a:hover {
+  background: white;
+  color: black;
+}
+
+li.active {
+  background: white;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  padding: 0px 20px;
+  background-color: rgba(0, 0, 0, 0.538);
 }
 </style>

@@ -1,4 +1,3 @@
-<!-- src/App.vue -->
 <template>
   <div>
     <NavBar />
@@ -10,6 +9,4 @@
 import NavBar from "@/components/NavBar.vue";
 </script>
 
-<style scoped>
-/* Add your global CSS styling here */
-</style>
+<style scoped></style>
