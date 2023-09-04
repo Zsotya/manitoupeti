@@ -39,6 +39,7 @@ nav {
   position: absolute;
   right: 200px;
   top: 20px;
+  z-index: 1;
 }
 
 ul {
