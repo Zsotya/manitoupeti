@@ -1,10 +1,8 @@
 <template>
   <div>
     <div><HomeLanding /></div>
-    <section class="second-part">
-      <div><HomeParagraphIntro /></div>
-      <div><HomeParagraphLeft /></div>
-    </section>
+    <div><HomeParagraphIntro /></div>
+    <div><HomeParagraphLeft /></div>
   </div>
 </template>
 
