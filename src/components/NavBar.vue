@@ -28,11 +28,7 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: "NavBar",
-};
-</script>
+<script setup></script>
 
 <style scoped>
 nav {
