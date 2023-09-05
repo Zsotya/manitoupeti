@@ -1,7 +1,10 @@
 <template>
-  <div class="paragraph-left">
+  <div class="paragraph-right">
     <div class="paragraph-section">
       <div class="left-side">
+        <img src="@/assets/42.jpeg" alt="img" />
+      </div>
+      <div class="right-side">
         <h1>Title for this part</h1>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. A tempora
@@ -16,12 +19,11 @@
           cupiditate tempora. Aliquam.
         </p>
       </div>
-      <div class="right-side">
-        <img src="@/assets/42.jpeg" alt="img" />
-      </div>
     </div>
   </div>
 </template>
+
+<script setup></script>
 
 <style scoped>
 .paragraph-section {
@@ -32,29 +34,29 @@
   align-items: center;
 }
 
-.right-side {
+.left-side {
   flex: 3;
   padding: 20px;
 }
 
-.right-side img {
+.left-side img {
   width: 843px;
   height: 896px;
   object-fit: cover;
 }
 
-.left-side {
+.right-side {
   flex: 2;
   padding: 0px 0px 0px 75px;
 }
 
-.left-side p {
+.right-side p {
   font-size: 16px;
   line-height: 1.5;
   width: 40ch;
   padding: 16px 0px;
 }
-.left-side h1 {
+.right-side h1 {
   font-size: 30px;
   display: flex;
 }
