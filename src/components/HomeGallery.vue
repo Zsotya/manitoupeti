@@ -131,6 +131,7 @@ const preloadImages = () => {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .button-container.left {
@@ -171,5 +172,11 @@ img {
 
 .image img {
   max-height: 100%;
+}
+
+.image:hover img {
+  transform: scale(1.18);
+  transition: transform 0.5s ease;
+  overflow: hidden;
 }
 </style>
