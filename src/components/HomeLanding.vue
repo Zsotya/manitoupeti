@@ -1,7 +1,9 @@
 <template>
   <div class="landing-section">
     <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image" />
-    <img class="logo" src="@/assets/logo.png" alt="Logo" @click="goToHome" />
+    <div class="logodiv">
+      <img class="logo" src="@/assets/logo3.png" alt="Logo" @click="goToHome" />
+    </div>
     <div class="router-container">
       <Navbar />
     </div>
@@ -28,7 +30,7 @@ const goToHome = () => {
 .landing-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 1080px;
   overflow: hidden;
 }
 
@@ -47,7 +49,7 @@ const goToHome = () => {
   top: 20px;
   left: 20px;
   cursor: pointer;
-  z-index: 1; /* A kép elé helyezi a logot */
+  z-index: 0; /* A kép elé helyezi a logot */
 }
 
 .router-container {

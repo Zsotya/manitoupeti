@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/assets/logo.png" alt="Logo" @click="goToHome" />
+    <img src="@/assets/logo3.png" alt="Logo" @click="goToHome" />
     <NavBar />
     <h1>{{ pageTitle }}</h1>
   </div>
