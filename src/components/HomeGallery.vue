@@ -50,6 +50,7 @@ const displayedImages = computed(() => {
 const moveLeft = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
+    preloadImages();
   }
 };
 
@@ -60,15 +61,21 @@ const moveRight = () => {
   }
 };
 
+// Előre betölti a képeket, jobb user experience eléréséhez
+
 const preloadImages = () => {
-  if (currentIndex.value > 0) {
-    const minusFirstImage = new Image();
-    minusFirstImage.src = images[currentIndex.value - 1];
+  for (let i = currentIndex; i < currentIndex + 5; i++) {
+    if (i >= 0 && i < images.length) {
+      const img = new Image();
+      img.src = images[i];
+    }
   }
 
-  if (currentIndex.value < images.length - 3) {
-    const fourthImage = new Image();
-    fourthImage.src = images[currentIndex.value + 3];
+  for (let i = currentIndex - 1; i >= currentIndex - 5; i--) {
+    if (i >= 0 && i < images.length) {
+      const img = new Image();
+      img.src = images[i];
+    }
   }
 };
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div><HomeLanding /></div>
-    <div><HomeParagraphIntro /></div>
-    <div><HomeParagraphLeft /></div>
-    <div><HomeParagraphRight /></div>
-    <div><HomeParagraphLeft /></div>
-    <div><HomeWhoAreWe /></div>
-    <div><HomeGallery /></div>
+    <header><HomeLanding /></header>
+    <section><HomeParagraphIntro /></section>
+    <section><HomeParagraphLeft /></section>
+    <section><HomeParagraphRight /></section>
+    <section><HomeParagraphLeft /></section>
+    <section><HomeWhoAreWe /></section>
+    <section><HomeGallery /></section>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quo
       suscipit! Optio velit totam magnam obcaecati, voluptas ab non nostrum
