@@ -7,12 +7,7 @@
     <section><HomeParagraphLeft /></section>
     <section><HomeWhoAreWe /></section>
     <section><HomeGallery /></section>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quo
-      suscipit! Optio velit totam magnam obcaecati, voluptas ab non nostrum
-      debitis quasi porro voluptatibus. Fuga voluptatum voluptas odio tempora
-      necessitatibus?
-    </p>
+    <footer><Footer /></footer>
   </div>
 </template>
 
@@ -23,6 +18,7 @@ import HomeParagraphLeft from "@/components/HomeParagraphLeft.vue";
 import HomeParagraphRight from "@/components/HomeParagraphRight.vue";
 import HomeWhoAreWe from "@/components/HomeWhoAreWe.vue";
 import HomeGallery from "@/components/HomeGallery.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <style scoped></style>
