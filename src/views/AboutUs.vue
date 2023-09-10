@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/assets/logo3.png" alt="Logo" @click="goToHome" />
+    <Logo />
     <NavBar />
     <h1>{{ pageTitle }}</h1>
   </div>
@@ -10,13 +10,10 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/NavBar.vue";
+import Logo from "@/components/Logo.vue";
 
 const pageTitle = ref("");
 const router = useRouter();
-
-const goToHome = () => {
-  router.push("/");
-};
 
 // pageTitle komponens beállítása oldaltól függően
 const route = router.currentRoute.value;

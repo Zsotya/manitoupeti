@@ -1,8 +1,32 @@
 <template>
   <div>
-    <img src="@/assets/logo3.png" alt="Logo" @click="goToHome" />
+    <Logo />
     <NavBar />
-    <h1>{{ pageTitle }}</h1>
+    <OurWorksFilms
+      :filmsData="[
+        {
+          title: 'Spectral',
+          imageSrc: require('@/assets/Spectral.jpg'),
+          description: 'Description for Spectral',
+        },
+        {
+          title: 'Hercules',
+          imageSrc: require('@/assets/Hercules.jpg'),
+          description: 'Description for Hercules',
+        },
+        {
+          title: 'Alienist',
+          imageSrc: require('@/assets/Alienist.jpg'),
+          description: 'Description for Alienist',
+        },
+        {
+          title: 'Alienist',
+          imageSrc: require('@/assets/Alienist.jpg'),
+          description: 'Description for Alienist',
+        },
+      ]"
+    ></OurWorksFilms>
+    <Footer />
   </div>
 </template>
 
@@ -10,13 +34,12 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/NavBar.vue";
+import Logo from "@/components/Logo.vue";
+import OurWorksFilms from "@/components/OurWorksFilms.vue";
+import Footer from "@/components/Footer.vue";
 
 const pageTitle = ref("");
 const router = useRouter();
-
-const goToHome = () => {
-  router.push("/");
-};
 
 // pageTitle komponens beállítása oldaltól függően
 const route = router.currentRoute.value;

@@ -1,9 +1,7 @@
 <template>
   <div class="landing-section">
     <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image" />
-    <div class="logodiv">
-      <img class="logo" src="@/assets/logo3.png" alt="Logo" @click="goToHome" />
-    </div>
+    <Logo />
     <div class="router-container">
       <Navbar />
     </div>
@@ -19,11 +17,7 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
-const goToHome = () => {
-  router.push({ path: "/" });
-};
+import Logo from "@/components/Logo.vue";
 </script>
 
 <style scoped>
@@ -61,12 +55,13 @@ const goToHome = () => {
 
 .text-parts {
   position: absolute;
-  top: 50%;
-  left: 50%; /* top+left 50%: a container közepébe helyezi a szöveget */
-  transform: translate(
+  top: 37.5%;
+  left: 12%; /* top+left 50%: a container közepébe helyezi a szöveget */
+  /* transform: translate(
     -85%,
     -25%
   ); /* Mozgatás a container közepétől balra, lefele */
+
   color: rgb(238, 237, 250);
   text-align: left;
   font-weight: bolder;
