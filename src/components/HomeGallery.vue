@@ -40,7 +40,7 @@ const images = [
 
 const displayedImages = computed(() => {
   const start = currentIndex.value;
-  const end = start + 3;
+  const end = start + 1;
   const displayed = images.slice(start, end);
 
   const nextSet = images.slice(end, end + 2);
@@ -87,6 +87,7 @@ const preloadImages = () => {
   text-align: center;
   background-color: #e8e6e6;
   height: 900px;
+  overflow: hidden;
 }
 
 .carousel {
@@ -151,7 +152,7 @@ const preloadImages = () => {
 
 .gallery {
   display: flex;
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 756px;
   padding: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -179,11 +180,12 @@ img {
 
 .image img {
   max-height: 100%;
+  transition: transform 0.3s ease;
 }
 
 .image:hover img {
-  transform: scale(1.18);
-  transition: transform 0.5s ease;
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
   overflow: hidden;
 }
 </style>
