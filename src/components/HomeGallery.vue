@@ -188,4 +188,8 @@ img {
   transition: transform 0.3s ease;
   overflow: hidden;
 }
+
+.image:hover {
+  z-index: 2;
+}
 </style>
