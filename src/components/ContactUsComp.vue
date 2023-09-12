@@ -15,31 +15,31 @@
         <div class="name-part">
           <div class="first-name">
             <label for="firstName">Vezetéknév</label>
-            <input type="text" id="firstName" />
+            <input type="text" id="firstName" class="transparent-input" />
           </div>
           <div class="last-name">
             <label for="lastName">Keresztnév</label>
-            <input type="text" id="lastName" />
+            <input type="text" id="lastName" class="transparent-input" />
           </div>
         </div>
         <div class="email-part">
           <div class="email">
             <label for="email">Email</label>
-            <input type="text" id="email" />
+            <input type="text" id="email" class="transparent-input" />
           </div>
           <div class="subject">
             <label for="subject">Tárgy</label>
-            <input type="text" id="subject" />
+            <input type="text" id="subject" class="transparent-input" />
           </div>
         </div>
         <div class="message-part">
           <div class="message">
             <label for="message">Hagyjon üzenetet...</label>
-            <input type="text" id="message" />
+            <textarea class="message-format" id="message"></textarea>
           </div>
         </div>
         <div class="submit">
-          <button class="submit-button">Submit</button>
+          <button class="submit-button">Küldés</button>
         </div>
       </div>
       <div class="showcase-img">
@@ -56,12 +56,13 @@
   display: flex;
   flex-direction: column;
   background-color: #e8e6e6;
+  padding-left: 60px;
 }
 
 .text-parts {
   display: flex;
   flex-direction: column;
-  padding: 300px 0px 0px 100px;
+  padding: 260px 0px 0px 100px;
 }
 
 .small-title {
@@ -108,7 +109,12 @@
 .submit {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px 30px 16px 0px;
+  margin-right: 50px;
+}
+
+input {
+  width: 140%;
 }
 
 label {
@@ -116,13 +122,69 @@ label {
   font-size: 16px;
 }
 
+.transparent-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  padding: 5px 0;
+  font-size: 16px;
+  width: 120%;
+  transition: 0.3s;
+}
+
+.transparent-input:focus {
+  border-bottom: 1px solid #e07076;
+  transition: 0.3s;
+}
+
+.message textarea {
+  width: 58ch;
+  height: 14em;
+  line-height: 1.5;
+  background: transparent;
+  resize: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.message textarea:focus {
+  border: 1px solid #e07076;
+  transition: 0.3s;
+}
+
+.message-format {
+  padding: 2px 0px 0px 4px;
+  font-size: 16px;
+}
+
+.submit {
+  width: 50%;
+}
+
+.submit-button {
+  background-color: #e87474;
+  color: black;
+  padding: 24px 46px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.submit-button:hover {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
 .showcase-img {
   align-self: flex-end;
+  padding-right: 30px;
 }
 
 .showcase-img img {
   max-width: 100%;
-  width: 850px;
+  width: 900px;
   height: 586px;
   object-fit: cover;
 }
