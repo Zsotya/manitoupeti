@@ -33,10 +33,10 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import NavBar from "@/components/NavBar.vue";
-import Logo from "@/components/Logo.vue";
-import OurWorksFilms from "@/components/OurWorksFilms.vue";
-import Footer from "@/components/Footer.vue";
+import NavBar from "@/components/RootComponents/NavBar.vue";
+import Logo from "@/components/RootComponents/Logo.vue";
+import OurWorksFilms from "@/components/OurWorksComponents/OurWorksFilms.vue";
+import Footer from "@/components/RootComponents/Footer.vue";
 
 const pageTitle = ref("");
 const router = useRouter();

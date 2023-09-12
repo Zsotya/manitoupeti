@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "@/components/RootComponents/NavBar.vue";
 </script>
 
 <style scoped></style>

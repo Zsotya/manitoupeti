@@ -29,12 +29,12 @@
 </template>
 
 <script setup>
-import HomeLanding from "@/components/HomeLanding.vue";
-import HomeParagraphIntro from "@/components/HomeParagraphIntro.vue";
-import HomeParagraph from "@/components/HomeParagraph.vue";
-import HomeWhoAreWe from "@/components/HomeWhoAreWe.vue";
-import HomeGallery from "@/components/HomeGallery.vue";
-import Footer from "@/components/Footer.vue";
+import HomeLanding from "@/components/HomeComponents/HomeLanding.vue";
+import HomeParagraphIntro from "@/components/HomeComponents/HomeParagraphIntro.vue";
+import HomeParagraph from "@/components/HomeComponents/HomeParagraph.vue";
+import HomeWhoAreWe from "@/components/HomeComponents/HomeWhoAreWe.vue";
+import HomeGallery from "@/components/HomeComponents/HomeGallery.vue";
+import Footer from "@/components/RootComponents/Footer.vue";
 </script>
 
 <style scoped></style>
