@@ -64,6 +64,7 @@ a:hover {
 a:hover {
   background: white;
   color: black;
+  transition: 0.3s ease;
 }
 
 li.active {
@@ -76,5 +77,6 @@ a {
   color: white;
   padding: 0px 20px;
   background-color: rgba(0, 0, 0, 0.538);
+  transition: 0.3s ease;
 }
 </style>
