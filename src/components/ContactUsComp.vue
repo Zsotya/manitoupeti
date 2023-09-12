@@ -187,5 +187,7 @@ label {
   width: 900px;
   height: 586px;
   object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 4.5px 4.5px 9px rgba(0, 0, 0, 0.8);
 }
 </style>
