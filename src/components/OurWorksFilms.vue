@@ -152,7 +152,7 @@ h2 {
 }
 
 .film-card.flipped .film-front {
-  transform: rotateY(180deg);
+  transform: rotateY(-180deg);
 }
 
 .film-card.flipped .film-back {
