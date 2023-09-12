@@ -2,7 +2,8 @@
   <div>
     <Logo />
     <NavBar />
-    <h1>{{ pageTitle }}</h1>
+    <ContactUsComp />
+    <Footer />
   </div>
 </template>
 
@@ -11,6 +12,8 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import NavBar from "@/components/NavBar.vue";
 import Logo from "@/components/Logo.vue";
+import ContactUsComp from "@/components/ContactUsComp.vue";
+import Footer from "@/components/Footer.vue";
 
 const pageTitle = ref("");
 const router = useRouter();
