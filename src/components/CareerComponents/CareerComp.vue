@@ -1,0 +1,58 @@
+<template>
+  <div class="career-component">
+    <div class="text-part">
+      <div class="small-content">Karrier lehetőség vállalkozásunknál</div>
+      <div class="big-content">Betölthető pozícióink</div>
+    </div>
+    <div class="career-cards-container">
+      <div class="career-cards">
+        <CardComponent v-for="job in jobs" :key="job.id" :job="job" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import CardComponent from "./CardComponent.vue";
+const { jobs } = defineProps(["jobs"]);
+</script>
+
+<style scoped>
+.career-component {
+  background-color: #e8e6e6;
+  display: flex;
+  flex-direction: column;
+  padding-left: 90px;
+}
+
+.text-part {
+  display: flex;
+  flex-direction: column;
+  padding-top: 240px;
+}
+
+.small-content {
+  font-size: 24px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+}
+
+.big-content {
+  font-size: 46px;
+  margin-bottom: 4px;
+  font-weight: bolder;
+  color: #e07076;
+  width: 30ch;
+}
+
+.career-cards-container {
+  margin-left: -60px;
+}
+
+.career-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px 40px 80px 30px;
+}
+</style>

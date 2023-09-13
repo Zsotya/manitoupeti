@@ -62,7 +62,7 @@ const toggleDescription = (film) => {
 .text-intro {
   display: flex;
   flex-direction: column;
-  padding: 500px 0px 0px 92px;
+  padding: 300px 0px 0px 92px;
 }
 
 .small-title {
