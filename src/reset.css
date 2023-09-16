@@ -1,0 +1,13 @@
+/* Minden elem padding,margó beállítása 0-ra */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Box-sizing beállítása globálisan border-box-ra */
+/* Így könnyebb kalkulálni a méretezést, konzisztensebb lesz a dizájn */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
