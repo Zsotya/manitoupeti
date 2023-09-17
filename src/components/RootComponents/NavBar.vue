@@ -2,38 +2,35 @@
   <nav>
     <ul>
       <router-link
-        to="/bemutatkozas"
-        :class="{ active: $route.path === '/bemutatkozas' }"
-        ><li>Bemutatkozás</li></router-link
+        v-for="route in routes"
+        :key="route.path"
+        :to="route.path"
+        :exact="true"
       >
-      <router-link
-        to="/munkaink"
-        :class="{ active: $route.path === '/munkaink' }"
-        ><li>Munkáink</li></router-link
-      >
-      <router-link
-        to="/berelheto-gepeink"
-        :class="{ active: $route.path === '/berelheto-gepeink' }"
-        ><li>Bérelhető gépeink</li></router-link
-      >
-      <router-link
-        to="/elerhetoseg"
-        :class="{ active: $route.path === '/elerhetoseg' }"
-        ><li>Elérhetőség</li></router-link
-      >
-      <router-link to="/karrier" :class="{ active: $route.path === '/karrier' }"
-        ><li>Karrier</li></router-link
-      >
+        <li>{{ route.label }}</li>
+      </router-link>
     </ul>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRoute } from "vue-router";
+
+const routes = [
+  { path: "/bemutatkozas", label: "Bemutatkozás" },
+  { path: "/munkaink", label: "Munkáink" },
+  { path: "/berelheto-gepeink", label: "Bérelhető gépeink" },
+  { path: "/elerhetoseg", label: "Elérhetőség" },
+  { path: "/karrier", label: "Karrier" },
+];
+
+const $route = useRoute();
+</script>
 
 <style scoped>
 nav {
   position: absolute;
-  right: 200px;
+  right: 12rem;
   top: 20px;
   z-index: 1;
 }
@@ -50,7 +47,7 @@ ul {
 
 li {
   text-align: center;
-  margin: 0;
+  margin: 0 0.2rem;
   line-height: 70px;
   position: relative;
 }
@@ -77,6 +74,29 @@ a {
   color: white;
   padding: 0px 20px;
   background-color: rgba(0, 0, 0, 0.538);
-  transition: 0.3s ease;
+  transition: 0.3s ease-in-out;
+}
+
+/* Tablet nézet */
+
+@media screen and (max-width: 1024px) {
+  nav {
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  ul {
+    justify-content: center;
+  }
+
+  a {
+    width: 100%;
+    padding: 0px;
+  }
+
+  li {
+    margin: 0;
+  }
 }
 </style>
