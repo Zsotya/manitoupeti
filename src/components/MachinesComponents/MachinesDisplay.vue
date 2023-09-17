@@ -53,7 +53,7 @@ const { machine } = defineProps(["machine"]);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 500px;
+  max-width: 100%;
   border: 1px solid #ccc;
   padding: 20px;
   margin: 20px 0;
@@ -70,13 +70,15 @@ const { machine } = defineProps(["machine"]);
 .machines-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
 }
 
 .image-container {
   width: 100%;
-  max-width: 200px;
 }
 
 .image-container img {
@@ -137,6 +139,7 @@ button:hover {
   .machines-display {
     flex-direction: column;
     text-align: center;
+    justify-content: center;
   }
 
   .machine-details {

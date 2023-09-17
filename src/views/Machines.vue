@@ -6,7 +6,7 @@
     <div class="machines-container">
       <MachinesDisplay
         v-for="machine in machines"
-        :key="machines.id"
+        :key="machine.id"
         :machine="machine"
       />
     </div>
@@ -87,17 +87,20 @@ const machines = [
 
 <style scoped>
 .machines-container {
+  padding-top: 100px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  margin: 20px;
+  justify-content: space-evenly;
+  gap: 0px;
+  padding: 140px 20px 40px 20px;
+  background-color: #e8e6e6;
 }
 
 @media (max-width: 768px) {
   .machines-container {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 }
 </style>
