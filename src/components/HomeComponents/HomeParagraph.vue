@@ -2,25 +2,20 @@
   <div class="paragraph">
     <div class="paragraph-section" :class="{ 'reverse-order': isEven }">
       <div class="text-side">
-        <h1>{{ title }}</h1>
-        <p>{{ content }}</p>
+        <h1>{{ paragraph.title }}</h1>
+        <p>{{ paragraph.content }}</p>
       </div>
       <div class="image-side">
-        <img :src="imageSrc" alt="Image" />
+        <img :src="paragraph.imageSrc" alt="Image" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const { id, title, content, imageSrc } = defineProps([
-  "id",
-  "title",
-  "content",
-  "imageSrc",
-]);
+const { paragraph } = defineProps(["paragraph"]);
 
-const isEven = id % 2 === 0;
+const isEven = paragraph.id % 2 === 0;
 </script>
 
 <style scoped>

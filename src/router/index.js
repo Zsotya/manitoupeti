@@ -1,9 +1,23 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
-const routes = [{}];
+import Home from "../views/Home.vue";
+import AboutUs from "../views/AboutUs.vue";
+import OurWorks from "../views/OurWorks.vue";
+import Machines from "../views/Machines.vue";
+import ContactUs from "../views/ContactUs.vue";
+import Career from "../views/Career.vue";
+
+const routes = [
+  { path: "/", component: Home },
+  { path: "/bemutatkozas", component: AboutUs },
+  { path: "/munkaink", component: OurWorks },
+  { path: "/berelheto-gepeink", component: Machines },
+  { path: "/elerhetoseg", component: ContactUs },
+  { path: "/karrier", component: Career },
+];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

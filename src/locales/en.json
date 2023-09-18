@@ -4,5 +4,17 @@
   "machinesLabel": "Machines",
   "contactUsLabel": "Contact Us",
   "careerLabel": "Career",
-  "languageSwitch": "Switch Language"
+  "languageSwitch": "Switch Language",
+  "homeBigText": "Professional Manitou machine services",
+  "homeMediumText": "\"Every machine and tool is only as good as and capable of as much as the person operating it can get out of it.\"",
+  "homeIntroductionBig": "The task entrusted to us is in good hands",
+  "homeIntroductionSmall": "We take maximum responsibility for the work we do",
+  "homeLearnMore": "Learn more here",
+  "homeExperience": "Years experience",
+  "homeProjects": "Successful projects",
+  "homeOperators": "Professional operators",
+  "homeEmployer": "Satisfied employers",
+  "homeWhoAreWe": "Who are we?",
+  "homeAboutUs": "About our company",
+  "homeAboutUsText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
 }

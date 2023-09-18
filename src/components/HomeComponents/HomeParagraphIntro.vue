@@ -1,11 +1,11 @@
 <template>
   <div class="introduction-part">
     <div class="introduction-left">
-      <h3>A ránk bízott feladat jó kezekben van</h3>
-      <h1>Mi az általunk végzett munkáért felelősséget vállalunk</h1>
+      <h3>{{ $t("homeIntroductionBig") }}</h3>
+      <h1>{{ $t("homeIntroductionSmall") }}</h1>
     </div>
     <div class="introduction-right">
-      <button>További tudnivalók</button>
+      <button>{{ $t("homeLearnMore") }}</button>
     </div>
   </div>
 </template>
@@ -17,10 +17,10 @@
   display: flex;
   background-color: #e8e6e6;
   align-items: center;
+  justify-content: space-between;
 }
 
 .introduction-left {
-  flex: 2;
   padding: 70px 30px 0px 150px;
 }
 
@@ -36,8 +36,10 @@
   padding-top: 16px;
 }
 .introduction-right {
-  flex: 0.7;
+  justify-self: flex-end;
+  align-self: center;
   padding-top: 20px;
+  padding-right: 200px;
 }
 
 .introduction-right button {

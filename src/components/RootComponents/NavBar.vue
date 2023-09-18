@@ -7,10 +7,13 @@
         :to="route.path"
         :exact="true"
       >
-        <li>{{ route.label }}</li>
+        <li>{{ $t(route.label) }}</li>
       </router-link>
       <li>
-        <button @click="toggleLanguage" class="language-switch">
+        <button
+          @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
+          class="language-switch"
+        >
           {{ $t("languageSwitch") }}
         </button>
       </li>
@@ -20,21 +23,16 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { useI18n } from "vue-i18n";
 
 const routes = [
-  { path: "/bemutatkozas", label: "Bemutatkozás" },
-  { path: "/munkaink", label: "Munkáink" },
-  { path: "/berelheto-gepeink", label: "Bérelhető gépeink" },
-  { path: "/elerhetoseg", label: "Elérhetőség" },
-  { path: "/karrier", label: "Karrier" },
+  { path: "/bemutatkozas", label: "aboutLabel" },
+  { path: "/munkaink", label: "ourWorksLabel" },
+  { path: "/berelheto-gepeink", label: "machinesLabel" },
+  { path: "/elerhetoseg", label: "contactUsLabel" },
+  { path: "/karrier", label: "careerLabel" },
 ];
 
-const { locale, t } = useI18n();
 const $route = useRoute();
-const toggleLanguage = () => {
-  console.log("Toggle language function");
-};
 </script>
 
 <style scoped>

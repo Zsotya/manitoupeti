@@ -4,5 +4,17 @@
   "machinesLabel": "Gépeink",
   "contactUsLabel": "Kapcsolat",
   "careerLabel": "Karrier",
-  "languageSwitch": "Nyelv váltása"
+  "languageSwitch": "Nyelv váltása",
+  "homeBigText": "Professzionális Manitou gépes szolgáltatások",
+  "homeMediumText": "\"Minden gép és eszköz annyit ér és arra képes,amennyit az azt kezelő személy ki tud hozni belőle.\"",
+  "homeIntroductionBig": "A ránk bízott feladat jó kezekben van",
+  "homeIntroductionSmall": "Mi az általunk végzett munkáért teljes felelősséget vállalunk",
+  "homeLearnMore": "További tudnivalók",
+  "homeExperience": "Év tapasztalat",
+  "homeProjects": "Sikeres projekt",
+  "homeOperators": "Professzionális gépkezelő",
+  "homeEmployer": "Elégedett munkáltató",
+  "homeWhoAreWe": "Kik vagyunk mi?",
+  "homeAboutUs": "Cégünkről",
+  "homeAboutUsText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi."
 }

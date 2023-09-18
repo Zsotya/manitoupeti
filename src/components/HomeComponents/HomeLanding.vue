@@ -2,10 +2,9 @@
   <div class="landing-section">
     <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image" />
     <div class="text-parts">
-      <p class="big-text">Professzionális Manitou gépes szolgáltatások</p>
+      <p class="big-text">{{ $t("homeBigText") }}</p>
       <p class="medium-text">
-        "Minden gép és eszköz annyit ér és arra képes,amennyit az azt kezelő
-        személy ki tud hozni belőle."
+        {{ $t("homeMediumText") }}
       </p>
       <p class="small-text">- ManitouPeti</p>
     </div>

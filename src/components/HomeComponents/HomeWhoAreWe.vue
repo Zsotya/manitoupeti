@@ -6,36 +6,33 @@
         <li>
           <div class="milestone">
             <div class="number">10+</div>
-            <div class="text">Év tapasztalat</div>
+            <div class="text">{{ $t("homeExperience") }}</div>
           </div>
         </li>
         <li>
           <div class="milestone">
             <div class="number">300+</div>
-            <div class="text">Sikeres projekt</div>
+            <div class="text">{{ $t("homeProjects") }}</div>
           </div>
         </li>
         <li>
           <div class="milestone">
             <div class="number">12</div>
-            <div class="text">Professzionális gépkezelő</div>
+            <div class="text">{{ $t("homeOperators") }}</div>
           </div>
         </li>
         <li>
           <div class="milestone">
             <div class="number">30+</div>
-            <div class="text">Elégedett munkáltató</div>
+            <div class="text">{{ $t("homeEmployer") }}</div>
           </div>
         </li>
       </ul>
     </div>
     <div class="info">
-      <div class="question">Kik vagyunk mi?</div>
-      <div class="title">Cégünkről</div>
-      <div class="paragraph">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-        odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-      </div>
+      <div class="question">{{ $t("homeWhoAreWe") }}</div>
+      <div class="title">{{ $t("homeAboutUs") }}</div>
+      <div class="paragraph">{{ $t("homeAboutUsText") }}</div>
     </div>
   </div>
 </template>
@@ -96,7 +93,7 @@
 .info {
   position: absolute;
   top: 50%;
-  right: 160px;
+  right: 180px;
   transform: translateY(-30%);
   text-align: left;
   color: white;
@@ -112,6 +109,7 @@
 .title {
   font-size: 63px;
   margin-bottom: 4px;
+  width: 18ch;
   font-weight: bolder;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
   color: #e07076;
