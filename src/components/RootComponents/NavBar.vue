@@ -10,7 +10,9 @@
         <li>{{ route.label }}</li>
       </router-link>
       <li>
-        <button @click="toggleLanguage" class="language-switch">teszt</button>
+        <button @click="toggleLanguage" class="language-switch">
+          {{ $t("languageSwitch") }}
+        </button>
       </li>
     </ul>
   </nav>
@@ -18,6 +20,7 @@
 
 <script setup>
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const routes = [
   { path: "/bemutatkozas", label: "Bemutatkozás" },
@@ -27,9 +30,10 @@ const routes = [
   { path: "/karrier", label: "Karrier" },
 ];
 
+const { locale, t } = useI18n();
 const $route = useRoute();
 const toggleLanguage = () => {
-  console.log("sajt");
+  console.log("Toggle language function");
 };
 </script>
 
