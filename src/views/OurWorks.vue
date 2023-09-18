@@ -22,6 +22,11 @@
           imageSrc: require('@/assets/Alienist.jpg'),
           description: 'Description for Alienist',
         },
+        {
+          title: 'Alienist',
+          imageSrc: require('@/assets/Alienist.jpg'),
+          description: 'Description for Alienist',
+        },
       ]"
     ></OurWorksFilms>
   </div>
