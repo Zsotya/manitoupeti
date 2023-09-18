@@ -17,7 +17,7 @@
             class="onoffswitch-checkbox"
             id="myonoffswitch"
             tabindex="0"
-            checked
+            unchecked
             @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
           />
           <label class="onoffswitch-label" for="myonoffswitch">
@@ -60,6 +60,8 @@ ul {
   padding: 0;
   background-color: rgba(0, 0, 0, 0.338);
   border: 1px solid red;
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 li {
@@ -140,20 +142,20 @@ a {
   box-sizing: border-box;
 }
 .onoffswitch-inner:before {
-  content: "HUN";
+  content: "";
   padding-left: 10px;
   text-align: left;
-  background-image: url("@/assets/hungarian-flag.png");
-  background-size: 100px 60px;
+  background-image: url("@/assets/american-flag.png");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   color: #000000;
 }
 .onoffswitch-inner:after {
-  content: "ENG";
+  content: "";
   padding-right: 10px;
-  background-image: url("@/assets/american-flag.png");
-  background-size: cover;
+  background-image: url("@/assets/hungarian-flag.png");
+  background-size: 100px 60px;
   background-repeat: no-repeat;
   background-position: center;
   text-shadow: 2px 2px 2px rgb(255, 255, 255);
