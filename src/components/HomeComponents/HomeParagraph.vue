@@ -2,8 +2,8 @@
   <div class="paragraph">
     <div class="paragraph-section" :class="{ 'reverse-order': isEven }">
       <div class="text-side">
-        <h1>{{ paragraph.title }}</h1>
-        <p>{{ paragraph.content }}</p>
+        <h1>{{ paragraph["title_" + $i18n.locale] }}</h1>
+        <p>{{ paragraph["content_" + $i18n.locale] }}</p>
       </div>
       <div class="image-side">
         <img :src="paragraph.imageSrc" alt="Image" />
