@@ -143,13 +143,19 @@ a {
   content: "HUN";
   padding-left: 10px;
   text-align: left;
-  background-color: #f0f0f0;
+  background-image: url("@/assets/hungarian-flag.png");
+  background-size: 100px 60px;
+  background-repeat: no-repeat;
+  background-position: center;
   color: #000000;
 }
 .onoffswitch-inner:after {
   content: "ENG";
   padding-right: 10px;
-  background-color: #eeeeee;
+  background-image: url("@/assets/american-flag.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   color: #000000;
   text-align: right;
 }
@@ -157,12 +163,12 @@ a {
   display: block;
   width: 20px;
   margin: 5px;
-  background: #3498db;
+  background: rgba(0, 0, 0, 0.8);
   position: absolute;
   top: 0;
   bottom: 0;
   right: 56px;
-  border: 2px solid #999999;
+  border: 2px solid rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   transition: all 0.3s ease-in 0s;
 }
