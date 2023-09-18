@@ -99,7 +99,7 @@ a {
 .lang-switch {
   text-decoration: none;
   color: white;
-  padding: 10px 10px 0px 10px;
+  padding: 4px 10px 0px 0px;
   background-color: rgba(0, 0, 0, 0.538);
   transition: 0.3s ease-in-out;
   margin: 0px;
@@ -107,7 +107,7 @@ a {
 
 .onoffswitch {
   position: relative;
-  width: 90px;
+  width: 70px;
 }
 .onoffswitch-checkbox {
   position: absolute;
@@ -171,7 +171,7 @@ a {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 56px;
+  right: 36px;
   border: 3px solid rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   transition: all 0.3s ease-in 0s;
@@ -194,6 +194,7 @@ a {
 
   ul {
     justify-content: center;
+    border-radius: 0px;
   }
 
   a {
