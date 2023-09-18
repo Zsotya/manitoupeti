@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Logo />
-    <NavBar />
     <MachinesIntro />
     <div class="machines-container">
       <MachinesDisplay
@@ -10,16 +8,12 @@
         :machine="machine"
       />
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup>
-import NavBar from "@/components/RootComponents/NavBar.vue";
-import Logo from "@/components/RootComponents/Logo.vue";
 import MachinesIntro from "@/components/MachinesComponents/MachinesIntro.vue";
 import MachinesDisplay from "@/components/MachinesComponents/MachinesDisplay.vue";
-import Footer from "@/components/RootComponents/Footer.vue";
 
 const machines = [
   {
@@ -92,7 +86,7 @@ const machines = [
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 0px;
-  padding: 140px 20px 40px 20px;
+  padding: 140px 0px 40px 0px;
   background-color: #e8e6e6;
 }
 

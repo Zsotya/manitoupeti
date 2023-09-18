@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Logo />
-    <NavBar />
     <OurWorksFilms
       :filmsData="[
         {
@@ -26,13 +24,9 @@
         },
       ]"
     ></OurWorksFilms>
-    <Footer />
   </div>
 </template>
 
 <script setup>
-import NavBar from "@/components/RootComponents/NavBar.vue";
-import Logo from "@/components/RootComponents/Logo.vue";
 import OurWorksFilms from "@/components/OurWorksComponents/OurWorksFilms.vue";
-import Footer from "@/components/RootComponents/Footer.vue";
 </script>

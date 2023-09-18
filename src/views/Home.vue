@@ -24,7 +24,6 @@
     </section>
     <section><HomeWhoAreWe /></section>
     <section><HomeGallery /></section>
-    <footer><Footer /></footer>
   </div>
 </template>
 
@@ -34,7 +33,6 @@ import HomeParagraphIntro from "@/components/HomeComponents/HomeParagraphIntro.v
 import HomeParagraph from "@/components/HomeComponents/HomeParagraph.vue";
 import HomeWhoAreWe from "@/components/HomeComponents/HomeWhoAreWe.vue";
 import HomeGallery from "@/components/HomeComponents/HomeGallery.vue";
-import Footer from "@/components/RootComponents/Footer.vue";
 </script>
 
 <style scoped></style>

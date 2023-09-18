@@ -1,19 +1,13 @@
 <template>
   <div>
-    <Logo />
-    <NavBar />
     <div class="career-cards">
       <CareerComp :jobs="jobs" />
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup>
-import NavBar from "@/components/RootComponents/NavBar.vue";
-import Logo from "@/components/RootComponents/Logo.vue";
 import CareerComp from "@/components/CareerComponents/CareerComp.vue";
-import Footer from "@/components/RootComponents/Footer.vue";
 
 const jobs = [
   {

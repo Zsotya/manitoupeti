@@ -9,6 +9,9 @@
       >
         <li>{{ route.label }}</li>
       </router-link>
+      <li>
+        <button @click="toggleLanguage" class="language-switch">teszt</button>
+      </li>
     </ul>
   </nav>
 </template>
@@ -25,6 +28,9 @@ const routes = [
 ];
 
 const $route = useRoute();
+const toggleLanguage = () => {
+  console.log("sajt");
+};
 </script>
 
 <style scoped>

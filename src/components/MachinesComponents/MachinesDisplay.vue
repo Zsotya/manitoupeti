@@ -73,7 +73,7 @@ const { machine } = defineProps(["machine"]);
   text-align: center;
   margin-bottom: 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 320px;
   height: auto;
 }
 

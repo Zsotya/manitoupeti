@@ -1,23 +1,17 @@
 <template>
   <div>
-    <Logo />
-    <NavBar />
     <AboutUsIntro />
     <AboutUsParagraph
       v-for="paragraph in paragraphs"
       :key="paragraphs.id"
       :paragraph="paragraph"
     />
-    <Footer />
   </div>
 </template>
 
 <script setup>
-import NavBar from "@/components/RootComponents/NavBar.vue";
-import Logo from "@/components/RootComponents/Logo.vue";
 import AboutUsIntro from "@/components/AboutUsComponents/AboutUsIntro.vue";
 import AboutUsParagraph from "@/components/AboutUsComponents/AboutUsParagraph.vue";
-import Footer from "@/components/RootComponents/Footer.vue";
 
 const paragraphs = [
   {

@@ -1,10 +1,6 @@
 <template>
   <div class="landing-section">
     <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image" />
-    <Logo />
-    <div class="router-container">
-      <Navbar />
-    </div>
     <div class="text-parts">
       <p class="big-text">Professzionális Manitou gépes szolgáltatások</p>
       <p class="medium-text">
@@ -16,9 +12,7 @@
   </div>
 </template>
 
-<script setup>
-import Logo from "@/components/RootComponents/Logo.vue";
-</script>
+<script setup></script>
 
 <style scoped>
 .landing-section {
@@ -44,13 +38,6 @@ import Logo from "@/components/RootComponents/Logo.vue";
   left: 20px;
   cursor: pointer;
   z-index: 0; /* A kép elé helyezi a logot */
-}
-
-.router-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1; /* A kép elé helyezi a logot */
 }
 
 .text-parts {

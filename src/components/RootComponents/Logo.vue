@@ -18,6 +18,6 @@ const goToHome = () => {
   top: 20px;
   left: 20px;
   cursor: pointer;
-  z-index: 0;
+  z-index: 1;
 }
 </style>
