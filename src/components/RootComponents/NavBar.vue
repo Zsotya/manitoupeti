@@ -116,7 +116,7 @@ a {
   display: block;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid #999999;
+  border: 2px solid black;
   border-radius: 20px;
 }
 .onoffswitch-inner {
@@ -156,19 +156,21 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  color: #000000;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255);
+  color: black;
   text-align: right;
+  font-weight: bold;
 }
 .onoffswitch-switch {
   display: block;
-  width: 20px;
-  margin: 5px;
-  background: rgba(0, 0, 0, 0.8);
+  width: 30px;
+  margin: 2px;
+  background: rgba(255, 255, 255, 1);
   position: absolute;
   top: 0;
   bottom: 0;
   right: 56px;
-  border: 2px solid rgba(0, 0, 0, 0.8);
+  border: 3px solid rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   transition: all 0.3s ease-in 0s;
 }
