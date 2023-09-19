@@ -4,7 +4,11 @@
     <div class="footer-content">
       <div class="footer-item">
         <div class="name">ManitouPeti</div>
-        <div class="location">2890 Tata, Derítő-tó</div>
+        <div class="location">
+          2890 Tata
+          <div class="break"></div>
+          Derítő-tó
+        </div>
       </div>
       <div class="footer-item">
         <div class="contacts">Elérhetőségeink</div>
@@ -33,12 +37,13 @@
           auctor lorem, vel lacinia lorem vulputate vel.
         </div>
       </div>
+      <div class="break"></div>
       <div class="footer-item">
         <router-link to="/elerhetoseg" class="contactus-button"
-          >Kapcsolat űrlap</router-link
+          ><span class="button-content">Kapcsolat űrlap</span></router-link
         >
         <router-link to="/berelheto-gepeink" class="quote-button"
-          >Árajánlat kérése</router-link
+          ><span class="button-content">Árajánlat kérése</span></router-link
         >
       </div>
     </div>
@@ -64,14 +69,17 @@
 
 .footer-content {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 20px 10%;
+  padding: 20px 7.5%;
 }
 
 .footer-item {
   flex: 1;
   padding: 0 10px;
   color: #333;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .name,
@@ -104,11 +112,12 @@
   width: 30ch;
   margin: 10px auto;
   font-size: 14px;
+  text-align: center;
 }
 
 .contactus-button,
 .quote-button {
-  display: inline-block;
+  display: inline-flex;
   margin-top: 15px;
   padding: 10px 20px;
   background-color: #e87474;
@@ -118,6 +127,11 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  min-width: 146px;
+}
+
+.button-content {
+  width: 14ch;
 }
 
 .contactus-button:hover,
@@ -133,5 +147,22 @@
   padding: 5px;
   font-size: 14px;
   color: #333;
+}
+
+/* Laptop nézet */
+@media screen and (max-width: 1024px) {
+  /* CSS trükk line-break beszúrásához */
+  /* Működése: Mivel a flex-basis-t 100%-ra állítottuk, ezáltal megmondtuk az oldalnak, hogy ennek a div-nek a container 100%-át le kell fednie, ez csak új sorban történhet meg */
+  .break {
+    flex-basis: 100%;
+  }
+
+  .footer-content {
+  }
+
+  .contactus-button,
+  .quote-button {
+    margin: 10px 50px 0px 50px;
+  }
 }
 </style>
