@@ -4,10 +4,12 @@
     <div class="footer-content">
       <div class="footer-item">
         <div class="name">ManitouPeti</div>
-        <div class="location">
-          2890 Tata
-          <div class="break"></div>
-          Derítő-tó
+        <div class="location-container">
+          <div class="location">
+            &nbsp2890 Tata,&nbsp
+            <div class="break"></div>
+            Derítő-tó
+          </div>
         </div>
       </div>
       <div class="footer-item">
@@ -39,12 +41,14 @@
       </div>
       <div class="break"></div>
       <div class="footer-item">
-        <router-link to="/elerhetoseg" class="contactus-button"
-          ><span class="button-content">Kapcsolat űrlap</span></router-link
-        >
-        <router-link to="/berelheto-gepeink" class="quote-button"
-          ><span class="button-content">Árajánlat kérése</span></router-link
-        >
+        <div class="buttons-container">
+          <router-link to="/elerhetoseg" class="contactus-button"
+            ><span class="button-content">Kapcsolat űrlap</span></router-link
+          >
+          <router-link to="/berelheto-gepeink" class="quote-button"
+            ><span class="button-content">Árajánlat kérése</span></router-link
+          >
+        </div>
       </div>
     </div>
     <div class="copyright">© 2023 ManitouPeti - GoodFriend's Company</div>
@@ -88,6 +92,15 @@
 .information {
   font-weight: bold;
   margin-top: 10px;
+}
+
+.location-container {
+  display: grid;
+}
+
+.location {
+  display: flex;
+  justify-self: center;
 }
 
 .phone-numbers,
@@ -149,12 +162,31 @@
   color: #333;
 }
 
+/* 4k nézet korrekció */
+
+@media screen and (min-width: 1920px) {
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 154px;
+    margin-left: 78px;
+  }
+}
+
 /* Laptop nézet */
 @media screen and (max-width: 1024px) {
   /* CSS trükk line-break beszúrásához */
   /* Működése: Mivel a flex-basis-t 100%-ra állítottuk, ezáltal megmondtuk az oldalnak, hogy ennek a div-nek a container 100%-át le kell fednie, ez csak új sorban történhet meg */
   .break {
     flex-basis: 100%;
+  }
+
+  .location-container {
+    display: block;
+  }
+
+  .location {
+    display: block;
   }
 
   .contactus-button,
