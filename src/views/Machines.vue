@@ -81,7 +81,6 @@ const machines = [
 
 <style scoped>
 .machines-container {
-  padding-top: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -90,11 +89,17 @@ const machines = [
   background-color: #e8e6e6;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   /* .machines-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
   } */
+}
+
+@media screen and (max-width: 496px) {
+  .machines-container {
+    padding-top: 100px;
+  }
 }
 </style>

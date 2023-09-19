@@ -183,8 +183,7 @@ a {
   right: 0px;
 }
 
-/* Tablet nézet */
-
+/* Laptop nézet */
 @media screen and (max-width: 1024px) {
   nav {
     top: 0;

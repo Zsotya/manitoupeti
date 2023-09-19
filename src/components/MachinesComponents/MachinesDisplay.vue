@@ -138,9 +138,20 @@ button:hover {
   background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
+/* For Laptop+Tablet view */
+@media screen and (max-width: 768px) {
   .machines-display {
     max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .machines-display {
+    max-width: 100%;
+  }
+
+  .machines-item {
+    max-width: 240px;
   }
 }
 </style>
