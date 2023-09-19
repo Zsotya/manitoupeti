@@ -91,10 +91,10 @@ const machines = [
 }
 
 @media (max-width: 768px) {
-  .machines-container {
+  /* .machines-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+  } */
 }
 </style>

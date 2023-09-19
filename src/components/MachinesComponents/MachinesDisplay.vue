@@ -36,9 +36,9 @@
             <span class="value">{{ machine.isRemote ? "Igen" : "Nem" }}</span>
           </div>
         </div>
-      </div>
-      <div class="button-container">
-        <button>Árajánlat kérése</button>
+        <div class="button-container">
+          <button>Árajánlat kérése</button>
+        </div>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@ const { machine } = defineProps(["machine"]);
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
   max-width: 320px;
   height: auto;
@@ -87,6 +87,8 @@ const { machine } = defineProps(["machine"]);
 }
 
 .machine-details {
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
 }
 
@@ -116,8 +118,9 @@ const { machine } = defineProps(["machine"]);
 }
 
 .button-container {
-  margin-top: 15px;
+  margin-top: 20px;
   text-align: center;
+  align-self: center;
 }
 
 button {
@@ -137,18 +140,7 @@ button:hover {
 
 @media (max-width: 768px) {
   .machines-display {
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .machine-details {
-    margin-top: 15px;
-  }
-
-  .image-container {
-    max-width: 100%;
-    width: auto;
+    max-width: 50%;
   }
 }
 </style>
