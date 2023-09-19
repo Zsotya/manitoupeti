@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 
 const currentIndex = ref(0);
 
@@ -38,18 +38,14 @@ const images = [
   require("@/assets/merlo30.jpg"),
 ];
 
-const displayedImages = computed(() => {
-  const start = currentIndex.value;
-  const end = start + 1;
-  const displayed = images.slice(start, end);
+const screenWidth = ref(window.innerWidth);
 
-  const nextSet = images.slice(end, end + 2);
-  return displayed.concat(nextSet);
-});
+const displayedImages = ref([]);
 
 const moveLeft = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
+    displayedImages.value = calculateDisplayedImages();
     preloadImages();
   }
 };
@@ -57,6 +53,7 @@ const moveLeft = () => {
 const moveRight = () => {
   if (currentIndex.value < images.length - 3) {
     currentIndex.value++;
+    displayedImages.value = calculateDisplayedImages();
     preloadImages();
   }
 };
@@ -78,6 +75,70 @@ const preloadImages = () => {
     }
   }
 };
+
+// Kiszámolja az end értékét a képernyő szélesség alapján
+const calculateEnd = () => {
+  const screenWidth = window.innerWidth;
+  if (screenWidth <= 1024) {
+    return currentIndex.value;
+  } else {
+    return currentIndex.value + 1;
+  }
+};
+
+const handleResize = () => {
+  screenWidth.value = window.innerWidth;
+  displayedImages.value = calculateDisplayedImages();
+  setGalleryHeight();
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+  displayedImages.value = calculateDisplayedImages();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+watch(screenWidth, () => {
+  displayedImages.value = calculateDisplayedImages();
+});
+
+const calculateDisplayedImages = () => {
+  const start = currentIndex.value;
+  const end = calculateEnd();
+  const displayed = images.slice(start, end);
+
+  const nextSet = images.slice(end, end + 2);
+  return displayed.concat(nextSet);
+};
+
+// A legmagasabb pixelszámú kép megkeresése
+const setGalleryHeight = () => {
+  const images = document.querySelectorAll(".image img");
+  let maxHeight = 0;
+
+  images.forEach((image) => {
+    const imageHeight = image.clientHeight;
+    if (imageHeight > maxHeight) {
+      maxHeight = imageHeight;
+    }
+  });
+
+  const maxHeightPercent = 70;
+  const maxImageHeight = (window.innerHeight * maxHeightPercent) / 100;
+
+  images.forEach((image) => {
+    image.style.maxHeight = `${maxImageHeight}px`;
+  });
+
+  const gallery = document.querySelector(".gallery");
+  gallery.style.height = `${maxHeight + 40}px`;
+};
+
+window.addEventListener("load", setGalleryHeight);
+window.addEventListener("resize", setGalleryHeight);
 </script>
 
 <style scoped>
@@ -86,7 +147,7 @@ const preloadImages = () => {
   padding-bottom: 60px;
   text-align: center;
   background-color: #e8e6e6;
-  height: 900px;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -153,7 +214,6 @@ const preloadImages = () => {
 .gallery {
   display: flex;
   /* overflow: hidden; */
-  height: 756px;
   padding: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -174,12 +234,9 @@ const preloadImages = () => {
 }
 
 img {
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
   display: block;
-}
-
-.image img {
-  max-height: 100%;
   transition: transform 0.3s ease;
 }
 
@@ -191,5 +248,22 @@ img {
 
 .image:hover {
   z-index: 2;
+}
+
+/* Laptop és tablet nézet egyaránt */
+@media screen and (max-width: 1024px) {
+  .image {
+    flex: 0 0 50%;
+  }
+
+  img {
+    max-height: 730px;
+  }
+
+  .image:hover img {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+  }
 }
 </style>
