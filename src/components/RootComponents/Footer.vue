@@ -6,7 +6,7 @@
         <div class="name">ManitouPeti</div>
         <div class="location-container">
           <div class="location">
-            &nbsp2890 Tata,&nbsp
+            2890 Tata,
             <div class="break"></div>
             Derítő-tó
           </div>

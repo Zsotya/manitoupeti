@@ -62,12 +62,13 @@
 .text-parts {
   display: flex;
   flex-direction: column;
-  padding: 260px 0px 0px 100px;
+  margin: 260px 0px 0px 60px;
 }
 
 .small-title {
   font-size: 22px;
   margin-bottom: 2px;
+  margin-left: 4px;
 }
 
 .big-content {
@@ -75,7 +76,7 @@
   margin-bottom: 4px;
   font-weight: bolder;
   color: #e07076;
-  width: 30ch;
+  width: 25ch;
 }
 
 .small-content {
@@ -85,20 +86,26 @@
 
 .full-form {
   display: flex;
-  padding: 100px;
-  padding-top: 60px;
-  justify-content: space-between;
+  padding: 30px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  margin: 0px 0px 100px 30px;
+  max-width: 50%;
 }
 
 .name-part,
 .email-part,
 .message-part {
   display: flex;
+}
+
+.message-part {
+  max-width: 74ch;
+  width: 100%;
 }
 
 .first-name,
@@ -113,10 +120,6 @@
   margin-right: 50px;
 }
 
-input {
-  width: 140%;
-}
-
 label {
   padding-bottom: 10px;
   font-size: 16px;
@@ -129,7 +132,7 @@ label {
   outline: none;
   padding: 5px 0;
   font-size: 16px;
-  width: 120%;
+  width: 100%;
   transition: 0.3s;
 }
 
@@ -138,8 +141,10 @@ label {
   transition: 0.3s;
 }
 
+.message {
+  width: 100%;
+}
 .message textarea {
-  width: 58ch;
   height: 14em;
   line-height: 1.5;
   background: transparent;
@@ -159,7 +164,7 @@ label {
 }
 
 .submit {
-  width: 50%;
+  width: 260px;
 }
 
 .submit-button {
@@ -178,14 +183,15 @@ label {
 }
 
 .showcase-img {
-  align-self: flex-end;
-  padding-right: 30px;
+  flex: 1;
+  margin-right: 30px;
+  min-width: 400px;
+  min-height: 640px;
 }
 
 .showcase-img img {
   max-width: 100%;
-  width: 900px;
-  height: 586px;
+  min-height: 600px;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 4.5px 4.5px 9px rgba(0, 0, 0, 0.8);
