@@ -157,9 +157,6 @@
     flex-basis: 100%;
   }
 
-  .footer-content {
-  }
-
   .contactus-button,
   .quote-button {
     margin: 10px 50px 0px 50px;

@@ -63,8 +63,9 @@ const toggleDescription = (film) => {
 
 .text-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 200px 0px 0px 0px;
+  margin-left: 80px;
 }
 
 .text-intro {
@@ -75,7 +76,7 @@ const toggleDescription = (film) => {
 .small-title {
   font-size: 22px;
   margin-bottom: 2px;
-  padding-left: 12px;
+  padding-left: 6px;
 }
 
 .big-text {
@@ -83,12 +84,12 @@ const toggleDescription = (film) => {
   margin-bottom: 4px;
   font-weight: bolder;
   color: #e07076;
-  width: 100%;
+  width: 27ch;
 }
 
 .small-text {
   font-size: 18px;
-  width: 100%;
+  width: 102ch;
 }
 
 .films {
@@ -182,19 +183,26 @@ const toggleDescription = (film) => {
 }
 
 @media screen and (max-width: 1024px) {
-  /* Tablet és laptop nézethez egyaránt */
+  /* Laptop nézet */
+  .text-wrap {
+    margin-left: 60px;
+  }
   .text-intro {
-    padding: 100px 80px 20px 80px;
+    padding: 100px 0px 0px 0px;
+  }
+
+  .small-title {
+    font-size: 20px;
+    padding-left: 4px;
   }
 
   .big-text {
     font-size: 36px;
-    width: 100%;
   }
 
   .small-text {
     font-size: 16px;
-    width: 100%;
+    width: 86ch;
   }
 
   .film-cards {
