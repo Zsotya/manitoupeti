@@ -18,6 +18,7 @@
   background-color: #e8e6e6;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .introduction-left {
