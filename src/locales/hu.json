@@ -30,5 +30,12 @@
   "machinesRemote": "Távirányítható",
   "machinesQuotation": "Árajánlat kérése",
   "machinesCommonYes": "Igen",
-  "machinesCommonNo": "Nem"
+  "machinesCommonNo": "Nem",
+  "contactUsBigContent": "Kérdésekkel, észrevételekkel keressen minket!",
+  "contactUsSmallContent": "Kérjük, használja ezt az űrlapot, vagy keressen a +36 12 345-6789-es számon",
+  "contactUsLastName": "Vezetéknév",
+  "contactUsFirstName": "Keresztnév",
+  "contactUsSubject": "Tárgy",
+  "contactUsLeaveMessage": "Hagyjon üzenetet...",
+  "contactUsSend": "Küldés"
 }

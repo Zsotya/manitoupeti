@@ -1,24 +1,23 @@
 <template>
   <div class="contact-us">
     <div class="text-parts">
-      <div class="small-title">Kapcsolat</div>
+      <div class="small-title">{{ $t("contactUsLabel") }}</div>
       <div class="big-content">
-        Kérdésekkel, észrevételekkel keressen minket!
+        {{ $t("contactUsBigContent") }}
       </div>
       <div class="small-content">
-        Kérjük, használja ezt az űrlapot, vagy keressen a +36 12 345-6789-es
-        számon
+        {{ $t("contactUsSmallContent") }}
       </div>
     </div>
     <div class="full-form">
       <div class="form">
         <div class="name-part">
           <div class="first-name">
-            <label for="firstName">Vezetéknév</label>
+            <label for="firstName">{{ $t("contactUsLastName") }}</label>
             <input type="text" id="firstName" class="transparent-input" />
           </div>
           <div class="last-name">
-            <label for="lastName">Keresztnév</label>
+            <label for="lastName">{{ $t("contactUsFirstName") }}</label>
             <input type="text" id="lastName" class="transparent-input" />
           </div>
         </div>
@@ -28,18 +27,18 @@
             <input type="text" id="email" class="transparent-input" />
           </div>
           <div class="subject">
-            <label for="subject">Tárgy</label>
+            <label for="subject">{{ $t("contactUsSubject") }}</label>
             <input type="text" id="subject" class="transparent-input" />
           </div>
         </div>
         <div class="message-part">
           <div class="message">
-            <label for="message">Hagyjon üzenetet...</label>
+            <label for="message">{{ $t("contactUsLeaveMessage") }}</label>
             <textarea class="message-format" id="message"></textarea>
           </div>
         </div>
         <div class="submit">
-          <button class="submit-button">Küldés</button>
+          <button class="submit-button">{{ $t("contactUsSend") }}</button>
         </div>
       </div>
       <div class="showcase-img">

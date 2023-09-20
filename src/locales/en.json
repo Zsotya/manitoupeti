@@ -30,5 +30,12 @@
   "machinesRemote": "Remote Control",
   "machinesQuotation": "Request a Quote",
   "machinesCommonYes": "Yes",
-  "machinesCommonNo": "No"
+  "machinesCommonNo": "No",
+  "contactUsBigContent": "Feel free to reach out with any questions or feedback!",
+  "contactUsSmallContent": "Please use this form or reach out to us at +36 12 345-6789.",
+  "contactUsLastName": "Last Name",
+  "contactUsFirstName": "First Name",
+  "contactUsSubject": "Subject",
+  "contactUsLeaveMessage": "Leave a message...",
+  "contactUsSend": "Send"
 }
