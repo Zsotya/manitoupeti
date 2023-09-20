@@ -61,26 +61,25 @@ const moveRight = () => {
 // Előre betölti a képeket, jobb user experience eléréséhez
 
 const preloadImages = () => {
-  for (let i = currentIndex; i < currentIndex + 5; i++) {
-    if (i >= 0 && i < images.length) {
-      const img = new Image();
-      img.src = images[i];
-    }
-  }
+  let preloadStart = currentIndex.value - 5;
+  let preloadEnd = currentIndex.value + 5;
 
-  for (let i = currentIndex - 1; i >= currentIndex - 5; i--) {
-    if (i >= 0 && i < images.length) {
-      const img = new Image();
-      img.src = images[i];
-    }
+  preloadStart = Math.max(preloadStart, 0);
+  preloadEnd = Math.min(preloadEnd, images.length - 1);
+
+  for (let i = preloadStart; i <= preloadEnd; i++) {
+    const img = new Image();
+    img.src = images[i];
   }
 };
 
 // Kiszámolja az end értékét a képernyő szélesség alapján
 const calculateEnd = () => {
   const screenWidth = window.innerWidth;
-  if (screenWidth <= 1024) {
-    return currentIndex.value;
+  if (screenWidth <= 496) {
+    return currentIndex.value - 1;
+  } else if (screenWidth <= 1024) {
+    return currentIndex.value + 0;
   } else {
     return currentIndex.value + 1;
   }
@@ -263,6 +262,21 @@ img {
   .image:hover img {
     transform: scale(1.1);
     transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .image {
+    flex: 0 0 100%;
+  }
+
+  .image:hover img {
+    transform: none;
+    overflow: hidden;
+  }
+
+  .gallery {
     overflow: hidden;
   }
 }
