@@ -2,14 +2,12 @@
   <main class="page-format">
     <div class="text-wrap">
       <div class="text-intro">
-        <div class="small-title">Filmjeink</div>
+        <div class="small-title">{{ $t("ourWorksSmallTitle") }}</div>
         <div class="big-text">
-          Fontosabb filmek, melyeket szakértelmünkkel támogattunk
+          {{ $t("ourWorksBigText") }}
         </div>
         <div class="small-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, fugiat
-          quia ut dolores, ex delectus dolor vero, vel suscipit iste iure ea
-          expedita error aliquid? Veniam vel numquam corporis aliquam.
+          {{ $t("ourWorksSmallText") }}
         </div>
       </div>
     </div>
@@ -24,11 +22,11 @@
         >
           <div class="film-front">
             <img :src="film.imageSrc" alt="Film Image" />
-            <h3>{{ film.title }}</h3>
+            <h3>{{ film["title_" + $i18n.locale] }}</h3>
           </div>
           <div class="film-back">
-            <h3>{{ film.title }}</h3>
-            <p>{{ film.description }}</p>
+            <h3>{{ film["title_" + $i18n.locale] }}</h3>
+            <p>{{ film["description_" + $i18n.locale] }}</p>
           </div>
         </div>
       </div>
