@@ -19,10 +19,12 @@
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+  padding: 8vh 8vw;
+  padding-right: 0vw;
 }
 
 .introduction-left {
-  padding: 70px 30px 0px 150px;
+  padding-right: 30px;
 }
 
 .introduction-left h3 {
@@ -40,7 +42,7 @@
   justify-self: flex-end;
   align-self: center;
   padding-top: 20px;
-  padding-right: 200px;
+  margin-right: 200px;
 }
 
 .introduction-right button {
@@ -56,5 +58,60 @@
   background-color: white;
   border: 1px solid black;
   color: black;
+}
+
+@media screen and (max-width: 1280px) {
+  .introduction-left h3 {
+    font-size: 22px;
+    height: 14px;
+  }
+  .introduction-left h1 {
+    font-size: 40px;
+  }
+  .introduction-right {
+    margin-right: 140px;
+  }
+  .introduction-right button {
+    padding: 18px 34px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .introduction-left h3 {
+    font-size: 16px;
+    height: 12px;
+  }
+  .introduction-left h1 {
+    font-size: 28px;
+  }
+  .introduction-right {
+    margin-right: 110px;
+  }
+  .introduction-right button {
+    padding: 18px 27px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .introduction-part {
+    flex-direction: column;
+    justify-content: center;
+    padding: 7vh 0px 7vh 0px;
+    text-align: center;
+  }
+  .introduction-left {
+    padding: 0px;
+  }
+  .introduction-left h1 {
+    width: 100%;
+  }
+  .introduction-left h3 {
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .introduction-right {
+    margin: 0px;
+    text-wrap: wrap;
+  }
 }
 </style>
