@@ -8,12 +8,12 @@
           <div class="location">
             2890 Tata,
             <div class="break"></div>
-            Derítő-tó
+            {{ $t("footerLake") }}
           </div>
         </div>
       </div>
       <div class="footer-item">
-        <div class="contacts">Elérhetőségeink</div>
+        <div class="contacts">{{ $t("footerContact") }}</div>
         <div class="phone-numbers">
           <div>+123 456 789</div>
           <div>+987 654 321</div>
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="footer-item">
-        <div class="socials">Socials</div>
+        <div class="socials">{{ $t("footerSocials") }}</div>
         <div class="social-links">
           <a href="https://www.facebook.com/">Facebook</a>
           <a href="https://www.instagram.com/">Instagram</a>
@@ -33,20 +33,23 @@
         </div>
       </div>
       <div class="footer-item">
-        <div class="information">Tudakozó</div>
+        <div class="information">{{ $t("footerInquiry") }}</div>
         <div class="info-paragraph">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula
-          auctor lorem, vel lacinia lorem vulputate vel.
+          {{ $t("footerInquiryContent") }}
         </div>
       </div>
       <div class="break"></div>
       <div class="footer-item">
         <div class="buttons-container">
           <router-link to="/elerhetoseg" class="contactus-button"
-            ><span class="button-content">Kapcsolat űrlap</span></router-link
+            ><span class="button-content">{{
+              $t("footerContactForm")
+            }}</span></router-link
           >
           <router-link to="/berelheto-gepeink" class="quote-button"
-            ><span class="button-content">Árajánlat kérése</span></router-link
+            ><span class="button-content">{{
+              $t("machinesQuotation")
+            }}</span></router-link
           >
         </div>
       </div>
