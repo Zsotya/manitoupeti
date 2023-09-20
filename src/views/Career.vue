@@ -12,59 +12,90 @@ import CareerComp from "@/components/CareerComponents/CareerComp.vue";
 const jobs = [
   {
     id: 1,
-    jobName: "Emelőgépkezelő",
-    jobDescription:
+    jobName_hu: "Emelőgépkezelő",
+    jobName_en: "Crane Operator",
+    jobDescription_hu:
       "Szeretnénk felvenni minél több emelőgépkezelőt, mindenképpen elvárás az OKJ képzés megléte. Részletek a 'Jelentkezz most!' gombra kattintás után elérhetőek.",
-    jobTime: "Teljes munkaidő",
+    jobDescription_en:
+      "We would like to apply more and more machine operators, you must have OKJ. Details at 'Apply now!' button go check",
+    jobTime_hu: "Teljes munkaidő",
+    jobTime_en: "Full-time",
   },
   {
     id: 2,
-    jobName: "Földmunkagépkezelő",
-    jobDescription:
+    jobName_hu: "Földmunkagépkezelő",
+    jobName_en: "Heavy Equipment Operator",
+    jobDescription_hu:
       "Szeretnénk felvenni minél több földmunkagépkezelőt, mindenképpen elvárás az OKJ képzés megléte. Részletek a 'Jelentkezz most!' gombra kattintás után elérhetőek.",
-    jobTime: "Teljes munkaidő",
+    jobDescription_en:
+      "We would like to apply more and more machine operators, you must have OKJ. Details at 'Apply now!' button go check",
+    jobTime_hu: "Full-time",
   },
   {
     id: 3,
-    jobName: "Fuvarszervező",
-    jobDescription:
+    jobName_hu: "Fuvarszervező",
+    jobName_en: "Logistics Coordinator",
+    jobDescription_hu:
       "A fontos logisztikai feladatok elvégzésére szeretnénk új logisztikust/fuvarszervező munkatársat a köreinkbe. Amennyiben rendelkezik logisztikai végzettséggel és érdekelné a munkakör, kattintson a 'Jelentkezz most!' gombra.",
-    jobTime: "Teljes munkaidő",
+    jobDescription_en:
+      "We are looking to hire a new Logistics Coordinator to handle important logistics tasks within our team. If you have a background in logistics and are interested in the position, click the 'Apply Now!' button.",
+    jobTime_hu: "Teljes munkaidő",
+    jobTime_en: "Full-time",
   },
   {
     id: 4,
-    jobName: "Könyvelő",
-    jobDescription:
+    jobName_hu: "Könyvelő",
+    jobName_en: "Accountant",
+    jobDescription_hu:
       "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.",
-    jobTime: "Részmunkaidő",
+    jobDescription_en:
+      "LoremENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Click apply now for details",
+    jobTime_hu: "Részmunkaidő",
+    jobTime_en: "Part-time",
   },
   {
     id: 5,
-    jobName: "Vevői kapcsolattartó",
-    jobDescription:
+    jobName_hu: "Vevői kapcsolattartó",
+    jobName_en: "Customer Relationship Manager",
+    jobDescription_hu:
       "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.",
-    jobTime: "Teljes munkaidő",
+    jobDescription_en:
+      "LoreENENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Click apply now for details",
+    jobTime_hu: "Teljes munkaidő",
+    jobTime_en: "Full-time",
   },
   {
     id: 6,
-    jobName: "Gépszerelő",
-    jobDescription:
+    jobName_hu: "Gépszerelő",
+    jobName_en: "Mechanic",
+    jobDescription_hu:
       "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.",
-    jobTime: "Részmunkaidő",
+    jobDescription_en:
+      "LoremENENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. click apply now for details.",
+    jobTime_hu: "Részmunkaidő",
+    jobTime_en: "Part-time",
   },
   {
     id: 7,
-    jobName: "Jogász",
-    jobDescription:
+    jobName_hu: "Jogász",
+    jobName_en: "Lawyer",
+    jobDescription_hu:
       "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.",
-    jobTime: "Részmunkaidő",
+    jobDescription_en:
+      "LoremENEnEnn ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. click apply details!",
+    jobTime_hu: "Részmunkaidő",
+    jobTime_en: "Part-time",
   },
   {
     id: 8,
-    jobName: "Katona",
-    jobDescription:
+    jobName_hu: "Katona",
+    jobName_en: "Soldier",
+    jobDescription_hu:
       "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.aaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa ",
-    jobTime: "Alkalmi munka",
+    jobDescription_en:
+      "LoremENENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Click apply now! NOWNOW! aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa ",
+    jobTime_hu: "Alkalmi munka",
+    jobTime_en: "Occasional work",
   },
 ];
 </script>

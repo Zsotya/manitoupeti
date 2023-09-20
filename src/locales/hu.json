@@ -37,5 +37,8 @@
   "contactUsFirstName": "Keresztnév",
   "contactUsSubject": "Tárgy",
   "contactUsLeaveMessage": "Hagyjon üzenetet...",
-  "contactUsSend": "Küldés"
+  "contactUsSend": "Küldés",
+  "careerSmallContent": "Karrier lehetőség vállalkozásunknál",
+  "careerBigContent": "Betölthető pozícióink",
+  "careerApply": "Jelentkezz most!"
 }

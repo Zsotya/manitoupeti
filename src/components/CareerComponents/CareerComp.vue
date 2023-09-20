@@ -1,8 +1,8 @@
 <template>
   <div class="career-component">
     <div class="text-part">
-      <div class="small-content">Karrier lehetőség vállalkozásunknál</div>
-      <div class="big-content">Betölthető pozícióink</div>
+      <div class="small-content">{{ $t("careerSmallContent") }}</div>
+      <div class="big-content">{{ $t("careerBigContent") }}</div>
     </div>
     <div class="career-cards-container">
       <div class="career-cards">

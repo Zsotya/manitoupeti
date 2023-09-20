@@ -37,5 +37,8 @@
   "contactUsFirstName": "First Name",
   "contactUsSubject": "Subject",
   "contactUsLeaveMessage": "Leave a message...",
-  "contactUsSend": "Send"
+  "contactUsSend": "Send",
+  "careerSmallContent": "Career Opportunities at Our Company",
+  "careerBigContent": "Available Positions",
+  "careerApply": "Apply now!"
 }
