@@ -8,36 +8,48 @@
         <div class="machine-name">{{ machine.name }}</div>
         <div class="machine-description">
           <div class="feature">
-            <span class="label">Max Munkamagasság:</span>
+            <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
             <span class="value">{{ machine.maxHeight }}</span>
           </div>
           <div class="feature">
-            <span class="label">Max Teherbírás:</span>
+            <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
             <span class="value">{{ machine.maxWeight }}</span>
           </div>
           <div class="feature">
-            <span class="label">Talp:</span>
-            <span class="value">{{ machine.hasSole ? "Van" : "Nincs" }}</span>
+            <span class="label">{{ $t("machinesSole") }}:</span>
+            <span class="value">{{
+              machine.hasSole ? $t("machinesCommonYes") : $t("machinesCommonNo")
+            }}</span>
           </div>
           <div class="feature" v-if="machine.hasSole">
-            <span class="label">Talpak Száma:</span>
+            <span class="label">{{ $t("machinesSoleCount") }}:</span>
             <span class="value">{{ machine.soleCount }}</span>
           </div>
           <div class="feature">
-            <span class="label">Kosár:</span>
-            <span class="value">{{ machine.hasBasket ? "Van" : "Nincs" }}</span>
+            <span class="label">{{ $t("machinesBasket") }}:</span>
+            <span class="value">{{
+              machine.hasBasket
+                ? $t("machinesCommonYes")
+                : $t("machinesCommonNo")
+            }}</span>
           </div>
           <div class="feature">
-            <span class="label">Villa:</span>
-            <span class="value">{{ machine.hasFork ? "Van" : "Nincs" }}</span>
+            <span class="label">{{ $t("machinesFork") }}:</span>
+            <span class="value">{{
+              machine.hasFork ? $t("machinesCommonYes") : $t("machinesCommonNo")
+            }}</span>
           </div>
           <div class="feature">
-            <span class="label">Távirányítható:</span>
-            <span class="value">{{ machine.isRemote ? "Igen" : "Nem" }}</span>
+            <span class="label">{{ $t("machinesRemote") }}:</span>
+            <span class="value">{{
+              machine.isRemote
+                ? $t("machinesCommonYes")
+                : $t("machinesCommonNo")
+            }}</span>
           </div>
         </div>
         <div class="button-container">
-          <button>Árajánlat kérése</button>
+          <button>{{ $t("machinesQuotation") }}</button>
         </div>
       </div>
     </div>

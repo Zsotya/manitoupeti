@@ -20,5 +20,15 @@
   "aboutUsTitle": "Építőipartól a filmiparig - Egy családi vállalkozás története",
   "ourWorksSmallTitle": "Filmjeink",
   "ourWorksBigText": "Fontosabb filmek, melyeket szakértelmünkkel támogattunk",
-  "ourWorksSmallText": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, fugiat quia ut dolores, ex delectus dolor vero, vel suscipit iste iure ea expedita error aliquid? Veniam vel numquam corporis aliquam."
+  "ourWorksSmallText": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, fugiat quia ut dolores, ex delectus dolor vero, vel suscipit iste iure ea expedita error aliquid? Veniam vel numquam corporis aliquam.",
+  "machinesMaxWorkingHeight": "Max Munkamagasság",
+  "machinesMaxLoadCapacity": "Max Teherbírás",
+  "machinesSole": "Talp",
+  "machinesSoleCount": "Talpak Száma",
+  "machinesBasket": "Kosár",
+  "machinesFork": "Villa",
+  "machinesRemote": "Távirányítható",
+  "machinesQuotation": "Árajánlat kérése",
+  "machinesCommonYes": "Igen",
+  "machinesCommonNo": "Nem"
 }

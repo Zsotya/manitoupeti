@@ -20,5 +20,15 @@
   "aboutUsTitle": "From the building industry to the film industry - The story of a family business",
   "ourWorksSmallTitle": "Our films",
   "ourWorksBigText": "Important films that we supported with our expertise",
-  "ourWorksSmallText": "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Ullam, fugiat quia ut dolores, ex delectus dolor vero, vel suscipit iste iure ea expedita error aliquid? Veniam vel numquam corporis aliquam."
+  "ourWorksSmallText": "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Ullam, fugiat quia ut dolores, ex delectus dolor vero, vel suscipit iste iure ea expedita error aliquid? Veniam vel numquam corporis aliquam.",
+  "machinesMaxWorkingHeight": "Max Working Height",
+  "machinesMaxLoadCapacity": "Max Load Capacity",
+  "machinesSole": "Sole",
+  "machinesSoleCount": "Sole Count",
+  "machinesBasket": "Basket",
+  "machinesFork": "Fork",
+  "machinesRemote": "Remote Control",
+  "machinesQuotation": "Request a Quote",
+  "machinesCommonYes": "Yes",
+  "machinesCommonNo": "No"
 }
