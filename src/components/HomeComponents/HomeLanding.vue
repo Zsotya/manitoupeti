@@ -115,6 +115,7 @@
     align-items: flex-start;
     padding: 0px;
     padding-top: 74px;
+    height: 70vh;
   }
   .text-parts {
     flex-wrap: wrap;
@@ -135,11 +136,13 @@
 
   .landing-image {
     width: 100vw;
-    height: 100vw;
   }
 }
 
 @media screen and (max-width: 496px) {
+  .landing-section {
+    height: 50vh;
+  }
   .big-text {
     font-size: 1.85rem;
   }
