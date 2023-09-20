@@ -1,8 +1,12 @@
 <template>
   <div class="paragraph-section" :class="{ 'reverse-order': isEven }">
     <div class="text-part">
-      <div class="paragraph-title">{{ paragraph.title }}</div>
-      <div class="paragraph-content">{{ paragraph.content }}</div>
+      <div class="paragraph-title">
+        {{ paragraph["title_" + $i18n.locale] }}
+      </div>
+      <div class="paragraph-content">
+        {{ paragraph["content_" + $i18n.locale] }}
+      </div>
     </div>
     <div class="image-container">
       <img :src="paragraph.imageSrc" alt="image" />

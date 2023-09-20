@@ -2,7 +2,7 @@
   <div class="about-us-intro">
     <div class="text-part">
       <div class="title">
-        Építőipartól a filmiparig - Egy családi vállalkozás története
+        {{ $t("aboutUsTitle") }}
       </div>
     </div>
   </div>

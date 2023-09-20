@@ -29,7 +29,7 @@ const paragraphs = [
     content_hu:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     content_en:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
+      "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     imageSrc: require("@/assets/42.jpeg"),
   },
   {
@@ -39,7 +39,7 @@ const paragraphs = [
     content_hu:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     content_en:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
+      "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     imageSrc: require("@/assets/42.jpeg"),
   },
   {
@@ -49,7 +49,7 @@ const paragraphs = [
     content_hu:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     content_en:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
+      "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
     imageSrc: require("@/assets/42.jpeg"),
   },
 ];
