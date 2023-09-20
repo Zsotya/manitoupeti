@@ -15,10 +15,15 @@
 
 <style scoped>
 .landing-section {
+  display: flex;
   position: relative;
   width: 100%;
-  height: 1080px;
+  height: 100vh;
   overflow: hidden;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 12.5rem;
+  padding-top: 6.25rem;
 }
 
 .landing-image {
@@ -31,23 +36,9 @@
   z-index: -1; /* A többi tartalom mögé helyezi (háttérkép) */
 }
 
-.logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 0; /* A kép elé helyezi a logot */
-}
-
 .text-parts {
-  position: absolute;
-  top: 37.5%;
-  left: 12%; /* top+left 50%: a container közepébe helyezi a szöveget */
-  /* transform: translate(
-    -85%,
-    -25%
-  ); /* Mozgatás a container közepétől balra, lefele */
-
+  display: flex;
+  flex-direction: column;
   color: rgb(238, 237, 250);
   text-align: left;
   font-weight: bolder;
@@ -56,67 +47,107 @@
 
 /* Landing page-n a szövegméretek beállítása */
 .big-text {
-  font-size: 100px;
+  font-size: 6rem;
   margin: 0;
   width: 16ch;
 }
 
 .medium-text {
-  font-size: 42px;
+  font-size: 2.625rem;
   margin: 0;
   width: 42ch;
 }
 
 .small-text {
-  font-size: 30px;
+  font-size: 1.875rem;
   margin: 0;
 }
 
-@media (max-width: 1536px) {
+@media screen and (max-width: 1600px) {
+  .landing-section {
+    padding-left: 12rem;
+    padding-top: 4.25rem;
+  }
   .big-text {
-    font-size: 80px;
+    font-size: 4.5rem;
+    margin: 0;
+    width: 16ch;
   }
+
   .medium-text {
-    font-size: 33.6px;
+    font-size: 2.125rem;
+    margin: 0;
+    width: 42ch;
   }
+
   .small-text {
-    font-size: 24px;
+    font-size: 1.575rem;
+    margin: 0;
   }
 }
 
-@media (max-width: 1228px) {
+@media screen and (max-width: 1280px) {
+  .landing-section {
+    padding-left: 8rem;
+    padding-top: 4.25rem;
+  }
   .big-text {
-    font-size: 64px;
+    font-size: 3.8rem;
+    margin: 0;
+    width: 16ch;
   }
+
   .medium-text {
-    font-size: 26.88px;
+    font-size: 1.8rem;
+    margin: 0;
+    width: 42ch;
   }
+
   .small-text {
-    font-size: 19.2px;
+    font-size: 1.375rem;
+    margin: 0;
   }
 }
 
-@media (max-width: 982px) {
+@media screen and (max-width: 768px) {
+  .landing-section {
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    padding-top: 74px;
+  }
+  .text-parts {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
   .big-text {
-    font-size: 51.2px;
+    width: 100%;
+    font-size: 2.8rem;
   }
   .medium-text {
-    font-size: 21.504px;
+    width: 100%;
+    font-size: 1.5rem;
   }
   .small-text {
-    font-size: 15.36px;
+    font-size: 1.25rem;
+  }
+
+  .landing-image {
+    width: 100vw;
+    height: 100vw;
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 496px) {
   .big-text {
-    font-size: 39.936px;
+    font-size: 1.85rem;
   }
   .medium-text {
-    font-size: 16.773px;
+    font-size: 1rem;
   }
   .small-text {
-    font-size: 11.981px;
+    font-size: 0.85rem;
   }
 }
 </style>
