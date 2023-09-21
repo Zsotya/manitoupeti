@@ -29,6 +29,7 @@ const { jobs } = defineProps(["jobs"]);
   display: flex;
   flex-direction: column;
   padding-top: 240px;
+  width: 100%;
 }
 
 .small-content {
@@ -42,7 +43,7 @@ const { jobs } = defineProps(["jobs"]);
   margin-bottom: 4px;
   font-weight: bolder;
   color: #e07076;
-  width: 30ch;
+  max-width: 100%;
 }
 
 .career-cards-container {
@@ -54,5 +55,32 @@ const { jobs } = defineProps(["jobs"]);
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 30px 40px 80px 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .career-cards-container {
+    margin: 0;
+  }
+  .career-component {
+    padding: 0;
+  }
+  .text-part {
+    align-items: center;
+  }
+  .career-cards {
+    padding: 30px 0 80px 0;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .small-content {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .big-content {
+    font-size: 38px;
+    text-align: center;
+  }
 }
 </style>
