@@ -15,13 +15,26 @@
   display: flex;
   background-color: #e8e6e6;
   justify-content: center;
-  padding: 220px 0px 100px 0px;
+  padding: 220px 0px 60px 0px;
 }
 
 .title {
-  padding: 16px;
+  margin: 0 36px 0 36px;
   font-size: 44px;
   color: #e07076;
   font-weight: bolder;
+  text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .title {
+    font-size: 32px;
+  }
 }
 </style>
