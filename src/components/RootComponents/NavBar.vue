@@ -34,6 +34,7 @@
 import { useRoute } from "vue-router";
 
 const routes = [
+  { path: "/", label: "homeLabel" },
   { path: "/bemutatkozas", label: "aboutLabel" },
   { path: "/munkaink", label: "ourWorksLabel" },
   { path: "/berelheto-gepeink", label: "machinesLabel" },
