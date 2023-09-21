@@ -51,7 +51,19 @@ const moveLeft = () => {
 };
 
 const moveRight = () => {
-  if (currentIndex.value < images.length - 3) {
+  if (window.innerWidth <= 496 && currentIndex.value < images.length - 1) {
+    currentIndex.value++;
+    displayedImages.value = calculateDisplayedImages();
+    preloadImages();
+  } else if (
+    window.innerWidth > 496 &&
+    window.innerWidth < 1024 &&
+    currentIndex.value < images.length - 2
+  ) {
+    currentIndex.value++;
+    displayedImages.value = calculateDisplayedImages();
+    preloadImages();
+  } else if (currentIndex.value < images.length - 3) {
     currentIndex.value++;
     displayedImages.value = calculateDisplayedImages();
     preloadImages();
@@ -77,11 +89,11 @@ const preloadImages = () => {
 const calculateEnd = () => {
   const screenWidth = window.innerWidth;
   if (screenWidth <= 496) {
-    return currentIndex.value - 1;
+    return currentIndex.value;
   } else if (screenWidth <= 1024) {
-    return currentIndex.value + 0;
-  } else {
     return currentIndex.value + 1;
+  } else {
+    return currentIndex.value + 2;
   }
 };
 
@@ -109,7 +121,15 @@ const calculateDisplayedImages = () => {
   const end = calculateEnd();
   const displayed = images.slice(start, end);
 
-  const nextSet = images.slice(end, end + 2);
+  let nextSet = ref([]);
+
+  if (screenWidth <= 496) {
+    nextSet = images.slice(end, end - 1);
+  } else if (screenWidth > 496 && screenWidth < 1024) {
+    nextSet = images.slice(end, end);
+  } else {
+    nextSet = images.slice(end, end + 1);
+  }
   return displayed.concat(nextSet);
 };
 
