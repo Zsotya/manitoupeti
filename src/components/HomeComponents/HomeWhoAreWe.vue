@@ -233,6 +233,9 @@
     ul {
       flex-direction: column;
     }
+    .info .paragraph {
+      max-width: 40ch;
+    }
   }
 }
 </style>

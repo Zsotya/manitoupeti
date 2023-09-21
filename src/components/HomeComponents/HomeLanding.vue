@@ -121,7 +121,7 @@
     align-items: flex-start;
     padding: 0px;
     padding-top: 74px;
-    height: 70vh;
+    height: 76vh;
   }
   .text-parts {
     flex-wrap: wrap;
@@ -148,8 +148,14 @@
 /* Mobil nézet */
 
 @media screen and (max-width: 496px) {
+  .landing-image {
+    min-height: 100%;
+    width: auto;
+    min-width: 300px;
+    max-width: 100%;
+  }
   .landing-section {
-    height: 50vh;
+    height: 66vh;
   }
   .big-text {
     font-size: 1.85rem;
