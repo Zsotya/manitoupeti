@@ -91,9 +91,9 @@ const jobs = [
     jobName_hu: "Katona",
     jobName_en: "Soldier",
     jobDescription_hu:
-      "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért.aaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa ",
+      "Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Kattints a 'Jelentkezz most!' gombra a részletekért. aaaaaaaaaaaaaaaaaa ",
     jobDescription_en:
-      "LoremENENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Click apply now! NOWNOW! aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa ",
+      "LoremENENEN ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Lorem ipsum aszkala baszkala csasztala bum. Prifferium tolerium mandatoru askelu kaotorikum. Click apply now!aaaaaaaaa ",
     jobTime_hu: "Alkalmi munka",
     jobTime_en: "Occasional work",
   },

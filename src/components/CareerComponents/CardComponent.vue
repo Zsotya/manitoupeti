@@ -106,4 +106,22 @@ const { job } = defineProps(["job"]);
   transform: scale(1.05);
   transition: background 0.4s ease, transform 0.2s ease;
 }
+
+@media screen and (max-width: 496px) {
+  .career-card {
+    width: 69vw;
+    height: 54vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .card-text-content {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .apply-button {
+    padding: 20px 20px;
+  }
+}
 </style>
