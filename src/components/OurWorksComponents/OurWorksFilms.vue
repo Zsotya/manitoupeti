@@ -69,12 +69,15 @@ const toggleDescription = (film) => {
 .text-intro {
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
+  flex-wrap: wrap;
 }
 
 .small-title {
   font-size: 22px;
   margin-bottom: 2px;
   padding-left: 6px;
+  flex-wrap: wrap;
 }
 
 .big-text {
@@ -82,12 +85,14 @@ const toggleDescription = (film) => {
   margin-bottom: 4px;
   font-weight: bolder;
   color: #e07076;
-  width: 27ch;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .small-text {
   font-size: 18px;
-  width: 102ch;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .films {
@@ -195,12 +200,11 @@ const toggleDescription = (film) => {
   }
 
   .big-text {
-    font-size: 36px;
+    font-size: 46px;
   }
 
   .small-text {
-    font-size: 16px;
-    width: 86ch;
+    font-size: 18px;
   }
 
   .film-cards {
@@ -221,6 +225,44 @@ const toggleDescription = (film) => {
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 6.5px 8px 7px rgba(0, 0, 0, 0.75);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .text-wrap {
+    margin: 0;
+    padding-top: 200px;
+    width: 100%;
+    /* margin: 0px 40px 0px 40px; */
+    flex-wrap: wrap;
+  }
+  .text-intro {
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .small-title {
+    font-size: 20px;
+  }
+  .big-text {
+    font-size: 40px;
+  }
+  .small-text {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .small-title {
+    font-size: 20px;
+  }
+  .big-text {
+    font-size: 32px;
+  }
+  .small-text {
+    font-size: 17px;
   }
 }
 </style>
