@@ -1,6 +1,54 @@
 <template>
   <nav>
-    <ul>
+    <button class="hamburger-icon" @click="toggleMobileMenu">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="3em"
+        viewBox="0 0 448 512"
+      >
+        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        <path
+          d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+        />
+      </svg>
+    </button>
+
+    <!-- MOBIL MENÜ -->
+    <ul
+      class="mobile-menu"
+      :class="{ active: mobileMenuOpen }"
+      @click="closeMobileMenu"
+    >
+      <router-link
+        v-for="route in routes"
+        :key="route.path"
+        :to="route.path"
+        :exact="true"
+        @click="closeMobileMenu"
+      >
+        <li>{{ $t(route.label) }}</li>
+      </router-link>
+      <li class="lang-switch">
+        <div class="onoffswitch">
+          <input
+            type="checkbox"
+            name="onoffswitch"
+            class="onoffswitch-checkbox"
+            id="myonoffswitch"
+            tabindex="0"
+            unchecked
+            @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
+          />
+          <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
+        </div>
+      </li>
+    </ul>
+
+    <!-- DESKTOP MENÜ -->
+    <ul class="desktop-menu">
       <router-link
         v-for="route in routes"
         :key="route.path"
@@ -32,6 +80,7 @@
 
 <script setup>
 import { useRoute } from "vue-router";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const routes = [
   { path: "/", label: "homeLabel" },
@@ -43,6 +92,35 @@ const routes = [
 ];
 
 const $route = useRoute();
+const mobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value;
+};
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false;
+};
+
+// Bezárja a menüt, ha szélesebb lenne a viewport (pl. mobil elforgatás aktív menü közben)
+const closeMobileMenuOnResize = () => {
+  if (window.innerWidth > 768) {
+    mobileMenuOpen.value = false;
+  }
+};
+
+const resizeListener = () => {
+  closeMobileMenuOnResize();
+};
+
+onMounted(() => {
+  window.addEventListener("resize", resizeListener);
+  closeMobileMenuOnResize();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", resizeListener);
+});
 </script>
 
 <style scoped>
@@ -184,6 +262,34 @@ a {
   right: 0px;
 }
 
+/* Mobil menü stílus */
+
+.mobile-menu {
+  display: none; /* 768px+ képernyőknél ne jelenjen meg */
+  list-style: none;
+  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 30%;
+  min-width: 160px;
+  background-color: rgba(0, 0, 0, 0.338);
+  border: 1px solid red;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+.hamburger-icon {
+  display: none; /* 768px+ képernyőknél ne jelenjen meg */
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  padding: 10px 0px 0px 10px;
+}
+
 /* Laptop nézet */
 @media screen and (max-width: 1024px) {
   nav {
@@ -204,6 +310,17 @@ a {
 
   li {
     margin: 0;
+  }
+}
+
+/* Tablet, mobil nézet */
+@media screen and (max-width: 768px) {
+  .hamburger-icon {
+    display: flex;
+  }
+
+  .desktop-menu {
+    display: none;
   }
 }
 </style>
