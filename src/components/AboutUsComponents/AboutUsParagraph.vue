@@ -21,44 +21,38 @@ const isEven = paragraph.id % 2 === 0;
 
 <style scoped>
 .paragraph-section {
-  background-color: #e8e6e6;
-  padding-bottom: 50px;
   display: flex;
-}
-
-.paragraph-section .image-container {
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e8e6e6;
+  padding: 0rem 7.2vw 4rem 7.2vw;
 }
 
 .text-part {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex: 1.6;
-  padding-left: 190px;
+  align-self: center;
+  flex-wrap: wrap;
 }
 
 .paragraph-title {
-  width: 26ch;
-  font-size: 30px;
-  margin-bottom: 16px;
-  font-weight: bolder;
+  display: flex;
+  font-size: 1.875rem;
+  max-width: 30ch;
+  flex-wrap: wrap;
 }
 
 .paragraph-content {
-  width: 46ch;
+  font-size: 1.1rem;
   line-height: 1.5;
-  font-size: 16px;
-}
-
-.image-container {
-  display: flex;
-  margin-right: 140px;
+  max-width: 60ch;
+  width: 100%;
+  padding: 0.625rem 0;
 }
 
 .image-container img {
-  width: 840px;
-  height: 890px;
+  width: 45rem;
+  height: 48rem;
   object-fit: cover;
 }
 
@@ -66,13 +60,102 @@ const isEven = paragraph.id % 2 === 0;
   flex-direction: row-reverse;
 }
 
-.reverse-order .text-part {
-  position: relative;
-  right: 0px;
+.reverse-order .image-container img {
+  margin-right: 3rem;
 }
 
-.reverse-order .image-container {
-  position: relative;
-  left: 160px;
+/* Közepes desktop nézet */
+
+@media screen and (max-width: 1600px) {
+  .image-container img {
+    width: 40rem;
+    height: 43rem;
+  }
 }
+
+/* Kisebb desktop nézet */
+
+@media screen and (max-width: 1440px) {
+  .image-container img {
+    width: 31rem;
+    height: 34rem;
+  }
+}
+
+/* Kicsi desktop nézet */
+
+@media screen and (max-width: 1280px) {
+  .image-container img {
+    width: 25rem;
+    height: 28rem;
+  }
+  .paragraph-content {
+    font-size: 1rem;
+  }
+
+  .paragraph-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Laptop nézet */
+
+@media screen and (max-width: 1024px) {
+  .text-part {
+    padding-right: 10px;
+  }
+  .reverse-order .text-part {
+    padding-right: 0px;
+  }
+  .paragraph-title {
+    font-size: 1.5rem;
+  }
+
+  .paragraph-content {
+    max-width: 50ch;
+  }
+
+  .image-container img {
+    width: 24rem;
+    height: 26rem;
+  }
+}
+
+/* Tablet nézet, mobil nézet */
+
+@media screen and (max-width: 768px) {
+  .paragraph-section {
+    flex-direction: column;
+  }
+
+  .text-part {
+    text-align: center;
+    padding-bottom: 1.5rem;
+  }
+
+  .paragraph-title {
+    justify-content: center;
+    max-width: 60ch;
+  }
+
+  .paragraph-content {
+    max-width: 76ch;
+  }
+
+  .image-container {
+    margin: 0 1rem 0 1rem;
+  }
+
+  .image-container img {
+    max-height: 34rem;
+    max-width: 32rem;
+    height: 100%;
+    width: 100%;
+  }
+
+  .reverse-order .image-container img {
+    margin-right: 0;
+  }
+}
+/* Külön mobilnézet nem szükséges */
 </style>
