@@ -3,30 +3,35 @@
     <img class="background-image" src="@/assets/43.jpg" alt="image" />
     <div class="milestones">
       <ul>
-        <li>
-          <div class="milestone">
-            <div class="number">10+</div>
-            <div class="text">{{ $t("homeExperience") }}</div>
-          </div>
-        </li>
-        <li>
-          <div class="milestone">
-            <div class="number">300+</div>
-            <div class="text">{{ $t("homeProjects") }}</div>
-          </div>
-        </li>
-        <li>
-          <div class="milestone">
-            <div class="number">12</div>
-            <div class="text">{{ $t("homeOperators") }}</div>
-          </div>
-        </li>
-        <li>
-          <div class="milestone">
-            <div class="number">30+</div>
-            <div class="text">{{ $t("homeEmployer") }}</div>
-          </div>
-        </li>
+        <div class="twocontainer">
+          <li>
+            <div class="milestone">
+              <div class="number">10+</div>
+              <div class="text">{{ $t("homeExperience") }}</div>
+            </div>
+          </li>
+          <li>
+            <div class="milestone">
+              <div class="number">300+</div>
+              <div class="text">{{ $t("homeProjects") }}</div>
+            </div>
+          </li>
+        </div>
+        <div class="break"></div>
+        <div class="twocontainer">
+          <li>
+            <div class="milestone">
+              <div class="number">12</div>
+              <div class="text">{{ $t("homeOperators") }}</div>
+            </div>
+          </li>
+          <li>
+            <div class="milestone">
+              <div class="number">30+</div>
+              <div class="text">{{ $t("homeEmployer") }}</div>
+            </div>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="info">
@@ -42,7 +47,7 @@
 <style scoped>
 .who-are-we {
   position: relative;
-  height: 1000px;
+  height: 100vh;
   padding-top: 100px;
   background-color: #e8e6e6;
 }
@@ -57,26 +62,25 @@
   position: absolute;
   display: flex;
   list-style: none;
-  padding: 0;
   bottom: 96px;
   left: 112px;
 }
 
 .milestones ul {
   display: flex;
+  list-style: none;
 }
 
 .milestone {
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin-right: 40px;
-  padding-right: 30px;
+  margin-right: 70px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
 }
 
 .milestone :last-child {
-  padding-right: 0px;
+  margin-right: 0px;
 }
 
 .number {
@@ -92,9 +96,8 @@
 
 .info {
   position: absolute;
-  top: 50%;
-  right: 180px;
-  transform: translateY(-30%);
+  top: 42%;
+  right: 10vw;
   text-align: left;
   color: white;
   width: 50ch;
@@ -104,12 +107,13 @@
   font-size: 22px;
   margin-bottom: 2px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+  color: #eaeaea;
 }
 
 .title {
   font-size: 63px;
   margin-bottom: 4px;
-  width: 18ch;
+  width: 100%;
   font-weight: bolder;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
   color: #e07076;
@@ -118,5 +122,117 @@
 .paragraph {
   font-size: 24px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+  color: #eaeaea;
+}
+
+.twocontainer {
+  display: flex;
+}
+
+@media screen and (max-width: 1600px) {
+  .info {
+    right: 6vw;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .milestone {
+    margin-right: 54px;
+  }
+  .text {
+    font-size: 22px;
+  }
+  .info {
+    top: 45.5%;
+    right: 1vw;
+    width: 43ch;
+  }
+  .title {
+    font-size: 52px;
+  }
+
+  .paragraph {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .milestones {
+      left: 60px;
+    }
+    .milestone {
+      margin-right: 40px;
+    }
+    .number {
+      font-size: 54px;
+    }
+    .text {
+      max-width: 14ch;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .who-are-we {
+      padding-top: 0px;
+      height: 750px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .background-image {
+      max-width: 100%;
+      object-fit: cover;
+      min-height: 100%;
+      min-width: 600px;
+    }
+    .milestones {
+      left: 20px;
+      bottom: 30px;
+      max-width: 100%;
+    }
+    .milestone {
+      margin-right: 48px;
+    }
+    .number {
+      font-size: 40px;
+    }
+    .text {
+      font-size: 18px;
+      max-width: 8ch;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      top: 3%;
+      width: 100%;
+      text-align: center;
+      align-items: center;
+    }
+    .info .title {
+      font-size: 46px;
+    }
+    .info .paragraph {
+      max-width: 64ch;
+      font-size: 18px;
+    }
+    .info .question {
+      font-size: 20px;
+      margin-bottom: 0px;
+    }
+  }
+
+  @media screen and (max-width: 496px) {
+    .milestones {
+      left: auto;
+      bottom: auto;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 40px;
+      padding-left: 50px;
+      width: 100%;
+      height: 100%;
+    }
+    ul {
+      flex-direction: column;
+    }
+  }
 }
 </style>
