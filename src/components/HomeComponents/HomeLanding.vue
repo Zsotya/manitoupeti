@@ -55,13 +55,15 @@
 .medium-text {
   font-size: 2.625rem;
   margin: 0;
-  width: 42ch;
+  width: 36ch;
 }
 
 .small-text {
   font-size: 1.875rem;
   margin: 0;
 }
+
+/* Közepes desktop méret */
 
 @media screen and (max-width: 1600px) {
   .landing-section {
@@ -86,6 +88,8 @@
   }
 }
 
+/* Kisebb desktop méret, laptop nézet */
+
 @media screen and (max-width: 1280px) {
   .landing-section {
     padding-left: 8rem;
@@ -108,6 +112,8 @@
     margin: 0;
   }
 }
+
+/* Tablet nézet */
 
 @media screen and (max-width: 768px) {
   .landing-section {
@@ -138,6 +144,8 @@
     width: 100vw;
   }
 }
+
+/* Mobil nézet */
 
 @media screen and (max-width: 496px) {
   .landing-section {
