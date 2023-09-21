@@ -32,6 +32,7 @@
           <a href="https://www.linkedin.com/">LinkedIn</a>
         </div>
       </div>
+      <div class="break-2"></div>
       <div class="footer-item">
         <div class="information">{{ $t("footerInquiry") }}</div>
         <div class="info-paragraph">
@@ -178,6 +179,10 @@
 
 /* Laptop nézet */
 @media screen and (max-width: 1024px) {
+  .footer-content {
+    padding: 20px 5%;
+  }
+
   /* CSS trükk line-break beszúrásához */
   /* Működése: Mivel a flex-basis-t 100%-ra állítottuk, ezáltal megmondtuk az oldalnak, hogy ennek a div-nek a container 100%-át le kell fednie, ez csak új sorban történhet meg */
   .break {
@@ -195,6 +200,24 @@
   .contactus-button,
   .quote-button {
     margin: 10px 50px 0px 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .break-2 {
+    flex-basis: 100%;
+  }
+}
+
+@media screen and (max-width: 496px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  .footer-item {
+    padding: 0;
+  }
+  .footer {
+    overflow: hidden;
   }
 }
 </style>
