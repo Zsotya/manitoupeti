@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <section>
     <div class="career-cards">
       <CareerComp :jobs="jobs" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

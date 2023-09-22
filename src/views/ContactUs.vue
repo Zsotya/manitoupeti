@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <section>
     <ContactUsComp />
-  </div>
+  </section>
 </template>
 
 <script setup>

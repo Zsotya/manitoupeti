@@ -203,12 +203,14 @@
   }
 }
 
+/* Tablet nézet */
 @media screen and (max-width: 768px) {
   .break-2 {
     flex-basis: 100%;
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .footer-content {
     flex-direction: column;

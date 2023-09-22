@@ -57,6 +57,7 @@ const { jobs } = defineProps(["jobs"]);
   padding: 30px 40px 80px 30px;
 }
 
+/* Tablet nézet */
 @media screen and (max-width: 768px) {
   .career-cards-container {
     margin: 0;
@@ -72,6 +73,7 @@ const { jobs } = defineProps(["jobs"]);
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .small-content {
     font-size: 22px;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <OurWorksFilms
       :filmsData="[
         {
@@ -44,7 +44,7 @@
         },
       ]"
     ></OurWorksFilms>
-  </div>
+  </section>
 </template>
 
 <script setup>

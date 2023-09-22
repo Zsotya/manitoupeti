@@ -1,5 +1,5 @@
 <template>
-  <main class="page-format">
+  <div class="page-format">
     <div class="text-wrap">
       <div class="text-intro">
         <div class="small-title">{{ $t("ourWorksSmallTitle") }}</div>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -185,8 +185,8 @@ const toggleDescription = (film) => {
   padding-top: 30px;
 }
 
+/* Laptop nézet */
 @media screen and (max-width: 1024px) {
-  /* Laptop nézet */
   .text-wrap {
     margin-left: 60px;
   }
@@ -228,6 +228,7 @@ const toggleDescription = (film) => {
   }
 }
 
+/* Tablet nézet */
 @media screen and (max-width: 768px) {
   .text-wrap {
     margin: 0;
@@ -254,6 +255,7 @@ const toggleDescription = (film) => {
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .small-title {
     font-size: 20px;

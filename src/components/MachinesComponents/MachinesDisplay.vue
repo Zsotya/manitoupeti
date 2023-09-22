@@ -150,13 +150,14 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* For Laptop+Tablet view */
+/* Tablet nézet */
 @media screen and (max-width: 768px) {
   .machines-display {
     max-width: 50%;
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .machines-display {
     max-width: 100%;

@@ -26,12 +26,14 @@
   text-align: center;
 }
 
+/* Laptop nézet */
 @media screen and (max-width: 1024px) {
   .title {
     font-size: 36px;
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .title {
     font-size: 32px;

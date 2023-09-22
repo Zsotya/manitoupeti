@@ -34,12 +34,12 @@
             type="checkbox"
             name="onoffswitch"
             class="onoffswitch-checkbox"
-            id="myonoffswitch"
+            id="myonoffswitch1"
             tabindex="0"
             unchecked
             @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
           />
-          <label class="onoffswitch-label" for="myonoffswitch">
+          <label class="onoffswitch-label" for="myonoffswitch1">
             <span class="onoffswitch-inner"></span>
             <span class="onoffswitch-switch"></span>
           </label>
@@ -63,12 +63,12 @@
             type="checkbox"
             name="onoffswitch"
             class="onoffswitch-checkbox"
-            id="myonoffswitch"
+            id="myonoffswitch2"
             tabindex="0"
             unchecked
             @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
           />
-          <label class="onoffswitch-label" for="myonoffswitch">
+          <label class="onoffswitch-label" for="myonoffswitch2">
             <span class="onoffswitch-inner"></span>
             <span class="onoffswitch-switch"></span>
           </label>
@@ -79,7 +79,6 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const routes = [
@@ -91,7 +90,7 @@ const routes = [
   { path: "/karrier", label: "careerLabel" },
 ];
 
-const $route = useRoute();
+/* Alapértelmezetten bezárva */
 const mobileMenuOpen = ref(false);
 
 const toggleMobileMenu = () => {

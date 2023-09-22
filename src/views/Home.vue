@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header><HomeLanding /></header>
+    <section><HomeLanding /></section>
     <section><HomeParagraphIntro /></section>
     <section>
       <HomeParagraph

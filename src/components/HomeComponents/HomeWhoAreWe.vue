@@ -129,12 +129,14 @@
   display: flex;
 }
 
+/* Közepes desktop nézet */
 @media screen and (max-width: 1600px) {
   .info {
     right: 6vw;
   }
 }
 
+/* Kicsi desktop méret */
 @media screen and (max-width: 1280px) {
   .milestone {
     margin-right: 54px;
@@ -154,88 +156,91 @@
   .paragraph {
     font-size: 20px;
   }
+}
 
-  @media screen and (max-width: 1024px) {
-    .milestones {
-      left: 60px;
-    }
-    .milestone {
-      margin-right: 40px;
-    }
-    .number {
-      font-size: 54px;
-    }
-    .text {
-      max-width: 14ch;
-    }
+/* Laptop nézet */
+@media screen and (max-width: 1024px) {
+  .milestones {
+    left: 60px;
   }
-
-  @media screen and (max-width: 768px) {
-    .who-are-we {
-      padding-top: 0px;
-      height: 750px;
-      overflow: hidden;
-      width: 100%;
-    }
-    .background-image {
-      max-width: 100%;
-      object-fit: cover;
-      min-height: 100%;
-      min-width: 600px;
-    }
-    .milestones {
-      left: 20px;
-      bottom: 30px;
-      max-width: 100%;
-    }
-    .milestone {
-      margin-right: 48px;
-    }
-    .number {
-      font-size: 40px;
-    }
-    .text {
-      font-size: 18px;
-      max-width: 8ch;
-    }
-    .info {
-      display: flex;
-      flex-direction: column;
-      top: 3%;
-      width: 100%;
-      text-align: center;
-      align-items: center;
-    }
-    .info .title {
-      font-size: 46px;
-    }
-    .info .paragraph {
-      max-width: 64ch;
-      font-size: 18px;
-    }
-    .info .question {
-      font-size: 20px;
-      margin-bottom: 0px;
-    }
+  .milestone {
+    margin-right: 40px;
   }
+  .number {
+    font-size: 54px;
+  }
+  .text {
+    max-width: 14ch;
+  }
+}
 
-  @media screen and (max-width: 496px) {
-    .milestones {
-      left: auto;
-      bottom: auto;
-      justify-content: center;
-      align-items: flex-end;
-      padding-bottom: 40px;
-      padding-left: 50px;
-      width: 100%;
-      height: 100%;
-    }
-    ul {
-      flex-direction: column;
-    }
-    .info .paragraph {
-      max-width: 40ch;
-    }
+/* Tablet nézet */
+@media screen and (max-width: 768px) {
+  .who-are-we {
+    padding-top: 0px;
+    height: 750px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .background-image {
+    max-width: 100%;
+    object-fit: cover;
+    min-height: 100%;
+    min-width: 600px;
+  }
+  .milestones {
+    left: 20px;
+    bottom: 30px;
+    max-width: 100%;
+  }
+  .milestone {
+    margin-right: 48px;
+  }
+  .number {
+    font-size: 40px;
+  }
+  .text {
+    font-size: 18px;
+    max-width: 8ch;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    top: 3%;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+  .info .title {
+    font-size: 46px;
+  }
+  .info .paragraph {
+    max-width: 64ch;
+    font-size: 18px;
+  }
+  .info .question {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+}
+
+/* Mobil nézet */
+@media screen and (max-width: 496px) {
+  .milestones {
+    left: auto;
+    bottom: auto;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 40px;
+    padding-left: 50px;
+    width: 100%;
+    height: 100%;
+  }
+  ul {
+    flex-direction: column;
+  }
+  .info .paragraph {
+    max-width: 40ch;
   }
 }
 </style>

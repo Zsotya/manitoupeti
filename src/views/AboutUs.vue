@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <section>
     <AboutUsIntro />
     <AboutUsParagraph
       v-for="paragraph in paragraphs"
       :key="paragraphs.id"
       :paragraph="paragraph"
     />
-  </div>
+  </section>
 </template>
 
 <script setup>

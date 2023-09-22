@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <MachinesIntro />
     <div class="machines-container">
       <MachinesDisplay
@@ -8,7 +8,7 @@
         :machine="machine"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
@@ -89,6 +89,7 @@ const machines = [
   background-color: #e8e6e6;
 }
 
+/* Tablet nézet */
 @media screen and (max-width: 768px) {
   /* .machines-container {
     flex-direction: column;
@@ -97,6 +98,7 @@ const machines = [
   } */
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .machines-container {
     padding-top: 100px;

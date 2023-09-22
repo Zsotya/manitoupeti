@@ -286,6 +286,7 @@ img {
   }
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .image {
     flex: 0 0 100%;

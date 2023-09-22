@@ -61,7 +61,6 @@
 }
 
 /* Kisebb desktop nézet */
-
 @media screen and (max-width: 1280px) {
   .introduction-left h3 {
     font-size: 22px;
@@ -79,7 +78,6 @@
 }
 
 /* Laptop nézet */
-
 @media screen and (max-width: 1024px) {
   .introduction-left h3 {
     font-size: 16px;
@@ -97,7 +95,6 @@
 }
 
 /* Tablet nézet, mobil nézet */
-
 @media screen and (max-width: 768px) {
   .introduction-part {
     flex-direction: column;

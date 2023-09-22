@@ -64,7 +64,6 @@
 }
 
 /* Közepes desktop méret */
-
 @media screen and (max-width: 1600px) {
   .landing-section {
     padding-left: 12rem;
@@ -89,7 +88,6 @@
 }
 
 /* Kisebb desktop méret, laptop nézet */
-
 @media screen and (max-width: 1280px) {
   .landing-section {
     padding-left: 8rem;
@@ -114,7 +112,6 @@
 }
 
 /* Tablet nézet */
-
 @media screen and (max-width: 768px) {
   .landing-section {
     justify-content: center;
@@ -146,7 +143,6 @@
 }
 
 /* Mobil nézet */
-
 @media screen and (max-width: 496px) {
   .landing-image {
     min-height: 100%;

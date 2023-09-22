@@ -107,6 +107,7 @@ const { job } = defineProps(["job"]);
   transition: background 0.4s ease, transform 0.2s ease;
 }
 
+/* Mobil nézet */
 @media screen and (max-width: 496px) {
   .career-card {
     width: 69vw;

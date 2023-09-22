@@ -65,7 +65,6 @@ const isEven = paragraph.id % 2 === 0;
 }
 
 /* Közepes desktop nézet */
-
 @media screen and (max-width: 1600px) {
   .image-container img {
     width: 40rem;
@@ -74,7 +73,6 @@ const isEven = paragraph.id % 2 === 0;
 }
 
 /* Kisebb desktop nézet */
-
 @media screen and (max-width: 1440px) {
   .image-container img {
     width: 31rem;
@@ -83,7 +81,6 @@ const isEven = paragraph.id % 2 === 0;
 }
 
 /* Kicsi desktop nézet */
-
 @media screen and (max-width: 1280px) {
   .image-container img {
     width: 25rem;
@@ -99,7 +96,6 @@ const isEven = paragraph.id % 2 === 0;
 }
 
 /* Laptop nézet */
-
 @media screen and (max-width: 1024px) {
   .text-part {
     padding-right: 10px;
@@ -122,7 +118,6 @@ const isEven = paragraph.id % 2 === 0;
 }
 
 /* Tablet nézet, mobil nézet */
-
 @media screen and (max-width: 768px) {
   .paragraph-section {
     flex-direction: column;
