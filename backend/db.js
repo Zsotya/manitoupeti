@@ -3,11 +3,11 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "harcosok",
+  password: "password",
   database: "manitoupetidb",
 });
 
-// Test the connection
+// Connection tesztelés
 connection.connect((err) => {
   if (err) {
     console.error("Error connecting to the database:", err);
