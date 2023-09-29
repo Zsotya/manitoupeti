@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header><NavBar /></header>
-    <Logo />
+    <!-- <Logo /> -->
     <main class="content">
       <router-view />
     </main>
