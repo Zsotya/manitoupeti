@@ -6,7 +6,7 @@
         <p>{{ paragraph["content_" + $i18n.locale] }}</p>
       </div>
       <div class="image-side">
-        <img :src="paragraph.imageSrc" alt="Image" />
+        <img :src="paragraph.image_path" alt="Image" />
       </div>
     </div>
   </div>
