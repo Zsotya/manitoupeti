@@ -29,7 +29,8 @@ const jobs = [
       "Szeretnénk felvenni minél több földmunkagépkezelőt, mindenképpen elvárás az OKJ képzés megléte. Részletek a 'Jelentkezz most!' gombra kattintás után elérhetőek.",
     jobDescription_en:
       "We would like to apply more and more machine operators, you must have OKJ. Details at 'Apply now!' button go check",
-    jobTime_hu: "Full-time",
+    jobTime_hu: "Teljes munkaidő",
+    jobTime_en: "Full-time",
   },
   {
     id: 3,
