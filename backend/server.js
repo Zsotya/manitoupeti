@@ -10,7 +10,10 @@ app.use(
 );
 
 const paragraphsRoutes = require("./routes/paragraphs");
+const jobsRoutes = require("./routes/jobs");
+
 app.use(paragraphsRoutes);
+app.use(jobsRoutes);
 
 // Start the server
 app.listen(port, () => {

@@ -2,7 +2,7 @@
   <div class="career-card">
     <div class="card-content">
       <div class="card-text-part">
-        <div class="card-title">{{ job["jobName_" + $i18n.locale] }}</div>
+        <div class="card-title">{{ job["jobname_" + $i18n.locale] }}</div>
         <div class="job-time-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -15,9 +15,9 @@
             />
           </svg>
         </div>
-        <div class="job-time">{{ job["jobTime_" + $i18n.locale] }}</div>
+        <div class="job-time">{{ job["jobtime_" + $i18n.locale] }}</div>
         <div class="card-text-content">
-          {{ job["jobDescription_" + $i18n.locale] }}
+          {{ job["jobdescription_" + $i18n.locale] }}
         </div>
       </div>
     </div>

@@ -29,8 +29,6 @@ async function fetchData() {
   try {
     const response = await axios.get("http://localhost:3000/api/paragraphs");
     paragraphs.value = response.data;
-    console.log(paragraphs);
-    console.log(paragraphs.value[0].id);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
