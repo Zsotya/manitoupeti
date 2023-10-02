@@ -9,6 +9,7 @@ import Machines from "../views/Machines.vue";
 import ContactUs from "../views/ContactUs.vue";
 import Career from "../views/Career.vue";
 import Admin from "../views/Admin.vue";
+import AdminDashboard from "../views/AdminDashboard.vue";
 
 /* Router paths */
 const routes = [
@@ -41,6 +42,11 @@ const routes = [
   {
     path: "/admin",
     component: Admin,
+    meta: { showNavbar: false, showFooter: false },
+  },
+  {
+    path: "/admin/dashboard",
+    component: AdminDashboard,
     meta: { showNavbar: false, showFooter: false },
   },
 ];
