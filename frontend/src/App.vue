@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <header><NavBar /></header>
+    <header v-if="$route.meta.showNavbar"><NavBar /></header>
     <!-- <Logo /> -->
     <main class="content">
       <router-view />
     </main>
-    <footer><Footer /></footer>
+    <footer v-if="$route.meta.showFooter"><Footer /></footer>
   </div>
 </template>
 
