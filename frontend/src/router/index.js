@@ -43,17 +43,39 @@ const routes = [
     path: "/admin",
     component: Admin,
     meta: { showNavbar: false, showFooter: false },
+    beforeEnter: (to, from, next) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        next("/admin/dashboard"); // Ha van token, automatikusan a ../admin/dashboard oldalra kerül
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/admin/dashboard",
     component: AdminDashboard,
-    meta: { showNavbar: false, showFooter: false },
+    meta: { showNavbar: false, showFooter: false, requireAuth: true },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Route guard
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      next("/admin"); // Ha nincs token, "visszaküldés" a ../admin oldalra
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
