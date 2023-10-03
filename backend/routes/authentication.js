@@ -4,7 +4,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const connection = require("../db");
 
-const secretKey = "szupertitkoskulcs";
+const crypto = require("crypto");
+// 32 byte-os random kulcs generálása
+const secretKey = crypto.randomBytes(32).toString("hex");
+console.log(secretKey);
 
 router.post("/api/authentication", (req, res) => {
   console.log("Authentication route accessed.");
