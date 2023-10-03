@@ -1,5 +1,5 @@
 const readline = require("readline");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const mysql = require("mysql2/promise");
 
 const rl = readline.createInterface({
