@@ -14,13 +14,30 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import axios from "axios";
 
 const username = ref("");
 const password = ref("");
 const router = useRouter();
 
-const login = () => {
-  router.push("/admin/dashboard");
+const login = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/authentication",
+      {
+        username: username.value,
+        password: password.value,
+      }
+    );
+    if (response.data.authenticated) {
+      localStorage.setItem("token", response.data.token);
+      router.push("/admin/dashboard");
+    } else {
+      console.log("Ejnye bejnye, csúnya betörő");
+    }
+  } catch (error) {
+    console.error("Hiba a bejelentkezéskor:", error);
+  }
 };
 </script>
 

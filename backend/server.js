@@ -9,11 +9,14 @@ app.use(
   })
 );
 
+app.use(express.json());
 const paragraphsRoutes = require("./routes/paragraphs");
 const jobsRoutes = require("./routes/jobs");
+const authenticationRoutes = require("./routes/authentication");
 
 app.use(paragraphsRoutes);
 app.use(jobsRoutes);
+app.use(authenticationRoutes);
 
 // Start the server
 app.listen(port, () => {
