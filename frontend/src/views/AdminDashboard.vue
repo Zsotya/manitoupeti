@@ -1,7 +1,9 @@
 <template>
-  <h1>test test test</h1>
+  <Sidebar />
 </template>
 
-<script setup></script>
+<script setup>
+import Sidebar from "@/components/AdminComponents/Sidebar.vue";
+</script>
 
 <style scoped></style>

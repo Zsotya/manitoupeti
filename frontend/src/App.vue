@@ -15,4 +15,6 @@ import Footer from "./components/RootComponents/Footer.vue";
 import Logo from "./components/RootComponents/Logo.vue";
 </script>
 
-<style scoped></style>
+<style scoped>
+@import "~@fortawesome/fontawesome-free/css/all.css";
+</style>
