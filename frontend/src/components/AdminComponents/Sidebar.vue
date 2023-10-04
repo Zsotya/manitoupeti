@@ -4,40 +4,10 @@
       <h3>ManitouPeti</h3>
     </div>
     <ul>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="fas fa-home mr-2"></i> Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-chart-bar mr-2"></i> Statistics
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-book mr-2"></i> Paragraph Management
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-film mr-2"></i> Our Films Management
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-cogs mr-2"></i> Machines Management
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-briefcase mr-2"></i> Career Management
-        </a>
-      </li>
-      <li>
-        <a href="https://www.google.com" class="nav-link">
-          <i class="fas fa-user mr-2"></i> Admin Management
-        </a>
+      <li v-for="link in links" :key="link.path">
+        <router-link :to="link.path" class="nav-link">
+          <i :class="link.iconClass"></i> {{ link.label }}
+        </router-link>
       </li>
     </ul>
     <ul class="logout">
@@ -50,7 +20,45 @@
   </div>
 </template>
 
-<script></script>
+<script setup>
+const links = [
+  {
+    path: "/admin/dashboard",
+    label: "Dashboard",
+    iconClass: "fas fa-home mr-2",
+  },
+  {
+    path: "/admin/statistics",
+    label: "Statistics",
+    iconClass: "fas fa-chart-bar mr-2",
+  },
+  {
+    path: "/admin/paragraph-management",
+    label: "Paragraph Management",
+    iconClass: "fas fa-book mr-2",
+  },
+  {
+    path: "/admin/ourfilms-management",
+    label: "Our Films Management",
+    iconClass: "fas fa-film mr-2",
+  },
+  {
+    path: "/admin/machines-management",
+    label: "Machines Management",
+    iconClass: "fas fa-cogs mr-2",
+  },
+  {
+    path: "/admin/career-management",
+    label: "Career Management",
+    iconClass: "fas fa-briefcase mr-2",
+  },
+  {
+    path: "/admin/admin-management",
+    label: "Admin Management",
+    iconClass: "fas fa-user mr-2",
+  },
+];
+</script>
 
 <style scoped>
 .sidebar {
@@ -69,6 +77,10 @@
   color: #ffffff;
   display: flex;
   align-items: center;
+}
+
+.router-link-active {
+  background-color: #495057;
 }
 
 .nav-link:hover {
