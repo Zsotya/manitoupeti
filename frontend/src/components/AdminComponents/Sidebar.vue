@@ -12,7 +12,7 @@
     </ul>
     <ul class="logout">
       <li>
-        <a href="#" class="nav-link">
+        <a href="#" class="nav-link" @click="logout">
           <i class="fas fa-sign-out-alt mr-2"></i> Logout
         </a>
       </li>
@@ -21,6 +21,9 @@
 </template>
 
 <script setup>
+import router from "@/router";
+import authService from "@/services/authService";
+
 const links = [
   {
     path: "/admin/dashboard",
@@ -58,6 +61,11 @@ const links = [
     iconClass: "fas fa-user mr-2",
   },
 ];
+
+const logout = () => {
+  authService.logoutUser();
+  router.push("/admin");
+};
 </script>
 
 <style scoped>
