@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <header v-if="$route.meta.showNavbar"><NavBar /></header>
-    <section v-if="$route.meta.showSidebar"><Sidebar /></section>
-    <!-- <Logo /> -->
-    <main class="content">
-      <router-view />
-    </main>
-    <footer v-if="$route.meta.showFooter"><Footer /></footer>
+    <!-- MAIN APP PART -->
+
+    <div v-if="$route.meta.isMainApp">
+      <header><NavBar /></header>
+      <!-- <section><Logo /></section> -->
+      <main class="main-content">
+        <router-view />
+      </main>
+      <footer><Footer /></footer>
+    </div>
+
+    <!-- ADMIN APP PART -->
+
+    <section v-if="$route.meta.isAdminApp" class="admin-app">
+      <Sidebar />
+      <main class="admin-content">
+        <router-view />
+      </main>
+    </section>
   </div>
 </template>
 
@@ -19,4 +31,9 @@ import Sidebar from "./components/AdminComponents/Sidebar.vue";
 
 <style scoped>
 @import "~@fortawesome/fontawesome-free/css/all.css";
+
+.admin-app {
+  display: flex;
+  width: 100%;
+}
 </style>

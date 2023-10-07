@@ -23,37 +23,37 @@ const routes = [
   {
     path: "/",
     component: Home,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/bemutatkozas",
     component: AboutUs,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/munkaink",
     component: OurWorks,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/berelheto-gepeink",
     component: Machines,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/elerhetoseg",
     component: ContactUs,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/karrier",
     component: Career,
-    meta: { showNavbar: true, showFooter: true, showSidebar: false },
+    meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/admin",
     component: Admin,
-    meta: { showNavbar: false, showFooter: false, showSidebar: false },
+    meta: { isMainApp: false, isAdminApp: false },
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
       if (token) {
@@ -67,9 +67,8 @@ const routes = [
     path: "/admin/dashboard",
     component: AdminDashboard,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -77,9 +76,8 @@ const routes = [
     path: "/admin/statistics",
     component: AdminStatistics,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -87,9 +85,8 @@ const routes = [
     path: "/admin/paragraph-management",
     component: AdminParagraph,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -97,9 +94,8 @@ const routes = [
     path: "/admin/ourfilms-management",
     component: AdminOurFilms,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -107,9 +103,8 @@ const routes = [
     path: "/admin/machines-management",
     component: AdminMachines,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -117,9 +112,8 @@ const routes = [
     path: "/admin/career-management",
     component: AdminCareer,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },
@@ -127,9 +121,8 @@ const routes = [
     path: "/admin/admin-management",
     component: AdminAdminManagement,
     meta: {
-      showNavbar: false,
-      showFooter: false,
-      showSidebar: true,
+      isMainApp: false,
+      isAdminApp: true,
       requireAuth: true,
     },
   },

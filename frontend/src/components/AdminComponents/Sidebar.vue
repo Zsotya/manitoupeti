@@ -75,6 +75,7 @@ const logout = () => {
   color: #ffffff;
   height: 100vh;
   padding-top: 20px;
+  flex-shrink: 0; /* Enélkül összezsugorodna, ha széles a tartalom mellette */
 }
 
 .company-name h3 {
