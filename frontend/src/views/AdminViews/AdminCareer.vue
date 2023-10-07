@@ -1,7 +1,7 @@
 <template>
   <div class="admin-career">
     <div class="title">
-      <h2>Admin Career Panel</h2>
+      <h2>Admin Karrier Management Panel</h2>
     </div>
     <div class="jobs-table">
       <table>
@@ -14,11 +14,10 @@
             <th>Job Description (EN)</th>
             <th>Job Time (HU)</th>
             <th>Job Time (EN)</th>
-            <th>Actions</th>
+            <th>Műveletek</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Loop through the jobs data and generate rows -->
           <tr v-for="job in jobs" :key="job.id">
             <td>{{ job.id }}</td>
             <td>{{ job.jobname_hu }}</td>
@@ -28,15 +27,17 @@
             <td>{{ job.jobtime_hu }}</td>
             <td>{{ job.jobtime_en }}</td>
             <td class="actions-buttons">
-              <button class="modify-button">Modify</button>
-              <button class="delete-button">Delete</button>
+              <button class="modify-button">Módosítás</button>
+              <button class="delete-button" @click="deleteJob(job.id)">
+                Törlés
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <router-link to="/admin/career-management/createjob">
-      <button class="add-button">Add New Job</button></router-link
+      <button class="add-button">Új állás hozzáadása</button></router-link
     >
   </div>
 </template>
@@ -63,6 +64,15 @@ async function fetchData() {
     console.error("Error fetching data:", error);
   }
 }
+
+const deleteJob = async (jobId) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/jobs/${jobId}`);
+    jobs.value = jobs.value.filter((job) => job.id !== jobId);
+  } catch (error) {
+    console.error("Error deleting job:", error);
+  }
+};
 
 onMounted(() => {
   fetchData();

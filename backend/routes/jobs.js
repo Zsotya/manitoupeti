@@ -50,4 +50,25 @@ router.post("/api/jobs", (req, res) => {
   );
 });
 
+// DELETE REQUEST KEZELÉSE
+
+router.delete("/api/jobs/:id", (req, res) => {
+  const jobId = req.params.id;
+
+  db.query("DELETE FROM jobs WHERE id = ?", [jobId], (err, result) => {
+    if (err) {
+      console.error("Error deleting job from the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+
+    // Vizsgálat, hogy ténylegesen töröltünk-e elemet
+    if (result.affectedRows === 0) {
+      res.status(404).json({ error: "Job not found" });
+    } else {
+      res.json({ message: "Job deleted successfully" });
+    }
+  });
+});
+
 module.exports = router;
