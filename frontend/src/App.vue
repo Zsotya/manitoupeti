@@ -40,4 +40,8 @@ import Sidebar from "./components/AdminComponents/Sidebar.vue";
   display: flex;
   width: 100%;
 }
+
+.admin-content {
+  width: 100%;
+}
 </style>

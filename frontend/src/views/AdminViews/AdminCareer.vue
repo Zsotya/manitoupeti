@@ -35,7 +35,9 @@
         </tbody>
       </table>
     </div>
-    <button class="add-button">Add New Job</button>
+    <router-link to="/admin/career-management/createjob">
+      <button class="add-button">Add New Job</button></router-link
+    >
   </div>
 </template>
 

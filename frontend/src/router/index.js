@@ -2,12 +2,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 /* Router views */
+
+// Main application
 import Home from "../views/MainAppViews/Home.vue";
 import AboutUs from "../views/MainAppViews/AboutUs.vue";
 import OurWorks from "../views/MainAppViews/OurWorks.vue";
 import Machines from "../views/MainAppViews/Machines.vue";
 import ContactUs from "../views/MainAppViews/ContactUs.vue";
 import Career from "../views/MainAppViews/Career.vue";
+
+// Admin application
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
 import AdminStatistics from "../views/AdminViews/AdminStatistics.vue";
@@ -16,6 +20,9 @@ import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
+import CreateJob from "../components/AdminComponents/CreateJob.vue";
+
+// Services
 import authService from "@/services/authService";
 
 /* Router paths */
@@ -120,6 +127,15 @@ const routes = [
   {
     path: "/admin/admin-management",
     component: AdminAdminManagement,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/career-management/createjob",
+    component: CreateJob,
     meta: {
       isMainApp: false,
       isAdminApp: true,
