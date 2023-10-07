@@ -27,8 +27,11 @@
             <td>{{ job.jobtime_hu }}</td>
             <td>{{ job.jobtime_en }}</td>
             <td class="actions-buttons">
-              <button class="modify-button">Módosítás</button>
+              <button class="modify-button">
+                <i class="fas fa-edit"></i>Módosítás
+              </button>
               <button class="delete-button" @click="deleteJob(job.id)">
+                <i class="fas fa-trash"></i>
                 Törlés
               </button>
             </td>
@@ -37,7 +40,9 @@
       </table>
     </div>
     <router-link to="/admin/career-management/createjob">
-      <button class="add-button">Új állás hozzáadása</button></router-link
+      <button class="add-button">
+        <i class="fas fa-plus"></i>Új állás hozzáadása
+      </button></router-link
     >
   </div>
 </template>
@@ -124,17 +129,29 @@ th {
 .modify-button,
 .delete-button {
   padding: 8px;
-  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 80px;
+  width: 100px;
+  display: flex;
+  gap: 4px;
 }
 
-.modify-button:hover,
-.delete-button:hover {
+.modify-button {
+  background-color: #007bff;
+}
+
+.delete-button {
+  background-color: red;
+}
+
+.modify-button:hover {
   background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: rgb(130, 14, 14);
 }
 
 .add-button {
@@ -149,5 +166,9 @@ th {
 
 .add-button:hover {
   background-color: #218838;
+}
+
+.fa-plus {
+  padding-right: 5px;
 }
 </style>
