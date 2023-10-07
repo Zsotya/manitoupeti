@@ -16,6 +16,7 @@ import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
+import authService from "@/services/authService";
 
 /* Router paths */
 const routes = [
@@ -144,7 +145,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     const token = localStorage.getItem("token");
     if (!token) {
-      next("/admin"); // Ha nincs token, "visszaküldés" a ../admin oldalra
+      next("/admin");
+    } else if (authService.isTokenExpired(token)) {
+      authService.logoutUser();
+      next("/admin");
     } else {
       next();
     }
