@@ -11,8 +11,12 @@
       <footer><Footer /></footer>
     </div>
 
-    <!-- ADMIN APP PART -->
+    <!-- ADMIN LOGIN PART -->
+    <section v-if="$route.meta.isAdminLogin" class="admin-login">
+      <router-view />
+    </section>
 
+    <!-- ADMIN APP PART -->
     <section v-if="$route.meta.isAdminApp" class="admin-app">
       <Sidebar />
       <main class="admin-content">

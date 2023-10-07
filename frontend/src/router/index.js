@@ -53,7 +53,7 @@ const routes = [
   {
     path: "/admin",
     component: Admin,
-    meta: { isMainApp: false, isAdminApp: false },
+    meta: { isMainApp: false, isAdminApp: false, isAdminLogin: true },
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
       if (token) {
