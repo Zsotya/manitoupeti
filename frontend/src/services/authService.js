@@ -16,7 +16,7 @@ function isTokenExpired(token) {
 // JWT token dekódolása, elemzés
 function parseToken(token) {
   try {
-    const payload = token.split(".");
+    const [, payload] = token.split(".");
     const base64 = payload.replace("-", "+").replace("_", "/");
     return JSON.parse(atob(base64));
   } catch (error) {
