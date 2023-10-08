@@ -21,6 +21,7 @@ import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
 import CreateJob from "../components/AdminComponents/CreateJob.vue";
+import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 
 // Services
 import authService from "@/services/authService";
@@ -136,6 +137,15 @@ const routes = [
   {
     path: "/admin/career-management/createjob",
     component: CreateJob,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/ourfilms-management/createfilm",
+    component: CreateFilm,
     meta: {
       isMainApp: false,
       isAdminApp: true,
