@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); // Adatbázis modul importálása
+const db = require("../db");
 
 // GET REQUEST KEZELÉSE - Jobok listázása
 
@@ -50,7 +50,7 @@ router.post("/api/jobs", (req, res) => {
   );
 });
 
-// DELETE REQUEST KEZELÉSE
+// DELETE REQUEST KEZELÉSE - Job törlése
 
 router.delete("/api/jobs/:id", (req, res) => {
   const jobId = req.params.id;
