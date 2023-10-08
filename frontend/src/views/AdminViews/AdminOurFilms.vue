@@ -12,8 +12,8 @@
             <th>Title (EN)</th>
             <th>Description (HU)</th>
             <th>Description (EN)</th>
-            <th>Image URL</th>
-            <th>Actions</th>
+            <th>Kép</th>
+            <th>Műveletek</th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +23,13 @@
             <td>{{ film.title_en }}</td>
             <td>{{ film.description_hu }}</td>
             <td>{{ film.description_en }}</td>
-            <td>{{ film.image_url }}</td>
+            <td class="image-container">
+              <img
+                :src="film.image_url"
+                alt="film.image_url"
+                class="thumbnail"
+              />
+            </td>
             <td class="actions-buttons">
               <button class="modify-button">
                 <i class="fas fa-edit"></i>Módosítás
@@ -118,10 +124,20 @@ th {
   background-color: #f2f2f2;
 }
 
+.image-container {
+  text-align: center;
+}
+
+.thumbnail {
+  max-height: 300px;
+  max-width: 110px;
+}
+
 .actions-buttons {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
 }
 
 .modify-button,
