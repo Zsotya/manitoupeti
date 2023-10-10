@@ -1,12 +1,24 @@
 <template>
-  <div>
-    <h1>Bejelentkezés a vezérlőpultba</h1>
-    <form @submit.prevent="login">
-      <label for="username">Felhasználónév:</label>
-      <input type="text" id="username" v-model="username" required />
-      <label for="password">Jelszó:</label>
-      <input type="password" id="password" v-model="password" required />
-      <button type="submit">Bejelentkezés</button>
+  <div class="login">
+    <h1 class="login-title">Bejelentkezés a vezérlőpultba</h1>
+    <form @submit.prevent="login" class="login-form">
+      <label for="username" class="login-label">Felhasználónév:</label>
+      <input
+        type="text"
+        id="username"
+        v-model="username"
+        class="login-input"
+        required
+      />
+      <label for="password" class="login-label">Jelszó:</label>
+      <input
+        type="password"
+        id="password"
+        v-model="password"
+        class="login-input"
+        required
+      />
+      <button type="submit" class="login-button">Bejelentkezés</button>
     </form>
   </div>
 </template>
@@ -41,4 +53,56 @@ const login = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120px;
+}
+
+.login-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-label {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.login-input {
+  padding: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.login-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+</style>
