@@ -46,7 +46,7 @@ router.post("/api/paragraphs", upload.single("image"), (req, res) => {
 
   const imageUrl = `/images/${imageFile.filename}`;
   const sql =
-    "INSERT INTO films (title_hu, title_en, content_hu, content_en, image_url) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO paragraphs (title_hu, title_en, content_hu, content_en, image_url) VALUES (?, ?, ?, ?, ?)";
   db.query(
     sql,
     [title_hu, title_en, content_hu, content_en, imageUrl],
@@ -56,7 +56,7 @@ router.post("/api/paragraphs", upload.single("image"), (req, res) => {
         res.status(500).json({ error: "Database error" });
         return;
       }
-      res.status(201).json({ message: "Film created successfully" });
+      res.status(201).json({ message: "Paragraph created successfully" });
     }
   );
 });
