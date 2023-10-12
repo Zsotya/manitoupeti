@@ -23,12 +23,15 @@ import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
 import CreateJob from "../components/AdminComponents/CreateJob.vue";
 import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 import CreateParagraph from "../components/AdminComponents/CreateParagraph.vue";
+import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
 
 // Services
 import authService from "@/services/authService";
 
 /* Router paths */
 const routes = [
+  /* MAIN APPLICATION */
+
   {
     path: "/",
     component: Home,
@@ -59,6 +62,8 @@ const routes = [
     component: Career,
     meta: { isMainApp: true, isAdminApp: false },
   },
+  /* ADMIN APPLICATION */
+
   {
     path: "/admin",
     component: Admin,
@@ -156,6 +161,15 @@ const routes = [
   {
     path: "/admin/paragraph-management/createparagraph",
     component: CreateParagraph,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/admin-management/createadmin",
+    component: CreateAdmin,
     meta: {
       isMainApp: false,
       isAdminApp: true,
