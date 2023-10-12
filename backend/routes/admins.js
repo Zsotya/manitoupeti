@@ -24,7 +24,7 @@ router.get("/api/admins", (req, res) => {
 
 router.post("/api/admins", async (req, res) => {
   const { username, password, full_name } = req.body;
-  // Jelszó hashelés (admincreator.js alapján)
+  // Jelszó hashelés
   const saltRounds = 13;
   try {
     const connection = await mysql.createConnection({
