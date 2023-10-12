@@ -16,11 +16,13 @@ app.use(express.static(path.join(__dirname, "../frontend/public")));
 const paragraphsRoutes = require("./routes/paragraphs");
 const jobsRoutes = require("./routes/jobs");
 const filmsRoutes = require("./routes/films");
+const adminsRoutes = require("./routes/admins");
 const authenticationRoutes = require("./routes/authentication");
 
 app.use(paragraphsRoutes);
 app.use(jobsRoutes);
 app.use(filmsRoutes);
+app.use(adminsRoutes);
 app.use(authenticationRoutes);
 
 // Start the server
