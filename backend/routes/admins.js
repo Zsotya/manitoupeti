@@ -4,11 +4,11 @@ const db = require("../db");
 const bcrypt = require("bcryptjs");
 const mysql = require("mysql2/promise");
 
-// GET REQUEST KEZELÉSE - Adminok listázása (jelszó nélkül!)
+// GET REQUEST KEZELÉSE - Adminok listázása (jelszó nélkül, főadminok kivételével)
 
 router.get("/api/admins", (req, res) => {
   db.query(
-    "SELECT id, username, full_name FROM admin_users",
+    "SELECT id, username, full_name FROM admin_users WHERE is_main_admin = 0",
     (err, results) => {
       if (err) {
         console.error("Error querying the database:", err);
@@ -54,6 +54,13 @@ router.post("/api/admins", async (req, res) => {
 
 router.delete("/api/admins/:id", async (req, res) => {
   const adminId = req.params.id;
+  // Extra biztonságért: Főadmin törlése ne legyen lehetséges
+  if (adminId === mainAdminId) {
+    res
+      .status(403)
+      .json({ error: "Főadmin felhasználó törlése nem lehetséges" });
+    return;
+  }
 
   db.query("DELETE FROM admin_users WHERE id = ?", [adminId], (err, result) => {
     if (err) {
