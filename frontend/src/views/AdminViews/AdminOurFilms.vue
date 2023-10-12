@@ -181,4 +181,8 @@ th {
 .add-button:hover {
   background-color: #218838;
 }
+
+.fa-plus {
+  padding-right: 5px;
+}
 </style>
