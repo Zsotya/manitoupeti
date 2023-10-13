@@ -138,6 +138,7 @@ const routes = [
       isMainApp: false,
       isAdminApp: true,
       requireAuth: true,
+      requireMainAdmin: true,
     },
   },
   {
@@ -174,6 +175,7 @@ const routes = [
       isMainApp: false,
       isAdminApp: true,
       requireAuth: true,
+      requireMainAdmin: true,
     },
   },
 ];
@@ -187,11 +189,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     const token = localStorage.getItem("token");
+    const isMainAdmin = localStorage.getItem("isMainAdmin") === "true";
     if (!token) {
       next("/admin");
     } else if (authService.isTokenExpired(token)) {
       authService.logoutUser();
       next("/admin");
+    } else if (to.meta.requireMainAdmin && !isMainAdmin) {
+      next("/admin/dashboard");
     } else {
       next();
     }
