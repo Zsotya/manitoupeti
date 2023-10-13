@@ -19,7 +19,6 @@
 
 <script setup>
 const { film } = defineProps(["film"]);
-console.log(film.title_en);
 
 const toggleDescription = () => {
   film.isFlipped = !film.isFlipped;

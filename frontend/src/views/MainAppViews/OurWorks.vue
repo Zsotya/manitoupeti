@@ -19,7 +19,6 @@ async function fetchData() {
   try {
     const response = await axios.get("http://localhost:3000/api/films");
     films.value = response.data;
-    console.log(films.value[0].id);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
