@@ -28,6 +28,7 @@ function parseToken(token) {
 // Felhasználó kijelentkeztetése
 function logoutUser() {
   localStorage.removeItem("token");
+  localStorage.removeItem("isMainAdmin");
 }
 
 export default {

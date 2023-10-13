@@ -43,6 +43,11 @@ const login = async () => {
     );
     if (response.data.authenticated) {
       localStorage.setItem("token", response.data.token);
+      if (response.data.is_main_admin === 1) {
+        localStorage.setItem("isMainAdmin", "true");
+      } else {
+        localStorage.setItem("isMainAdmin", "false");
+      }
       router.push("/admin/dashboard");
     } else {
       console.log("Ejnye bejnye, csúnya betörő");

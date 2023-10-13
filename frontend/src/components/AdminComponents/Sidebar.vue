@@ -5,7 +5,7 @@
     </div>
     <ul>
       <li v-for="link in links" :key="link.path">
-        <router-link :to="link.path" class="nav-link">
+        <router-link :to="link.path" class="nav-link" v-if="link.show">
           <i :class="link.iconClass"></i> {{ link.label }}
         </router-link>
       </li>
@@ -29,36 +29,43 @@ const links = [
     path: "/admin/dashboard",
     label: "Dashboard",
     iconClass: "fas fa-home mr-2",
+    show: true,
   },
   {
     path: "/admin/statistics",
     label: "Statistics",
     iconClass: "fas fa-chart-bar mr-2",
+    show: true,
   },
   {
     path: "/admin/paragraph-management",
     label: "Paragraph Management",
     iconClass: "fas fa-book mr-2",
+    show: true,
   },
   {
     path: "/admin/ourfilms-management",
     label: "Our Films Management",
     iconClass: "fas fa-film mr-2",
+    show: true,
   },
   {
     path: "/admin/machines-management",
     label: "Machines Management",
     iconClass: "fas fa-cogs mr-2",
+    show: true,
   },
   {
     path: "/admin/career-management",
     label: "Career Management",
     iconClass: "fas fa-briefcase mr-2",
+    show: true,
   },
   {
     path: "/admin/admin-management",
     label: "Admin Management",
     iconClass: "fas fa-user mr-2",
+    show: localStorage.isMainAdmin === "true",
   },
 ];
 

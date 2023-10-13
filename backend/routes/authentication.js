@@ -40,7 +40,11 @@ router.post("/api/authentication", (req, res) => {
               const token = jwt.sign({ userId: user.id }, secretKey, {
                 expiresIn: "1h",
               });
-              res.json({ authenticated: true, token });
+              res.json({
+                authenticated: true,
+                token,
+                is_main_admin: user.is_main_admin,
+              });
             }
           }
         );
