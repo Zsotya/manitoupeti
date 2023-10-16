@@ -8,6 +8,7 @@ import Home from "../views/MainAppViews/Home.vue";
 import AboutUs from "../views/MainAppViews/AboutUs.vue";
 import OurWorks from "../views/MainAppViews/OurWorks.vue";
 import Machines from "../views/MainAppViews/Machines.vue";
+import MachineDetail from "../views/MainAppViews/MachineDetail.vue";
 import ContactUs from "../views/MainAppViews/ContactUs.vue";
 import Career from "../views/MainAppViews/Career.vue";
 
@@ -50,6 +51,11 @@ const routes = [
   {
     path: "/berelheto-gepeink",
     component: Machines,
+    meta: { isMainApp: true, isAdminApp: false },
+  },
+  {
+    path: "/berelheto-gepeink/:id",
+    component: MachineDetail,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
