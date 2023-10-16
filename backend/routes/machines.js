@@ -29,6 +29,28 @@ router.get("/api/machines", (req, res) => {
   });
 });
 
+// GET REQUEST KEZELÉSE - Egy adott nehézgép lekérdezése adott azonosító alapján
+router.get("/api/machines/:id", (req, res) => {
+  const machineId = req.params.id;
+
+  db.query(
+    "SELECT * FROM machines WHERE id = ?",
+    [machineId],
+    (err, results) => {
+      if (err) {
+        console.error("Error querying the database:", err);
+        res.status(500).json({ error: "Database error" });
+        return;
+      }
+      if (results.length === 0) {
+        res.status(404).json({ error: "Machine not found" });
+        return;
+      }
+      res.json(results[0]);
+    }
+  );
+});
+
 // POST REQUEST KEZELÉSE - Új nehézgép létrehozása
 
 router.post("/api/machines", upload.single("image"), (req, res) => {
