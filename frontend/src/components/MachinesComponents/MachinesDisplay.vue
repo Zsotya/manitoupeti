@@ -2,33 +2,35 @@
   <div class="machines-display">
     <div class="machines-item">
       <div class="image-container">
-        <img :src="machine.img" alt="Machine Image" />
+        <img :src="machine.image_url" alt="Machine Image" />
       </div>
       <div class="machine-details">
-        <div class="machine-name">{{ machine.name }}</div>
+        <div class="machine-name">{{ machine.machine_name }}</div>
         <div class="machine-description">
           <div class="feature">
             <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
-            <span class="value">{{ machine.maxHeight }}</span>
+            <span class="value">{{ machine.max_height }}m</span>
           </div>
           <div class="feature">
             <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
-            <span class="value">{{ machine.maxWeight }}</span>
+            <span class="value">{{ machine.max_weight }}kg</span>
           </div>
           <div class="feature">
             <span class="label">{{ $t("machinesSole") }}:</span>
             <span class="value">{{
-              machine.hasSole ? $t("machinesCommonYes") : $t("machinesCommonNo")
+              machine.has_sole
+                ? $t("machinesCommonYes")
+                : $t("machinesCommonNo")
             }}</span>
           </div>
-          <div class="feature" v-if="machine.hasSole">
+          <div class="feature" v-if="machine.has_sole">
             <span class="label">{{ $t("machinesSoleCount") }}:</span>
-            <span class="value">{{ machine.soleCount }}</span>
+            <span class="value">{{ machine.sole_count }}</span>
           </div>
           <div class="feature">
             <span class="label">{{ $t("machinesBasket") }}:</span>
             <span class="value">{{
-              machine.hasBasket
+              machine.has_basket
                 ? $t("machinesCommonYes")
                 : $t("machinesCommonNo")
             }}</span>
@@ -36,20 +38,24 @@
           <div class="feature">
             <span class="label">{{ $t("machinesFork") }}:</span>
             <span class="value">{{
-              machine.hasFork ? $t("machinesCommonYes") : $t("machinesCommonNo")
+              machine.has_fork
+                ? $t("machinesCommonYes")
+                : $t("machinesCommonNo")
             }}</span>
           </div>
           <div class="feature">
             <span class="label">{{ $t("machinesRemote") }}:</span>
             <span class="value">{{
-              machine.isRemote
+              machine.is_remote
                 ? $t("machinesCommonYes")
                 : $t("machinesCommonNo")
             }}</span>
           </div>
         </div>
         <div class="button-container">
-          <button>{{ $t("machinesQuotation") }}</button>
+          <router-link :to="`/berelheto-gepeink/${machine.id}`">
+            <button>{{ $t("machinesQuotation") }}</button>
+          </router-link>
         </div>
       </div>
     </div>
