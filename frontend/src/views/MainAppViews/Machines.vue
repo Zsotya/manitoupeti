@@ -14,69 +14,52 @@
 <script setup>
 import MachinesIntro from "@/components/MachinesComponents/MachinesIntro.vue";
 import MachinesDisplay from "@/components/MachinesComponents/MachinesDisplay.vue";
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
-const machines = [
-  {
-    id: 1,
-    name: "Bobcat",
-    img: require("@/assets/41.jpg"),
-    maxHeight: "50m",
-    maxWeight: "5000kg",
-    hasSole: true,
-    soleCount: 4,
-    hasBasket: true,
-    hasFork: true,
-    isRemote: true,
-  },
-  {
-    id: 2,
-    name: "Manitou",
-    img: require("@/assets/41.jpg"),
-    maxHeight: "30m",
-    maxWeight: "4000kg",
-    hasSole: true,
-    soleCount: 2,
-    hasBasket: false,
-    hasFork: true,
-    isRemote: false,
-  },
-  {
-    id: 3,
-    name: "Bobket",
-    img: require("@/assets/41.jpg"),
-    maxHeight: "42m",
-    maxWeight: "6000kg",
-    hasSole: false,
-    soleCount: 0,
-    hasBasket: false,
-    hasFork: false,
-    isRemote: true,
-  },
-  {
-    id: 4,
-    name: "Bobket2",
-    img: require("@/assets/41.jpg"),
-    maxHeight: "42m",
-    maxWeight: "6000kg",
-    hasSole: true,
-    soleCount: 2,
-    hasBasket: false,
-    hasFork: false,
-    isRemote: true,
-  },
-  {
-    id: 5,
-    name: "Bobket3",
-    img: require("@/assets/41.jpg"),
-    maxHeight: "42m",
-    maxWeight: "6000kg",
-    hasSole: false,
-    soleCount: 0,
-    hasBasket: false,
-    hasFork: false,
-    isRemote: true,
-  },
-];
+const machines = ref([]);
+
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/machines");
+    machines.value = response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+onMounted(() => {
+  fetchData();
+});
+
+// const machines = [
+//   {
+//     id: 1,
+//     machine_name: "Bobcat",
+//     max_height: "50m",
+//     max_weight: "5000kg",
+//     has_sole: true,
+//     sole_count: 4,
+//     has_basket: true,
+//     has_fork: true,
+//     is_remote: true,
+//     price_per_day: 50000,
+//     image_url: "a",
+//   },
+//   {
+//     id: 2,
+//     machine_name: "Manitou",
+//     max_height: "30m",
+//     max_weight: "4000kg",
+//     has_sole: true,
+//     sole_count: 2,
+//     has_basket: false,
+//     has_fork: true,
+//     is_remote: false,
+//     price_per_day: 80000,
+//     image_url: "a",
+//   },
+// ];
 </script>
 
 <style scoped>
