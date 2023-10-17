@@ -1,8 +1,70 @@
-<template></template>
+<template>
+  <div class="admin-machines">
+    <div class="title">
+      <h2>Admin Machines Management Panel</h2>
+    </div>
+    <div class="machines-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Machine Name</th>
+            <th>Max Height</th>
+            <th>Max Weight</th>
+            <th>Has Sole</th>
+            <th>Sole Count</th>
+            <th>Has Basket</th>
+            <th>Has Fork</th>
+            <th>Is Remote</th>
+            <th>Price per day</th>
+            <th>Image</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="machine in machines" :key="machine.id">
+            <td>{{ machine.id }}</td>
+            <td>{{ machine.machine_name }}</td>
+            <td>{{ machine.max_height }}m</td>
+            <td>{{ machine.max_weight }}kg</td>
+            <td>{{ machine.has_sole ? "Yes" : "No" }}</td>
+            <td>{{ machine.sole_count }}</td>
+            <td>{{ machine.has_basket ? "Yes" : "No" }}</td>
+            <td>{{ machine.has_fork ? "Yes" : "No" }}</td>
+            <td>{{ machine.is_remote ? "Yes" : "No" }}</td>
+            <td>{{ machine.price_per_day }}Ft</td>
+            <td class="image-container">
+              <img
+                :src="machine.image_url"
+                alt="machine.image_url"
+                class="thumbnail"
+              />
+            </td>
+            <td class="actions-buttons">
+              <button class="modify-button">
+                <i class="fas fa-edit"></i>Módosítás
+              </button>
+              <button class="delete-button" @click="deleteMachine(machine.id)">
+                <i class="fas fa-trash"></i>
+                Törlés
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <router-link to="/admin/machines-management/createmachine">
+      <button class="add-button">
+        <i class="fas fa-plus"></i>Új machine létrehozása
+      </button>
+    </router-link>
+  </div>
+</template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
+import axios from "axios";
 
 onMounted(() => {
   const token = localStorage.getItem("token");
@@ -11,4 +73,128 @@ onMounted(() => {
     $router.push("/admin");
   }
 });
+
+const machines = ref([]);
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/machines");
+    machines.value = response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+const deleteMachine = async (machineId) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/machines/${machineId}`);
+    machines.value = machines.value.filter(
+      (machine) => machine.id !== machineId
+    );
+  } catch (error) {
+    console.error("Error deleting machine:", error);
+  }
+};
+
+onMounted(() => {
+  fetchData();
+});
 </script>
+
+<style scoped>
+.admin-machines {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.machines-table {
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.thumbnail {
+  max-height: 300px;
+  max-width: 110px;
+}
+
+.actions-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.modify-button,
+.delete-button {
+  padding: 8px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  display: flex;
+  gap: 4px;
+}
+
+.modify-button {
+  background-color: #007bff;
+}
+
+.delete-button {
+  background-color: red;
+}
+
+.modify-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: rgb(130, 14, 14);
+}
+
+.add-button {
+  margin-top: 20px;
+  background-color: #28a745;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.fa-plus {
+  padding-right: 5px;
+}
+</style>
