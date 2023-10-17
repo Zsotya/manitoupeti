@@ -21,9 +21,10 @@ import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
-import CreateJob from "../components/AdminComponents/CreateJob.vue";
-import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 import CreateParagraph from "../components/AdminComponents/CreateParagraph.vue";
+import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
+import CreateMachine from "../components/AdminComponents/CreateMachine.vue";
+import CreateJob from "../components/AdminComponents/CreateJob.vue";
 import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
 
 // Services
@@ -148,8 +149,8 @@ const routes = [
     },
   },
   {
-    path: "/admin/career-management/createjob",
-    component: CreateJob,
+    path: "/admin/paragraph-management/createparagraph",
+    component: CreateParagraph,
     meta: {
       isMainApp: false,
       isAdminApp: true,
@@ -166,8 +167,17 @@ const routes = [
     },
   },
   {
-    path: "/admin/paragraph-management/createparagraph",
-    component: CreateParagraph,
+    path: "/admin/machines-management/createmachine",
+    component: CreateMachine,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/career-management/createjob",
+    component: CreateJob,
     meta: {
       isMainApp: false,
       isAdminApp: true,
