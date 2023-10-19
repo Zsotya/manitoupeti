@@ -2,7 +2,7 @@
   <div class="machine-detail">
     <div class="machine-info">
       <div class="machine-image">
-        <img src="@/assets/41.jpg" alt="Machine Image" />
+        <img :src="machine.image_url" alt="Machine Image" />
       </div>
       <div class="machine-properties">
         <h1 class="machine-name">{{ machine.machine_name }}</h1>
@@ -51,20 +51,16 @@
       </div>
     </div>
   </div>
-  <div class="fullcalendar-container">
-    <div class="calendar-container">
-      <FullCalendar :options="calendarOptions" />
-    </div>
-  </div>
+  <FullCalendar />
+  <BookingForm :machine="machine" />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import { useRoute } from "vue-router";
-import FullCalendar from "@fullcalendar/vue3";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import axios from "axios";
+import FullCalendar from "@/components/MachineDetailComponents/FullCalendar.vue";
+import BookingForm from "@/components/MachineDetailComponents/BookingForm.vue";
 
 const route = useRoute();
 const machine = ref([]);
@@ -84,62 +80,6 @@ async function fetchData() {
 onMounted(() => {
   fetchData();
 });
-
-/***********************************/
-/***********************************/
-/***********************************/
-/***********************************/
-/***********************************/
-/*          FULLCALENDAR           */
-/***********************************/
-/***********************************/
-/***********************************/
-/***********************************/
-/***********************************/
-
-// Jelenlegi dátum kiszámolása
-const currentDate = new Date();
-const currentYear = currentDate.getFullYear();
-const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-const currentDay = currentDate.getDate().toString().padStart(2, "0");
-
-const startDate = `${currentYear}-${currentMonth}-${currentDay}`;
-
-// Következő 5 teljes hónap kiszámolása
-const futureDate = new Date();
-futureDate.setMonth(currentDate.getMonth() + 5);
-const futureYear = futureDate.getFullYear();
-const futureMonth = (futureDate.getMonth() + 1).toString().padStart(2, "0");
-const lastDayOfMonth =
-  new Date(futureYear, futureDate.getMonth() + 1, 0).getDate() + 1;
-
-const endDate = `${futureYear}-${futureMonth}-${lastDayOfMonth}`;
-
-const calendarOptions = {
-  plugins: [dayGridPlugin, interactionPlugin],
-  initialView: "dayGridMonth",
-  height: 850,
-  validRange: {
-    start: startDate,
-    end: endDate,
-  },
-  events: [
-    {
-      title: "Available",
-      start: "2023-10-17",
-      end: "2023-11-30",
-      backgroundColor: "green",
-      display: "background",
-    },
-    {
-      title: "Occupied",
-      start: "2023-10-19",
-      end: "2023-10-24",
-      display: "background",
-      backgroundColor: "orange",
-    },
-  ],
-};
 </script>
 
 <style scoped>
@@ -247,18 +187,5 @@ const calendarOptions = {
     flex-direction: column;
     text-align: center;
   }
-}
-
-/* FULLCALENDAR STYLING */
-.fullcalendar-container {
-  background-color: #e8e6e6;
-  padding-bottom: 30px;
-}
-.calendar-container {
-  width: 80%;
-  margin: 0 auto;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 6px;
 }
 </style>
