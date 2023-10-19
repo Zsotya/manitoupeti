@@ -30,6 +30,10 @@
           <label for="phone">Telefonszám:</label>
           <input type="tel" id="phone" v-model="phoneNumber" />
         </div>
+        <div>
+          <label for="location">Helyszín:</label>
+          <input type="text" id="location" v-model="location" />
+        </div>
       </div>
 
       <!-- Végösszeg kiszámolása -->
