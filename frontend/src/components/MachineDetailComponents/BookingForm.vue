@@ -16,23 +16,23 @@
       <div class="user-info">
         <div class="input-group">
           <label for="first-name">Vezetéknév:</label>
-          <input type="text" id="first-name" v-model="firstName" />
+          <input type="text" id="first-name" v-model="bookingData.first_name" />
         </div>
         <div class="input-group">
           <label for="last-name">Keresztnév:</label>
-          <input type="text" id="last-name" v-model="lastName" />
+          <input type="text" id="last-name" v-model="bookingData.last_name" />
         </div>
         <div class="input-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" />
+          <input type="email" id="email" v-model="bookingData.email" />
         </div>
         <div class="input-group">
           <label for="phone">Telefonszám:</label>
-          <input type="tel" id="phone" v-model="phoneNumber" />
+          <input type="tel" id="phone" v-model="bookingData.phone_number" />
         </div>
         <div>
           <label for="location">Helyszín:</label>
-          <input type="text" id="location" v-model="location" />
+          <input type="text" id="location" v-model="bookingData.location" />
         </div>
       </div>
 
@@ -49,32 +49,43 @@
       <button @click="submitBooking">Foglalás elküldése</button>
     </div>
   </div>
+  <!-- <button @click="testButton">testbutton</button> -->
 </template>
 
 <script setup>
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { ref, computed, defineProps } from "vue";
+import axios from "axios";
 
 const props = defineProps(["machine"]);
 const date = ref([new Date(), null]);
 
+// Date picker format
+
+const startDate = ref();
+const endDate = ref();
 const customFormat = (date) => {
   const formatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
-  const startDate = date[0];
-  const endDate = date[1];
+  startDate.value = date[0];
+  endDate.value = date[1];
 
-  if (startDate && endDate) {
-    const formattedStartDate = startDate.toLocaleDateString(
+  if (startDate.value && endDate.value) {
+    const formattedStartDate = startDate.value.toLocaleDateString(
       "hu-HU",
       formatOptions
     );
-    const formattedEndDate = endDate.toLocaleDateString("hu-HU", formatOptions);
+    const formattedEndDate = endDate.value.toLocaleDateString(
+      "hu-HU",
+      formatOptions
+    );
     return `A választott időintervallum: ${formattedStartDate} - ${formattedEndDate}`;
   }
 
   return "Válasszon időintervallumot...";
 };
+
+// Disabled dates
 
 const disabledDates = computed(() => {
   const disabledStartDate = new Date("2023-11-15");
@@ -90,19 +101,53 @@ const disabledDates = computed(() => {
   return disabledDateRange;
 });
 
+// Total price calculation
+
 const totalPrice = computed(() => {
-  const startPrice = date.value ? date.value[0] : null;
-  const endPrice = date.value ? date.value[1] : null;
-  console.log(startPrice);
-  console.log(endPrice);
-  if (startPrice && endPrice) {
+  const startDay = date.value ? date.value[0] : null;
+  const endDay = date.value ? date.value[1] : null;
+  if (startDay && endDay) {
     const daysDifference = Math.ceil(
-      (endPrice - startPrice + 1) / (1000 * 60 * 60 * 24)
+      (endDay - startDay + 1) / (1000 * 60 * 60 * 24)
     );
     return daysDifference * props.machine.price_per_day;
   }
   return 0;
 });
+
+// POST request preparation
+
+// const testButton = () => {
+//   console.log(bookingData.value);
+// };
+
+const bookingData = computed(() => ({
+  machine_id: props.machine.id,
+  first_name: "",
+  last_name: "",
+  email: "",
+  phone_number: "",
+  location: "",
+  start_date: startDate.value
+    ? startDate.value.toISOString().split("T")[0]
+    : null,
+  end_date: endDate.value ? endDate.value.toISOString().split("T")[0] : null,
+  price: totalPrice.value,
+}));
+
+const submitBooking = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/api/bookings",
+      bookingData.value
+    );
+    if (response.status === 201) {
+      console.log("Booking added successfully");
+    }
+  } catch (error) {
+    console.error("Error while adding a booking:", error);
+  }
+};
 </script>
 
 <style scoped>
