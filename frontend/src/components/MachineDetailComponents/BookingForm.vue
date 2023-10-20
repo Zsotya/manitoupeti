@@ -55,7 +55,7 @@
 <script setup>
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import axios from "axios";
 
 const props = defineProps(["machine"]);
@@ -118,8 +118,7 @@ const totalPrice = computed(() => {
 // POST request preparation
 
 // const testButton = () => {
-//   const test = prepareBookingData();
-//   console.log(test);
+//   console.log(machineId.value);
 // };
 
 // Form elemek
@@ -148,6 +147,8 @@ const prepareBookingData = () => {
   };
 };
 
+// Foglalás elküldése
+
 const submitBooking = async () => {
   const bookingData = prepareBookingData();
   try {
@@ -162,6 +163,45 @@ const submitBooking = async () => {
     console.error("Error while adding a booking:", error);
   }
 };
+
+// Paid, azaz kifizetett (garantáltan foglalt) foglalások lekérdezése
+// Ezzel visszakapunk egy tömböt az összes "Paid" státuszú foglalással
+
+const paidBookings = ref([]);
+const machineId = ref(props.machine.id);
+
+async function fetchAndSetPaidBookings() {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/api/paidBookings?machine_id=${machineId.value}`
+    );
+    paidBookings.value = response.data;
+    console.log(paidBookings.value);
+  } catch (error) {
+    console.log("Error fetching/setting data:", error);
+  }
+}
+
+// Ha simán ${props.machine.id}-t kapna a GET request, hamarabb lenne elküldve, minthogy megkapja az ID-t, ezért undefined lenne a response
+// Ennek kiküszöbölésére használunk watch-ot
+
+watch(
+  () => props.machine.id,
+  (newMachineId, oldMachineId) => {
+    if (newMachineId !== oldMachineId && newMachineId !== undefined) {
+      machineId.value = newMachineId;
+      fetchAndSetPaidBookings();
+    }
+  }
+);
+
+// Ha mégis elérhető lenne az oldal inicializálásakor a props.machine.id, akkor fusson le a GET request
+
+onMounted(() => {
+  if (machineId.value !== undefined) {
+    fetchAndSetPaidBookings();
+  }
+});
 </script>
 
 <style scoped>
