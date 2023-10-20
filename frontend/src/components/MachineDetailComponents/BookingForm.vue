@@ -4,49 +4,54 @@
       <h1>Emelőgép foglalás</h1>
 
       <!-- Dátum range kiválasztása (vue datepicker) -->
-      <DatePicker
-        v-model="date"
-        range
-        :format="customFormat"
-        no-disabled-range
-        :disabled-dates="disabledDates"
-      />
+      <form @submit.prevent="submitBooking">
+        <DatePicker
+          v-model="date"
+          range
+          :format="customFormat"
+          no-disabled-range
+          :disabled-dates="disabledDates"
+          :min-date="new Date()"
+          :enable-time-picker="false"
+          required
+        />
 
-      <!-- Megrendelő információk -->
-      <div class="user-info">
-        <div class="input-group">
-          <label for="first-name">Vezetéknév:</label>
-          <input type="text" id="first-name" v-model="first_name" />
+        <!-- Megrendelő információk -->
+        <div class="user-info">
+          <div class="input-group">
+            <label for="first-name">Vezetéknév:</label>
+            <input type="text" id="first-name" v-model="first_name" required />
+          </div>
+          <div class="input-group">
+            <label for="last-name">Keresztnév:</label>
+            <input type="text" id="last-name" v-model="last_name" required />
+          </div>
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" v-model="email" required />
+          </div>
+          <div class="input-group">
+            <label for="phone">Telefonszám:</label>
+            <input type="tel" id="phone" v-model="phone_number" required />
+          </div>
+          <div>
+            <label for="location">Helyszín:</label>
+            <input type="text" id="location" v-model="location" required />
+          </div>
         </div>
-        <div class="input-group">
-          <label for="last-name">Keresztnév:</label>
-          <input type="text" id="last-name" v-model="last_name" />
-        </div>
-        <div class="input-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" />
-        </div>
-        <div class="input-group">
-          <label for="phone">Telefonszám:</label>
-          <input type="tel" id="phone" v-model="phone_number" />
-        </div>
-        <div>
-          <label for="location">Helyszín:</label>
-          <input type="text" id="location" v-model="location" />
-        </div>
-      </div>
 
-      <!-- Végösszeg kiszámolása -->
-      <div class="total-price">
-        <p>Gép bérleti díj: {{ totalPrice }} Ft</p>
-      </div>
-      <div class="price-note" v-if="date && date[0] && date[1]">
-        <p>
-          Tájékoztatjuk kedves megrendelőinket, hogy a bérleti díj nem
-          tartalmazza a logisztikai díjakat, valamint egyéb adókat.
-        </p>
-      </div>
-      <button @click="submitBooking">Foglalás elküldése</button>
+        <!-- Végösszeg kiszámolása -->
+        <div class="total-price">
+          <p>Gép bérleti díj: {{ totalPrice }} Ft</p>
+        </div>
+        <div class="price-note" v-if="date && date[0] && date[1]">
+          <p>
+            Tájékoztatjuk kedves megrendelőinket, hogy a bérleti díj nem
+            tartalmazza a logisztikai díjakat, valamint egyéb adókat.
+          </p>
+        </div>
+        <button type="submit">Foglalás elküldése</button>
+      </form>
     </div>
   </div>
   <!-- <button @click="testButton">testbutton</button> -->
@@ -168,7 +173,6 @@ async function fetchAndSetPaidBookings() {
       `http://localhost:3000/api/paidBookings?machine_id=${machineId.value}`
     );
     paidBookings.value = response.data;
-    console.log(paidBookings.value);
   } catch (error) {
     console.log("Error fetching/setting data:", error);
   }
