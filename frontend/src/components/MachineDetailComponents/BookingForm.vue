@@ -85,22 +85,6 @@ const customFormat = (date) => {
   return "Válasszon időintervallumot...";
 };
 
-// Disabled dates
-
-const disabledDates = computed(() => {
-  const disabledStartDate = new Date("2023-11-15");
-  const disabledEndDate = new Date("2023-11-18");
-  const disabledDateRange = [];
-  for (
-    let date = new Date(disabledStartDate);
-    date <= disabledEndDate;
-    date.setDate(date.getDate() + 1)
-  ) {
-    disabledDateRange.push(new Date(date));
-  }
-  return disabledDateRange;
-});
-
 // Total price calculation
 
 const totalPrice = computed(() => {
@@ -115,11 +99,19 @@ const totalPrice = computed(() => {
   return 0;
 });
 
-// POST request preparation
+// Teszt gomb unit tesztekhez
 
 // const testButton = () => {
-//   console.log(machineId.value);
+//   const teszt = new Date(paidBookings.value[0].start_date);
+//   const teszt2 = new Date(paidBookings.value[0].end_date);
+//   console.log(teszt);
+//   console.log(teszt2);
+//   console.log(teszt);
+//   console.log(teszt2);
+//   console.log(disabledDates);
 // };
+
+// POST request preparation
 
 // Form elemek
 
@@ -201,6 +193,25 @@ onMounted(() => {
   if (machineId.value !== undefined) {
     fetchAndSetPaidBookings();
   }
+});
+
+// Azoknak a dátumoknak a letiltása, amik már garantáltan foglaltak ("Paid" státusz)
+
+const disabledDates = computed(() => {
+  const disabledDateRange = [];
+
+  for (const booking of paidBookings.value) {
+    const bookingStartDate = new Date(booking.start_date);
+    const bookingEndDate = new Date(booking.end_date);
+    for (
+      let date = bookingStartDate;
+      date <= bookingEndDate;
+      date.setDate(date.getDate() + 1)
+    ) {
+      disabledDateRange.push(new Date(date));
+    }
+  }
+  return disabledDateRange;
 });
 </script>
 
