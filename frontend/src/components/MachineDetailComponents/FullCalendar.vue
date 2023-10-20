@@ -4,6 +4,7 @@
       <FullCalendar :options="calendarOptions" />
     </div>
   </div>
+  <!-- <button @click="testButton">testbutton</button> -->
 </template>
 
 <script setup>
@@ -11,23 +12,18 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-// Jelenlegi dátum kiszámolása
-const currentDate = new Date();
-const currentYear = currentDate.getFullYear();
-const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-const currentDay = currentDate.getDate().toString().padStart(2, "0");
+// const testButton = () => {
+//   console.log(startDate);
+//   console.log(endDate);
+// };
 
-const startDate = `${currentYear}-${currentMonth}-${currentDay}`;
+// Jelenlegi dátum kiszámolása
+const startDate = new Date().toISOString().split("T")[0];
 
 // Következő 5 teljes hónap kiszámolása
-const futureDate = new Date();
-futureDate.setMonth(currentDate.getMonth() + 5);
-const futureYear = futureDate.getFullYear();
-const futureMonth = (futureDate.getMonth() + 1).toString().padStart(2, "0");
-const lastDayOfMonth =
-  new Date(futureYear, futureDate.getMonth() + 1, 0).getDate() + 1;
-
-const endDate = `${futureYear}-${futureMonth}-${lastDayOfMonth}`;
+const endDate = new Date(new Date().setMonth(new Date().getMonth() + 5))
+  .toISOString()
+  .split("T")[0];
 
 const calendarOptions = {
   plugins: [dayGridPlugin, interactionPlugin],
