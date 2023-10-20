@@ -16,23 +16,23 @@
       <div class="user-info">
         <div class="input-group">
           <label for="first-name">Vezetéknév:</label>
-          <input type="text" id="first-name" v-model="bookingData.first_name" />
+          <input type="text" id="first-name" v-model="first_name" />
         </div>
         <div class="input-group">
           <label for="last-name">Keresztnév:</label>
-          <input type="text" id="last-name" v-model="bookingData.last_name" />
+          <input type="text" id="last-name" v-model="last_name" />
         </div>
         <div class="input-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" v-model="bookingData.email" />
+          <input type="email" id="email" v-model="email" />
         </div>
         <div class="input-group">
           <label for="phone">Telefonszám:</label>
-          <input type="tel" id="phone" v-model="bookingData.phone_number" />
+          <input type="tel" id="phone" v-model="phone_number" />
         </div>
         <div>
           <label for="location">Helyszín:</label>
-          <input type="text" id="location" v-model="bookingData.location" />
+          <input type="text" id="location" v-model="location" />
         </div>
       </div>
 
@@ -55,7 +55,7 @@
 <script setup>
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { ref, computed, defineProps } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
 
 const props = defineProps(["machine"]);
@@ -118,28 +118,42 @@ const totalPrice = computed(() => {
 // POST request preparation
 
 // const testButton = () => {
-//   console.log(bookingData.value);
+//   const test = prepareBookingData();
+//   console.log(test);
 // };
 
-const bookingData = computed(() => ({
-  machine_id: props.machine.id,
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone_number: "",
-  location: "",
-  start_date: startDate.value
-    ? startDate.value.toISOString().split("T")[0]
-    : null,
-  end_date: endDate.value ? endDate.value.toISOString().split("T")[0] : null,
-  price: totalPrice.value,
-}));
+// Form elemek
+
+const first_name = ref("");
+const last_name = ref("");
+const email = ref("");
+const phone_number = ref("");
+const location = ref("");
+
+// Kulcs-érték párok meghatározása
+
+const prepareBookingData = () => {
+  return {
+    machine_id: props.machine.id,
+    first_name: first_name.value,
+    last_name: last_name.value,
+    email: email.value,
+    phone_number: phone_number.value,
+    location: location.value,
+    price: totalPrice.value,
+    start_date: startDate.value
+      ? startDate.value.toISOString().split("T")[0]
+      : null,
+    end_date: endDate.value ? endDate.value.toISOString().split("T")[0] : null,
+  };
+};
 
 const submitBooking = async () => {
+  const bookingData = prepareBookingData();
   try {
     const response = await axios.post(
       "http://localhost:3000/api/bookings",
-      bookingData.value
+      bookingData
     );
     if (response.status === 201) {
       console.log("Booking added successfully");
