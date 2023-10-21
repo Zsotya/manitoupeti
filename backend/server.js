@@ -19,8 +19,12 @@ const machinesRoutes = require("./routes/machines");
 const jobsRoutes = require("./routes/jobs");
 const adminsRoutes = require("./routes/admins");
 const authenticationRoutes = require("./routes/authentication");
-const bookingsRoutes = require("./routes/bookings");
-const paidBookingsRoutes = require("./routes/paidBookings");
+
+// Bookings imports
+const bookingsRoutes = require("./routes/bookings/bookings");
+const pendingBookingsRoutes = require("./routes/bookings/pendingBookings");
+const acceptedBookingsRoutes = require("./routes/bookings/acceptedBookings");
+const paidBookingsRoutes = require("./routes/bookings/paidBookings");
 
 app.use(paragraphsRoutes);
 app.use(filmsRoutes);
@@ -28,7 +32,11 @@ app.use(machinesRoutes);
 app.use(jobsRoutes);
 app.use(adminsRoutes);
 app.use(authenticationRoutes);
+
+// Bookings routes
 app.use(bookingsRoutes);
+app.use(pendingBookingsRoutes);
+app.use(acceptedBookingsRoutes);
 app.use(paidBookingsRoutes);
 
 // Start the server
