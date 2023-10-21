@@ -10,46 +10,51 @@
 <script setup>
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import axios from "axios";
 
 // const testButton = () => {
-//   console.log(startDate);
-//   console.log(endDate);
+//   console.log("Pending:", pendingData);
+//   console.log("Accepted:", acceptedData);
+//   console.log("Paid:", paidData);
 // };
 
 // Jelenlegi dátum kiszámolása
 const startDate = new Date().toISOString().split("T")[0];
 
-// Következő 5 teljes hónap kiszámolása
+// 5 hónap múlva levő dátum kiszámolása
 const endDate = new Date(new Date().setMonth(new Date().getMonth() + 5))
   .toISOString()
   .split("T")[0];
 
+// FullCalendar konfigurálása
 const calendarOptions = {
-  plugins: [dayGridPlugin, interactionPlugin],
+  plugins: [dayGridPlugin],
   initialView: "dayGridMonth",
   height: 850,
   validRange: {
     start: startDate,
     end: endDate,
   },
-  events: [
-    {
-      title: "Available",
-      start: "2023-10-17",
-      end: "2023-11-30",
-      backgroundColor: "green",
-      display: "background",
-    },
-    {
-      title: "Occupied",
-      start: "2023-10-19",
-      end: "2023-10-24",
-      display: "background",
-      backgroundColor: "orange",
-    },
-  ],
+  events: [],
 };
+
+// Adatok lekérdezése
+const getBookingData = async (status) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/api/${status}Bookings?machine_id=1`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Error getting ${status} bookings:`, error);
+    return [];
+  }
+};
+
+// Rekordok tárolása
+const pendingData = getBookingData("pending");
+const acceptedData = getBookingData("accepted");
+const paidData = getBookingData("paid");
 </script>
 
 <style scoped>
