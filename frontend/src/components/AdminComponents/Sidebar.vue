@@ -32,6 +32,12 @@ const links = [
     show: true,
   },
   {
+    path: "/admin/bookings",
+    label: "Megrendelések",
+    iconClass: "far fa-calendar-alt mr-2",
+    show: true,
+  },
+  {
     path: "/admin/statistics",
     label: "Statistics",
     iconClass: "fas fa-chart-bar mr-2",

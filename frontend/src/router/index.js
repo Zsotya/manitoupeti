@@ -15,6 +15,7 @@ import Career from "../views/MainAppViews/Career.vue";
 // Admin application
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
+import AdminBookings from "../views/AdminViews/AdminBookings.vue";
 import AdminStatistics from "../views/AdminViews/AdminStatistics.vue";
 import AdminParagraph from "../views/AdminViews/AdminParagraph.vue";
 import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
@@ -87,6 +88,15 @@ const routes = [
   {
     path: "/admin/dashboard",
     component: AdminDashboard,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/bookings",
+    component: AdminBookings,
     meta: {
       isMainApp: false,
       isAdminApp: true,
