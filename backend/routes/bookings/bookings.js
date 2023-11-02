@@ -15,6 +15,45 @@ router.get("/api/bookings", (req, res) => {
   });
 });
 
+// Pending státuszú bookingok lekérdezése
+
+router.get("/api/bookings/pending", (req, res) => {
+  db.query("SELECT * FROM bookings WHERE status='Pending'", (err, results) => {
+    if (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Approved státuszú bookingok lekérdezése
+
+router.get("/api/bookings/approved", (req, res) => {
+  db.query("SELECT * FROM bookings WHERE status='Approved'", (err, results) => {
+    if (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Expired státuszú bookingok lekérdezése
+
+router.get("/api/bookings/expired", (req, res) => {
+  db.query("SELECT * FROM bookings WHERE status='Expired'", (err, results) => {
+    if (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.json(results);
+  });
+});
+
 // POST REQUEST KEZELÉSE - Új booking létrehozása
 
 router.post("/api/bookings", (req, res) => {
