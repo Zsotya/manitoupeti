@@ -23,7 +23,7 @@ const authenticationRoutes = require("./routes/authentication");
 // Bookings imports
 const bookingsRoutes = require("./routes/bookings/bookings");
 const pendingBookingsRoutes = require("./routes/bookings/pendingBookings");
-const acceptedBookingsRoutes = require("./routes/bookings/acceptedBookings");
+const approvedBookingsRoutes = require("./routes/bookings/approvedBookings");
 const paidBookingsRoutes = require("./routes/bookings/paidBookings");
 
 app.use(paragraphsRoutes);
@@ -36,7 +36,7 @@ app.use(authenticationRoutes);
 // Bookings routes
 app.use(bookingsRoutes);
 app.use(pendingBookingsRoutes);
-app.use(acceptedBookingsRoutes);
+app.use(approvedBookingsRoutes);
 app.use(paidBookingsRoutes);
 
 // Start the server

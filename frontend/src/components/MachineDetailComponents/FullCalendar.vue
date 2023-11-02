@@ -43,7 +43,7 @@ const events = ref([]);
 const createCalendarEvents = async () => {
   const pendingData = await getBookingData("pending");
   const paidData = await getBookingData("paid");
-  const acceptedData = await getBookingData("accepted");
+  const approvedData = await getBookingData("approved");
   // Dátumok formázása. Azért külön, mert end esetén +1 napot hozzá kell adni (FullCalendar működése miatt..)
   function formatStart(date) {
     const year = date.getFullYear();
@@ -69,8 +69,8 @@ const createCalendarEvents = async () => {
       display: "background",
     })),
 
-    ...acceptedData.map((booking) => ({
-      title: "Accepted",
+    ...approvedData.map((booking) => ({
+      title: "Approved",
       start: formatStart(new Date(booking.start_date)),
       end: formatEnd(new Date(booking.end_date)),
       backgroundColor: "orange",
