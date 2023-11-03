@@ -95,4 +95,22 @@ router.post("/api/bookings", (req, res) => {
   );
 });
 
+// PATCH REQUEST KEZELÉSE - Meglévő booking árának módosítása
+
+router.patch("/api/bookings/:id", (req, res) => {
+  const { id } = req.params;
+  const { price } = req.body;
+
+  const sql = "UPDATE bookings SET price = ? WHERE id = ?";
+  db.query(sql, [price, id], (err, results) => {
+    if (err) {
+      console.error("Error updating the price:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+
+    res.status(200).json({ message: "Price updated successfully" });
+  });
+});
+
 module.exports = router;
