@@ -18,7 +18,7 @@
 
     <!-- ADMIN APP PART -->
     <section v-if="$route.meta.isAdminApp" class="admin-app">
-      <Sidebar />
+      <div class="sidebar"><Sidebar /></div>
       <main class="admin-content">
         <router-view />
       </main>
@@ -41,7 +41,14 @@ import Sidebar from "./components/AdminComponents/Sidebar.vue";
   width: 100%;
 }
 
+.sidebar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
 .admin-content {
   width: 100%;
+  margin-left: 250px;
 }
 </style>
