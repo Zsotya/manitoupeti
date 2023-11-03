@@ -29,7 +29,7 @@
             <td>{{ booking.location }}</td>
             <td>{{ formatDateRange(booking.start_date, booking.end_date) }}</td>
             <td>{{ booking.price }}Ft</td>
-            <td>{{ booking.created_at }}</td>
+            <td>{{ formatDate(booking.created_at) }}</td>
             <td class="actions-buttons">
               <button
                 class="approve-button"
@@ -81,6 +81,19 @@ const formatDateRange = (startDate, endDate) => {
   const formattedEndDate = new Date(endDate).toISOString().split("T")[0];
 
   return `${formattedStartDate} - ${formattedEndDate}`;
+};
+
+// Létrehozás dátumának "YYYY.MM.DD. HH:MM" formátumra formázás
+const formatDate = (updatedDate) => {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const date = new Date(updatedDate);
+  return date.toLocaleString("hu-HU", options);
 };
 </script>
 

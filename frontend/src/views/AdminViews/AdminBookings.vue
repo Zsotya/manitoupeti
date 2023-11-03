@@ -1,7 +1,15 @@
 <template>
-  <PendingBookings />
-  <ApprovedBookings />
-  <ExpiredBookings />
+  <div class="bookings">
+    <div class="pending-bookings">
+      <PendingBookings />
+    </div>
+    <div class="approved-bookings">
+      <ApprovedBookings />
+    </div>
+    <div class="expired-bookings">
+      <ExpiredBookings />
+    </div>
+  </div>
 </template>
 
 <script setup>
