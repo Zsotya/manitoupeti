@@ -42,7 +42,7 @@
               </button>
               <button
                 class="modify-price-button"
-                @click="modifyPrice(booking.id)"
+                @click="openModifyPrice(booking.id)"
               >
                 <i class="fas fa-edit"></i>Ár módosítása
               </button>
@@ -50,6 +50,23 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Ár módosító ablak -->
+    <div v-if="isModifyPriceOpen" class="modify-price">
+      <div class="content">
+        <h3>
+          {{ selectedBooking.id }} ID-vel ellátott foglalás árának módosítása
+        </h3>
+        <p>Jelenlegi ár: {{ selectedBooking.price }}Ft</p>
+        <input
+          v-model="newPrice"
+          placeholder="Új ár (Ft)"
+          type="text"
+          id="newPrice"
+        />Ft
+        <button @click="modifyPrice">Módosítás</button>
+        <button @click="closeModifyPrice">Mégse</button>
+      </div>
     </div>
   </div>
 </template>
@@ -94,6 +111,54 @@ const formatDate = (updatedDate) => {
   };
   const date = new Date(updatedDate);
   return date.toLocaleString("hu-HU", options);
+};
+
+// Funkciógombok
+
+// Elfogadás
+const approveBooking = (bookingId) => {};
+
+// Elutasítás
+const rejectBooking = (bookingId) => {};
+
+// Ár módosítás
+const isModifyPriceOpen = ref(false);
+const newPrice = ref("");
+let selectedBooking = null;
+
+const openModifyPrice = (bookingId) => {
+  const booking = pendingBookings.value.find((b) => b.id === bookingId);
+  if (booking) {
+    selectedBooking = booking;
+    isModifyPriceOpen.value = true;
+    newPrice.value = "";
+  }
+};
+
+const closeModifyPrice = () => {
+  isModifyPriceOpen.value = false;
+};
+
+const modifyPrice = async () => {
+  if (selectedBooking) {
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/api/bookings/${selectedBooking.id}`,
+        {
+          price: newPrice.value,
+        }
+      );
+
+      if (response.status === 200) {
+        selectedBooking.price = newPrice.value;
+        closeModifyPrice();
+      } else {
+        console.error("Error updating price:", response);
+      }
+    } catch (error) {
+      console.error("Error updating price:", error);
+    }
+  }
 };
 </script>
 
@@ -148,7 +213,7 @@ th {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100px;
+  width: 120px;
   display: flex;
   gap: 4px;
 }
