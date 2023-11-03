@@ -83,3 +83,84 @@ const formatDateRange = (startDate, endDate) => {
   return `${formattedStartDate} - ${formattedEndDate}`;
 };
 </script>
+
+<style scoped>
+.admin-pending-bookings {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.bookings-table {
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.actions-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.approve-button,
+.reject-button,
+.modify-price-button {
+  padding: 8px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  display: flex;
+  gap: 4px;
+}
+
+.approve-button {
+  background-color: #4caf50;
+}
+
+.reject-button {
+  background-color: red;
+}
+
+.modify-price-button {
+  background-color: #007bff;
+}
+
+.approve-button:hover {
+  background-color: #45a049;
+}
+
+.reject-button:hover {
+  background-color: rgb(130, 14, 14);
+}
+
+.modify-price-button:hover {
+  background-color: #0056b3;
+}
+</style>

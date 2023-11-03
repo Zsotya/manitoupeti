@@ -34,7 +34,7 @@
               <button class="paid-button" @click="markAsPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
-              <button class="reject-button" @click="markAsExpired(booking.id)">
+              <button class="expired-button" @click="markAsExpired(booking.id)">
                 <i class="fas fa-times"></i>Lejárt
               </button>
             </td>
@@ -74,3 +74,75 @@ const formatDateRange = (startDate, endDate) => {
   return `${formattedStartDate} - ${formattedEndDate}`;
 };
 </script>
+
+<style scoped>
+.admin-expired-bookings {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.bookings-table {
+  margin-top: 40px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.actions-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.paid-button,
+.expired-button {
+  padding: 8px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  display: flex;
+  gap: 4px;
+}
+
+.paid-button {
+  background-color: #4caf50;
+}
+
+.expired-button {
+  background-color: red;
+}
+
+.paid-button:hover {
+  background-color: #45a049;
+}
+
+.expired-button:hover {
+  background-color: rgb(130, 14, 14);
+}
+</style>
