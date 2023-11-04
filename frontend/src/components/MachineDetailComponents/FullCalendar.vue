@@ -12,6 +12,7 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
 
 // const testButton = () => {
 //   console.log(calendarOptions.events);
@@ -26,10 +27,13 @@ const endDate = new Date(new Date().setMonth(new Date().getMonth() + 5))
   .split("T")[0];
 
 // GET request - Adatok lekérdezése
+const route = useRoute();
+const machineId = route.params.id;
+
 const getBookingData = async (status) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/${status}Bookings?machine_id=1`
+      `http://localhost:3000/api/${status}BookingsMachine?machine_id=${machineId}`
     );
     return response.data;
   } catch (error) {

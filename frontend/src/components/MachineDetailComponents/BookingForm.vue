@@ -170,7 +170,7 @@ const machineId = ref(props.machine.id);
 async function fetchAndSetPaidBookings() {
   try {
     const response = await axios.get(
-      `http://localhost:3000/api/paidBookings?machine_id=${machineId.value}`
+      `http://localhost:3000/api/paidBookingsMachine?machine_id=${machineId.value}`
     );
     paidBookings.value = response.data;
   } catch (error) {

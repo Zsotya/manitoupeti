@@ -22,9 +22,9 @@ const authenticationRoutes = require("./routes/authentication");
 
 // Bookings imports
 const bookingsRoutes = require("./routes/bookings/bookings");
-const pendingBookingsRoutes = require("./routes/bookings/pendingBookings");
-const approvedBookingsRoutes = require("./routes/bookings/approvedBookings");
-const paidBookingsRoutes = require("./routes/bookings/paidBookings");
+const pendingBookingsRoutes = require("./routes/bookings/pendingBookingsMachine");
+const approvedBookingsRoutes = require("./routes/bookings/approvedBookingsMachine");
+const paidBookingsRoutes = require("./routes/bookings/paidBookingsMachine");
 
 app.use(paragraphsRoutes);
 app.use(filmsRoutes);
