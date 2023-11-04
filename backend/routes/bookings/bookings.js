@@ -95,9 +95,9 @@ router.post("/api/bookings", (req, res) => {
   );
 });
 
-// PATCH REQUEST KEZELÉSE - Meglévő booking árának módosítása
+// Booking árának módosítása PATCH
 
-router.patch("/api/bookings/:id", (req, res) => {
+router.patch("/api/bookings/price/:id", (req, res) => {
   const { id } = req.params;
   const { price } = req.body;
 
@@ -108,9 +108,60 @@ router.patch("/api/bookings/:id", (req, res) => {
       res.status(500).json({ error: "Database error" });
       return;
     }
-
     res.status(200).json({ message: "Price updated successfully" });
   });
 });
 
+// Státusz módosítása Approved-ra PATCH
+
+router.patch("/api/bookings/approve/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = "UPDATE bookings SET status = 'Approved' WHERE id = ?";
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error("Error approving the booking:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.status(200).json({ message: "Booking approved successfully" });
+  });
+});
+
+// Státusz módosítása Rejected-re, komment hozzáadása PATCH
+
+router.patch("/api/bookings/reject/:id", (req, res) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+
+  const sql =
+    "UPDATE bookings SET status = 'Rejected', comment = ? WHERE id = ?";
+  db.query(sql, [comment, id], (err, results) => {
+    if (err) {
+      console.error("Error rejecting the booking:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.status(200).json({ message: "Booking rejected successfully" });
+  });
+});
+
+// Státusz módosítása Paid-re PATCH
+
+router.patch("/api/bookings/markAsPaid/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = "UPDATE bookings SET status = 'Paid' WHERE id = ?";
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      console.error("Error marking the booking as Paid:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+
+    res.status(200).json({ message: "Booking marked as Paid successfully" });
+  });
+});
+
+// Archív? Ez majd még kelleni fog az Expired esetén!
 module.exports = router;

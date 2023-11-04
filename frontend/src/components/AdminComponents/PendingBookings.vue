@@ -143,7 +143,7 @@ const modifyPrice = async () => {
   if (selectedBooking) {
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/bookings/${selectedBooking.id}`,
+        `http://localhost:3000/api/bookings/price/${selectedBooking.id}`,
         {
           price: newPrice.value,
         }
