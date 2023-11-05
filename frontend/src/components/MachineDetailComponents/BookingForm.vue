@@ -155,6 +155,12 @@ const submitBooking = async () => {
     );
     if (response.status === 201) {
       console.log("Booking added successfully");
+      first_name.value = "";
+      last_name.value = "";
+      email.value = "";
+      phone_number.value = "";
+      location.value = "";
+      date.value = [new Date(), null];
     }
   } catch (error) {
     console.error("Error while adding a booking:", error);
