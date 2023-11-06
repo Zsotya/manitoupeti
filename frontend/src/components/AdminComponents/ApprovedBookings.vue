@@ -107,6 +107,22 @@ const formatDate = (modifiedDate) => {
 
 // Fizetve
 
+const markAsPaid = async (bookingId) => {
+  try {
+    const response = await axios.patch(
+      `http://localhost:3000/api/bookings/markAsPaid/${bookingId}`
+    );
+    if (response.status === 200) {
+      console.log("Booking marked as paid successfully!");
+      fetchData();
+    } else {
+      console.error("Failed to mark the booking as paid");
+    }
+  } catch (error) {
+    console.error("Error marking the booking paid:", error);
+  }
+};
+
 // Elutasítás
 
 const isRejectOpen = ref(false);
