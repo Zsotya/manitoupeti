@@ -163,5 +163,40 @@ router.patch("/api/bookings/markAsPaid/:id", (req, res) => {
   });
 });
 
-// Archív? Ez majd még kelleni fog az Expired esetén!
+// Áthelyezés archive_bookings táblába, törlés bookings táblából POST
+
+router.post("/api/bookings/archive/:id", (req, res) => {
+  const { id } = req.params;
+
+  const archiveQuery = `
+      INSERT INTO archive_bookings (booking_id, machine_id, first_name, last_name, email, phone_number, location, start_date, end_date, status, price, created_at, comment)
+      SELECT id, machine_id, first_name, last_name, email, phone_number, location, start_date, end_date, status, price, created_at, comment
+      FROM bookings
+      WHERE id = ?;
+  `;
+
+  const deleteQuery = `
+      DELETE FROM bookings
+      WHERE id = ?;
+  `;
+
+  db.query(archiveQuery, [id], (err, results) => {
+    if (err) {
+      console.error("Error archiving the booking:", err);
+      res.status(500).json({ error: "Database error" });
+    } else {
+      db.query(deleteQuery, [id], (err, results) => {
+        if (err) {
+          console.error("Error deleting the booking:", err);
+          res.status(500).json({ error: "Database error" });
+        } else {
+          res.json({
+            message: "Booking archived and deleted from bookings successfully",
+          });
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;
