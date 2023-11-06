@@ -58,7 +58,7 @@ function scheduleBookingExpirationCheck() {
           console.error("Hiba a státusz módosításakor:", updateError);
         } else {
           console.log(
-            `Lejárt foglalások státusza sikeresen módosítva "Rejected" státuszra. Módosított sorok száma: ${updateResults.affectedRows}`
+            `Lejárt foglalások státusza sikeresen módosítva "Expired" státuszra. Módosított sorok száma: ${updateResults.affectedRows}`
           );
         }
       });
