@@ -34,8 +34,8 @@
               <button class="paid-button" @click="markAsPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
-              <button class="expired-button" @click="markAsExpired(booking.id)">
-                <i class="fas fa-times"></i>Lejárt
+              <button class="expired-button" @click="archive(booking.id)">
+                <i class="fas fa-times"></i>Archiválás
               </button>
             </td>
           </tr>
@@ -85,6 +85,44 @@ const formatDate = (modifiedDate) => {
   };
   const date = new Date(modifiedDate);
   return date.toLocaleString("hu-HU", options);
+};
+
+// Funkciógombok
+
+// Fizetve
+
+const markAsPaid = async (bookingId) => {
+  try {
+    const response = await axios.patch(
+      `http://localhost:3000/api/bookings/markAsPaid/${bookingId}`
+    );
+    if (response.status === 200) {
+      console.log("Booking marked as paid successfully!");
+      fetchData();
+    } else {
+      console.error("Failed to mark the booking as paid");
+    }
+  } catch (error) {
+    console.error("Error marking the booking paid:", error);
+  }
+};
+
+// Lejárt
+
+const archive = async (bookingId) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:3000/api/bookings/archive/${bookingId}`
+    );
+    if (response.status === 200) {
+      console.log("Booking has been archived successfully!");
+      fetchData();
+    } else {
+      console.error("Failed to archive booking.");
+    }
+  } catch (error) {
+    console.error("Error marking the booking as archived:", error);
+  }
 };
 </script>
 
