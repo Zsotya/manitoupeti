@@ -34,13 +34,29 @@
               <button class="paid-button" @click="markAsPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
-              <button class="reject-button" @click="rejectBooking(booking.id)">
+              <button class="reject-button" @click="openReject(booking.id)">
                 <i class="fas fa-times"></i>Elutasítás
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Elutasítás ablak -->
+    <div v-if="isRejectOpen" class="reject-popup">
+      <div class="content">
+        <h3>
+          {{ selectedRejectBooking.id }} ID-vel ellátott foglalás elutasítása
+        </h3>
+        <textarea
+          v-model="rejectComment"
+          placeholder="Megjegyzés hozzáadása..."
+        ></textarea>
+        <button @click="rejectBooking(selectedRejectBooking.id)">
+          Elutasítás
+        </button>
+        <button @click="closeReject">Mégse</button>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +101,51 @@ const formatDate = (modifiedDate) => {
   };
   const date = new Date(modifiedDate);
   return date.toLocaleString("hu-HU", options);
+};
+
+// Funkciógombok
+
+// Fizetve
+
+// Elutasítás
+
+const isRejectOpen = ref(false);
+const rejectComment = ref("");
+let selectedRejectBooking = null;
+
+const openReject = (bookingId) => {
+  const booking = approvedBookings.value.find((b) => b.id === bookingId);
+  if (booking) {
+    selectedRejectBooking = booking;
+    isRejectOpen.value = true;
+    rejectComment.value = "";
+  }
+};
+
+const closeReject = () => {
+  isRejectOpen.value = false;
+};
+
+const rejectBooking = async () => {
+  if (selectedRejectBooking) {
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/api/bookings/reject/${selectedRejectBooking.id}`,
+        {
+          comment: rejectComment.value,
+        }
+      );
+      if (response.status === 200) {
+        console.log("Sikeres elutasítás");
+        closeReject();
+        fetchData();
+      } else {
+        console.error("Hiba elutasítás közben:", response);
+      }
+    } catch (error) {
+      console.error("Hiba elutasítás közben:", error);
+    }
+  }
 };
 </script>
 
