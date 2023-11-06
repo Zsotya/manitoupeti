@@ -3,16 +3,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require("cors");
 const path = require("path");
+const scheduler = require("./routes/bookings/scheduler");
 
+// Scheduler elindítása
+scheduler.scheduleBookingExpirationCheck();
+
+// Middleware
 app.use(
   cors({
     origin: "http://localhost:8080", // így kap engedélyt middlewaren keresztül http requestek fogadásához
   })
 );
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend/public")));
 
+// Routes
 const paragraphsRoutes = require("./routes/paragraphs");
 const filmsRoutes = require("./routes/films");
 const machinesRoutes = require("./routes/machines");
