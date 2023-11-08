@@ -156,13 +156,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.content {
+  min-height: 80vh;
+  background-color: #e8e6e6;
+}
+
 .machines-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 0px;
   padding: 140px 0px 40px 0px;
-  background-color: #e8e6e6;
 }
 
 .filter-toggle {
