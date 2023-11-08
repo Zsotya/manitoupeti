@@ -15,6 +15,23 @@ router.get("/api/jobs", (req, res) => {
   });
 });
 
+// GET REQUEST KEZELÉSE - Egy adott job lekérdezése adott azonosító alapján
+router.get("/api/jobs/:id", (req, res) => {
+  const jobId = req.params.id;
+  db.query("SELECT * FROM jobs WHERE id = ?", [jobId], (err, results) => {
+    if (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).json({ error: "Job not found" });
+      return;
+    }
+    res.json(results[0]);
+  });
+});
+
 // POST REQUEST KEZELÉSE - Új job létrehozása
 
 router.post("/api/jobs", (req, res) => {
