@@ -63,7 +63,6 @@
           />
         </div>
         <div class="filter-button">
-          <button @click="applyFilters">Szűrők alkalmazása</button>
           <button @click="resetFilters">Szűrők törlése</button>
         </div>
       </div>
@@ -74,38 +73,27 @@
 <script setup>
 import MachinesIntro from "@/components/MachinesComponents/MachinesIntro.vue";
 import MachinesDisplay from "@/components/MachinesComponents/MachinesDisplay.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive, computed } from "vue";
 import axios from "axios";
 
 const machines = ref([]);
-const filteredMachines = ref([]);
-const filters = {
+
+// Filter opciók
+const filters = reactive({
   requiredHeight: null,
   requiredWeight: null,
   hasSole: false,
   hasBasket: false,
   hasFork: false,
   isRemote: false,
-};
-const showFilterSection = ref(false);
-
-async function fetchData() {
-  try {
-    const response = await axios.get("http://localhost:3000/api/machines");
-    machines.value = response.data;
-    filteredMachines.value = [...machines.value];
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-onMounted(() => {
-  fetchData();
 });
 
-function applyFilters() {
-  filteredMachines.value = machines.value.filter((machine) => {
-    // Szűrők alkalmazása a kijelöltek alapján
+// Filter ablak megjelenítése
+const showFilterSection = ref(false);
+
+// Szűrők alkalmazása
+const filteredMachines = computed(() => {
+  return machines.value.filter((machine) => {
     if (
       filters.requiredHeight !== null &&
       machine.max_height < filters.requiredHeight
@@ -133,7 +121,7 @@ function applyFilters() {
     // Ha mindnek megfelel, listázás
     return true;
   });
-}
+});
 
 // Szűrők törlése és az összes nehézgép listázása
 function resetFilters() {
@@ -147,6 +135,21 @@ function resetFilters() {
 function toggleFilterSection() {
   showFilterSection.value = !showFilterSection.value;
 }
+
+// Adatok fetchelése
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/machines");
+    machines.value = response.data;
+    filteredMachines.value = [...machines.value];
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+onMounted(() => {
+  fetchData();
+});
 </script>
 
 <style scoped>
