@@ -5,7 +5,7 @@
     </div>
     <!-- Szűrés gomb -->
     <div class="filter-toggle" @click="toggleFilterSection">
-      <button>Szűrés...</button>
+      <button>{{ $t("machinesFiltering") }}</button>
     </div>
     <!-- Emelőgép kártyák -->
     <div class="content">
@@ -20,10 +20,10 @@
     <!-- Szűrés ablak -->
     <div class="filter-section" :class="{ open: showFilterSection }">
       <div class="filter-content">
-        <h3>Szűrők</h3>
+        <h3>{{ $t("machinesFilterOptions") }}</h3>
         <div class="filter-input">
           <label class="filter-label" for="requiredHeightFilter"
-            >Minimum magasság:</label
+            >{{ $t("machinesFilterMinHeight") }}:</label
           >
           <input
             type="number"
@@ -33,7 +33,7 @@
         </div>
         <div class="filter-input">
           <label class="filter-label" for="requiredWeightFilter"
-            >Minimum teherbírás:</label
+            >{{ $t("machinesFilterMinWeight") }}:</label
           >
           <input
             type="number"
@@ -42,11 +42,15 @@
           />
         </div>
         <div class="filter-input">
-          <label class="filter-label" for="hasSoleFilter">Talp:</label>
+          <label class="filter-label" for="hasSoleFilter"
+            >{{ $t("machinesSole") }}:</label
+          >
           <input type="checkbox" v-model="filters.hasSole" id="hasSoleFilter" />
         </div>
         <div class="filter-input">
-          <label class="filter-label" for="hasBasketFilter">Kosár:</label>
+          <label class="filter-label" for="hasBasketFilter"
+            >{{ $t("machinesBasket") }}:</label
+          >
           <input
             type="checkbox"
             v-model="filters.hasBasket"
@@ -54,12 +58,14 @@
           />
         </div>
         <div class="filter-input">
-          <label class="filter-label" for="hasForkFilter">Villa:</label>
+          <label class="filter-label" for="hasForkFilter"
+            >{{ $t("machinesFork") }}:</label
+          >
           <input type="checkbox" v-model="filters.hasFork" id="hasForkFilter" />
         </div>
         <div class="filter-input">
           <label class="filter-label" for="isRemoteFilter"
-            >Távirányítható:</label
+            >{{ $t("machinesRemote") }}:</label
           >
           <input
             type="checkbox"
@@ -68,7 +74,9 @@
           />
         </div>
         <div class="filter-button">
-          <button @click="resetFilters">Szűrők törlése</button>
+          <button @click="resetFilters">
+            {{ $t("machinesFiltersRemove") }}
+          </button>
         </div>
       </div>
     </div>
@@ -218,7 +226,7 @@ onMounted(() => {
 }
 
 .filter-label {
-  width: 160px;
+  width: 220px;
 }
 
 .filter-input label {
@@ -226,7 +234,7 @@ onMounted(() => {
 }
 
 .filter-input input {
-  width: 100%;
+  width: 38%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;

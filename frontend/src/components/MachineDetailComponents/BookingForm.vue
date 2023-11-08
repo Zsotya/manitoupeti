@@ -1,7 +1,7 @@
 <template>
   <div class="form-wrap">
     <div class="booking-form">
-      <h1>Emelőgép foglalás</h1>
+      <h1>{{ $t("machinesBooking") }}</h1>
 
       <!-- Dátum range kiválasztása (vue datepicker) -->
       <form @submit.prevent="submitBooking">
@@ -19,11 +19,11 @@
         <!-- Megrendelő információk -->
         <div class="user-info">
           <div class="input-group">
-            <label for="last-name">Vezetéknév:</label>
+            <label for="last-name">{{ $t("lastName") }}:</label>
             <input type="text" id="last-name" v-model="last_name" required />
           </div>
           <div class="input-group">
-            <label for="first-name">Keresztnév:</label>
+            <label for="first-name">{{ $t("firstName") }}:</label>
             <input type="text" id="first-name" v-model="first_name" required />
           </div>
           <div class="input-group">
@@ -31,26 +31,25 @@
             <input type="email" id="email" v-model="email" required />
           </div>
           <div class="input-group">
-            <label for="phone">Telefonszám:</label>
+            <label for="phone">{{ $t("phone") }}:</label>
             <input type="tel" id="phone" v-model="phone_number" required />
           </div>
           <div>
-            <label for="location">Helyszín:</label>
+            <label for="location">{{ $t("location") }}:</label>
             <input type="text" id="location" v-model="location" required />
           </div>
         </div>
 
         <!-- Végösszeg kiszámolása -->
         <div class="total-price">
-          <p>Gép bérleti díj: {{ totalPrice }} Ft</p>
+          <p>{{ $t("machinesFormPrice") }}: {{ totalPrice }} Ft</p>
         </div>
         <div class="price-note" v-if="date && date[0] && date[1]">
           <p>
-            Tájékoztatjuk kedves megrendelőinket, hogy a bérleti díj nem
-            tartalmazza a logisztikai díjakat, valamint egyéb adókat.
+            {{ $t("machinesFormInform") }}
           </p>
         </div>
-        <button type="submit">Foglalás elküldése</button>
+        <button type="submit">{{ $t("machinesFormSubmit") }}</button>
       </form>
     </div>
   </div>

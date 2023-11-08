@@ -13,11 +13,11 @@
       <div class="form">
         <div class="name-part">
           <div class="first-name">
-            <label for="firstName">{{ $t("contactUsLastName") }}</label>
+            <label for="firstName">{{ $t("lastName") }}</label>
             <input type="text" id="firstName" class="transparent-input" />
           </div>
           <div class="last-name">
-            <label for="lastName">{{ $t("contactUsFirstName") }}</label>
+            <label for="lastName">{{ $t("firstName") }}</label>
             <input type="text" id="lastName" class="transparent-input" />
           </div>
         </div>
