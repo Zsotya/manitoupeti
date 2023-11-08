@@ -19,12 +19,12 @@
         <!-- Megrendelő információk -->
         <div class="user-info">
           <div class="input-group">
-            <label for="first-name">Vezetéknév:</label>
-            <input type="text" id="first-name" v-model="first_name" required />
+            <label for="last-name">Vezetéknév:</label>
+            <input type="text" id="last-name" v-model="last_name" required />
           </div>
           <div class="input-group">
-            <label for="last-name">Keresztnév:</label>
-            <input type="text" id="last-name" v-model="last_name" required />
+            <label for="first-name">Keresztnév:</label>
+            <input type="text" id="first-name" v-model="first_name" required />
           </div>
           <div class="input-group">
             <label for="email">Email:</label>
@@ -120,8 +120,8 @@ const totalPrice = computed(() => {
 
 // Form elemek
 
-const first_name = ref("");
 const last_name = ref("");
+const first_name = ref("");
 const email = ref("");
 const phone_number = ref("");
 const location = ref("");
@@ -131,8 +131,8 @@ const location = ref("");
 const prepareBookingData = () => {
   return {
     machine_id: props.machine.id,
-    first_name: first_name.value,
     last_name: last_name.value,
+    first_name: first_name.value,
     email: email.value,
     phone_number: phone_number.value,
     location: location.value,
@@ -155,8 +155,8 @@ const submitBooking = async () => {
     );
     if (response.status === 201) {
       console.log("Booking added successfully");
-      first_name.value = "";
       last_name.value = "";
+      first_name.value = "";
       email.value = "";
       phone_number.value = "";
       location.value = "";
