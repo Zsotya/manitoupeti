@@ -1,9 +1,13 @@
 <template>
   <section>
-    <MachinesIntro />
+    <div class="machines-intro">
+      <MachinesIntro />
+    </div>
+    <!-- Szűrés gomb -->
     <div class="filter-toggle" @click="toggleFilterSection">
       <button>Szűrés...</button>
     </div>
+    <!-- Emelőgép kártyák -->
     <div class="content">
       <div class="machines-container">
         <MachinesDisplay
@@ -13,6 +17,7 @@
         />
       </div>
     </div>
+    <!-- Szűrés ablak -->
     <div class="filter-section" :class="{ open: showFilterSection }">
       <div class="filter-content">
         <h3>Szűrők</h3>
@@ -128,7 +133,6 @@ function resetFilters() {
   for (const key in filters) {
     filters[key] = null;
   }
-  filteredMachines.value = [...machines.value];
 }
 
 // Szűrők megjelenítése toggle
@@ -141,7 +145,6 @@ async function fetchData() {
   try {
     const response = await axios.get("http://localhost:3000/api/machines");
     machines.value = response.data;
-    filteredMachines.value = [...machines.value];
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -227,7 +230,6 @@ onMounted(() => {
 
 .filter-button {
   display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 }
 
