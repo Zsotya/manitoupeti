@@ -12,6 +12,7 @@ import MachineDetail from "../views/MainAppViews/MachineDetail.vue";
 import ContactUs from "../views/MainAppViews/ContactUs.vue";
 import Career from "../views/MainAppViews/Career.vue";
 import CareerDetail from "../views/MainAppViews/CareerDetail.vue";
+import NotFound from "../views/MainAppViews/NotFound.vue";
 
 // Admin application
 import Admin from "../views/AdminViews/Admin.vue";
@@ -74,6 +75,11 @@ const routes = [
   {
     path: "/karrier/:id",
     component: CareerDetail,
+    meta: { isMainApp: true, isAdminApp: false },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: NotFound,
     meta: { isMainApp: true, isAdminApp: false },
   },
   /* ADMIN APPLICATION */
