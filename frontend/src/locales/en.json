@@ -62,5 +62,8 @@
   "footerSocials": "Socials",
   "footerInquiry": "Inquiry",
   "footerInquiryContent": "Feel free to contact us with questions and feedback!",
-  "footerContactForm": "Contact Form"
+  "footerContactForm": "Contact Form",
+  "404oops": "Oops! The page you're looking for doesn't exist.",
+  "404navigate": "Please use the navigation menu to find what you are looking for.",
+  "404goHome": "Go back to the home page"
 }

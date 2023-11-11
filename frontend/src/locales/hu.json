@@ -62,5 +62,8 @@
   "footerSocials": "Közösségi",
   "footerInquiry": "Tudakozó",
   "footerInquiryContent": "Kérdésekkel és észrevételekkel vegye fel velünk a kapcsolatot!",
-  "footerContactForm": "Kapcsolat űrlap"
+  "footerContactForm": "Kapcsolat űrlap",
+  "404oops": "Hoppá! Az Ön által keresett oldal nem található.",
+  "404navigate": "Kérjük, használja a navigációs menüt, hogy megtalálja amit keres.",
+  "404goHome": "Navigálás a főoldalra"
 }

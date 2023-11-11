@@ -2,11 +2,11 @@
   <div class="container">
     <div class="content">
       <h1>404</h1>
-      <p>Hoppá! Az Ön által keresett oldal nem található.</p>
+      <p>{{ $t("404oops") }}</p>
       <p>
-        Kérjük, használja a navigációs menüt az oldalon történő navigáláshoz.
+        {{ $t("404navigate") }}
       </p>
-      <router-link to="/">Navigálás a főoldalra</router-link>
+      <router-link to="/">{{ $t("404goHome") }}</router-link>
     </div>
   </div>
 </template>
