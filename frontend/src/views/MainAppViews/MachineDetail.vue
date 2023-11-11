@@ -58,11 +58,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import axios from "axios";
 import FullCalendar from "@/components/MachineDetailComponents/FullCalendar.vue";
 import BookingForm from "@/components/MachineDetailComponents/BookingForm.vue";
 
 const route = useRoute();
+const router = useRouter();
 const machine = ref([]);
 
 async function fetchData() {
@@ -71,9 +73,23 @@ async function fetchData() {
     const response = await axios.get(
       `http://localhost:3000/api/machines/${machineId}`
     );
-    machine.value = response.data;
+    // Ha létezik nehézgép az URL-ben megadott ID-vel, 2xx státuszú response-t kapunk
+    if (response.status >= 200 && response.status < 300) {
+      machine.value = response.data;
+    }
+    // Ha nem létezik nehézgép ilyen ID-vel, 404 oldalra navigálás
+    else {
+      router.replace("/404");
+    }
   } catch (error) {
-    console.error("Error fetching data:", error);
+    // Ha Axios-tól kapunk 404-es státuszt, szintén 404 oldalra navigálás
+    if (error.response && error.response.status === 404) {
+      router.replace("/404");
+    }
+    // Egyéb hibakódok esetén
+    else {
+      console.error("Error fetching data:", error);
+    }
   }
 }
 
