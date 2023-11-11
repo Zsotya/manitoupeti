@@ -73,7 +73,7 @@ async function fetchData() {
     const response = await axios.get(
       `http://localhost:3000/api/machines/${machineId}`
     );
-    // Ha létezik nehézgép az URL-ben megadott ID-vel, 2xx státuszú response-t kapunk
+    // Ha létezik nehézgép az URL-ben megadott ID-vel, 2xx státuszú response-t kapunk, ekkor machine értékének feltöltése
     if (response.status >= 200 && response.status < 300) {
       machine.value = response.data;
     }
