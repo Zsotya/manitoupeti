@@ -28,7 +28,7 @@
       >
         <li>{{ $t(route.label) }}</li>
       </router-link>
-      <li class="lang-switch">
+      <li class="buttons">
         <div class="onoffswitch">
           <input
             type="checkbox"
@@ -44,6 +44,14 @@
             <span class="onoffswitch-switch"></span>
           </label>
         </div>
+        <div class="theme-toggle">
+          <button
+            :class="{ 'dark-button': true, active: darkMode }"
+            @click="toggleDarkMode"
+          >
+            <span class="slider"></span>
+          </button>
+        </div>
       </li>
     </ul>
 
@@ -57,7 +65,7 @@
       >
         <li>{{ $t(route.label) }}</li>
       </router-link>
-      <li class="lang-switch">
+      <li class="buttons">
         <div class="onoffswitch">
           <input
             type="checkbox"
@@ -72,6 +80,14 @@
             <span class="onoffswitch-inner"></span>
             <span class="onoffswitch-switch"></span>
           </label>
+        </div>
+        <div class="theme-toggle">
+          <button
+            :class="{ 'dark-button': true, active: darkMode }"
+            @click="toggleDarkMode"
+          >
+            <span class="slider"></span>
+          </button>
         </div>
       </li>
     </ul>
@@ -89,6 +105,13 @@ const routes = [
   { path: "/elerhetoseg", label: "contactUsLabel" },
   { path: "/karrier", label: "careerLabel" },
 ];
+
+// Dark mode
+const darkMode = ref(false);
+
+const toggleDarkMode = () => {
+  darkMode.value = !darkMode.value;
+};
 
 /* Alapértelmezetten bezárva */
 const mobileMenuOpen = ref(false);
@@ -174,7 +197,7 @@ a {
   transition: 0.3s ease-in-out;
 }
 
-.lang-switch {
+.buttons {
   text-decoration: none;
   color: white;
   padding: 4px 10px 0px 0px;
@@ -250,7 +273,7 @@ a {
   top: 0;
   bottom: 0;
   right: 36px;
-  border: 3px solid rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   transition: all 0.3s ease-in 0s;
 }
@@ -259,6 +282,46 @@ a {
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
+}
+
+.theme-toggle {
+  line-height: 22px;
+}
+
+.dark-button {
+  position: relative;
+  background-color: #eee;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  width: 68px;
+  height: 30px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.5s;
+}
+
+.slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1px;
+  width: 29px;
+  height: 29px;
+  border: 2px black solid;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: 0.5s;
+}
+
+.dark-button.active {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.dark-button.active .slider {
+  left: 38px;
+  transition: left 0.5s;
 }
 
 /* Mobil menü stílus */
@@ -320,6 +383,11 @@ a {
 
   .desktop-menu {
     display: none;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
