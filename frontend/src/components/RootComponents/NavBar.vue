@@ -1,24 +1,11 @@
 <template>
-  <nav>
+  <nav :class="{ 'dark-mode': darkMode }">
     <button class="hamburger-icon" @click="toggleMobileMenu">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="3em"
-        viewBox="0 0 448 512"
-      >
-        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-        <path
-          d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
-        />
-      </svg>
+      <i class="fas fa-bars" style="font-size: 3em"></i>
     </button>
 
     <!-- MOBIL MENÜ -->
-    <ul
-      class="mobile-menu"
-      :class="{ active: mobileMenuOpen }"
-      @click="closeMobileMenu"
-    >
+    <ul class="mobile-menu" :class="{ active: mobileMenuOpen }">
       <router-link
         v-for="route in routes"
         :key="route.path"
@@ -49,7 +36,8 @@
             :class="{ 'dark-button': true, active: darkMode }"
             @click="toggleDarkMode"
           >
-            <span class="slider"></span>
+            <i v-if="!darkMode" class="fas fa-sun"></i>
+            <i v-if="darkMode" class="fas fa-moon"></i>
           </button>
         </div>
       </li>
@@ -86,7 +74,10 @@
             :class="{ 'dark-button': true, active: darkMode }"
             @click="toggleDarkMode"
           >
-            <span class="slider"></span>
+            <span class="slider">
+              <i v-if="!darkMode" class="fas fa-sun"></i>
+              <i v-if="darkMode" class="fas fa-moon"></i
+            ></span>
           </button>
         </div>
       </li>
@@ -159,10 +150,10 @@ ul {
   justify-content: flex-end;
   margin: 0;
   padding: 0;
-  background-color: rgba(0, 0, 0, 0.338);
-  border: 1px solid red;
+  background-color: rgba(230, 247, 255, 0.7);
   border-radius: 50px;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 li {
@@ -174,13 +165,13 @@ li {
 
 .router-link-active,
 a:hover {
-  background: white;
-  color: black;
+  background: rgba(0, 90, 187, 0.8);
+  color: #ffffff;
 }
 
 a:hover {
-  background: white;
-  color: black;
+  background: rgba(0, 90, 187, 0.8);
+  color: #ffffff;
   transition: 0.3s ease;
 }
 
@@ -191,17 +182,17 @@ li.active {
 
 a {
   text-decoration: none;
-  color: white;
+  color: black;
   padding: 0px 20px;
-  background-color: rgba(0, 0, 0, 0.538);
+  background-color: rgba(230, 247, 255, 0.7);
   transition: 0.3s ease-in-out;
 }
 
 .buttons {
   text-decoration: none;
   color: white;
-  padding: 4px 10px 0px 0px;
-  background-color: rgba(0, 0, 0, 0.538);
+  padding: 2px 10px 0px 0px;
+  background-color: rgba(230, 247, 255, 0.7);
   transition: 0.3s ease-in-out;
   margin: 0px;
 }
@@ -286,19 +277,24 @@ a {
 
 .theme-toggle {
   line-height: 22px;
+  position: relative;
 }
 
 .dark-button {
   position: relative;
   background-color: #eee;
   color: #333;
-  border: none;
+  border: 1px solid #c3c3c3;
   border-radius: 20px;
   width: 68px;
   height: 30px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.5s;
+}
+
+.dark-button:hover {
+  background-color: #bbbbbb;
 }
 
 .slider {
@@ -315,13 +311,34 @@ a {
 }
 
 .dark-button.active {
-  background-color: #2c3e50;
+  background-color: #323232;
   color: #fff;
+  border: 1px solid #494949;
+  transition: background-color 0.5s;
+}
+
+.dark-button.active:hover {
+  background-color: #727272;
 }
 
 .dark-button.active .slider {
   left: 38px;
-  transition: left 0.5s;
+  border: 2px white solid;
+  background-color: black;
+  transition: 0.5s;
+}
+
+.dark-button i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  line-height: 0;
+}
+
+.dark-button i.fas.fa-moon {
+  color: white;
 }
 
 /* Mobil menü stílus */
@@ -389,5 +406,26 @@ a {
     display: flex;
     justify-content: space-between;
   }
+}
+
+/* Dark mode */
+.dark-mode ul {
+  background-color: rgba(0, 0, 0, 0.45);
+  border: 1px solid red;
+}
+
+.dark-mode a {
+  background-color: rgba(0, 0, 0, 0.45);
+  color: white;
+}
+
+.dark-mode .router-link-active,
+.dark-mode a:hover {
+  background-color: #efefef;
+  color: black;
+}
+
+.dark-mode .buttons {
+  background-color: rgba(0, 0, 0, 0.45);
 }
 </style>
