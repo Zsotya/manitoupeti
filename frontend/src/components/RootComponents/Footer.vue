@@ -269,6 +269,10 @@ const darkMode = computed(() => store.getters.isDarkMode);
   color: rgb(180, 180, 180);
 }
 
+.footer.dark-mode .social-links a:hover {
+  color: #ed6969;
+}
+
 .footer.dark-mode .contactus-button,
 .footer.dark-mode .quote-button {
   background-color: #b94a50;

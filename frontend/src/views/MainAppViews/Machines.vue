@@ -20,6 +20,11 @@
       </div>
       <!-- Szűrés ablak -->
       <div class="filter-section" :class="{ open: showFilterSection }">
+        <div class="escape">
+          <button @click="toggleFilterSection()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
         <div class="filter-content">
           <h3>{{ $t("machinesFilterOptions") }}</h3>
           <div class="filter-input">
@@ -86,6 +91,9 @@
             <button @click="resetFilters">
               {{ $t("machinesFiltersRemove") }}
             </button>
+          </div>
+          <div class="cancel-button">
+            <button @click="toggleFilterSection()">Bezárás</button>
           </div>
         </div>
       </div>
@@ -195,13 +203,13 @@ function resetFilters() {
 
 .filter-toggle {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 32px;
+  left: 50px;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 1;
 }
 
 .filter-section {
@@ -214,12 +222,12 @@ function resetFilters() {
   border-radius: 5px;
   padding: 20px;
   transition: 0.5s;
-  z-index: 1;
+  z-index: 2;
 }
 
 .filter-section.open {
   left: 0;
-  background-color: rgba(249, 249, 249, 0.9);
+  background-color: rgba(245, 245, 245, 1);
 }
 
 .filter-section h3 {
@@ -272,12 +280,59 @@ button:hover {
   background-color: #0056b3;
 }
 
+.cancel-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.escape {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.escape button {
+  padding: 6px 8px;
+}
+/* Laptop nézet */
+@media screen and (max-width: 1024px) {
+  .filter-toggle {
+    top: 80px;
+    left: 6px;
+  }
+
+  .filter-content {
+    padding-top: 100px;
+  }
+
+  .escape {
+    top: 0px;
+    padding-top: 80px;
+  }
+}
+
 /* Tablet nézet */
 @media screen and (max-width: 768px) {
   .machines-container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .filter-toggle {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filter-content {
+    padding-top: 50px;
+  }
+
+  .escape {
+    top: 4px;
+    padding-top: 0px;
   }
 }
 
@@ -286,6 +341,8 @@ button:hover {
   .machines-container {
     padding-top: 100px;
   }
+
+  /* MÉG KELL A SZŰRÉS MOBILNÉZETE! */
 }
 
 /* Dark mode */
@@ -302,6 +359,6 @@ button:hover {
 }
 
 .page-container.dark-mode .filter-section.open {
-  background-color: rgba(200, 200, 200, 0.9);
+  background-color: rgba(190, 190, 190, 1);
 }
 </style>
