@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-us">
+  <div class="contact-us" :class="{ 'dark-mode': darkMode }">
     <div class="text-parts">
       <div class="small-title">{{ $t("contactUsLabel") }}</div>
       <div class="big-content">
@@ -48,7 +48,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+</script>
 
 <style scoped>
 .contact-us {
@@ -56,6 +63,7 @@
   flex-direction: column;
   background-color: #e8e6e6;
   padding-left: 60px;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .text-parts {
@@ -193,6 +201,39 @@ label {
   min-height: 600px;
   object-fit: cover;
   border-radius: 16px;
-  box-shadow: 4.5px 4.5px 9px rgba(0, 0, 0, 0.8);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.8);
+  transition: box-shadow 0.7s;
+}
+
+/* Dark mode */
+.contact-us.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.contact-us.dark-mode .transparent-input,
+.contact-us.dark-mode .message textarea {
+  border-bottom: 1px solid #ccc;
+  color: #ccc;
+}
+
+.contact-us.dark-mode .transparent-input:focus,
+.contact-us.dark-mode .message textarea:focus {
+  border-bottom: 1px solid #e07076;
+}
+
+.contact-us.dark-mode button {
+  background-color: #b94a50;
+  color: #1a1a1a;
+}
+
+.contact-us.dark-mode button:hover {
+  background-color: #d55b61;
+  color: #1a1a1a;
+  border: 1px solid red;
+}
+
+.contact-us.dark-mode .showcase-img img {
+  box-shadow: 2px 0px 20px rgba(255, 255, 255, 0.8);
 }
 </style>

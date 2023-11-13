@@ -28,7 +28,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   overflow: hidden;
   padding: 8vh 8vw;
   padding-right: 0vw;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .introduction-left {
@@ -131,19 +131,16 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .introduction-part.dark-mode {
   background-color: #1a1a1a;
   color: #ffffff;
-  transition: background-color 0.5s;
 }
 
 .introduction-part.dark-mode button {
   background-color: #b94a50;
   color: #1a1a1a;
-  transition: background-color 0.5s;
 }
 
 .introduction-part.dark-mode button:hover {
   background-color: #d55b61;
   color: #1a1a1a;
   border: 1px solid red;
-  transition: background-color 0.5s, border-color 0.3s;
 }
 </style>
