@@ -4,9 +4,10 @@
     <section><HomeParagraphIntro /></section>
     <section>
       <HomeParagraph
-        v-for="paragraph in paragraphs"
+        v-for="(paragraph, index) in paragraphs"
         :key="paragraph.id"
         :paragraph="paragraph"
+        :order="calculateOrder(index)"
       />
     </section>
     <section><HomeWhoAreWe /></section>
@@ -20,10 +21,10 @@ import HomeParagraphIntro from "@/components/HomeComponents/HomeParagraphIntro.v
 import HomeParagraph from "@/components/HomeComponents/HomeParagraph.vue";
 import HomeWhoAreWe from "@/components/HomeComponents/HomeWhoAreWe.vue";
 import HomeGallery from "@/components/HomeComponents/HomeGallery.vue";
-
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
+// Adatok fetchelése
 const paragraphs = ref([]);
 async function fetchData() {
   try {
@@ -38,38 +39,10 @@ onMounted(() => {
   fetchData();
 });
 
-// const paragraphs = [
-//   {
-//     id: "1",
-//     title_hu: "Első a biztonság",
-//     title_en: "Safety first",
-//     content_hu:
-//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. ",
-//     content_en:
-//       "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
-//     imageSrc: require("@/assets/42.jpeg"),
-//   },
-//   {
-//     id: "2",
-//     title_hu: "Fontos az elégedettség",
-//     title_en: "Satisfaction is important",
-//     content_hu:
-//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
-//     content_en:
-//       "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
-//     imageSrc: require("@/assets/42.jpeg"),
-//   },
-//   {
-//     id: "3",
-//     title_hu: "Professzionális gépek, professzionális gépkezelők",
-//     title_en: "Professional machines, professional operators",
-//     content_hu:
-//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
-//     content_en:
-//       "LoremEN ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore et adipisci sapiente tempora quisquam tempore iste. Cupiditate quo eos odit delectus quasi, numquam repellendus id facere totam natus ullam nam.",
-//     imageSrc: require("@/assets/42.jpeg"),
-//   },
-// ];
+// Páratlan indexű esetén kép jobb oldalt, szöveg bal oldalt. Páratlan esetén fordítva (reverse-order)
+const calculateOrder = (index) => {
+  return index % 2 === 0 ? 1 : 2;
+};
 </script>
 
 <style scoped></style>

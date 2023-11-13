@@ -1,6 +1,6 @@
 <template>
-  <div class="paragraph">
-    <div class="paragraph-section" :class="{ 'reverse-order': isEven }">
+  <div class="paragraph" :class="{ 'dark-mode': darkMode }">
+    <div class="paragraph-section" :class="{ 'reverse-order': order === 2 }">
       <div class="text-side">
         <h1>{{ paragraph["title_" + $i18n.locale] }}</h1>
         <p>{{ paragraph["content_" + $i18n.locale] }}</p>
@@ -13,9 +13,15 @@
 </template>
 
 <script setup>
-const { paragraph } = defineProps(["paragraph"]);
+import { computed } from "vue";
+import { useStore } from "vuex";
 
-const isEven = paragraph.id % 2 === 0;
+// Adatok meghatározása
+const { paragraph, order } = defineProps(["paragraph", "order"]);
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -25,6 +31,7 @@ const isEven = paragraph.id % 2 === 0;
   justify-content: space-between;
   background-color: #e8e6e6;
   padding: 0rem 7.2vw 4rem 7.2vw;
+  transition: background-color 0.5s;
 }
 
 .text-side {
@@ -152,4 +159,11 @@ const isEven = paragraph.id % 2 === 0;
   }
 }
 /* Külön mobilnézet nem szükséges */
+
+/* Dark mode */
+.paragraph.dark-mode .paragraph-section {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  transition: background-color 0.5s;
+}
 </style>
