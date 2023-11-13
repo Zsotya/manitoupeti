@@ -14,8 +14,11 @@ import { createI18n } from "vue-i18n";
 import en from "./locales/en.json";
 import hu from "./locales/hu.json";
 
+const languagePreference = "languagePreference";
+const savedLanguage = localStorage.getItem(languagePreference);
+
 const i18n = createI18n({
-  locale: "hu",
+  locale: savedLanguage || "hu",
   fallbackLocale: "en",
   messages: {
     hu: hu,

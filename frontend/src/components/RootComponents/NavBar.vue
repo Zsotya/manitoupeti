@@ -23,7 +23,13 @@
             class="onoffswitch-checkbox"
             id="myonoffswitch1"
             tabindex="0"
-            unchecked
+            :checked="$store.getters.currentLanguage === 'en'"
+            @change="
+              $store.dispatch(
+                'setLanguage',
+                $store.getters.currentLanguage === 'hu' ? 'en' : 'hu'
+              )
+            "
             @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
           />
           <label class="onoffswitch-label" for="myonoffswitch1">
@@ -36,8 +42,10 @@
             :class="{ 'dark-button': true, active: darkMode }"
             @click="toggleDarkMode"
           >
-            <i v-if="!darkMode" class="fas fa-sun"></i>
-            <i v-if="darkMode" class="fas fa-moon"></i>
+            <span class="slider">
+              <i v-if="!darkMode" class="fas fa-sun"></i>
+              <i v-if="darkMode" class="fas fa-moon"></i
+            ></span>
           </button>
         </div>
       </li>
@@ -61,7 +69,13 @@
             class="onoffswitch-checkbox"
             id="myonoffswitch2"
             tabindex="0"
-            unchecked
+            :checked="$store.getters.currentLanguage === 'en'"
+            @change="
+              $store.dispatch(
+                'setLanguage',
+                $store.getters.currentLanguage === 'hu' ? 'en' : 'hu'
+              )
+            "
             @click="$i18n.locale = $i18n.locale === 'hu' ? 'en' : 'hu'"
           />
           <label class="onoffswitch-label" for="myonoffswitch2">
@@ -90,7 +104,6 @@ import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const darkMode = computed(() => store.getters.isDarkMode);
 
 const routes = [
   { path: "/", label: "homeLabel" },
@@ -103,6 +116,7 @@ const routes = [
 
 // Dark mode
 
+const darkMode = computed(() => store.getters.isDarkMode);
 const toggleDarkMode = () => {
   store.dispatch("toggleDarkMode");
 };
