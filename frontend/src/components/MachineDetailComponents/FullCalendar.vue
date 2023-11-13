@@ -14,6 +14,10 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import axios from "axios";
 
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+
 // Jelenlegi dátum kiszámolása és formázása
 const startDate = new Date().toISOString().split("T")[0];
 
@@ -90,6 +94,8 @@ const createCalendarEvents = async () => {
 
 // FullCalendar konfigurálása
 
+const language = store.getters.currentLanguage;
+
 const calendarOptions = {
   plugins: [dayGridPlugin],
   initialView: "dayGridMonth",
@@ -102,6 +108,7 @@ const calendarOptions = {
   firstDay: 1,
   showNonCurrentDates: false,
   fixedWeekCount: false,
+  locale: language === "hu" ? "hu" : "en",
 };
 
 // Kezdeti inicializáláskor a calendarOptions.events értéke undefined lenne, mivel hamarabb renderel, mint hogy a GET request megtörténne.
@@ -114,10 +121,6 @@ onMounted(() => {
 watch(events, (newEvents) => {
   calendarOptions.events = newEvents;
 });
-
-// Dark mode
-const store = useStore();
-const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
