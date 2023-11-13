@@ -2,9 +2,10 @@
   <section>
     <AboutUsIntro />
     <AboutUsParagraph
-      v-for="paragraph in paragraphs"
+      v-for="(paragraph, index) in paragraphs"
       :key="paragraphs.id"
       :paragraph="paragraph"
+      :order="calculateOrder(index)"
     />
   </section>
 </template>
@@ -13,6 +14,12 @@
 import AboutUsIntro from "@/components/AboutUsComponents/AboutUsIntro.vue";
 import AboutUsParagraph from "@/components/AboutUsComponents/AboutUsParagraph.vue";
 
+// Páratlan indexű esetén kép jobb oldalt, szöveg bal oldalt. Páratlan esetén fordítva (reverse-order)
+const calculateOrder = (index) => {
+  return index % 2 === 0 ? 1 : 2;
+};
+
+// Adatok
 const paragraphs = [
   {
     id: 1,

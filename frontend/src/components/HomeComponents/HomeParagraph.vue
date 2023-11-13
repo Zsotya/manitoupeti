@@ -31,7 +31,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   justify-content: space-between;
   background-color: #e8e6e6;
   padding: 0rem 7.2vw 4rem 7.2vw;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .text-side {
@@ -164,6 +164,5 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .paragraph.dark-mode .paragraph-section {
   background-color: #1a1a1a;
   color: #ffffff;
-  transition: background-color 0.5s;
 }
 </style>

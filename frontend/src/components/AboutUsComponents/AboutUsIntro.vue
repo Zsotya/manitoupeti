@@ -1,5 +1,5 @@
 <template>
-  <div class="about-us-intro">
+  <div class="about-us-intro" :class="{ 'dark-mode': darkMode }">
     <div class="text-part">
       <div class="title">
         {{ $t("aboutUsTitle") }}
@@ -8,7 +8,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+</script>
 
 <style scoped>
 .about-us-intro {
@@ -16,6 +23,7 @@
   background-color: #e8e6e6;
   justify-content: center;
   padding: 220px 0px 60px 0px;
+  transition: background-color 0.5s;
 }
 
 .title {
@@ -38,5 +46,10 @@
   .title {
     font-size: 32px;
   }
+}
+
+/* Dark mode */
+.about-us-intro.dark-mode {
+  background-color: #1a1a1a;
 }
 </style>
