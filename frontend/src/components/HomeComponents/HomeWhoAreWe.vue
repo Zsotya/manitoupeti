@@ -1,5 +1,5 @@
 <template>
-  <div class="who-are-we">
+  <div class="who-are-we" :class="{ 'dark-mode': darkMode }">
     <img class="background-image" src="@/assets/43.jpg" alt="image" />
     <div class="milestones">
       <ul>
@@ -42,7 +42,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+</script>
 
 <style scoped>
 .who-are-we {
@@ -50,6 +57,7 @@
   height: 100vh;
   padding-top: 100px;
   background-color: #e8e6e6;
+  transition: background-color 0.5s;
 }
 .background-image {
   position: absolute;
@@ -242,5 +250,10 @@
   .info .paragraph {
     max-width: 40ch;
   }
+}
+
+/* Dark mode */
+.who-are-we.dark-mode {
+  background-color: #1a1a1a;
 }
 </style>
