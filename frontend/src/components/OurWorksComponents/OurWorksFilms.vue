@@ -1,5 +1,5 @@
 <template>
-  <div class="films">
+  <div class="films" :class="{ 'dark-mode': darkMode }">
     <div
       class="film-card"
       @click="toggleDescription(film)"
@@ -18,11 +18,20 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+// Adatok importálása
 const { film } = defineProps(["film"]);
 
+// Kártya "megfordítása"
 const toggleDescription = () => {
   film.isFlipped = !film.isFlipped;
 };
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -54,11 +63,13 @@ const toggleDescription = () => {
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
-  transition: transform 1s;
-  background: linear-gradient(45deg, #f0f0f0, #ddd);
+  color: black;
+  background-color: #e7e5e5;
+  transition: transform 1s, background-color 0.5s, color 0.5s, border 0.5s,
+    box-shadow 0.7s;
   border-radius: 8px;
   border: 1px solid #ccc;
-  box-shadow: 7px 10px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.35);
 }
 
 .film-front {
@@ -73,7 +84,7 @@ const toggleDescription = () => {
   height: 326px;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 6.5px 8px 7px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
 }
 
 .film-back {
@@ -125,5 +136,24 @@ const toggleDescription = () => {
     border-radius: 8px;
     box-shadow: 6.5px 8px 7px rgba(0, 0, 0, 0.75);
   }
+}
+
+/* Dark mode */
+.films.dark-mode .film-front,
+.films.dark-mode .film-back {
+  background-color: #272727;
+  border: 1px solid #444444;
+  box-shadow: 0px 0px 24px rgba(255, 255, 255, 0.45);
+}
+
+.films.dark-mode .film-front h3,
+.films.dark-mode .film-back h3,
+.films.dark-mode .film-back p {
+  color: white;
+}
+
+.films.dark-mode .film-card.flipped .film-back,
+.films.dark-mode .film-card.flipped .film-front {
+  background: linear-gradient(45deg, #222, #111);
 }
 </style>

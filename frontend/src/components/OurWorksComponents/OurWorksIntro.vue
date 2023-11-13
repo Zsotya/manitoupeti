@@ -1,5 +1,5 @@
 <template>
-  <div class="page-format">
+  <div class="page-format" :class="{ 'dark-mode': darkMode }">
     <div class="text-wrap">
       <div class="text-intro">
         <div class="small-title">{{ $t("ourWorksSmallTitle") }}</div>
@@ -14,9 +14,20 @@
   </div>
 </template>
 
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+</script>
+
 <style scoped>
 .page-format {
   background-color: #e8e6e6;
+  color: black;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .text-wrap {
@@ -115,5 +126,11 @@
   .small-text {
     font-size: 17px;
   }
+}
+
+/* Dark mode */
+.page-format.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
 }
 </style>

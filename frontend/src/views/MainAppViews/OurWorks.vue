@@ -1,19 +1,26 @@
 <template>
-  <section><OurWorksIntro /></section>
-  <section class="films-wrap">
-    <section class="our-works">
-      <OurWorksFilms v-for="film in films" :key="film.id" :film="film" />
+  <div class="page-container" :class="{ 'dark-mode': darkMode }">
+    <section><OurWorksIntro /></section>
+    <section class="films-wrap">
+      <section class="our-works">
+        <OurWorksFilms v-for="film in films" :key="film.id" :film="film" />
+      </section>
     </section>
-  </section>
+  </div>
 </template>
 
 <script setup>
 import OurWorksFilms from "@/components/OurWorksComponents/OurWorksFilms.vue";
 import OurWorksIntro from "@/components/OurWorksComponents/OurWorksIntro.vue";
-
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+import { useStore } from "vuex";
 
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+
+// Adatok fetchelése
 const films = ref([]);
 async function fetchData() {
   try {
@@ -32,6 +39,7 @@ onMounted(() => {
 <style scoped>
 .films-wrap {
   background-color: #e8e6e6;
+  transition: background-color 0.5s;
 }
 .our-works {
   display: flex;
@@ -44,5 +52,10 @@ onMounted(() => {
   .our-works {
     align-items: center;
   }
+}
+
+/* Dark mode */
+.page-container.dark-mode .films-wrap {
+  background-color: #1a1a1a;
 }
 </style>
