@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" :class="{ 'dark-mode': darkMode }">
     <div class="horizontal-line"></div>
     <div class="footer-content">
       <div class="footer-item">
@@ -59,13 +59,21 @@
   </footer>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+</script>
 
 <style scoped>
 .footer {
   background-color: #e8e6e6;
   padding: 0 0 20px 0;
   text-align: center;
+  transition: background-color 0.5s;
 }
 
 .horizontal-line {
@@ -73,6 +81,7 @@
   height: 2px;
   width: 80%;
   margin: 0 auto;
+  transition: background-color 0.5s;
 }
 
 .footer-content {
@@ -88,6 +97,7 @@
   color: #333;
   margin-top: 10px;
   text-align: center;
+  transition: color 0.3s;
 }
 
 .name,
@@ -96,6 +106,7 @@
 .information {
   font-weight: bold;
   margin-top: 10px;
+  transition: color 0.3s;
 }
 
 .location-container {
@@ -111,6 +122,15 @@
 .email-addresses,
 .social-links {
   margin-top: 5px;
+}
+
+.location,
+.phone-numbers,
+.email-addresses,
+.social-links a,
+.info-paragraph,
+.copyright {
+  transition: color 0.3s;
 }
 
 .social-links a {
@@ -164,6 +184,7 @@
   padding: 5px;
   font-size: 14px;
   color: #333;
+  transition: color 0.3s;
 }
 
 /* 4k nézet korrekció */
@@ -221,5 +242,45 @@
   .footer {
     overflow: hidden;
   }
+}
+
+/* Dark mode */
+.footer.dark-mode {
+  background-color: #1a1a1a;
+}
+
+.footer.dark-mode .horizontal-line {
+  background-color: white;
+}
+
+.footer.dark-mode .name,
+.footer.dark-mode .contacts,
+.footer.dark-mode .socials,
+.footer.dark-mode .information {
+  color: white;
+}
+
+.footer.dark-mode .location,
+.footer.dark-mode .phone-numbers,
+.footer.dark-mode .email-addresses,
+.footer.dark-mode .social-links a,
+.footer.dark-mode .info-paragraph,
+.footer.dark-mode .copyright {
+  color: rgb(180, 180, 180);
+}
+
+.footer.dark-mode .contactus-button,
+.footer.dark-mode .quote-button {
+  background-color: #b94a50;
+  color: #1a1a1a;
+  transition: background-color 0.5s;
+}
+
+.footer.dark-mode .contactus-button:hover,
+.footer.dark-mode .quote-button:hover {
+  background-color: #d55b61;
+  color: #1a1a1a;
+  border: 1px solid red;
+  transition: background-color 0.5s, border-color 0.3s;
 }
 </style>
