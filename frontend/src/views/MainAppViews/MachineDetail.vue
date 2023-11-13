@@ -1,5 +1,5 @@
 <template>
-  <div class="machine-detail">
+  <div class="machine-detail" :class="{ 'dark-mode': darkMode }">
     <div class="machine-info">
       <div class="machine-image">
         <img :src="machine.image_url" alt="Machine Image" />
@@ -56,13 +56,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { useRouter } from "vue-router";
-import axios from "axios";
 import FullCalendar from "@/components/MachineDetailComponents/FullCalendar.vue";
 import BookingForm from "@/components/MachineDetailComponents/BookingForm.vue";
+import { ref, onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+import axios from "axios";
 
+// Adatok fetchelése
 const route = useRoute();
 const router = useRouter();
 const machine = ref([]);
@@ -96,6 +98,10 @@ async function fetchData() {
 onMounted(() => {
   fetchData();
 });
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -106,6 +112,7 @@ onMounted(() => {
   padding-top: 120px;
   padding-bottom: 30px;
   background-color: #e8e6e6;
+  transition: background-color 0.5s;
 }
 
 .machine-info {
@@ -116,12 +123,13 @@ onMounted(() => {
   padding: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 80%;
+  transition: background-color 0.5s;
 }
 
 .machine-name {
   font-size: 32px;
   font-weight: 600;
-  color: #333;
+  color: #222;
   margin-bottom: 20px;
   transition: color 0.3s;
   width: 100%;
@@ -166,20 +174,19 @@ onMounted(() => {
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: 500;
-  color: #333;
   line-height: 1.6;
   transition: color 0.3s;
 }
 
 .label {
-  color: #666;
+  color: #444;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: color 0.3s;
 }
 
 .value {
-  color: #333;
+  color: #111;
   transition: color 0.3s;
 }
 
@@ -203,5 +210,36 @@ onMounted(() => {
     flex-direction: column;
     text-align: center;
   }
+}
+
+/* Dark mode */
+.machine-detail.dark-mode {
+  background-color: #1a1a1a;
+}
+
+.machine-detail.dark-mode .machine-info {
+  background-color: #404040;
+}
+
+.machine-detail.dark-mode .machine-name {
+  color: #eee;
+}
+
+.machine-detail.dark-mode .label {
+  color: #ddd;
+}
+
+.machine-detail.dark-mode .value {
+  color: #aaa;
+}
+
+.machine-detail.dark-mode .property:hover .label,
+.machine-detail.dark-mode .property:hover .value,
+.machine-detail.dark-mode .machine-name:hover {
+  color: #ff6633;
+}
+
+.machine-detail.dark-mode .machine-image {
+  box-shadow: 2px 4px 10px rgba(255, 255, 255, 0.4);
 }
 </style>

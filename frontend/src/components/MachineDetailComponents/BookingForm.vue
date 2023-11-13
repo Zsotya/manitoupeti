@@ -1,5 +1,5 @@
 <template>
-  <div class="form-wrap">
+  <div class="form-wrap" :class="{ 'dark-mode': darkMode }">
     <div class="booking-form">
       <h1>{{ $t("machinesBooking") }}</h1>
 
@@ -13,6 +13,7 @@
           :disabled-dates="disabledDates"
           :min-date="new Date()"
           :enable-time-picker="false"
+          :dark="darkMode"
           required
         />
 
@@ -53,13 +54,13 @@
       </form>
     </div>
   </div>
-  <!-- <button @click="testButton">testbutton</button> -->
 </template>
 
 <script setup>
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { ref, computed, onMounted, watch } from "vue";
+import { useStore } from "vuex";
 import axios from "axios";
 
 const props = defineProps(["machine"]);
@@ -102,18 +103,6 @@ const totalPrice = computed(() => {
   }
   return 0;
 });
-
-// Teszt gomb unit tesztekhez
-
-// const testButton = () => {
-//   const teszt = new Date(paidBookings.value[0].start_date);
-//   const teszt2 = new Date(paidBookings.value[0].end_date);
-//   console.log(teszt);
-//   console.log(teszt2);
-//   console.log(teszt);
-//   console.log(teszt2);
-//   console.log(disabledDates);
-// };
 
 // POST request preparation
 
@@ -222,6 +211,10 @@ const disabledDates = computed(() => {
   }
   return disabledDateRange;
 });
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -229,6 +222,7 @@ const disabledDates = computed(() => {
   width: 100%;
   background-color: #e8e6e6;
   padding: 10px 0px 40px 0px;
+  transition: background-color 0.5s, color 0.5s;
 }
 .booking-form {
   width: 100%;
@@ -238,6 +232,7 @@ const disabledDates = computed(() => {
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 5px;
+  transition: background-color 0.5s, border 0.5s;
 }
 
 .booking-form h1 {
@@ -264,6 +259,7 @@ const disabledDates = computed(() => {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 .total-price p {
@@ -294,5 +290,34 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Dark mode */
+.form-wrap.dark-mode {
+  background-color: #1a1a1a;
+  color: #eeeeee;
+}
+
+.form-wrap.dark-mode .booking-form {
+  background-color: #303030;
+  border: 1px solid #ddd;
+}
+
+.form-wrap.dark-mode .user-info input {
+  background-color: #212121;
+  border: 1px solid #ffffff;
+  color: white;
+}
+
+.form-wrap.dark-mode button {
+  background-color: #0056b3;
+}
+
+.form-wrap.dark-mode button:hover {
+  background-color: #007bff;
+}
+
+.dp__theme_dark {
+  --dp-border-color: white;
 }
 </style>

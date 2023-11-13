@@ -156,7 +156,8 @@ ul {
   background-color: rgba(230, 247, 255, 0.7);
   border-radius: 50px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid rgb(19, 151, 217);
+  transition: background-color 0.5s, border 0.5s;
 }
 
 li {

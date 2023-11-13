@@ -1,22 +1,18 @@
 <template>
-  <div class="fullcalendar-container">
+  <div class="fullcalendar-container" :class="{ 'dark-mode': darkMode }">
     <div class="calendar-container">
       <FullCalendar :options="calendarOptions" />
     </div>
   </div>
-  <!-- <button @click="testButton">testbutton</button> -->
 </template>
 
 <script setup>
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import axios from "axios";
-import { ref, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-
-// const testButton = () => {
-//   console.log(calendarOptions.events);
-// };
+import { useStore } from "vuex";
+import axios from "axios";
 
 // Jelenlegi dátum kiszámolása és formázása
 const startDate = new Date().toISOString().split("T")[0];
@@ -118,12 +114,17 @@ onMounted(() => {
 watch(events, (newEvents) => {
   calendarOptions.events = newEvents;
 });
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
 .fullcalendar-container {
   background-color: #e8e6e6;
   padding-bottom: 30px;
+  transition: background-color 0.5s;
 }
 .calendar-container {
   width: 80%;
@@ -131,5 +132,16 @@ watch(events, (newEvents) => {
   background-color: white;
   border: 2px solid black;
   border-radius: 6px;
+  transition: background-color 0.5s, border 0.5s, color 0.5s;
+}
+
+/* Dark mode */
+.fullcalendar-container.dark-mode {
+  background-color: #1a1a1a;
+}
+.fullcalendar-container.dark-mode .calendar-container {
+  border: 2px solid white;
+  background-color: #454545;
+  color: white;
 }
 </style>
