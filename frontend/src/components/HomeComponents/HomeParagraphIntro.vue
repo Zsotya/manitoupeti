@@ -5,7 +5,7 @@
       <h1>{{ $t("homeIntroductionSmall") }}</h1>
     </div>
     <div class="introduction-right">
-      <button @click="testButton()">{{ $t("homeLearnMore") }}</button>
+      <button>{{ $t("homeLearnMore") }}</button>
     </div>
   </div>
 </template>
@@ -17,9 +17,6 @@ import { useStore } from "vuex";
 /* Dark mode */
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
-const testButton = () => {
-  console.log(darkMode.value);
-};
 </script>
 
 <style scoped>

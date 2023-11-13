@@ -144,7 +144,7 @@ nav {
   position: fixed;
   right: 12rem;
   top: 20px;
-  z-index: 1;
+  z-index: 2;
 }
 
 ul {
