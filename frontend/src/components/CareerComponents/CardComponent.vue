@@ -1,5 +1,5 @@
 <template>
-  <div class="career-card">
+  <div class="career-card" :class="{ 'dark-mode': darkMode }">
     <div class="card-content">
       <div class="card-text-part">
         <div class="card-title">{{ job["jobname_" + $i18n.locale] }}</div>
@@ -19,7 +19,15 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+// Adatok meghatározása
 const { job } = defineProps(["job"]);
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -33,28 +41,28 @@ const { job } = defineProps(["job"]);
   height: 460px;
   margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  background-color: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(155deg, #f3e0c8, #dbc3a4, #c5a57e);
-  transition: 0.15s;
   border-radius: 10px;
+  background-color: #edcca3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.15s, background-color 0.5s, color 0.5s, box-shadow 0.7s;
 }
 
 .career-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
-  transition: box-shadow 0.15s ease, transform 0.3s ease;
+  transition: box-shadow 0.15s, transform 0.3s;
 }
 
 .card-title {
   font-size: 24px;
   margin-bottom: 4px;
   margin-top: 60px;
-  background: linear-gradient(45deg, #222, #444);
+  background-color: #333333;
   -webkit-background-clip: text;
   background-clip: text;
-  color: #555;
+  color: #444;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s, color 0.5s, text-shadow 0.7s;
 }
 
 .job-time-icon {
@@ -62,12 +70,14 @@ const { job } = defineProps(["job"]);
   align-items: center;
   vertical-align: middle;
   margin-right: 6px;
+  color: #222;
 }
 
 .job-time {
   display: inline-block;
   margin-bottom: 24px;
   font-size: 16px;
+  color: #222;
 }
 
 .card-text-content {
@@ -77,12 +87,19 @@ const { job } = defineProps(["job"]);
   margin-bottom: 16px;
   word-wrap: break-word;
   text-align: justify;
+  color: #222;
+}
+
+.job-time-icon,
+.job-time,
+.card-text-content {
+  transition: color 0.5s;
 }
 
 .apply-button {
   position: relative;
-  background: linear-gradient(135deg, #e5e5e5, #dcdcdc);
-  color: #333;
+  background-color: #007bff;
+  color: #fff;
   padding: 24px 80px;
   cursor: pointer;
   border: none;
@@ -91,13 +108,12 @@ const { job } = defineProps(["job"]);
   font-weight: 600;
   font-size: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background 0.4s ease, transform 0.2s ease;
+  transition: background-color 0.5s, transform 0.3s;
 }
 
 .apply-button:hover {
-  background: linear-gradient(135deg, #ccc, #c7c6c6);
+  background-color: #0056b3;
   transform: scale(1.05);
-  transition: background 0.4s ease, transform 0.2s ease;
 }
 
 /* Mobil nézet */
@@ -117,5 +133,32 @@ const { job } = defineProps(["job"]);
   .apply-button {
     padding: 20px 20px;
   }
+}
+
+/* Dark mode */
+.career-card.dark-mode {
+  background-color: #364048;
+  border: 1px solid #4d5d6d;
+  box-shadow: 1px 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.career-card.dark-mode .card-title {
+  background-color: #4d90fe;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.career-card.dark-mode .job-time-icon,
+.career-card.dark-mode .job-time,
+.career-card.dark-mode .card-text-content {
+  color: #ccc;
+}
+
+.career-card.dark-mode .apply-button {
+  background-color: #0056b3;
+}
+
+.career-card.dark-mode .apply-button:hover {
+  background-color: #007bff;
 }
 </style>

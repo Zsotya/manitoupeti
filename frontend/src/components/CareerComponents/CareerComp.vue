@@ -1,5 +1,5 @@
 <template>
-  <div class="career-component">
+  <div class="career-component" :class="{ 'dark-mode': darkMode }">
     <div class="text-part">
       <div class="small-content">{{ $t("careerSmallContent") }}</div>
       <div class="big-content">{{ $t("careerBigContent") }}</div>
@@ -14,7 +14,15 @@
 
 <script setup>
 import CardComponent from "./CardComponent.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+// Adatok meghatározása
 const { jobs } = defineProps(["jobs"]);
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -23,6 +31,7 @@ const { jobs } = defineProps(["jobs"]);
   display: flex;
   flex-direction: column;
   padding-left: 90px;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .text-part {
@@ -84,5 +93,11 @@ const { jobs } = defineProps(["jobs"]);
     font-size: 38px;
     text-align: center;
   }
+}
+
+/* Dark mode */
+.career-component.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
 }
 </style>
