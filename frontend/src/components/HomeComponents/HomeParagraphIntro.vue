@@ -1,16 +1,26 @@
 <template>
-  <div class="introduction-part">
+  <div class="introduction-part" :class="{ 'dark-mode': darkMode }">
     <div class="introduction-left">
       <h3>{{ $t("homeIntroductionBig") }}</h3>
       <h1>{{ $t("homeIntroductionSmall") }}</h1>
     </div>
     <div class="introduction-right">
-      <button>{{ $t("homeLearnMore") }}</button>
+      <button @click="testButton()">{{ $t("homeLearnMore") }}</button>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+const testButton = () => {
+  console.log(darkMode.value);
+};
+</script>
 
 <style scoped>
 .introduction-part {
@@ -21,6 +31,7 @@
   overflow: hidden;
   padding: 8vh 8vw;
   padding-right: 0vw;
+  transition: background-color 0.5s;
 }
 
 .introduction-left {
@@ -50,8 +61,8 @@
   color: black;
   padding: 24px 46px;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-  border: 1px solid rgba(0, 0, 0, 0); /* Hover-nél kap bordert, ami miatt alapból 1px-el elmozdulna. Így nem mozdul, mert alapból van egy nem látható border */
+  transition: background-color 0.5s, border-color 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .introduction-right button:hover {
@@ -118,4 +129,24 @@
   }
 }
 /* Külön mobilnézet nem szükséges */
+
+/* Dark mode */
+.introduction-part.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  transition: background-color 0.5s;
+}
+
+.introduction-part.dark-mode button {
+  background-color: #b94a50;
+  color: #1a1a1a;
+  transition: background-color 0.5s;
+}
+
+.introduction-part.dark-mode button:hover {
+  background-color: #d55b61;
+  color: #1a1a1a;
+  border: 1px solid red;
+  transition: background-color 0.5s, border-color 0.3s;
+}
 </style>

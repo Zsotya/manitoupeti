@@ -2,6 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import "./reset.css";
 
+/* Vuex */
+import store from "./store/store";
+
 /* Vue Router */
 import router from "./router";
 
@@ -22,6 +25,7 @@ const i18n = createI18n({
 
 /* Application creation */
 const app = createApp(App);
+app.use(store);
 app.use(router);
 app.use(i18n);
 app.mount("#app");

@@ -86,7 +86,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 
 const routes = [
   { path: "/", label: "homeLabel" },
@@ -98,10 +102,9 @@ const routes = [
 ];
 
 // Dark mode
-const darkMode = ref(false);
 
 const toggleDarkMode = () => {
-  darkMode.value = !darkMode.value;
+  store.dispatch("toggleDarkMode");
 };
 
 /* Alapértelmezetten bezárva */
@@ -138,7 +141,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 nav {
-  position: absolute;
+  position: fixed;
   right: 12rem;
   top: 20px;
   z-index: 1;
