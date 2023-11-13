@@ -1,5 +1,5 @@
 <template>
-  <div class="machines-display">
+  <div class="machines-display" :class="{ 'dark-mode': darkMode }">
     <div class="machines-item">
       <div class="image-container">
         <img :src="machine.image_url" alt="Machine Image" />
@@ -63,6 +63,14 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+/* Dark mode */
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+
+// Adatok importálása
 const { machine } = defineProps(["machine"]);
 </script>
 
@@ -72,13 +80,13 @@ const { machine } = defineProps(["machine"]);
   justify-content: space-between;
   align-items: center;
   max-width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   padding: 20px;
   margin: 20px 0;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s, background-color 0.5s, border 0.5s;
 }
 
 .machines-display:hover {
@@ -114,6 +122,7 @@ const { machine } = defineProps(["machine"]);
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
+  transition: color 0.5s;
 }
 
 .machine-description {
@@ -129,10 +138,12 @@ const { machine } = defineProps(["machine"]);
 .label {
   font-weight: bold;
   color: #555;
+  transition: color 0.5s;
 }
 
 .value {
   color: #333;
+  transition: color 0.5s;
 }
 
 .button-container {
@@ -149,7 +160,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 button:hover {
@@ -172,5 +183,29 @@ button:hover {
   .machines-item {
     max-width: 240px;
   }
+}
+
+/* Dark mode */
+.machines-display.dark-mode {
+  background-color: #2a2a2a;
+  border: 1px solid white;
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
+}
+
+.machines-display.dark-mode .machine-name {
+  color: #ffffff;
+}
+
+.machines-display.dark-mode .label,
+.machines-display.dark-mode .value {
+  color: #c1c1c1;
+}
+
+.machines-display.dark-mode button {
+  background-color: #0056b3;
+}
+
+.machines-display.dark-mode button:hover {
+  background-color: #007bff;
 }
 </style>

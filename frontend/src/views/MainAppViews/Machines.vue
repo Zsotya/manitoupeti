@@ -1,82 +1,92 @@
 <template>
   <section>
-    <div class="machines-intro">
-      <MachinesIntro />
-    </div>
-    <!-- Szűrés gomb -->
-    <div class="filter-toggle" @click="toggleFilterSection">
-      <button>{{ $t("machinesFiltering") }}</button>
-    </div>
-    <!-- Emelőgép kártyák -->
-    <div class="content">
-      <div class="machines-container">
-        <MachinesDisplay
-          v-for="machine in filteredMachines"
-          :key="machine.id"
-          :machine="machine"
-        />
+    <div class="page-container" :class="{ 'dark-mode': darkMode }">
+      <div class="machines-intro">
+        <MachinesIntro />
       </div>
-    </div>
-    <!-- Szűrés ablak -->
-    <div class="filter-section" :class="{ open: showFilterSection }">
-      <div class="filter-content">
-        <h3>{{ $t("machinesFilterOptions") }}</h3>
-        <div class="filter-input">
-          <label class="filter-label" for="requiredHeightFilter"
-            >{{ $t("machinesFilterMinHeight") }}:</label
-          >
-          <input
-            type="number"
-            v-model="filters.requiredHeight"
-            id="requiredHeightFilter"
+      <!-- Szűrés gomb -->
+      <div class="filter-toggle" @click="toggleFilterSection">
+        <button>{{ $t("machinesFiltering") }}</button>
+      </div>
+      <!-- Emelőgép kártyák -->
+      <div class="content">
+        <div class="machines-container">
+          <MachinesDisplay
+            v-for="machine in filteredMachines"
+            :key="machine.id"
+            :machine="machine"
           />
         </div>
-        <div class="filter-input">
-          <label class="filter-label" for="requiredWeightFilter"
-            >{{ $t("machinesFilterMinWeight") }}:</label
-          >
-          <input
-            type="number"
-            v-model="filters.requiredWeight"
-            id="requiredWeightFilter"
-          />
-        </div>
-        <div class="filter-input">
-          <label class="filter-label" for="hasSoleFilter"
-            >{{ $t("machinesSole") }}:</label
-          >
-          <input type="checkbox" v-model="filters.hasSole" id="hasSoleFilter" />
-        </div>
-        <div class="filter-input">
-          <label class="filter-label" for="hasBasketFilter"
-            >{{ $t("machinesBasket") }}:</label
-          >
-          <input
-            type="checkbox"
-            v-model="filters.hasBasket"
-            id="hasBasketFilter"
-          />
-        </div>
-        <div class="filter-input">
-          <label class="filter-label" for="hasForkFilter"
-            >{{ $t("machinesFork") }}:</label
-          >
-          <input type="checkbox" v-model="filters.hasFork" id="hasForkFilter" />
-        </div>
-        <div class="filter-input">
-          <label class="filter-label" for="isRemoteFilter"
-            >{{ $t("machinesRemote") }}:</label
-          >
-          <input
-            type="checkbox"
-            v-model="filters.isRemote"
-            id="isRemoteFilter"
-          />
-        </div>
-        <div class="filter-button">
-          <button @click="resetFilters">
-            {{ $t("machinesFiltersRemove") }}
-          </button>
+      </div>
+      <!-- Szűrés ablak -->
+      <div class="filter-section" :class="{ open: showFilterSection }">
+        <div class="filter-content">
+          <h3>{{ $t("machinesFilterOptions") }}</h3>
+          <div class="filter-input">
+            <label class="filter-label" for="requiredHeightFilter"
+              >{{ $t("machinesFilterMinHeight") }}:</label
+            >
+            <input
+              type="number"
+              v-model="filters.requiredHeight"
+              id="requiredHeightFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="requiredWeightFilter"
+              >{{ $t("machinesFilterMinWeight") }}:</label
+            >
+            <input
+              type="number"
+              v-model="filters.requiredWeight"
+              id="requiredWeightFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="hasSoleFilter"
+              >{{ $t("machinesSole") }}:</label
+            >
+            <input
+              type="checkbox"
+              v-model="filters.hasSole"
+              id="hasSoleFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="hasBasketFilter"
+              >{{ $t("machinesBasket") }}:</label
+            >
+            <input
+              type="checkbox"
+              v-model="filters.hasBasket"
+              id="hasBasketFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="hasForkFilter"
+              >{{ $t("machinesFork") }}:</label
+            >
+            <input
+              type="checkbox"
+              v-model="filters.hasFork"
+              id="hasForkFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="isRemoteFilter"
+              >{{ $t("machinesRemote") }}:</label
+            >
+            <input
+              type="checkbox"
+              v-model="filters.isRemote"
+              id="isRemoteFilter"
+            />
+          </div>
+          <div class="filter-button">
+            <button @click="resetFilters">
+              {{ $t("machinesFiltersRemove") }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -88,8 +98,35 @@ import MachinesIntro from "@/components/MachinesComponents/MachinesIntro.vue";
 import MachinesDisplay from "@/components/MachinesComponents/MachinesDisplay.vue";
 import { ref, onMounted, reactive, computed } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
 
+// Adatok fetchelése
 const machines = ref([]);
+
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/machines");
+    machines.value = response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+onMounted(() => {
+  fetchData();
+});
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+
+// Filter ablak megjelenítő
+const showFilterSection = ref(false);
+
+// Szűrők megjelenítése toggle
+function toggleFilterSection() {
+  showFilterSection.value = !showFilterSection.value;
+}
 
 // Filter opciók
 const filters = reactive({
@@ -100,9 +137,6 @@ const filters = reactive({
   hasFork: false,
   isRemote: false,
 });
-
-// Filter ablak megjelenítése
-const showFilterSection = ref(false);
 
 // Szűrők alkalmazása
 const filteredMachines = computed(() => {
@@ -142,31 +176,13 @@ function resetFilters() {
     filters[key] = null;
   }
 }
-
-// Szűrők megjelenítése toggle
-function toggleFilterSection() {
-  showFilterSection.value = !showFilterSection.value;
-}
-
-// Adatok fetchelése
-async function fetchData() {
-  try {
-    const response = await axios.get("http://localhost:3000/api/machines");
-    machines.value = response.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
 .content {
   min-height: 80vh;
   background-color: #e8e6e6;
+  transition: background-color 0.5s;
 }
 
 .machines-container {
@@ -179,11 +195,9 @@ onMounted(() => {
 
 .filter-toggle {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #007bff;
+  top: 20px;
+  left: 20px;
   color: #fff;
-  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -196,11 +210,10 @@ onMounted(() => {
   position: fixed;
   left: -320px;
   top: 0;
-  background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
-  transition: left 0.5s;
+  transition: 0.5s;
   z-index: 1;
 }
 
@@ -248,10 +261,15 @@ onMounted(() => {
 button {
   background-color: #007bff;
   color: #fff;
-  padding: 8px 16px;
+  padding: 16px 32px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 /* Tablet nézet */
@@ -268,5 +286,22 @@ button {
   .machines-container {
     padding-top: 100px;
   }
+}
+
+/* Dark mode */
+.page-container.dark-mode .content {
+  background-color: #1a1a1a;
+}
+
+.page-container.dark-mode button {
+  background-color: #0056b3;
+}
+
+.page-container.dark-mode button:hover {
+  background-color: #007bff;
+}
+
+.page-container.dark-mode .filter-section.open {
+  background-color: rgba(200, 200, 200, 0.9);
 }
 </style>
