@@ -24,6 +24,7 @@ const machinesRoutes = require("./routes/machines");
 const jobsRoutes = require("./routes/jobs");
 const adminsRoutes = require("./routes/admins");
 const authenticationRoutes = require("./routes/authentication");
+const mailerRoutes = require("./routes/mailer");
 
 // Bookings imports
 const bookingsRoutes = require("./routes/bookings/bookings");
@@ -37,6 +38,7 @@ app.use(machinesRoutes);
 app.use(jobsRoutes);
 app.use(adminsRoutes);
 app.use(authenticationRoutes);
+app.use(mailerRoutes);
 
 // Bookings routes
 app.use(bookingsRoutes);

@@ -12,33 +12,59 @@
     <div class="full-form">
       <div class="form">
         <div class="name-part">
-          <div class="first-name">
-            <label for="firstName">{{ $t("lastName") }}</label>
-            <input type="text" id="firstName" class="transparent-input" />
-          </div>
           <div class="last-name">
-            <label for="lastName">{{ $t("firstName") }}</label>
-            <input type="text" id="lastName" class="transparent-input" />
+            <label for="lastName">{{ $t("lastName") }}</label>
+            <input
+              type="text"
+              id="lastName"
+              class="transparent-input"
+              v-model="lastName"
+            />
+          </div>
+          <div class="first-name">
+            <label for="firstName">{{ $t("firstName") }}</label>
+            <input
+              type="text"
+              id="firstName"
+              class="transparent-input"
+              v-model="firstName"
+            />
           </div>
         </div>
         <div class="email-part">
           <div class="email">
             <label for="email">Email</label>
-            <input type="text" id="email" class="transparent-input" />
+            <input
+              type="text"
+              id="email"
+              class="transparent-input"
+              v-model="email"
+            />
           </div>
           <div class="subject">
             <label for="subject">{{ $t("contactUsSubject") }}</label>
-            <input type="text" id="subject" class="transparent-input" />
+            <input
+              type="text"
+              id="subject"
+              class="transparent-input"
+              v-model="subject"
+            />
           </div>
         </div>
         <div class="message-part">
           <div class="message">
             <label for="message">{{ $t("contactUsLeaveMessage") }}</label>
-            <textarea class="message-format" id="message"></textarea>
+            <textarea
+              class="message-format"
+              id="message"
+              v-model="message"
+            ></textarea>
           </div>
         </div>
         <div class="submit">
-          <button class="submit-button">{{ $t("contactUsSend") }}</button>
+          <button class="submit-button" @click="submitForm">
+            {{ $t("contactUsSend") }}
+          </button>
         </div>
       </div>
       <div class="showcase-img">
@@ -49,12 +75,58 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import axios from "axios";
 
 /* Dark mode */
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
+
+// Form adatok
+const lastName = ref("");
+const firstName = ref("");
+const email = ref("");
+const subject = ref("");
+const message = ref("");
+
+// Form elküldése
+const submitForm = async () => {
+  try {
+    // Vizsgálás, hogy az összes adat ki van töltve
+    if (
+      !lastName.value ||
+      !firstName.value ||
+      !email.value ||
+      !subject.value ||
+      !message.value
+    ) {
+      // Hibakezelés, ha nincs kitöltve a form
+      console.error("Kérjük, töltsön ki minden mezőt!");
+      return;
+    }
+    // Form elküldése backendnek
+    const response = await axios.post("http://localhost:3000/api/contactus", {
+      lastName: lastName.value,
+      firstName: firstName.value,
+      email: email.value,
+      subject: subject.value,
+      message: message.value,
+    });
+    console.log(response.data);
+    // Siker esetkezelés
+    alert("Email sikeresen elküldve!");
+
+    // Értékek resetelése
+    lastName.value = "";
+    firstName.value = "";
+    email.value = "";
+    subject.value = "";
+    message.value = "";
+  } catch (error) {
+    console.error("Hiba az üzenet elküldésekor:", error.message);
+  }
+};
 </script>
 
 <style scoped>
