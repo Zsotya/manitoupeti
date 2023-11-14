@@ -42,9 +42,17 @@
             :class="{ 'dark-button': true, active: darkMode }"
             @click="toggleDarkMode"
           >
-            <span class="slider">
-              <i v-if="!darkMode" class="fas fa-sun"></i>
-              <i v-if="darkMode" class="fas fa-moon"></i
+            <span class="slider" :class="{ 'no-close': true }">
+              <i
+                v-if="!darkMode"
+                class="fas fa-sun"
+                :class="{ 'no-close': true }"
+              ></i>
+              <i
+                v-if="darkMode"
+                class="fas fa-moon"
+                :class="{ 'no-close': true }"
+              ></i
             ></span>
           </button>
         </div>
@@ -144,13 +152,40 @@ const resizeListener = () => {
 };
 
 onMounted(() => {
+  // Oldal átméretezésének figyelése
   window.addEventListener("resize", resizeListener);
   closeMobileMenuOnResize();
+
+  // A menün kívüli kattintások figyelése
+  document.addEventListener("click", handleDocumentClick);
 });
 
 onBeforeUnmount(() => {
+  // Oldal átméretezésének figyelésének törlése
   window.removeEventListener("resize", resizeListener);
+
+  // A menün kívüli kattintások figyelésének törlése
+  document.removeEventListener("click", handleDocumentClick);
 });
+
+// Menün kívüli kattintás esetén menü bezárása
+const handleDocumentClick = (event) => {
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const hamburgerIcon = document.querySelector(".hamburger-icon");
+  const switchButtons = document.querySelector(".buttons");
+
+  // Gombok meghatározása, melyeken kívül bárhova kattintva a menü bezár
+  if (
+    mobileMenu &&
+    hamburgerIcon &&
+    !mobileMenu.contains(event.target) &&
+    !hamburgerIcon.contains(event.target) &&
+    !switchButtons.contains(event.target) &&
+    !event.target.classList.contains("no-close")
+  ) {
+    closeMobileMenu();
+  }
+};
 </script>
 
 <style scoped>
@@ -371,7 +406,7 @@ a {
   width: 30%;
   min-width: 160px;
   background-color: rgba(0, 0, 0, 0.338);
-  border: 1px solid red;
+  border: 1px solid rgb(19, 151, 217);
   border-radius: 0px;
   overflow: hidden;
 }
