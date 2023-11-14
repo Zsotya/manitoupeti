@@ -1,5 +1,23 @@
 <template>
   <div class="fullcalendar-container" :class="{ 'dark-mode': darkMode }">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color today"></div>
+        <div class="legend-text">Today</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color potentially-occupied"></div>
+        <div class="legend-text">Potentially Occupied</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color occupied"></div>
+        <div class="legend-text">Occupied</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color available"></div>
+        <div class="legend-text">Available</div>
+      </div>
+    </div>
     <div class="calendar-container">
       <FullCalendar :options="calendarOptions" />
     </div>
@@ -66,26 +84,27 @@ const createCalendarEvents = async () => {
   // eventsData.end esetén +1 napot hozzáadunk, különben nem megfelelő date-ranget színez
   const eventsData = [
     ...pendingData.map((booking) => ({
-      title: "Pending",
+      title: "",
       start: formatStart(new Date(booking.start_date)),
       end: formatEnd(new Date(booking.end_date)),
-      backgroundColor: "orange",
+      backgroundColor: "rgba(255, 165, 0, 1)",
       display: "background",
+      color: "black",
     })),
 
     ...approvedData.map((booking) => ({
-      title: "Approved",
+      title: "",
       start: formatStart(new Date(booking.start_date)),
       end: formatEnd(new Date(booking.end_date)),
-      backgroundColor: "orange",
+      backgroundColor: "rgba(255, 165, 0, 1)",
       display: "background",
     })),
 
     ...paidData.map((booking) => ({
-      title: "Paid",
+      title: "",
       start: formatStart(new Date(booking.start_date)),
       end: formatEnd(new Date(booking.end_date)),
-      backgroundColor: "red",
+      backgroundColor: "rgba(255, 0, 0, 1)",
       display: "background",
     })),
   ];
@@ -110,6 +129,7 @@ const calendarOptions = {
   fixedWeekCount: false,
   locale: language === "hu" ? "hu" : "en",
 };
+// Locale esetén a dokumentációban is fel van tűntetve, hogy csak page reload után van lehetőség frissítésre
 
 // Kezdeti inicializáláskor a calendarOptions.events értéke undefined lenne, mivel hamarabb renderel, mint hogy a GET request megtörténne.
 // Éppen ezért watchert használunk, hogy "rákényszerítsük a FullCalendar-t", hogy re-rendereljen, ha változik az adat
@@ -124,6 +144,7 @@ watch(events, (newEvents) => {
 </script>
 
 <style scoped>
+@import "@/fullcalendar.css";
 .fullcalendar-container {
   background-color: #e8e6e6;
   padding-bottom: 30px;
@@ -138,6 +159,49 @@ watch(events, (newEvents) => {
   transition: background-color 0.5s, border 0.5s, color 0.5s;
 }
 
+/* Legend styles */
+.legend {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border: 1px solid black;
+}
+
+.today {
+  background-color: rgb(160, 209, 226);
+}
+
+.available {
+  background-color: #fff;
+  transition: background-color 0.5s;
+}
+
+.potentially-occupied {
+  background-color: rgba(255, 165, 0, 1);
+}
+
+.occupied {
+  background-color: red;
+}
+
+.legend-text {
+  color: black;
+  transition: color 0.5s;
+}
+
 /* Dark mode */
 .fullcalendar-container.dark-mode {
   background-color: #1a1a1a;
@@ -146,5 +210,13 @@ watch(events, (newEvents) => {
   border: 2px solid white;
   background-color: #454545;
   color: white;
+}
+
+.fullcalendar-container.dark-mode .legend-text {
+  color: white;
+}
+
+.fullcalendar-container.dark-mode .available {
+  background-color: #787878;
 }
 </style>

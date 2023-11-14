@@ -1,0 +1,31 @@
+/* Fullcalendar stílusok */
+
+.fc .fc-bg-event {
+  opacity: 1;
+}
+
+.fc-day-today {
+  color: black;
+}
+
+:root {
+  --fc-today-bg-color: rgb(160, 209, 226);
+}
+
+.fc-day.fc-day-disabled {
+  transition: background-color 0.5s;
+}
+
+.fullcalendar-container.dark-mode .fc-day:not(.fc-day-disabled) {
+  background-color: #787878;
+}
+
+.fullcalendar-container.dark-mode .fc-day.fc-day-disabled {
+  background-color: #454545;
+}
+
+.fullcalendar-container.dark-mode .fc-day.fc-day-today {
+  background-color: var(
+    --fc-today-bg-color
+  ) !important; /* Maradjon dark modeban is ezen a színen */
+}
