@@ -103,12 +103,14 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .film-front h3 {
   position: relative;
   padding: 20px;
+  transition: color 0.5s;
 }
 
 .film-back h3 {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 10px;
+  transition: color 0.5s;
 }
 
 .film-back p {
@@ -117,6 +119,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   align-self: flex-start;
   padding-left: 20px;
   padding-top: 30px;
+  transition: color 0.5s;
 }
 
 /* Laptop nézet */
@@ -154,6 +157,6 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 .films.dark-mode .film-card.flipped .film-back,
 .films.dark-mode .film-card.flipped .film-front {
-  background: linear-gradient(45deg, #222, #111);
+  background-color: rgb(32, 32, 32);
 }
 </style>
