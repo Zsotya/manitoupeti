@@ -21,7 +21,7 @@ router.post("/api/contactus", (req, res) => {
     from: "manitoupetinoreply@gmail.com",
     to: "manitoupetinoreply@gmail.com",
     subject: `Új üzenet a Kapcsolat oldalról - ${subject}`,
-    text: `Név: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}`,
+    text: `Név: ${fullName}\nEmail: ${email}\n\nÜzenet:\n${message}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
