@@ -338,11 +338,10 @@ button:hover {
 
 /* Mobil nézet */
 @media screen and (max-width: 496px) {
-  .machines-container {
-    padding-top: 100px;
+  .filter-section {
+    width: 240px;
+    left: -240px;
   }
-
-  /* MÉG KELL A SZŰRÉS MOBILNÉZETE! */
 }
 
 /* Dark mode */
