@@ -82,6 +82,22 @@ const images = [
   background-color: red;
 }
 
+/* Tablet nézet */
+@media screen and (max-width: 768px) {
+  .swiper {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+/* Mobil nézet */
+@media screen and (max-width: 496px) {
+  .swiper {
+    width: 320px;
+    height: 320px;
+  }
+}
+
 /* Dark mode */
 .gallery-carousel.dark-mode {
   background-color: #1a1a1a;
