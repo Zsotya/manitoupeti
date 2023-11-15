@@ -8,13 +8,25 @@
           <label for="lastName"
             ><span class="required">*</span>Vezetéknév:</label
           >
-          <input type="text" id="lastName" v-model="lastName" required />
+          <input
+            type="text"
+            id="lastName"
+            v-model="lastName"
+            placeholder="pl. Kiss"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="firstName"
             ><span class="required">*</span>Keresztnév:</label
           >
-          <input type="text" id="firstName" v-model="firstName" required />
+          <input
+            type="text"
+            id="firstName"
+            v-model="firstName"
+            placeholder="pl. János"
+            required
+          />
         </div>
       </div>
       <!-- Születési dátum -->
@@ -33,6 +45,7 @@
             type="text"
             id="birthLocation"
             v-model="birthLocation"
+            placeholder="pl. Győr"
             required
           />
         </div>
@@ -41,7 +54,13 @@
       <div class="email-part">
         <div class="form-group">
           <label for="email"><span class="required">*</span>Email:</label>
-          <input type="email" id="email" v-model="email" required />
+          <input
+            type="email"
+            id="email"
+            v-model="email"
+            placeholder="pl. kissjanos@gmail.com"
+            required
+          />
         </div>
       </div>
       <!-- Telefonszám, irányítószám -->
@@ -50,13 +69,25 @@
           <label for="phoneNumber"
             ><span class="required">*</span>Telefonszám:</label
           >
-          <input type="tel" id="phoneNumber" v-model="phoneNumber" required />
+          <input
+            type="tel"
+            id="phoneNumber"
+            v-model="phoneNumber"
+            placeholder="pl. 06301234567"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="zipCode"
             ><span class="required">*</span>Irányítószám:</label
           >
-          <input type="text" id="zipCode" v-model="zipCode" required />
+          <input
+            type="text"
+            id="zipCode"
+            v-model="zipCode"
+            placeholder="pl. 1016"
+            required
+          />
         </div>
       </div>
       <!-- Város, kerület -->
@@ -65,11 +96,22 @@
           <label for="settlement"
             ><span class="required">*</span>Település:</label
           >
-          <input type="text" id="settlement" v-model="settlement" required />
+          <input
+            type="text"
+            id="settlement"
+            v-model="settlement"
+            placeholder="pl. Budapest"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="district">Kerület:</label>
-          <input type="text" id="district" v-model="district" />
+          <input
+            type="text"
+            id="district"
+            placeholder="pl. 8"
+            v-model="district"
+          />
         </div>
       </div>
       <!-- Közterület típus, jelleg -->
@@ -82,6 +124,7 @@
             type="text"
             id="publicAreaName"
             v-model="publicAreaName"
+            placeholder="pl. Alsóhegy"
             required
           />
         </div>
@@ -93,6 +136,7 @@
             type="text"
             id="publicAreaType"
             v-model="publicAreaType"
+            placeholder="pl. utca"
             required
           />
         </div>
@@ -103,23 +147,39 @@
           <label for="houseNumber"
             ><span class="required">*</span>Házszám:</label
           >
-          <input type="text" id="houseNumber" v-model="houseNumber" required />
+          <input
+            type="text"
+            id="houseNumber"
+            v-model="houseNumber"
+            placeholder="pl. 14"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="building">Épület:</label>
-          <input type="text" id="building" v-model="building" />
+          <input
+            type="text"
+            id="building"
+            placeholder="pl. A"
+            v-model="building"
+          />
         </div>
         <div class="form-group">
           <label for="stairway">Lépcsőház:</label>
-          <input type="text" id="stairway" v-model="stairway" />
+          <input
+            type="text"
+            id="stairway"
+            placeholder="pl. B"
+            v-model="stairway"
+          />
         </div>
         <div class="form-group">
           <label for="floor">Emelet:</label>
-          <input type="text" id="floor" v-model="floor" />
+          <input type="text" id="floor" placeholder="pl. 3" v-model="floor" />
         </div>
         <div class="form-group">
           <label for="door">Ajtó:</label>
-          <input type="text" id="door" v-model="door" />
+          <input type="text" id="door" placeholder="pl. 1" v-model="door" />
         </div>
       </div>
       <!-- Önéletrajz -->
