@@ -12,6 +12,7 @@
           no-disabled-range
           :disabled-dates="disabledDates"
           :min-date="new Date()"
+          :max-date="new Date(new Date().setMonth(new Date().getMonth() + 5))"
           :enable-time-picker="false"
           :dark="darkMode"
           required

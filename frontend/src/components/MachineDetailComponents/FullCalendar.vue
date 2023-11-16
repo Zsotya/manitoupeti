@@ -3,19 +3,19 @@
     <div class="legend">
       <div class="legend-item">
         <div class="legend-color today"></div>
-        <div class="legend-text">Today</div>
+        <div class="legend-text">{{ $t("machinesToday") }}</div>
       </div>
       <div class="legend-item">
         <div class="legend-color potentially-occupied"></div>
-        <div class="legend-text">Potentially Occupied</div>
+        <div class="legend-text">{{ $t("machinesPotentiallyOccupied") }}</div>
       </div>
       <div class="legend-item">
         <div class="legend-color occupied"></div>
-        <div class="legend-text">Occupied</div>
+        <div class="legend-text">{{ $t("machinesOccupied") }}</div>
       </div>
       <div class="legend-item">
         <div class="legend-color available"></div>
-        <div class="legend-text">Available</div>
+        <div class="legend-text">{{ $t("machinesAvailable") }}</div>
       </div>
     </div>
     <div class="calendar-container">
