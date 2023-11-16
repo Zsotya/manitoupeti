@@ -39,6 +39,7 @@ import Sidebar from "./components/AdminComponents/Sidebar.vue";
 .admin-app {
   display: flex;
   width: 100%;
+  overflow: hidden;
 }
 
 .sidebar {
