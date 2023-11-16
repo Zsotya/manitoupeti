@@ -28,4 +28,30 @@ router.get("/api/statistics/monthly-revenue", (req, res) => {
   });
 });
 
+// Havi foglalások darabszámának lekérdezése minden hónapra
+router.get("/api/statistics/monthly-bookings", (req, res) => {
+  const query = `
+    SELECT
+      YEAR(created_at) AS booking_year,
+      MONTH(created_at) AS booking_month,
+      COUNT(*) AS monthly_bookings
+    FROM
+      (
+        SELECT created_at FROM bookings
+        UNION ALL
+        SELECT created_at FROM archive_bookings
+      ) AS all_bookings
+    GROUP BY booking_year, booking_month;
+  `;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error querying the database:", err);
+      res.status(500).json({ error: "Database error" });
+      return;
+    }
+    res.json(results);
+  });
+});
+
 module.exports = router;

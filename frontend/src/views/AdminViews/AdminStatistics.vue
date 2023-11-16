@@ -1,11 +1,13 @@
 <template>
-  <MonthlyRevenue />
+  <div class="revenue-component"><MonthlyRevenue /></div>
+  <div class="bookings-component"><MonthlyBookings /></div>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
 import authService from "@/services/authService";
 import MonthlyRevenue from "@/components/StatisticsComponents/MonthlyRevenue.vue";
+import MonthlyBookings from "@/components/StatisticsComponents/MonthlyBookings.vue";
 
 onMounted(() => {
   const token = localStorage.getItem("token");
