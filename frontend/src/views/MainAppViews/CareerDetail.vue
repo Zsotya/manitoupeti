@@ -1,12 +1,19 @@
 <template>
   <div class="page-container" :class="{ 'dark-mode': darkMode }">
     <form @submit.prevent="submitForm" class="styled-form">
-      <div class="form-title">Jelentkezés {{ job.jobname_hu }} állásra</div>
+      <div class="form-title">
+        <div class="hu-apply" v-if="$i18n.locale === 'hu'">
+          Jelentkezés {{ job.jobname_hu }} állásra
+        </div>
+        <div class="en-apply" v-if="$i18n.locale === 'en'">
+          Application for {{ job.jobname_en }} position
+        </div>
+      </div>
       <!-- Név -->
       <div class="name-part">
         <div class="form-group">
           <label for="lastName"
-            ><span class="required">*</span>Vezetéknév:</label
+            ><span class="required">*</span>{{ $t("lastName") }}:</label
           >
           <input
             type="text"
@@ -18,7 +25,7 @@
         </div>
         <div class="form-group">
           <label for="firstName"
-            ><span class="required">*</span>Keresztnév:</label
+            ><span class="required">*</span>{{ $t("firstName") }}:</label
           >
           <input
             type="text"
@@ -33,13 +40,13 @@
       <div class="birth-part">
         <div class="form-group">
           <label for="birthDate"
-            ><span class="required">*</span>Születési dátum:</label
+            ><span class="required">*</span>{{ $t("birthDate") }}:</label
           >
           <input type="date" id="birthDate" v-model="birthDate" required />
         </div>
         <div class="form-group">
           <label for="birthLocation"
-            ><span class="required">*</span>Születési hely:</label
+            ><span class="required">*</span>{{ $t("birthLocation") }}:</label
           >
           <input
             type="text"
@@ -67,7 +74,7 @@
       <div class="phone-zip-part">
         <div class="form-group">
           <label for="phoneNumber"
-            ><span class="required">*</span>Telefonszám:</label
+            ><span class="required">*</span>{{ $t("phone") }}:</label
           >
           <input
             type="tel"
@@ -79,7 +86,7 @@
         </div>
         <div class="form-group">
           <label for="zipCode"
-            ><span class="required">*</span>Irányítószám:</label
+            ><span class="required">*</span>{{ $t("zipCode") }}:</label
           >
           <input
             type="text"
@@ -94,7 +101,7 @@
       <div class="settlement-district-part">
         <div class="form-group">
           <label for="settlement"
-            ><span class="required">*</span>Település:</label
+            ><span class="required">*</span>{{ $t("settlement") }}:</label
           >
           <input
             type="text"
@@ -105,7 +112,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="district">Kerület:</label>
+          <label for="district">{{ $t("district") }}:</label>
           <input
             type="text"
             id="district"
@@ -118,7 +125,7 @@
       <div class="public-area-part">
         <div class="form-group">
           <label for="publicAreaName"
-            ><span class="required">*</span>Közterület neve:</label
+            ><span class="required">*</span>{{ $t("publicAreaName") }}:</label
           >
           <input
             type="text"
@@ -130,7 +137,7 @@
         </div>
         <div class="form-group">
           <label for="publicAreaType"
-            ><span class="required">*</span>Közterület jellege:</label
+            ><span class="required">*</span>{{ $t("publicAreaType") }}:</label
           >
           <input
             type="text"
@@ -145,7 +152,7 @@
       <div class="house-part">
         <div class="form-group">
           <label for="houseNumber"
-            ><span class="required">*</span>Házszám:</label
+            ><span class="required">*</span>{{ $t("houseNumber") }}:</label
           >
           <input
             type="text"
@@ -156,7 +163,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="building">Épület:</label>
+          <label for="building">{{ $t("building") }}:</label>
           <input
             type="text"
             id="building"
@@ -165,7 +172,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="stairway">Lépcsőház:</label>
+          <label for="stairway">{{ $t("stairway") }}:</label>
           <input
             type="text"
             id="stairway"
@@ -174,17 +181,19 @@
           />
         </div>
         <div class="form-group">
-          <label for="floor">Emelet:</label>
+          <label for="floor">{{ $t("floor") }}:</label>
           <input type="text" id="floor" placeholder="pl. 3" v-model="floor" />
         </div>
         <div class="form-group">
-          <label for="door">Ajtó:</label>
+          <label for="door">{{ $t("door") }}:</label>
           <input type="text" id="door" placeholder="pl. 1" v-model="door" />
         </div>
       </div>
       <!-- Önéletrajz -->
       <div class="form-group">
-        <label for="resume"><span class="required">*</span>Önéletrajz:</label>
+        <label for="resume"
+          ><span class="required">*</span>{{ $t("resume") }}:</label
+        >
         <input
           type="file"
           id="resume"
@@ -196,7 +205,7 @@
       <!-- Küldés -->
       <div class="button-part">
         <div class="submit-button">
-          <button type="submit">Küldés</button>
+          <button type="submit">{{ $t("submit") }}</button>
         </div>
       </div>
     </form>
