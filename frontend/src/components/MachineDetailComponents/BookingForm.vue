@@ -63,6 +63,10 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import { ref, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
+import io from "socket.io-client";
+
+// WebSocket
+const socket = io("http://localhost:3000");
 
 const props = defineProps(["machine"]);
 const date = ref([new Date(), null]);
@@ -192,6 +196,9 @@ onMounted(() => {
   if (machineId.value !== undefined) {
     fetchAndSetPaidBookings();
   }
+  socket.on("bookingsUpdated", () => {
+    fetchAndSetPaidBookings();
+  });
 });
 
 // Azoknak a dátumoknak a letiltása, amik már garantáltan foglaltak ("Paid" státusz)

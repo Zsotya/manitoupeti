@@ -31,6 +31,15 @@ import NavBar from "./components/RootComponents/NavBar.vue";
 import Footer from "./components/RootComponents/Footer.vue";
 import Logo from "./components/RootComponents/Logo.vue";
 import Sidebar from "./components/AdminComponents/Sidebar.vue";
+import io from "socket.io-client";
+import { onMounted } from "vue";
+
+// WebSocket
+const socket = io("http://localhost:3000");
+
+onMounted(() => {
+  socket.connect();
+});
 </script>
 
 <style scoped>

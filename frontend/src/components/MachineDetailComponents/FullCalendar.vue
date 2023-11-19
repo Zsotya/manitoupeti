@@ -31,6 +31,10 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import axios from "axios";
+import io from "socket.io-client";
+
+// WebSocket
+const socket = io("http://localhost:3000");
 
 // Dark mode
 const store = useStore();
@@ -115,7 +119,7 @@ const createCalendarEvents = async () => {
 
 const language = store.getters.currentLanguage;
 
-const calendarOptions = {
+const calendarOptions = ref({
   plugins: [dayGridPlugin],
   initialView: "dayGridMonth",
   height: 850,
@@ -128,18 +132,25 @@ const calendarOptions = {
   showNonCurrentDates: false,
   fixedWeekCount: false,
   locale: language === "hu" ? "hu" : "en",
-};
+});
 // Locale esetén a dokumentációban is fel van tűntetve, hogy csak page reload után van lehetőség frissítésre
 
 // Kezdeti inicializáláskor a calendarOptions.events értéke undefined lenne, mivel hamarabb renderel, mint hogy a GET request megtörténne.
 // Éppen ezért watchert használunk, hogy "rákényszerítsük a FullCalendar-t", hogy re-rendereljen, ha változik az adat
+const initializeCalendar = async () => {
+  await createCalendarEvents();
+  calendarOptions.value = { ...calendarOptions.value, events: events.value };
+};
 
 onMounted(() => {
-  createCalendarEvents();
+  initializeCalendar();
+  socket.on("bookingsUpdated", () => {
+    createCalendarEvents();
+  });
 });
 
 watch(events, (newEvents) => {
-  calendarOptions.events = newEvents;
+  calendarOptions.value = { ...calendarOptions.value, events: newEvents };
 });
 </script>
 
