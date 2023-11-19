@@ -111,8 +111,15 @@ onMounted(() => {
 
 // Időintervallum YYYY-MM-DD formátumra formázás (ebben az esetben az óra,perc irreleváns)
 const formatDateRange = (startDate, endDate) => {
-  const formattedStartDate = new Date(startDate).toISOString().split("T")[0];
-  const formattedEndDate = new Date(endDate).toISOString().split("T")[0];
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  const formattedStartDate = new Date(startDate).toLocaleDateString(
+    undefined,
+    options
+  );
+  const formattedEndDate = new Date(endDate).toLocaleDateString(
+    undefined,
+    options
+  );
 
   return `${formattedStartDate} - ${formattedEndDate}`;
 };
