@@ -90,6 +90,9 @@ router.post("/api/bookings", (req, res) => {
         res.status(500).json({ error: "Database error" });
         return;
       }
+      // Kliensek értesítése a változásról
+      const io = req.app.get("io");
+      io.emit("bookingsUpdated");
       res.status(201).json({ message: "Booking added successfully" });
     }
   );
@@ -124,6 +127,9 @@ router.patch("/api/bookings/approve/:id", (req, res) => {
       res.status(500).json({ error: "Database error" });
       return;
     }
+    // Kliensek értesítése a változásról
+    const io = req.app.get("io");
+    io.emit("bookingsUpdated");
     res.status(200).json({ message: "Booking approved successfully" });
   });
 });
@@ -142,6 +148,9 @@ router.patch("/api/bookings/reject/:id", (req, res) => {
       res.status(500).json({ error: "Database error" });
       return;
     }
+    // Kliensek értesítése a változásról
+    const io = req.app.get("io");
+    io.emit("bookingsUpdated");
     res.status(200).json({ message: "Booking rejected successfully" });
   });
 });
@@ -158,7 +167,9 @@ router.patch("/api/bookings/markAsPaid/:id", (req, res) => {
       res.status(500).json({ error: "Database error" });
       return;
     }
-
+    // Kliensek értesítése a változásról
+    const io = req.app.get("io");
+    io.emit("bookingsUpdated");
     res.status(200).json({ message: "Booking marked as Paid successfully" });
   });
 });
