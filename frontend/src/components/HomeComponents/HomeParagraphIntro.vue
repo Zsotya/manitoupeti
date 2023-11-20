@@ -5,7 +5,9 @@
       <h1>{{ $t("homeIntroductionSmall") }}</h1>
     </div>
     <div class="introduction-right">
-      <button>{{ $t("homeLearnMore") }}</button>
+      <router-link to="/munkaink">
+        <button>{{ $t("homeLearnMore") }}</button></router-link
+      >
     </div>
   </div>
 </template>
