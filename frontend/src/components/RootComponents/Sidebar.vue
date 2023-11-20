@@ -13,7 +13,7 @@
     <ul class="logout">
       <li>
         <a href="#" class="nav-link" @click="logout">
-          <i class="fas fa-sign-out-alt mr-2"></i> Logout
+          <i class="fas fa-sign-out-alt mr-2"></i> Kijelentkezés
         </a>
       </li>
     </ul>
@@ -27,7 +27,7 @@ import authService from "@/services/authService";
 const links = [
   {
     path: "/admin/dashboard",
-    label: "Dashboard",
+    label: "Irányítópult",
     iconClass: "fas fa-home mr-2",
     show: true,
   },
@@ -39,37 +39,37 @@ const links = [
   },
   {
     path: "/admin/statistics",
-    label: "Statistics",
+    label: "Statisztika",
     iconClass: "fas fa-chart-bar mr-2",
     show: true,
   },
   {
     path: "/admin/paragraph-management",
-    label: "Paragraph Management",
+    label: "Paragrafus Menedzsment",
     iconClass: "fas fa-book mr-2",
     show: true,
   },
   {
     path: "/admin/ourfilms-management",
-    label: "Our Films Management",
+    label: "Munkáink Menedzsment",
     iconClass: "fas fa-film mr-2",
     show: true,
   },
   {
     path: "/admin/machines-management",
-    label: "Machines Management",
+    label: "Gépeink Menedzsment",
     iconClass: "fas fa-cogs mr-2",
     show: true,
   },
   {
     path: "/admin/career-management",
-    label: "Career Management",
+    label: "Karrier Menedzsment",
     iconClass: "fas fa-briefcase mr-2",
     show: true,
   },
   {
     path: "/admin/admin-management",
-    label: "Admin Management",
+    label: "Admin Menedzsment",
     iconClass: "fas fa-user mr-2",
     show: localStorage.isMainAdmin === "true",
   },
