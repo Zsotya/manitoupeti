@@ -1,7 +1,7 @@
 <template>
   <div
     class="paragraph-section"
-    :class="{ 'reverse-order': order === 2, 'dark-mode': darkMode }"
+    :class="{ 'reverse-order': order === 0, 'dark-mode': darkMode }"
   >
     <div class="text-part">
       <div class="paragraph-title">

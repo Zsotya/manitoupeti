@@ -1,6 +1,6 @@
 <template>
   <div class="paragraph" :class="{ 'dark-mode': darkMode }">
-    <div class="paragraph-section" :class="{ 'reverse-order': order === 2 }">
+    <div class="paragraph-section" :class="{ 'reverse-order': order === 0 }">
       <div class="text-side">
         <h1>{{ paragraph["title_" + $i18n.locale] }}</h1>
         <p>{{ paragraph["content_" + $i18n.locale] }}</p>

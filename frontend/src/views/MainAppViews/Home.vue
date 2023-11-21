@@ -41,7 +41,7 @@ onMounted(() => {
 
 // Páratlan indexű esetén kép jobb oldalt, szöveg bal oldalt. Páratlan esetén fordítva (reverse-order)
 const calculateOrder = (index) => {
-  return index % 2 === 0 ? 1 : 2;
+  return index % 2 === 0 ? 1 : 0;
 };
 </script>
 
