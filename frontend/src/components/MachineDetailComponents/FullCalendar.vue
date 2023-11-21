@@ -93,7 +93,6 @@ const createCalendarEvents = async () => {
       end: formatEnd(new Date(booking.end_date)),
       backgroundColor: "rgba(255, 165, 0, 1)",
       display: "background",
-      color: "black",
     })),
 
     ...approvedData.map((booking) => ({
@@ -121,7 +120,6 @@ const language = store.getters.currentLanguage;
 
 const calendarOptions = ref({
   plugins: [dayGridPlugin],
-  initialView: "dayGridMonth",
   height: 850,
   validRange: {
     start: startDate,

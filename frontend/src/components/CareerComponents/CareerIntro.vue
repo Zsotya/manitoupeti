@@ -4,21 +4,12 @@
       <div class="small-content">{{ $t("careerSmallContent") }}</div>
       <div class="big-content">{{ $t("careerBigContent") }}</div>
     </div>
-    <div class="career-cards-container">
-      <div class="career-cards">
-        <CardComponent v-for="job in jobs" :key="job.id" :job="job" />
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import CardComponent from "./CardComponent.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
-
-// Adatok meghatározása
-const { jobs } = defineProps(["jobs"]);
 
 // Dark mode
 const store = useStore();
@@ -53,17 +44,6 @@ const darkMode = computed(() => store.getters.isDarkMode);
   font-weight: bolder;
   color: #e07076;
   max-width: 100%;
-}
-
-.career-cards-container {
-  margin-left: -60px;
-}
-
-.career-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 30px 40px 80px 30px;
 }
 
 /* Tablet nézet */

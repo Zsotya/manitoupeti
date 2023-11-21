@@ -12,7 +12,7 @@
 import MachinesDetailList from "@/components/MachineDetailComponents/MachinesDetailList.vue";
 import FullCalendar from "@/components/MachineDetailComponents/FullCalendar.vue";
 import BookingForm from "@/components/MachineDetailComponents/BookingForm.vue";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import axios from "axios";

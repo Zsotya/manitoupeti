@@ -1,15 +1,22 @@
 <template>
+  <section class="carrer-comp">
+    <CareerIntro />
+  </section>
   <section>
-    <div class="career-cards">
-      <CareerComp :jobs="jobs" />
+    <div class="career-cards-container" :class="{ 'dark-mode': darkMode }">
+      <div class="career-cards">
+        <CardComponent v-for="job in jobs" :key="job.id" :job="job" />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import CareerComp from "@/components/CareerComponents/CareerComp.vue";
+import CareerIntro from "@/components/CareerComponents/CareerIntro.vue";
+import CardComponent from "@/components/CareerComponents/CardComponent.vue";
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import { ref, onMounted, computed } from "vue";
 
 // Adatok fetchelése
 const jobs = ref([]);
@@ -25,4 +32,36 @@ async function fetchData() {
 onMounted(() => {
   fetchData();
 });
+
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
 </script>
+
+<style scoped>
+.career-cards-container {
+  background-color: #e8e6e6;
+  transition: background-color 0.5s;
+}
+
+.career-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 30px 40px 80px 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .career-cards-container {
+    margin: 0;
+  }
+  .career-cards {
+    padding: 30px 0 80px 0;
+  }
+}
+
+/* Dark mode */
+.career-cards-container.dark-mode {
+  background-color: #1a1a1a;
+}
+</style>
