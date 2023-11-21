@@ -22,19 +22,43 @@
         <div class="user-info">
           <div class="input-group">
             <label for="last-name">{{ $t("lastName") }}:</label>
-            <input type="text" id="last-name" v-model="last_name" required />
+            <input
+              type="text"
+              id="last-name"
+              v-model="last_name"
+              autocomplete="on"
+              required
+            />
           </div>
           <div class="input-group">
             <label for="first-name">{{ $t("firstName") }}:</label>
-            <input type="text" id="first-name" v-model="first_name" required />
+            <input
+              type="text"
+              id="first-name"
+              v-model="first_name"
+              autocomplete="on"
+              required
+            />
           </div>
           <div class="input-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" v-model="email" required />
+            <input
+              type="email"
+              id="email"
+              v-model="email"
+              autocomplete="on"
+              required
+            />
           </div>
           <div class="input-group">
             <label for="phone">{{ $t("phone") }}:</label>
-            <input type="tel" id="phone" v-model="phone_number" required />
+            <input
+              type="tel"
+              id="phone"
+              v-model="phone_number"
+              autocomplete="on"
+              required
+            />
           </div>
           <div>
             <label for="location">{{ $t("location") }}:</label>
