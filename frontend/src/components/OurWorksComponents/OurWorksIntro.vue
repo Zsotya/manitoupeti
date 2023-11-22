@@ -66,6 +66,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   flex-wrap: wrap;
 }
 
+/* Laptop nézet */
 @media screen and (max-width: 1024px) {
   .text-wrap {
     margin-left: 60px;
