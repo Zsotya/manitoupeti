@@ -155,12 +155,12 @@ const submitForm = async () => {
   margin-bottom: 4px;
   font-weight: bolder;
   color: #e07076;
-  width: 25ch;
+  max-width: 25ch;
 }
 
 .small-content {
   font-size: 18px;
-  width: 46ch;
+  max-width: 46ch;
 }
 
 .full-form {
@@ -307,5 +307,118 @@ label {
 
 .contact-us.dark-mode .showcase-img img {
   box-shadow: 2px 0px 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Laptop nézet */
+@media screen and (max-width: 1024px) {
+  .contact-us {
+    padding-left: 0px;
+  }
+  .text-parts {
+    text-align: center;
+    margin: 200px 0px 0px 0px;
+  }
+
+  .big-content {
+    max-width: 100%;
+  }
+
+  .small-content {
+    max-width: 100%;
+  }
+
+  .showcase-img {
+    display: none;
+  }
+
+  .full-form {
+    justify-content: center;
+    padding: 30px 0px 30px 0px;
+  }
+
+  .form {
+    margin: 0px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .message-part {
+    max-width: 70ch;
+  }
+}
+
+/* Tablet nézet */
+@media screen and (max-width: 768px) {
+  .big-content {
+    font-size: 48px;
+  }
+
+  .message {
+    margin-right: 0px;
+  }
+
+  .name-part,
+  .email-part,
+  .message-part {
+    margin: 0px 20px;
+  }
+
+  .first-name,
+  .last-name,
+  .email,
+  .subject,
+  .message,
+  .submit {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0px 16px 0px;
+  }
+
+  .message-part {
+    max-width: 60ch;
+  }
+
+  .submit {
+    margin: 0px;
+  }
+}
+
+/* Mobilnézet */
+@media screen and (max-width: 496px) {
+  .text-parts {
+    text-align: center;
+    margin: 200px 10px 0px 10px;
+  }
+  .big-content {
+    font-size: 36px;
+  }
+
+  .name-part,
+  .email-part {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .message-part {
+    max-width: 65%;
+  }
+
+  .first-name,
+  .last-name,
+  .email,
+  .subject {
+    margin-right: 0px;
+    align-items: center;
+  }
+
+  .transparent-input {
+    max-width: 65%;
+  }
+
+  .submit {
+    max-width: 220px;
+  }
 }
 </style>
