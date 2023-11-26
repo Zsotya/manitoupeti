@@ -1,23 +1,23 @@
 <template>
   <div class="admin-machines">
     <div class="title">
-      <h2>Admin Machines Management Panel</h2>
+      <h2>Admin Gépeink Menedzsment Panel</h2>
     </div>
     <div class="machines-table">
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Machine Name</th>
-            <th>Max Height</th>
-            <th>Max Weight</th>
-            <th>Has Sole</th>
-            <th>Sole Count</th>
-            <th>Has Basket</th>
-            <th>Has Fork</th>
-            <th>Is Remote</th>
-            <th>Price per day</th>
-            <th>Image</th>
+            <th>Nehézgép neve</th>
+            <th>Max magasság</th>
+            <th>Max teherbírás</th>
+            <th>Van talp</th>
+            <th>Talpak száma</th>
+            <th>Van kosár</th>
+            <th>Van villa</th>
+            <th>Távirányítható</th>
+            <th>Napi ár</th>
+            <th>Kép</th>
             <th>Műveletek</th>
           </tr>
         </thead>
@@ -27,11 +27,11 @@
             <td>{{ machine.machine_name }}</td>
             <td>{{ machine.max_height }}m</td>
             <td>{{ machine.max_weight }}kg</td>
-            <td>{{ machine.has_sole ? "Yes" : "No" }}</td>
+            <td>{{ machine.has_sole ? "Igen" : "Nem" }}</td>
             <td>{{ machine.sole_count }}</td>
-            <td>{{ machine.has_basket ? "Yes" : "No" }}</td>
-            <td>{{ machine.has_fork ? "Yes" : "No" }}</td>
-            <td>{{ machine.is_remote ? "Yes" : "No" }}</td>
+            <td>{{ machine.has_basket ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.has_fork ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.is_remote ? "Igen" : "Nem" }}</td>
             <td>{{ machine.price_per_day }}Ft</td>
             <td class="image-container">
               <img
@@ -41,9 +41,11 @@
               />
             </td>
             <td class="actions-buttons">
-              <button class="modify-button">
-                <i class="fas fa-edit"></i>Módosítás
-              </button>
+              <router-link :to="`/admin/machines-management/${machine.id}`">
+                <button class="modify-button">
+                  <i class="fas fa-edit"></i>Módosítás
+                </button></router-link
+              >
               <button class="delete-button" @click="deleteMachine(machine.id)">
                 <i class="fas fa-trash"></i>
                 Törlés
@@ -55,7 +57,7 @@
     </div>
     <router-link to="/admin/machines-management/createmachine">
       <button class="add-button">
-        <i class="fas fa-plus"></i>Új machine létrehozása
+        <i class="fas fa-plus"></i>Új nehézgép létrehozása
       </button>
     </router-link>
   </div>
@@ -66,6 +68,7 @@ import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
 import axios from "axios";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
@@ -74,6 +77,7 @@ onMounted(() => {
   }
 });
 
+// Adatok fetchelése
 const machines = ref([]);
 async function fetchData() {
   try {
@@ -84,6 +88,11 @@ async function fetchData() {
   }
 }
 
+onMounted(() => {
+  fetchData();
+});
+
+// Nehézgép törlése
 const deleteMachine = async (machineId) => {
   try {
     await axios.delete(`http://localhost:3000/api/machines/${machineId}`);
@@ -94,10 +103,6 @@ const deleteMachine = async (machineId) => {
     console.error("Error deleting machine:", error);
   }
 };
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
@@ -150,6 +155,7 @@ th {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  border: none;
 }
 
 .modify-button,

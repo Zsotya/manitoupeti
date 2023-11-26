@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 /* Router views */
 
-// Main application
+/* Main application */
 import Home from "../views/MainAppViews/Home.vue";
 import AboutUs from "../views/MainAppViews/AboutUs.vue";
 import OurWorks from "../views/MainAppViews/OurWorks.vue";
@@ -14,7 +14,8 @@ import Career from "../views/MainAppViews/Career.vue";
 import CareerDetail from "../views/MainAppViews/CareerDetail.vue";
 import NotFound from "../views/MainAppViews/NotFound.vue";
 
-// Admin application
+/* Admin application */
+// Main pages
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
 import AdminBookings from "../views/AdminViews/AdminBookings.vue";
@@ -24,11 +25,14 @@ import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
+// Creation pages
 import CreateParagraph from "../components/AdminComponents/CreateParagraph.vue";
 import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 import CreateMachine from "../components/AdminComponents/CreateMachine.vue";
 import CreateJob from "../components/AdminComponents/CreateJob.vue";
 import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
+// Modification pages
+import ModifyMachine from "../components/AdminComponents/ModifyMachine.vue";
 
 // Services
 import authService from "@/services/authService";
@@ -77,13 +81,14 @@ const routes = [
     component: CareerDetail,
     meta: { isMainApp: true, isAdminApp: false },
   },
+  // 404 Page
   {
     path: "/:pathMatch(.*)*",
     component: NotFound,
     meta: { isMainApp: true, isAdminApp: false },
   },
   /* ADMIN APPLICATION */
-
+  // Login Page
   {
     path: "/admin",
     component: Admin,
@@ -97,6 +102,7 @@ const routes = [
       }
     },
   },
+  // Admin Main Pages
   {
     path: "/admin/dashboard",
     component: AdminDashboard,
@@ -170,6 +176,7 @@ const routes = [
       requireMainAdmin: true,
     },
   },
+  // Admin - Creation Pages
   {
     path: "/admin/paragraph-management/createparagraph",
     component: CreateParagraph,
@@ -214,6 +221,16 @@ const routes = [
       isAdminApp: true,
       requireAuth: true,
       requireMainAdmin: true,
+    },
+  },
+  // Admin - Modification Pages
+  {
+    path: "/admin/machines-management/:id",
+    component: ModifyMachine,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
     },
   },
 ];

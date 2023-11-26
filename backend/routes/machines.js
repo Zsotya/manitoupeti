@@ -16,34 +16,43 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// GET REQUEST KEZELÉSE - Összes nehézgép lekérdezése
+/* REQUESTEK KEZELÉSE */
 
+// Összes nehézgép lekérdezése - GET
 router.get("/api/machines", (req, res) => {
-  db.query("SELECT * FROM machines", (err, results) => {
-    if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM machines",
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
-// GET REQUEST KEZELÉSE - Egy adott nehézgép lekérdezése adott azonosító alapján
+// Egy adott nehézgép lekérdezése adott azonosító alapján - GET
 router.get("/api/machines/:id", (req, res) => {
+  // Azonosító meghatározása
   const machineId = req.params.id;
-
+  // Lekérdezés
   db.query(
     "SELECT * FROM machines WHERE id = ?",
     [machineId],
+    // Hibakezelés
     (err, results) => {
       if (err) {
-        console.error("Error querying the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
+      // 404 kezelés
       if (results.length === 0) {
-        res.status(404).json({ error: "Machine not found" });
+        res.status(404).json({ error: "Nincs ilyen nehézgép" });
         return;
       }
       res.json(results[0]);
@@ -51,9 +60,9 @@ router.get("/api/machines/:id", (req, res) => {
   );
 });
 
-// POST REQUEST KEZELÉSE - Új nehézgép létrehozása
-
+// Új nehézgép létrehozása - POST
 router.post("/api/machines", upload.single("image"), (req, res) => {
+  // Értékek meghatározása
   const {
     machine_name,
     max_height,
@@ -68,10 +77,11 @@ router.post("/api/machines", upload.single("image"), (req, res) => {
 
   const imageFile = req.file;
   if (!imageFile) {
-    res.status(400).json({ error: "Image file is required" });
+    res.status(400).json({ error: "Képfájl megadása kötelező!" });
     return;
   }
 
+  // Beszúrás adatbázisba
   const imageUrl = `/images/${imageFile.filename}`;
   const sql =
     "INSERT INTO machines (machine_name, max_height, max_weight, has_sole, sole_count, has_basket, has_fork, is_remote, price_per_day, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -89,30 +99,94 @@ router.post("/api/machines", upload.single("image"), (req, res) => {
       price_per_day,
       imageUrl,
     ],
+    // Hibakezelés
     (err, result) => {
       if (err) {
-        console.error("Error inserting into the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba az adatbázisba beszúrás közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      res.status(201).json({ message: "Machine created successfully" });
+      res.status(201).json({ message: "Nehézgép sikeresen létrehozva" });
     }
   );
 });
 
-// DELETE REQUEST KEZELÉSE - Nehézgép törlése
-
-router.delete("/api/machines/:id", (req, res) => {
+// Nehézgép módosítása - PUT
+router.put("/api/machines/:id", upload.single("image"), (req, res) => {
+  // Azonosító meghatározása
   const machineId = req.params.id;
+  // Értékek meghatározása
+  const {
+    machine_name,
+    max_height,
+    max_weight,
+    has_sole,
+    sole_count,
+    has_basket,
+    has_fork,
+    is_remote,
+    price_per_day,
+    image,
+  } = req.body;
+  const imageFile = req.file;
+  let imageUrl = "";
 
-  db.query("DELETE FROM machines WHERE id = ?", [machineId], (err, result) => {
-    if (err) {
-      console.error("Error deleting from the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Amennyiben került új fájl megadásra
+  if (imageFile) {
+    imageUrl = `/images/${imageFile.filename}`;
+  } else {
+    imageUrl = image; // Ha nincs fájl, akkor a korábbi URL-t kapja
+  }
+
+  // Adatok frissítése az adatbázisban
+  const sql =
+    "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_sole=?, sole_count=?, has_basket=?, has_fork=?, is_remote=?, price_per_day=?, image_url=? WHERE id=?";
+  const values = [
+    machine_name,
+    max_height,
+    max_weight,
+    has_sole,
+    sole_count,
+    has_basket,
+    has_fork,
+    is_remote,
+    price_per_day,
+    imageUrl,
+    machineId,
+  ];
+  db.query(
+    sql,
+    values,
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba az adatbázis frissítésekor:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.status(200).json({ message: "Nehézgép sikeresen frissíítve" });
     }
-    res.json({ message: "Machine deleted successfully" });
-  });
+  );
+});
+
+// Nehézgép törlése - DELETE
+router.delete("/api/machines/:id", (req, res) => {
+  // Azonosító meghatározása
+  const machineId = req.params.id;
+  // Törlés az adatbázisból
+  db.query(
+    "DELETE FROM machines WHERE id = ?",
+    [machineId],
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba a törlés során:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json({ message: "Nehézgép sikeresen törölve" });
+    }
+  );
 });
 
 module.exports = router;
