@@ -1,15 +1,15 @@
 <template>
   <div class="admin-admins">
     <div class="title">
-      <h2>Admin Management Panel</h2>
+      <h2>Admin Menedzsment Panel</h2>
     </div>
     <div class="admins-table">
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Username</th>
-            <th>Full name</th>
+            <th>Felhasználónév</th>
+            <th>Teljes név</th>
             <th>Műveletek</th>
           </tr>
         </thead>
@@ -44,6 +44,7 @@ import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
 import axios from "axios";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
@@ -52,28 +53,30 @@ onMounted(() => {
   }
 });
 
+// Adatok fetchelése
 const admins = ref([]);
 async function fetchData() {
   try {
     const response = await axios.get("http://localhost:3000/api/admins");
     admins.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok fetchelése közben:", error);
   }
 }
 
+onMounted(() => {
+  fetchData();
+});
+
+// Admin törlése
 const deleteAdmin = async (adminId) => {
   try {
     await axios.delete(`http://localhost:3000/api/admins/${adminId}`);
     admins.value = admins.value.filter((admin) => admin.id !== adminId);
   } catch (error) {
-    console.error("Error deleting admin:", error);
+    console.error("Hiba az admin törlése közben:", error);
   }
 };
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
@@ -117,6 +120,9 @@ th {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
 }
 
 .modify-button,

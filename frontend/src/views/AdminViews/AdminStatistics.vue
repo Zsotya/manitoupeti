@@ -9,6 +9,7 @@ import authService from "@/services/authService";
 import MonthlyRevenue from "@/components/StatisticsComponents/MonthlyRevenue.vue";
 import MonthlyBookings from "@/components/StatisticsComponents/MonthlyBookings.vue";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {

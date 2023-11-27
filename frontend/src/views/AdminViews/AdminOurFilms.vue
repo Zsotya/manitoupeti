@@ -74,7 +74,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/films");
     films.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok módosítása közben:", error);
   }
 }
 
@@ -88,7 +88,7 @@ const deleteFilm = async (filmId) => {
     await axios.delete(`http://localhost:3000/api/films/${filmId}`);
     films.value = films.value.filter((film) => film.id !== filmId);
   } catch (error) {
-    console.error("Error deleting film:", error);
+    console.error("Hiba a film törlése közben:", error);
   }
 };
 </script>

@@ -19,6 +19,7 @@ import ExpiredBookings from "@/components/AdminComponents/ExpiredBookings.vue";
 import { onMounted } from "vue";
 import authService from "@/services/authService";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {

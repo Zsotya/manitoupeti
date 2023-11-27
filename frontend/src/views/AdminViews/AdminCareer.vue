@@ -70,7 +70,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/jobs");
     jobs.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok fetchelése közben:", error);
   }
 }
 
@@ -84,7 +84,7 @@ const deleteJob = async (jobId) => {
     await axios.delete(`http://localhost:3000/api/jobs/${jobId}`);
     jobs.value = jobs.value.filter((job) => job.id !== jobId);
   } catch (error) {
-    console.error("Error deleting job:", error);
+    console.error("Hiba a job törlése közben:", error);
   }
 };
 </script>

@@ -84,7 +84,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/machines");
     machines.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok fetchelése közben:", error);
   }
 }
 
@@ -100,7 +100,7 @@ const deleteMachine = async (machineId) => {
       (machine) => machine.id !== machineId
     );
   } catch (error) {
-    console.error("Error deleting machine:", error);
+    console.error("Hiba a nehézgép törlése közben:", error);
   }
 };
 </script>
@@ -155,7 +155,9 @@ th {
   flex-direction: column;
   gap: 8px;
   align-items: center;
-  border: none;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
 }
 
 .modify-button,

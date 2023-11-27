@@ -77,7 +77,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/paragraphs");
     paragraphs.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok fetchelése közben:", error);
   }
 }
 
@@ -93,7 +93,7 @@ const deleteParagraph = async (paragraphId) => {
       (paragraph) => paragraph.id !== paragraphId
     );
   } catch (error) {
-    console.error("Error deleting paragraph:", error);
+    console.error("Hiba a paragrafus törlése közben:", error);
   }
 };
 </script>
