@@ -1,7 +1,7 @@
 <template>
   <div class="admin-paragraphs">
     <div class="title">
-      <h2>Admin Paragraph Management Panel</h2>
+      <h2>Admin Paragrafus Menedzsment Panel</h2>
     </div>
     <div class="paragraphs-table">
       <table>
