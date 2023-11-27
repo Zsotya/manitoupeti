@@ -8,10 +8,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Title (HU)</th>
-            <th>Title (EN)</th>
-            <th>Content (HU)</th>
-            <th>Content (EN)</th>
+            <th>Cím (HU)</th>
+            <th>Cím (EN)</th>
+            <th>Tartalom (HU)</th>
+            <th>Tartalom (EN)</th>
             <th>Kép</th>
             <th>Műveletek</th>
           </tr>
@@ -31,9 +31,11 @@
               />
             </td>
             <td class="actions-buttons">
-              <button class="modify-button">
-                <i class="fas fa-edit"></i>Módosítás
-              </button>
+              <router-link :to="`/admin/paragraph-management/${paragraph.id}`">
+                <button class="modify-button">
+                  <i class="fas fa-edit"></i>Módosítás
+                </button></router-link
+              >
               <button
                 class="delete-button"
                 @click="deleteParagraph(paragraph.id)"
@@ -48,7 +50,7 @@
     </div>
     <router-link to="/admin/paragraph-management/createparagraph">
       <button class="add-button">
-        <i class="fas fa-plus"></i>Új paragraph hozzáadása
+        <i class="fas fa-plus"></i>Új paragrafus hozzáadása
       </button>
     </router-link>
   </div>
@@ -59,6 +61,7 @@ import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
 import axios from "axios";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
@@ -67,6 +70,7 @@ onMounted(() => {
   }
 });
 
+// Adatok fetchelése
 const paragraphs = ref([]);
 async function fetchData() {
   try {
@@ -77,6 +81,11 @@ async function fetchData() {
   }
 }
 
+onMounted(() => {
+  fetchData();
+});
+
+// Paragrafus törlése
 const deleteParagraph = async (paragraphId) => {
   try {
     await axios.delete(`http://localhost:3000/api/paragraphs/${paragraphId}`);
@@ -87,10 +96,6 @@ const deleteParagraph = async (paragraphId) => {
     console.error("Error deleting paragraph:", error);
   }
 };
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
@@ -143,6 +148,9 @@ th {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
 }
 
 .modify-button,

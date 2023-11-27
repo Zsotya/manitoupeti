@@ -33,6 +33,7 @@ import CreateJob from "../components/AdminComponents/CreateJob.vue";
 import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
 // Modification pages
 import ModifyMachine from "../components/AdminComponents/ModifyMachine.vue";
+import ModifyParagraph from "../components/AdminComponents/ModifyParagraph.vue";
 
 // Services
 import authService from "@/services/authService";
@@ -227,6 +228,15 @@ const routes = [
   {
     path: "/admin/machines-management/:id",
     component: ModifyMachine,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/paragraph-management/:id",
+    component: ModifyParagraph,
     meta: {
       isMainApp: false,
       isAdminApp: true,

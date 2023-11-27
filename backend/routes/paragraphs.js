@@ -17,61 +17,139 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// GET REQUEST KEZELÉSE
+/* REQUESTEK KEZELÉSE */
 
+// Összes nehézgép lekérdezése - GET
 router.get("/api/paragraphs", (req, res) => {
-  db.query("SELECT * FROM paragraphs", (err, results) => {
-    if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM paragraphs",
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
-// POST REQUEST KEZELÉSE - Új paragraph létrehozása
+// Egy adott paragrafus lekérdezése adott azonosító alapján - GET
+router.get("/api/paragraphs/:id", (req, res) => {
+  // Azonosító meghatározása
+  const paragraphId = req.params.id;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM paragraphs WHERE id = ?",
+    [paragraphId],
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      // 404 kezelés
+      if (results.length === 0) {
+        res.status(404).json({ error: "Nincs ilyen paragrafus" });
+        return;
+      }
+      res.json(results[0]);
+    }
+  );
+});
+
+// Új paragraph létrehozása - POST
 
 router.post("/api/paragraphs", upload.single("image"), (req, res) => {
+  // Értékek meghatározása
   const { title_hu, title_en, content_hu, content_en } = req.body;
 
   const imageFile = req.file;
   if (!imageFile) {
-    res.status(400).json({ error: "Image file is required" });
+    res.status(400).json({ error: "Képfájl megadása kötelező!" });
     return;
   }
 
+  // Beszúrás adatbázisba
   const imageUrl = `/images/${imageFile.filename}`;
   const sql =
     "INSERT INTO paragraphs (title_hu, title_en, content_hu, content_en, image_url) VALUES (?, ?, ?, ?, ?)";
   db.query(
     sql,
     [title_hu, title_en, content_hu, content_en, imageUrl],
+    // Hibakezelés
     (err, result) => {
       if (err) {
-        console.error("Error inserting into the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba az adatbázisba beszúrás közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      res.status(201).json({ message: "Paragraph created successfully" });
+      res.status(201).json({ message: "Paragrafus sikeresen létrehozva" });
     }
   );
 });
 
-// DELETE REQUEST KEZELÉSE - Paragraph törlése
-router.delete("/api/paragraphs/:id", (req, res) => {
+// Paragrafus módosítása - PUT
+router.put("/api/paragraphs/:id", upload.single("image"), (req, res) => {
+  // Azonosító meghatározása
   const paragraphId = req.params.id;
+  // Értékek meghatározása
+  const { title_hu, title_en, content_hu, content_en, image } = req.body;
+  const imageFile = req.file;
+  let imageUrl = "";
 
+  // Amennyiben került új fájl megadásra
+  if (imageFile) {
+    imageUrl = `/images/${imageFile.filename}`;
+  } else {
+    imageUrl = image; // Ha nincs fájl, akkor a korábbi URL-t kapja
+  }
+
+  // Adatok frissítése az adatbázisban
+  const sql =
+    "UPDATE paragraphs SET title_hu=?, title_en=?, content_hu=?, content_en=?, image_url=? WHERE id=?";
+  const values = [
+    title_hu,
+    title_en,
+    content_hu,
+    content_en,
+    imageUrl,
+    paragraphId,
+  ];
+  db.query(
+    sql,
+    values,
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba az adatbázis frissítésekor:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.status(200).json({ message: "Paragrafus sikeresen frissíítve" });
+    }
+  );
+});
+
+// Paragrafus törlése - DELETE
+router.delete("/api/paragraphs/:id", (req, res) => {
+  // Azonosító meghatározása
+  const paragraphId = req.params.id;
+  // Törlés az adatbázisból
   db.query(
     "DELETE FROM paragraphs WHERE id = ?",
     [paragraphId],
+    // Hibakezelés
     (err, result) => {
       if (err) {
-        console.error("Error deleting from the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba a törlés során:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      res.json({ message: "Paragraph deleted successfully" });
+      res.json({ message: "Paragrafus sikeresen törölve" });
     }
   );
 });
