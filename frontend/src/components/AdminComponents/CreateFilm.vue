@@ -6,19 +6,19 @@
     <!-- Film adatok -->
     <form @submit.prevent="createFilm">
       <div class="form-group">
-        <label for="title_hu">Title (HU)</label>
+        <label for="title_hu">Cím (HU)</label>
         <input v-model="filmData.title_hu" required />
       </div>
       <div class="form-group">
-        <label for="title_en">Title (EN)</label>
+        <label for="title_en">Cím (EN)</label>
         <input v-model="filmData.title_en" required />
       </div>
       <div class="form-group">
-        <label for="description_hu">Description (HU)</label>
+        <label for="description_hu">Leírás (HU)</label>
         <textarea v-model="filmData.description_hu" required></textarea>
       </div>
       <div class="form-group">
-        <label for="description_en">Description (EN)</label>
+        <label for="description_en">Leírás (EN)</label>
         <textarea v-model="filmData.description_en" required></textarea>
       </div>
 
@@ -56,6 +56,7 @@ import axios from "axios";
 
 const router = useRouter();
 
+// Adatok inicializálása
 const filmData = ref({
   title_hu: "",
   title_en: "",
@@ -66,6 +67,7 @@ const filmData = ref({
 const imageFile = ref(null);
 const imagePreviewUrl = ref(null);
 
+// Létrehozás
 const createFilm = async () => {
   const formData = new FormData();
   formData.append("title_hu", filmData.value.title_hu);
@@ -74,6 +76,7 @@ const createFilm = async () => {
   formData.append("description_en", filmData.value.description_en);
   formData.append("image", imageFile.value);
   try {
+    // POST request küldése
     const response = await axios.post(
       "http://localhost:3000/api/films",
       formData,
@@ -83,13 +86,15 @@ const createFilm = async () => {
         },
       }
     );
-    console.log("Film created:", response.data);
+    // Sikeres létrehozás esetén navigálás
+    console.log("Film sikeresen létrehozva:", response.data);
     router.push("/admin/ourfilms-management");
   } catch (error) {
-    console.error("Error creating film:", error);
+    console.error("Hiba a film létrehozása közben:", error);
   }
 };
 
+// Képfeltöltés, kép előnézet kezelése
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
   imageFile.value = file;

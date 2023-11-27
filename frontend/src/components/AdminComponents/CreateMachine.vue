@@ -1,65 +1,65 @@
 <template>
   <div class="create-machine">
     <div class="title">
-      <h2>Új machine létrehozása</h2>
+      <h2>Új nehézgép létrehozása</h2>
     </div>
     <!-- Machine adatok -->
     <form @submit.prevent="createMachine">
       <div class="form-group">
-        <label for="machine_name">Machine Name</label>
+        <label for="machine_name">Nehézgép neve</label>
         <input v-model="machineData.machine_name" required />
       </div>
       <div class="form-group">
-        <label for="max_height">Max Height</label>
+        <label for="max_height">Max magasság</label>
         <input v-model="machineData.max_height" required /> m
       </div>
       <div class="form-group">
-        <label for="max_weight">Max Weight</label>
+        <label for="max_weight">Max teherbírás</label>
         <input v-model="machineData.max_weight" required /> kg
       </div>
       <div class="form-group">
-        <label for="has_sole">Has Sole</label>
+        <label for="has_sole">Van talp?</label>
         <div class="styled-select">
           <select v-model="machineData.has_sole" @change="handleSoleChange">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option>
           </select>
           <i class="fas fa-caret-down"></i>
         </div>
       </div>
       <div class="form-group" v-if="machineData.has_sole === 'Yes'">
-        <label for="sole_count">Sole Count</label>
+        <label for="sole_count">Talpak száma</label>
         <input v-model="machineData.sole_count" required /> db
       </div>
       <div class="form-group">
-        <label for="has_basket">Has Basket</label>
+        <label for="has_basket">Van kosár?</label>
         <div class="styled-select">
           <select v-model="machineData.has_basket">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option></select
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
         </div>
       </div>
       <div class="form-group">
-        <label for="has_fork">Has Fork</label>
+        <label for="has_fork">Van villa?</label>
         <div class="styled-select">
           <select v-model="machineData.has_fork">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option></select
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
         </div>
       </div>
       <div class="form-group">
-        <label for="is_remote">Is Remote</label>
+        <label for="is_remote">Távirányítható?</label>
         <div class="styled-select">
           <select v-model="machineData.is_remote">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option></select
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
         </div>
       </div>
       <div class="form-group">
-        <label for="price_per_day">Price Per Day</label>
+        <label for="price_per_day">Napi ár</label>
         <input v-model="machineData.price_per_day" required /> Ft
       </div>
 
@@ -84,7 +84,7 @@
 
       <!-- Létrehozás -->
       <div class="form-group">
-        <button type="submit">Machine létrehozása</button>
+        <button type="submit">Nehézgép létrehozása</button>
       </div>
     </form>
   </div>
@@ -97,6 +97,7 @@ import axios from "axios";
 
 const router = useRouter();
 
+// Adatok inicializálása
 const machineData = ref({
   machine_name: "",
   max_height: "",
@@ -112,6 +113,7 @@ const machineData = ref({
 const imageFile = ref(null);
 const imagePreviewUrl = ref(null);
 
+// Létrehozás
 const createMachine = async () => {
   const formData = new FormData();
   formData.append("machine_name", machineData.value.machine_name);
@@ -128,6 +130,7 @@ const createMachine = async () => {
   formData.append("price_per_day", machineData.value.price_per_day);
   formData.append("image", imageFile.value);
   try {
+    // POST request küldése
     const response = await axios.post(
       "http://localhost:3000/api/machines",
       formData,
@@ -137,13 +140,15 @@ const createMachine = async () => {
         },
       }
     );
-    console.log("Machine created:", response.data);
+    // Sikeres létrehozás esetén navigáció
+    console.log("Nehézgép sikeresen létrehozva:", response.data);
     router.push("/admin/machines-management");
   } catch (error) {
-    console.error("Error creating machine:", error);
+    console.error("Hiba a nehézgép létrehozása közben:", error);
   }
 };
 
+// Képfeltöltés, kép előnézet kezelése
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
   imageFile.value = file;

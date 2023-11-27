@@ -1,24 +1,24 @@
 <template>
   <div class="create-paragraph">
     <div class="title">
-      <h2>Új paragraph létrehozása</h2>
+      <h2>Új paragrafus létrehozása</h2>
     </div>
     <!-- Paragraph adatok -->
     <form @submit.prevent="createParagraph">
       <div class="form-group">
-        <label for="title_hu">Title (HU)</label>
+        <label for="title_hu">Cím (HU)</label>
         <input v-model="paragraphData.title_hu" required />
       </div>
       <div class="form-group">
-        <label for="title_en">Title (EN)</label>
+        <label for="title_en">Cím (EN)</label>
         <input v-model="paragraphData.title_en" required />
       </div>
       <div class="form-group">
-        <label for="content_hu">Content (HU)</label>
+        <label for="content_hu">Tartalom (HU)</label>
         <textarea v-model="paragraphData.content_hu" required></textarea>
       </div>
       <div class="form-group">
-        <label for="content_en">Content (EN)</label>
+        <label for="content_en">Tartalom (EN)</label>
         <textarea v-model="paragraphData.content_en" required></textarea>
       </div>
 
@@ -43,7 +43,7 @@
 
       <!-- Létrehozás -->
       <div class="form-group">
-        <button type="submit">Paragraph létrehozása</button>
+        <button type="submit">Paragrafus létrehozása</button>
       </div>
     </form>
   </div>
@@ -56,6 +56,7 @@ import axios from "axios";
 
 const router = useRouter();
 
+// Adatok inicializálása
 const paragraphData = ref({
   title_hu: "",
   title_en: "",
@@ -66,6 +67,7 @@ const paragraphData = ref({
 const imageFile = ref(null);
 const imagePreviewUrl = ref(null);
 
+// Létrehozás
 const createParagraph = async () => {
   const formData = new FormData();
   formData.append("title_hu", paragraphData.value.title_hu);
@@ -74,6 +76,7 @@ const createParagraph = async () => {
   formData.append("content_en", paragraphData.value.content_en);
   formData.append("image", imageFile.value);
   try {
+    // POST request küldése
     const response = await axios.post(
       "http://localhost:3000/api/paragraphs",
       formData,
@@ -83,13 +86,15 @@ const createParagraph = async () => {
         },
       }
     );
-    console.log("Paragraph created:", response.data);
+    // Sikeres létrehozás esetén navigáció
+    console.log("Paragrafus sikeresen létrehozva:", response.data);
     router.push("/admin/paragraph-management");
   } catch (error) {
-    console.error("Error creating film:", error);
+    console.error("Hiba a paragrafus létrehozása közben:", error);
   }
 };
 
+// Képfeltöltés, kép előnézet kezelése
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
   imageFile.value = file;

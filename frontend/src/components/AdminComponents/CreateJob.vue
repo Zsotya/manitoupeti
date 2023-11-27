@@ -1,9 +1,9 @@
 <template>
   <div class="create-job">
-    <h2>Create New Job</h2>
+    <h2>Új állás létrehozása</h2>
     <form @submit.prevent="addJob">
       <div class="form-group">
-        <label for="jobname_hu">Job Name (HU):</label>
+        <label for="jobname_hu">Állás neve (HU):</label>
         <input
           type="text"
           id="jobname_hu"
@@ -13,7 +13,7 @@
       </div>
 
       <div class="form-group">
-        <label for="jobname_en">Job Name (EN):</label>
+        <label for="jobname_en">Állás neve (EN):</label>
         <input
           type="text"
           id="jobname_en"
@@ -23,7 +23,7 @@
       </div>
 
       <div class="form-group">
-        <label for="jobdescription_hu">Job Description (HU):</label>
+        <label for="jobdescription_hu">Állás leírása (HU):</label>
         <textarea
           id="jobdescription_hu"
           v-model="newJob.jobdescription_hu"
@@ -32,7 +32,7 @@
       </div>
 
       <div class="form-group">
-        <label for="jobdescription_en">Job Description (EN):</label>
+        <label for="jobdescription_en">Állás leírása (EN):</label>
         <textarea
           id="jobdescription_en"
           v-model="newJob.jobdescription_en"
@@ -41,7 +41,7 @@
       </div>
 
       <div class="form-group">
-        <label for="jobtime_hu">Job Time (HU):</label>
+        <label for="jobtime_hu">Munkaidő (HU):</label>
         <input
           type="text"
           id="jobtime_hu"
@@ -51,7 +51,7 @@
       </div>
 
       <div class="form-group">
-        <label for="jobtime_en">Job Time (EN):</label>
+        <label for="jobtime_en">Munkaidő (EN):</label>
         <input
           type="text"
           id="jobtime_en"
@@ -60,7 +60,7 @@
         />
       </div>
 
-      <button type="submit" class="submit-button">Add Job</button>
+      <button type="submit" class="submit-button">Munka létrehozása</button>
     </form>
   </div>
 </template>
@@ -70,6 +70,7 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 const router = useRouter();
 
+// Adatok inicializálása
 const newJob = {
   jobname_hu: "",
   jobname_en: "",
@@ -79,12 +80,16 @@ const newJob = {
   jobtime_en: "",
 };
 
+// Létrehozás
 const addJob = async () => {
   try {
+    // POST request küldése
     const response = await axios.post("http://localhost:3000/api/jobs", newJob);
+    // Sikeres létrehozás esetén navigálás
+    console.log("Állás sikeresen létrehozva:", response.data);
     router.push("/admin/career-management");
   } catch (error) {
-    console.error("Error adding job:", error);
+    console.error("Hiba az állás létrehozása közben:", error);
   }
 };
 </script>

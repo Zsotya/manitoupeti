@@ -37,21 +37,26 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 const router = useRouter();
 
+// Adatok inicializálása
 const newAdmin = {
   username: "",
   password: "",
   full_name: "",
 };
 
+// Létrehozás
 const addAdmin = async () => {
   try {
+    // POST request küldése
     const response = await axios.post(
       "http://localhost:3000/api/admins",
       newAdmin
     );
+    // Sikeres létrehozás esetén navigáció
+    console.log("Admin felhasználó sikeresen létrehozva:", response.data);
     router.push("/admin/admin-management");
   } catch (error) {
-    console.error("Error adding admin:", error);
+    console.error("Hiba az admin létrehozása közben:", error);
   }
 };
 </script>
