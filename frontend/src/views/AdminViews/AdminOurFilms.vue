@@ -1,17 +1,17 @@
 <template>
   <div class="admin-our-films">
     <div class="title">
-      <h2>Admin Munkáink Management Panel</h2>
+      <h2>Admin Munkáink Menedzsment Panel</h2>
     </div>
     <div class="films-table">
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Title (HU)</th>
-            <th>Title (EN)</th>
-            <th>Description (HU)</th>
-            <th>Description (EN)</th>
+            <th>Cím (HU)</th>
+            <th>Cím (EN)</th>
+            <th>Leírás (HU)</th>
+            <th>Leírás (EN)</th>
             <th>Kép</th>
             <th>Műveletek</th>
           </tr>
@@ -31,9 +31,11 @@
               />
             </td>
             <td class="actions-buttons">
-              <button class="modify-button">
-                <i class="fas fa-edit"></i>Módosítás
-              </button>
+              <router-link :to="`/admin/ourfilms-management/${film.id}`">
+                <button class="modify-button">
+                  <i class="fas fa-edit"></i>Módosítás
+                </button></router-link
+              >
               <button class="delete-button" @click="deleteFilm(film.id)">
                 <i class="fas fa-trash"></i>
                 Törlés
@@ -56,6 +58,7 @@ import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
 import axios from "axios";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
@@ -64,6 +67,7 @@ onMounted(() => {
   }
 });
 
+// Adatok fetchelése
 const films = ref([]);
 async function fetchData() {
   try {
@@ -74,6 +78,11 @@ async function fetchData() {
   }
 }
 
+onMounted(() => {
+  fetchData();
+});
+
+// Film törlése
 const deleteFilm = async (filmId) => {
   try {
     await axios.delete(`http://localhost:3000/api/films/${filmId}`);
@@ -82,10 +91,6 @@ const deleteFilm = async (filmId) => {
     console.error("Error deleting film:", error);
   }
 };
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
@@ -138,6 +143,9 @@ th {
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
 }
 
 .modify-button,

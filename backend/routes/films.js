@@ -17,59 +17,141 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// GET REQUEST KEZELÉSE - Filmek listázása
+/* REQUESTEK KEZELÉSE */
 
+// Összes film listázása - GET
 router.get("/api/films", (req, res) => {
-  db.query("SELECT * FROM films", (err, results) => {
-    if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM films",
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
-// POST REQUEST KEZELÉSE - Új film létrehozása
+// Egy adott film lekérdezése adott azonosító alapján - GET
+router.get("/api/films/:id", (req, res) => {
+  // Azonosító meghatározása
+  const filmId = req.params.id;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM films WHERE id = ?",
+    [filmId],
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      // 404 kezelés
+      if (results.length === 0) {
+        res.status(404).json({ error: "Nincs ilyen film" });
+        return;
+      }
+      res.json(results[0]);
+    }
+  );
+});
 
+// Új film létrehozása - POST
 router.post("/api/films", upload.single("image"), (req, res) => {
+  // Értékek meghatározása
   const { title_hu, title_en, description_hu, description_en } = req.body;
 
   const imageFile = req.file;
   if (!imageFile) {
-    res.status(400).json({ error: "Image file is required" });
+    res.status(400).json({ error: "Képfájl megadása kötelező" });
     return;
   }
 
+  // Beszúrás az adatbázisba
   const imageUrl = `/images/${imageFile.filename}`;
   const sql =
     "INSERT INTO films (title_hu, title_en, description_hu, description_en, image_url) VALUES (?, ?, ?, ?, ?)";
   db.query(
     sql,
     [title_hu, title_en, description_hu, description_en, imageUrl],
+    // Hibakezelés
     (err, result) => {
       if (err) {
-        console.error("Error inserting into the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      res.status(201).json({ message: "Film created successfully" });
+      res.status(201).json({ message: "Film sikeresen létrehozva" });
     }
   );
 });
 
-// DELETE REQUEST KEZELÉSE - Film törlése
-router.delete("/api/films/:id", (req, res) => {
+// Film módosítása - PUT
+router.put("/api/films/:id", upload.single("image"), (req, res) => {
+  // Azonosító meghatározása
   const filmId = req.params.id;
+  // Értékek meghatározása
+  const { title_hu, title_en, description_hu, description_en, image } =
+    req.body;
+  const imageFile = req.file;
+  let imageUrl = "";
 
-  db.query("DELETE FROM films WHERE id = ?", [filmId], (err, result) => {
-    if (err) {
-      console.error("Error deleting from the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Amennyiben került új fájl megadásra
+  if (imageFile) {
+    imageUrl = `/images/${imageFile.filename}`;
+  } else {
+    imageUrl = image; // Ha nincs fájl, akkor a korábbi URL-t kapja
+  }
+
+  // Adatok frissítése az adatbázisban
+  const sql =
+    "UPDATE films SET title_hu=?, title_en=?, description_hu=?, description_en=?, image_url=? WHERE id=?";
+  const values = [
+    title_hu,
+    title_en,
+    description_hu,
+    description_en,
+    imageUrl,
+    filmId,
+  ];
+  db.query(
+    sql,
+    values,
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba az adatbázis frissítésekor:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.status(200).json({ message: "Film sikeresen frissíítve" });
     }
-    res.json({ message: "Film deleted successfully" });
-  });
+  );
+});
+
+// Film törlése - DELETE
+router.delete("/api/films/:id", (req, res) => {
+  // Azonosító meghatározása
+  const filmId = req.params.id;
+  // Törlés az adatbázisból
+  db.query(
+    "DELETE FROM films WHERE id = ?",
+    [filmId],
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba a törlés során:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json({ message: "Film sikeresen törölve" });
+    }
+  );
 });
 
 module.exports = router;

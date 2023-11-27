@@ -35,6 +35,7 @@ import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
 import ModifyMachine from "../components/AdminComponents/ModifyMachine.vue";
 import ModifyParagraph from "../components/AdminComponents/ModifyParagraph.vue";
 import ModifyJob from "../components/AdminComponents/ModifyJob.vue";
+import ModifyFilm from "../components/AdminComponents/ModifyFilm.vue";
 
 // Services
 import authService from "@/services/authService";
@@ -247,6 +248,15 @@ const routes = [
   {
     path: "/admin/career-management/:id",
     component: ModifyJob,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/ourfilms-management/:id",
+    component: ModifyFilm,
     meta: {
       isMainApp: false,
       isAdminApp: true,
