@@ -19,7 +19,7 @@ const upload = multer({ storage: storage });
 
 /* REQUESTEK KEZELÉSE */
 
-// Összes nehézgép lekérdezése - GET
+// Összes paragrafus lekérdezése - GET
 router.get("/api/paragraphs", (req, res) => {
   // Lekérdezés
   db.query(
@@ -62,7 +62,6 @@ router.get("/api/paragraphs/:id", (req, res) => {
 });
 
 // Új paragraph létrehozása - POST
-
 router.post("/api/paragraphs", upload.single("image"), (req, res) => {
   // Értékek meghatározása
   const { title_hu, title_en, content_hu, content_en } = req.body;
