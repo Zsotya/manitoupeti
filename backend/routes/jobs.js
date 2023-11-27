@@ -2,39 +2,53 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// GET REQUEST KEZELÉSE - Jobok listázása
+/* REQUESTEK KEZELÉSE */
 
+// Összes job listázása - GET
 router.get("/api/jobs", (req, res) => {
-  db.query("SELECT * FROM jobs", (err, results) => {
-    if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM jobs",
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
-// GET REQUEST KEZELÉSE - Egy adott job lekérdezése adott azonosító alapján
+// Egy adott job lekérdezése azonosító alapján - GET
 router.get("/api/jobs/:id", (req, res) => {
+  // Azonosító meghatározása
   const jobId = req.params.id;
-  db.query("SELECT * FROM jobs WHERE id = ?", [jobId], (err, results) => {
-    if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  // Lekérdezés
+  db.query(
+    "SELECT * FROM jobs WHERE id = ?",
+    [jobId],
+    // Hibakezelés
+    (err, results) => {
+      if (err) {
+        console.error("Hiba az adatok lekérdezése közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      // 404 kezelés
+      if (results.length === 0) {
+        res.status(404).json({ error: "Nincs ilyen job" });
+        return;
+      }
+      res.json(results[0]);
     }
-    if (results.length === 0) {
-      res.status(404).json({ error: "Job not found" });
-      return;
-    }
-    res.json(results[0]);
-  });
+  );
 });
 
-// POST REQUEST KEZELÉSE - Új job létrehozása
-
+// Új job létrehozása - POST
 router.post("/api/jobs", (req, res) => {
+  // Értékek meghatározása
   const {
     jobname_hu,
     jobname_en,
@@ -44,6 +58,7 @@ router.post("/api/jobs", (req, res) => {
     jobtime_en,
   } = req.body;
 
+  // Beszúrás az adatbázisba
   const sql =
     "INSERT INTO jobs (jobname_hu, jobname_en, jobdescription_hu, jobdescription_en, jobtime_hu, jobtime_en) VALUES (?, ?, ?, ?, ?, ?)";
   db.query(
@@ -56,36 +71,77 @@ router.post("/api/jobs", (req, res) => {
       jobtime_hu,
       jobtime_en,
     ],
+    // Hibakezelés
     (err, result) => {
       if (err) {
-        console.error("Error adding job to the database:", err);
-        res.status(500).json({ error: "Database error" });
+        console.error("Hiba az adatbázisba beszúrás közben:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      res.status(201).json({ message: "Job added successfully" });
+      res.status(201).json({ message: "Job sikeresen létrehozva" });
     }
   );
 });
 
-// DELETE REQUEST KEZELÉSE - Job törlése
-
-router.delete("/api/jobs/:id", (req, res) => {
+// Job módosítása - PUT
+router.put("/api/jobs/:id", (req, res) => {
+  // Azonosító meghatározása
   const jobId = req.params.id;
+  // Értékek meghatározása
+  const {
+    jobname_hu,
+    jobname_en,
+    jobdescription_hu,
+    jobdescription_en,
+    jobtime_hu,
+    jobtime_en,
+  } = req.body;
+  // Adatok frissítése az adatbázisban
+  const sql =
+    "UPDATE jobs SET jobname_hu=?, jobname_en=?, jobdescription_hu=?, jobdescription_en=?, jobtime_hu=?, jobtime_en=? WHERE id=?";
+  const values = [
+    jobname_hu,
+    jobname_en,
+    jobdescription_hu,
+    jobdescription_en,
+    jobtime_hu,
+    jobtime_en,
+    jobId,
+  ];
 
-  db.query("DELETE FROM jobs WHERE id = ?", [jobId], (err, result) => {
-    if (err) {
-      console.error("Error deleting job from the database:", err);
-      res.status(500).json({ error: "Database error" });
-      return;
+  db.query(
+    sql,
+    values,
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba az adatbázis frissítésekor:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json({ message: "Job sikeresen frissítve" });
     }
+  );
+});
 
-    // Vizsgálat, hogy ténylegesen töröltünk-e elemet
-    if (result.affectedRows === 0) {
-      res.status(404).json({ error: "Job not found" });
-    } else {
-      res.json({ message: "Job deleted successfully" });
+// Job törlése - DELETE
+router.delete("/api/jobs/:id", (req, res) => {
+  // Azonosító meghatározása
+  const jobId = req.params.id;
+  // Törlés az adatbázisból
+  db.query(
+    "DELETE FROM jobs WHERE id = ?",
+    [jobId],
+    // Hibakezelés
+    (err, result) => {
+      if (err) {
+        console.error("Hiba a törlés során:", err);
+        res.status(500).json({ error: "Adatbázis hiba" });
+        return;
+      }
+      res.json({ message: "Job sikeresen törölve" });
     }
-  });
+  );
 });
 
 module.exports = router;

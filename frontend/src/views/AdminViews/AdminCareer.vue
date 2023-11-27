@@ -1,19 +1,19 @@
 <template>
   <div class="admin-career">
     <div class="title">
-      <h2>Admin Karrier Management Panel</h2>
+      <h2>Admin Karrier Menedzsment Panel</h2>
     </div>
     <div class="jobs-table">
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Job Name (HU)</th>
-            <th>Job Name (EN)</th>
-            <th>Job Description (HU)</th>
-            <th>Job Description (EN)</th>
-            <th>Job Time (HU)</th>
-            <th>Job Time (EN)</th>
+            <th>Állás neve (HU)</th>
+            <th>Állás neve (EN)</th>
+            <th>Állás leírása (HU)</th>
+            <th>Állás leírása (EN)</th>
+            <th>Munkaidő (HU)</th>
+            <th>Munkaidő (EN)</th>
             <th>Műveletek</th>
           </tr>
         </thead>
@@ -27,9 +27,11 @@
             <td>{{ job.jobtime_hu }}</td>
             <td>{{ job.jobtime_en }}</td>
             <td class="actions-buttons">
-              <button class="modify-button">
-                <i class="fas fa-edit"></i>Módosítás
-              </button>
+              <router-link :to="`/admin/career-management/${job.id}`">
+                <button class="modify-button">
+                  <i class="fas fa-edit"></i>Módosítás
+                </button></router-link
+              >
               <button class="delete-button" @click="deleteJob(job.id)">
                 <i class="fas fa-trash"></i>
                 Törlés
@@ -52,6 +54,7 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import authService from "@/services/authService";
 
+// Autentikáció (token validálása)
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
@@ -60,6 +63,7 @@ onMounted(() => {
   }
 });
 
+// Adatok fetchelése
 const jobs = ref([]);
 async function fetchData() {
   try {
@@ -70,6 +74,11 @@ async function fetchData() {
   }
 }
 
+onMounted(() => {
+  fetchData();
+});
+
+// Munka törlése
 const deleteJob = async (jobId) => {
   try {
     await axios.delete(`http://localhost:3000/api/jobs/${jobId}`);
@@ -78,10 +87,6 @@ const deleteJob = async (jobId) => {
     console.error("Error deleting job:", error);
   }
 };
-
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style scoped>
@@ -124,6 +129,9 @@ th {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
 }
 
 .modify-button,
