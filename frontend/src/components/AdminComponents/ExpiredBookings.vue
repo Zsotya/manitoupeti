@@ -142,20 +142,49 @@ const markAsPaid = async (bookingId) => {
 };
 
 // Lejárt
-
 const archive = async (bookingId) => {
   try {
+    // Foglalás releváns adatainak tárolása
+    const bookingToMarkExpired = expiredBookings.value.find(
+      (booking) => booking.id === bookingId
+    );
+    const { first_name, last_name, email, start_date, end_date } =
+      bookingToMarkExpired;
+    // Foglalás archiválása
     const response = await axios.post(
       `http://localhost:3000/api/bookings/archive/${bookingId}`
     );
+    // Sikeres archiválást követően visszajelzés, email küldés
     if (response.status === 200) {
-      console.log("Booking has been archived successfully!");
-      fetchData();
-    } else {
-      console.error("Failed to archive booking.");
+      console.log("Foglalás sikeresen archiválva!");
+      // Email küldés
+      const emailResponse = await axios.post(
+        "http://localhost:3000/api/paidMail",
+        {
+          bookingId,
+          first_name,
+          last_name,
+          email,
+          start_date,
+          end_date,
+        }
+      );
+      // Email sikeres elküldés esetén visszajelzés, újbóli lekérdezés
+      if (emailResponse.status === 200) {
+        console.log("Lejárva email sikeresen elküldve");
+        fetchData();
+      }
+      // Email hibakezelés
+      else {
+        console.error("Hiba a lejárva email kiküldése során:", emailResponse);
+      }
+    }
+    // Archiválási hibakezelés
+    else {
+      console.error("Hiba az archiválás közben");
     }
   } catch (error) {
-    console.error("Error marking the booking as archived:", error);
+    console.error("Hiba a foglalás archiválása közben:", error);
   }
 };
 </script>

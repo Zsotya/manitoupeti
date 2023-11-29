@@ -187,7 +187,7 @@ router.post("/api/rejectalMail", async (req, res) => {
     console.log("Email elküldve:", info.response);
     res.json({ success: "Elutasítás email sikeresen elküldve!" });
   } catch (error) {
-    // Handle errors
+    // Hibakezelés
     console.error("Hiba az email elküldésekor:", error);
     res.status(500).json({ error: "Hiba az elutasító email küldésekor!" });
   }
@@ -219,9 +219,41 @@ router.post("/api/paidMail", async (req, res) => {
     console.log("Email elküldve:", info.response);
     res.json({ success: "Fizetve email sikeresen elküldve!" });
   } catch (error) {
-    // Handle errors
+    // Hibakezelés
     console.error("Hiba az email elküldésekor:", error);
     res.status(500).json({ error: "Hiba a fizetve email küldésekor!" });
+  }
+});
+
+// Lejárt státuszra módosítás esetén email kiküldés a címre
+router.post("/api/expiredMail", async (req, res) => {
+  try {
+    // Adatok inicializálása
+    const { bookingId, first_name, last_name, email, start_date, end_date } =
+      req.body;
+
+    // Adatok formázása
+    const formattedStartDate = new Date(start_date).toLocaleDateString("hu-HU");
+    const formattedEndDate = new Date(end_date).toLocaleDateString("hu-HU");
+    const fullName = `${last_name} ${first_name}`;
+
+    // Email konfigurálása
+    const mailOptions = {
+      from: "manitoupetinoreply@gmail.com",
+      to: email,
+      subject: `ManitouPeti - ${bookingId}ID-jű megrendelés fizetés nem történt meg`,
+      text: `Tisztelt ${fullName},\n\nTájékoztatjuk, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó megrendelés elutasításra került, mivel a korábbi levelünkben meghatározott számlaszámra nem érkezett Öntől fizetés.\nKérjük, az erre való tekintettel legyen szíves már nem fizetni a szolgáltatásért.\n\nÜdvözlettel,\nManitouPeti csapata`,
+    };
+
+    // Email elküldése
+    const info = await transporter.sendMail(mailOptions);
+    // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
+    console.log("Email elküldve:", info.response);
+    res.json({ success: "Lejárás email sikeresen elküldve!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Hiba az email elküldésekor:", error);
+    res.status(500).json({ error: "Hiba a lejárás email küldésekor!" });
   }
 });
 

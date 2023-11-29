@@ -150,7 +150,9 @@ const markAsPaid = async (bookingId) => {
       else {
         console.error("Hiba a fizetve email kiküldése során:", emailResponse);
       }
-    } else {
+    }
+    // Archiválási hibakezelés
+    else {
       console.error("Hiba a státuszmódosítás közben");
     }
   } catch (error) {
