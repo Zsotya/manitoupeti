@@ -158,11 +158,39 @@ const rejectBooking = async () => {
           comment: rejectComment.value,
         }
       );
+      // Sikeres elutasítást követően visszajelzés, email küldése
       if (response.status === 200) {
         console.log("Sikeres elutasítás");
-        closeReject();
-        fetchData();
-      } else {
+
+        // Email kiküldése
+        const emailResponse = await axios.post(
+          "http://localhost:3000/api/rejectalMail",
+          {
+            bookingId: selectedRejectBooking.id,
+            first_name: selectedRejectBooking.first_name,
+            last_name: selectedRejectBooking.last_name,
+            email: selectedRejectBooking.email,
+            start_date: selectedRejectBooking.start_date,
+            end_date: selectedRejectBooking.end_date,
+            comment: rejectComment.value,
+          }
+        );
+        // Sikeres email kiküldést követően visszajelzés, komment ablak becsukása, adatok ismételt lekérdezése
+        if (emailResponse.status === 200) {
+          console.log("Elutasítás email sikeresen elküldve");
+          closeReject();
+          fetchData();
+        }
+        // Email hibakezelés
+        else {
+          console.error(
+            "Hiba az elutasítás email küldése közben:",
+            emailResponse
+          );
+        }
+      }
+      // Elutasítási hibakezelés
+      else {
         console.error("Hiba elutasítás közben:", response);
       }
     } catch (error) {

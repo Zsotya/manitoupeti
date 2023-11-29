@@ -117,7 +117,7 @@ router.post(
 // Elfogadás esetén email küldése a megadott email címre
 router.post("/api/approvalMail", async (req, res) => {
   try {
-    // Adatok inicializálása, előkészítés az emailhez
+    // Adatok inicializálása
     const {
       bookingId,
       first_name,
@@ -127,6 +127,8 @@ router.post("/api/approvalMail", async (req, res) => {
       end_date,
       price,
     } = req.body;
+
+    // Adatok előkészítése, formázás
     const fullName = `${last_name} ${first_name}`;
     const formattedStartDate = new Date(start_date).toLocaleDateString("hu-HU");
     const formattedEndDate = new Date(end_date).toLocaleDateString("hu-HU");
@@ -144,11 +146,50 @@ router.post("/api/approvalMail", async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
     console.log("Email elküldve:", info.response);
-    res.json({ success: "Email sikeresen elküldve!" });
+    res.json({ success: "Elfogadás email sikeresen elküldve!" });
   } catch (error) {
     // Hibakezelés
     console.error("Hiba az email elküldésekor:", error);
-    res.status(500).json({ error: "Hiba az email elküldésekor!" });
+    res.status(500).json({ error: "Hiba az elutasító email küldésekor!" });
+  }
+});
+
+// Elutasítás esetén email küldése a megadott email címre
+router.post("/api/rejectalMail", async (req, res) => {
+  try {
+    // Adatok inicializálása
+    const {
+      bookingId,
+      first_name,
+      last_name,
+      email,
+      start_date,
+      end_date,
+      comment,
+    } = req.body;
+
+    // Adatok formázása
+    const formattedStartDate = new Date(start_date).toLocaleDateString("hu-HU");
+    const formattedEndDate = new Date(end_date).toLocaleDateString("hu-HU");
+    const fullName = `${last_name} ${first_name}`;
+
+    // Email konfigurálása
+    const mailOptions = {
+      from: "manitoupetinoreply@gmail.com",
+      to: email,
+      subject: `ManitouPeti - ${bookingId}ID-jű megrendelés elutasításra került`,
+      text: `Tisztelt ${fullName},\n\nSajnálattal tudatjuk Önnel, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó  megrendelése elutasításra került a menedzsment csapatunk által.\n\nAz elutasítás indoklása: ${comment}\n\nÜdvözlettel,\nManitouPeti csapata`,
+    };
+
+    // Email elküldése
+    const info = await transporter.sendMail(mailOptions);
+    // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
+    console.log("Email elküldve:", info.response);
+    res.json({ success: "Elutasítás email sikeresen elküldve!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Hiba az email elküldésekor:", error);
+    res.status(500).json({ error: "Hiba az elutasító email küldésekor!" });
   }
 });
 
