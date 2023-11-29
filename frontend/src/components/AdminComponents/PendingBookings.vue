@@ -142,17 +142,50 @@ const formatDate = (updatedDate) => {
 // Elfogadás
 const approveBooking = async (bookingId) => {
   try {
+    const bookingToApprove = pendingBookings.value.find(
+      (booking) => booking.id === bookingId
+    );
+    const { first_name, last_name, email, start_date, end_date, price } =
+      bookingToApprove;
+    // Státusz módosítása "Approved"-ra
     const response = await axios.patch(
       `http://localhost:3000/api/bookings/approve/${bookingId}`
     );
+    // Sikeres módosítást követően visszajelzés, email kiküldés
     if (response.status === 200) {
-      console.log("Booking approved successfully!");
-      fetchData();
-    } else {
-      console.error("Failed to approve the booking");
+      console.log("Foglalás sikeresen elfogadva!");
+      // Email kiküldése
+      const emailResponse = await axios.post(
+        "http://localhost:3000/api/approvalMail",
+        {
+          bookingId,
+          first_name,
+          last_name,
+          email,
+          start_date,
+          end_date,
+          price,
+        }
+      );
+      // Email sikeres elküldése esetén visszajelzés, "Pending" státuszú foglalások ismételt lekérdezése
+      if (emailResponse.status === 200) {
+        console.log("Elfogadás email sikeresen elküldve");
+        fetchData();
+      }
+      // Email hibakezelés
+      else {
+        console.error(
+          "Hiba az email elküldése közben:",
+          emailResponse.data.error
+        );
+      }
+    }
+    // Elfogadási hibakezelés
+    else {
+      console.error("Hiba a foglalás elfogadása közben", response.data.error);
     }
   } catch (error) {
-    console.error("Error approving the booking:", error);
+    console.error("Elfogadási hiba:", error);
   }
 };
 

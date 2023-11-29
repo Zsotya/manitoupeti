@@ -14,10 +14,11 @@ const transporter = nodemailer.createTransport({
 
 // Kapcsolat oldalról érkező emailek kezelése
 router.post("/api/contactus", (req, res) => {
+  // Adatok inicializálása, előkészítése
   const { lastName, firstName, email, subject, message } = req.body;
-
   const fullName = `${lastName} ${firstName}`;
 
+  // Üzenet konfigurálása
   const mailOptions = {
     from: "manitoupetinoreply@gmail.com",
     to: "manitoupetinoreply@gmail.com",
@@ -25,6 +26,7 @@ router.post("/api/contactus", (req, res) => {
     text: `Név: ${fullName}\nEmail: ${email}\n\nÜzenet:\n${message}`,
   };
 
+  // Email elküldése
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Hiba az email elküldésekor:", error);
@@ -45,6 +47,7 @@ router.post(
   upload.single("resume"),
   async (req, res) => {
     try {
+      // Adatok inicializálása
       const {
         lastName,
         firstName,
@@ -99,8 +102,8 @@ router.post(
 
       // Email küldése
       const info = await transporter.sendMail(mailOptions);
+      // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
       console.log("Email elküldve:", info.response);
-
       res.json({ success: "Jelentkezési email sikeresen elküldve!" });
     } catch (error) {
       console.error("Hiba a jelentkezési email elküldésekor:", error);
@@ -110,5 +113,43 @@ router.post(
     }
   }
 );
+
+// Elfogadás esetén email küldése a megadott email címre
+router.post("/api/approvalMail", async (req, res) => {
+  try {
+    // Adatok inicializálása, előkészítés az emailhez
+    const {
+      bookingId,
+      first_name,
+      last_name,
+      email,
+      start_date,
+      end_date,
+      price,
+    } = req.body;
+    const fullName = `${last_name} ${first_name}`;
+    const formattedStartDate = new Date(start_date).toLocaleDateString("hu-HU");
+    const formattedEndDate = new Date(end_date).toLocaleDateString("hu-HU");
+    const accountNumber = "11112222-33334444-55556666";
+
+    // Üzenet konfigurálása
+    const mailOptions = {
+      from: "manitoupetinoreply@gmail.com",
+      to: email,
+      subject: `ManitouPeti - ${bookingId}ID-jű megrendelés elfogadásra került`,
+      text: `Tisztelt ${fullName},\n\nAz Ön ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó foglalását feldolgoztuk és elfogadtuk.\nA megrendelés véglegesítéséhez a következő számlaszámra kell elküldenie a meghatározott összeget:\n\nSzámlaszám: ${accountNumber}\nFizetendő összeg: ${price}Ft\n\nA fizetési határidő a jelenlegi e-mail kiküldését követő 3 nap. Kérjük, időben fizesse ki a megrendelést, ellenkező esetben a megrendelése elutasításra kerül.\n\nÜdvözlettel,\nManitouPeti csapata`,
+    };
+
+    // Email elküldése
+    const info = await transporter.sendMail(mailOptions);
+    // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
+    console.log("Email elküldve:", info.response);
+    res.json({ success: "Email sikeresen elküldve!" });
+  } catch (error) {
+    // Hibakezelés
+    console.error("Hiba az email elküldésekor:", error);
+    res.status(500).json({ error: "Hiba az email elküldésekor!" });
+  }
+});
 
 module.exports = router;
