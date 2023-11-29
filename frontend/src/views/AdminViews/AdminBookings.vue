@@ -18,13 +18,15 @@ import ApprovedBookings from "@/components/AdminComponents/ApprovedBookings.vue"
 import ExpiredBookings from "@/components/AdminComponents/ExpiredBookings.vue";
 import { onMounted } from "vue";
 import authService from "@/services/authService";
+import { useRouter } from "vue-router";
 
 // Autentikáció (token validálása)
+const router = useRouter();
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
     authService.logoutUser();
-    $router.push("/admin");
+    router.push("/admin");
   }
 });
 </script>

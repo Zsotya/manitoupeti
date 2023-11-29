@@ -43,13 +43,15 @@
 import { ref, onMounted } from "vue";
 import authService from "@/services/authService";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 // Autentikáció (token validálása)
+const router = useRouter();
 onMounted(() => {
   const token = localStorage.getItem("token");
   if (authService.isTokenExpired(token)) {
     authService.logoutUser();
-    $router.push("/admin");
+    router.push("/admin");
   }
 });
 
