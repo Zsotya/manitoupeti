@@ -27,7 +27,7 @@ function scheduleBookingExpirationCheck() {
       const updateQuery = `
           UPDATE bookings
           SET status = 'Expired'
-          WHERE status = 'Approved' AND updated_at < ?;
+          WHERE status = 'Approved' AND end_date < ? AND updated_at < ?;
         `;
 
       // Queryk lefuttatása
@@ -53,15 +53,19 @@ function scheduleBookingExpirationCheck() {
         }
       });
       // updateQuery
-      db.query(updateQuery, [threeDaysAgo], (updateError, updateResults) => {
-        if (updateError) {
-          console.error("Hiba a státusz módosításakor:", updateError);
-        } else {
-          console.log(
-            `Lejárt foglalások státusza sikeresen módosítva "Expired" státuszra. Módosított sorok száma: ${updateResults.affectedRows}`
-          );
+      db.query(
+        updateQuery,
+        [threeDaysAgo, threeDaysAgo],
+        (updateError, updateResults) => {
+          if (updateError) {
+            console.error("Hiba a státusz módosításakor:", updateError);
+          } else {
+            console.log(
+              `Lejárt foglalások státusza sikeresen módosítva "Expired" státuszra. Módosított sorok száma: ${updateResults.affectedRows}`
+            );
+          }
         }
-      });
+      );
     } catch (error) {
       console.error("Hiba:", error);
     }
