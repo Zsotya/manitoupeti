@@ -72,7 +72,6 @@ const fetchData = async () => {
     bookings.value = response.data;
     generateChartData();
     calculateYearlyBookings();
-    console.log(bookings.value);
   } catch (err) {
     console.log("Error fetching data:", err);
   }

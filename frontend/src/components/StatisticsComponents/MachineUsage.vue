@@ -21,7 +21,6 @@ const fetchMachineData = async () => {
       "http://localhost:3000/api/statistics/machine-bookings"
     );
     generatePieChart(response.data);
-    console.log(response.data);
   } catch (err) {
     console.log("Error fetching machine data:", err);
   }

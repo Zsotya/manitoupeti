@@ -63,7 +63,6 @@ const fetchData = async () => {
     revenue.value = response.data;
     generateChartData();
     calculateYearlyRevenues();
-    console.log(revenue.value);
   } catch (err) {
     console.log("Error fetching data:", err);
   }
