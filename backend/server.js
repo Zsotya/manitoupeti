@@ -44,6 +44,7 @@ const bookingsRoutes = require("./routes/bookings/bookings");
 const pendingBookingsRoutes = require("./routes/bookings/pendingBookingsMachine");
 const approvedBookingsRoutes = require("./routes/bookings/approvedBookingsMachine");
 const paidBookingsRoutes = require("./routes/bookings/paidBookingsMachine");
+const activeBookings = require("./routes/bookings/activeBookings");
 
 /* Routes usage */
 // Management routes
@@ -63,6 +64,7 @@ app.use(bookingsRoutes);
 app.use(pendingBookingsRoutes);
 app.use(approvedBookingsRoutes);
 app.use(paidBookingsRoutes);
+app.use(activeBookings);
 
 // WebSocket setup
 io.on("connection", (socket) => {
