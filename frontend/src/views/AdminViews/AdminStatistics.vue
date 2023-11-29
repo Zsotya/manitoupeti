@@ -1,6 +1,7 @@
 <template>
   <div class="revenue-component"><MonthlyRevenue /></div>
   <div class="bookings-component"><MonthlyBookings /></div>
+  <div class="usage-component"><MachineUsage /></div>
 </template>
 
 <script setup>
@@ -8,6 +9,7 @@ import { onMounted } from "vue";
 import authService from "@/services/authService";
 import MonthlyRevenue from "@/components/StatisticsComponents/MonthlyRevenue.vue";
 import MonthlyBookings from "@/components/StatisticsComponents/MonthlyBookings.vue";
+import MachineUsage from "@/components/StatisticsComponents/MachineUsage.vue";
 import { useRouter } from "vue-router";
 
 // Autentikáció (token validálása)

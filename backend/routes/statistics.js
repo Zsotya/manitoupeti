@@ -20,8 +20,8 @@ router.get("/api/statistics/monthly-revenue", (req, res) => {
 
   db.query(query, (err, results) => {
     if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
+      console.error("Hiba a lekérdezés közben:", err);
+      res.status(500).json({ error: "Adatbázis hiba" });
       return;
     }
     res.json(results);
@@ -46,11 +46,38 @@ router.get("/api/statistics/monthly-bookings", (req, res) => {
 
   db.query(query, (err, results) => {
     if (err) {
-      console.error("Error querying the database:", err);
-      res.status(500).json({ error: "Database error" });
+      console.error("Hiba a lekérdezés közben:", err);
+      res.status(500).json({ error: "Adatbázis hiba" });
       return;
     }
     res.json(results);
+  });
+});
+
+// Adott gépek foglalásainak darabszáma
+router.get("/api/statistics/machine-bookings", (req, res) => {
+  const query = `
+    SELECT machines.id AS machine_id, machines.machine_name, SUM(total_count) AS booking_count
+    FROM machines
+    LEFT JOIN (
+      SELECT machine_id, COUNT(*) AS total_count
+      FROM (
+        SELECT machine_id FROM bookings
+        UNION ALL
+        SELECT machine_id FROM archive_bookings
+      ) AS combined_bookings
+      GROUP BY machine_id
+    ) AS counts ON machines.id = counts.machine_id
+    GROUP BY machines.id, machines.machine_name
+    HAVING booking_count IS NOT NULL AND booking_count > 0;`;
+
+  db.query(query, (err, result) => {
+    if (err) {
+      console.error("Hiba a lekérdezés közben:", err);
+      res.status(500).json({ error: "Adatbázis hiba" });
+      return;
+    }
+    res.json(result);
   });
 });
 
