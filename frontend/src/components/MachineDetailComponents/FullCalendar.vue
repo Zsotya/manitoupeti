@@ -1,21 +1,25 @@
 <template>
   <div class="fullcalendar-container" :class="{ 'dark-mode': darkMode }">
     <div class="legend">
-      <div class="legend-item">
-        <div class="legend-color today"></div>
-        <div class="legend-text">{{ $t("machinesToday") }}</div>
+      <div class="first-container">
+        <div class="legend-item">
+          <div class="legend-color today"></div>
+          <div class="legend-text">{{ $t("machinesToday") }}</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color potentially-occupied"></div>
+          <div class="legend-text">{{ $t("machinesPotentiallyOccupied") }}</div>
+        </div>
       </div>
-      <div class="legend-item">
-        <div class="legend-color potentially-occupied"></div>
-        <div class="legend-text">{{ $t("machinesPotentiallyOccupied") }}</div>
-      </div>
-      <div class="legend-item">
-        <div class="legend-color occupied"></div>
-        <div class="legend-text">{{ $t("machinesOccupied") }}</div>
-      </div>
-      <div class="legend-item">
-        <div class="legend-color available"></div>
-        <div class="legend-text">{{ $t("machinesAvailable") }}</div>
+      <div class="second-container">
+        <div class="legend-item">
+          <div class="legend-color occupied"></div>
+          <div class="legend-text">{{ $t("machinesOccupied") }}</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color available"></div>
+          <div class="legend-text">{{ $t("machinesAvailable") }}</div>
+        </div>
       </div>
     </div>
     <div class="calendar-container">
@@ -176,6 +180,11 @@ watch(events, (newEvents) => {
   margin-bottom: 10px;
 }
 
+.first-container,
+.second-container {
+  display: flex;
+}
+
 .legend-item {
   margin-right: 30px;
   display: flex;
@@ -227,5 +236,16 @@ watch(events, (newEvents) => {
 
 .fullcalendar-container.dark-mode .available {
   background-color: #787878;
+}
+
+@media screen and (max-width: 768px) {
+  .first-container,
+  .second-container {
+    flex-direction: column;
+  }
+
+  .legend-item {
+    margin-bottom: 10px;
+  }
 }
 </style>
