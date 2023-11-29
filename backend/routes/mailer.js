@@ -193,4 +193,36 @@ router.post("/api/rejectalMail", async (req, res) => {
   }
 });
 
+// Fizetés beérkezés esetén email küldése az email címre
+router.post("/api/paidMail", async (req, res) => {
+  try {
+    // Adatok inicializálása
+    const { bookingId, first_name, last_name, email, start_date, end_date } =
+      req.body;
+
+    // Adatok formázása
+    const formattedStartDate = new Date(start_date).toLocaleDateString("hu-HU");
+    const formattedEndDate = new Date(end_date).toLocaleDateString("hu-HU");
+    const fullName = `${last_name} ${first_name}`;
+
+    // Email konfigurálása
+    const mailOptions = {
+      from: "manitoupetinoreply@gmail.com",
+      to: email,
+      subject: `ManitouPeti - ${bookingId}ID-jű megrendelés kifizetve`,
+      text: `Tisztelt ${fullName},\n\nTájékoztatjuk, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó megrendelés kifizetése teljesült, feldolgozása megtörtént. A végrehajtással kapcsolatban munkatársunk hamarosan felveszi Önnel a kapcsolatot.\n\nÜdvözlettel,\nManitouPeti csapata`,
+    };
+
+    // Email elküldése
+    const info = await transporter.sendMail(mailOptions);
+    // Sikeres elküldés esetén üzenet kiírása, válasz a kliensnek
+    console.log("Email elküldve:", info.response);
+    res.json({ success: "Fizetve email sikeresen elküldve!" });
+  } catch (error) {
+    // Handle errors
+    console.error("Hiba az email elküldésekor:", error);
+    res.status(500).json({ error: "Hiba a fizetve email küldésekor!" });
+  }
+});
+
 module.exports = router;

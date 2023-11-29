@@ -49,6 +49,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
+// Adatok fetchelése
 const expiredBookings = ref([]);
 
 async function fetchData() {
@@ -58,7 +59,7 @@ async function fetchData() {
     );
     expiredBookings.value = response.data;
   } catch (error) {
-    console.error("Error fetching expired bookings:", error);
+    console.error("Hiba az adatok fetchelésekor:", error);
   }
 }
 
@@ -95,22 +96,48 @@ const formatDate = (modifiedDate) => {
 };
 
 // Funkciógombok
-
 // Fizetve
-
 const markAsPaid = async (bookingId) => {
   try {
+    // Foglalás releváns adatainak tárolása
+    const bookingToMarkPaid = expiredBookings.value.find(
+      (booking) => booking.id === bookingId
+    );
+    const { first_name, last_name, email, start_date, end_date } =
+      bookingToMarkPaid;
+    // Státusz módosítása "Paid"-re
     const response = await axios.patch(
       `http://localhost:3000/api/bookings/markAsPaid/${bookingId}`
     );
+    // Sikeres módosítást követően visszajelzés, email kiküldése
     if (response.status === 200) {
-      console.log("Booking marked as paid successfully!");
-      fetchData();
+      console.log("Foglalás státusza sikeresen módosult 'Paid' státuszra!");
+      // Email küldés
+      const emailResponse = await axios.post(
+        "http://localhost:3000/api/paidMail",
+        {
+          bookingId,
+          first_name,
+          last_name,
+          email,
+          start_date,
+          end_date,
+        }
+      );
+      // Email sikeres elküldés esetén visszajelzés, újbóli lekérdezés
+      if (emailResponse.status === 200) {
+        console.log("Fizetve email sikeresen elküldve");
+        fetchData();
+      }
+      // Email hibakezelés
+      else {
+        console.error("Hiba a fizetve email kiküldése során:", emailResponse);
+      }
     } else {
-      console.error("Failed to mark the booking as paid");
+      console.error("Hiba a státuszmódosítás közben");
     }
   } catch (error) {
-    console.error("Error marking the booking paid:", error);
+    console.error("Fizetett státusz megjelölése közbeni hiba:", error);
   }
 };
 

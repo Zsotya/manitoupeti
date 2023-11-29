@@ -92,6 +92,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
+// Adatok fetchelése
 const pendingBookings = ref([]);
 
 async function fetchData() {
@@ -101,7 +102,7 @@ async function fetchData() {
     );
     pendingBookings.value = response.data;
   } catch (error) {
-    console.error("Error fetching pending bookings:", error);
+    console.error("Hiba az adatok fetchelése során:", error);
   }
 }
 
@@ -142,6 +143,7 @@ const formatDate = (updatedDate) => {
 // Elfogadás
 const approveBooking = async (bookingId) => {
   try {
+    // Foglalás releváns adatainak tárolása
     const bookingToApprove = pendingBookings.value.find(
       (booking) => booking.id === bookingId
     );
@@ -190,10 +192,12 @@ const approveBooking = async (bookingId) => {
 };
 
 // Elutasítás
+// Komment ablak inicializálása "bezártnak", adatok inicializálása
 const isRejectOpen = ref(false);
 const rejectComment = ref("");
 let selectedRejectBooking = null;
 
+// Komment ablak megnyitása
 const openReject = (bookingId) => {
   const booking = pendingBookings.value.find((b) => b.id === bookingId);
   if (booking) {
@@ -203,10 +207,12 @@ const openReject = (bookingId) => {
   }
 };
 
+// Komment ablak bezárása
 const closeReject = () => {
   isRejectOpen.value = false;
 };
 
+// Foglalás elutasítása
 const rejectBooking = async () => {
   if (selectedRejectBooking) {
     try {
@@ -259,10 +265,12 @@ const rejectBooking = async () => {
 };
 
 // Ár módosítás
+// Módosító ablak inicializálása "bezártként", adatok inicializálása
 const isModifyPriceOpen = ref(false);
 const newPrice = ref("");
 let selectedModifyBooking = null;
 
+// Ármódosító ablak megnyitása
 const openModifyPrice = (bookingId) => {
   const booking = pendingBookings.value.find((b) => b.id === bookingId);
   if (booking) {
@@ -272,24 +280,29 @@ const openModifyPrice = (bookingId) => {
   }
 };
 
+// Ármódosító ablak bezárása
 const closeModifyPrice = () => {
   isModifyPriceOpen.value = false;
 };
 
+// Ármódosítás
 const modifyPrice = async () => {
   if (selectedModifyBooking) {
     try {
+      // Módosítási request küldése
       const response = await axios.patch(
         `http://localhost:3000/api/bookings/price/${selectedModifyBooking.id}`,
         {
           price: newPrice.value,
         }
       );
-
+      // Sikeres módosítás után dinamikus frissítés, módosító ablak bezárás
       if (response.status === 200) {
         selectedModifyBooking.price = newPrice.value;
         closeModifyPrice();
-      } else {
+      }
+      // Hibakezelés
+      else {
         console.error("Hiba az ár módosításakor:", response);
       }
     } catch (error) {
