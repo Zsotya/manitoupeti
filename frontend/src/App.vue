@@ -8,6 +8,7 @@
       <main class="main-content">
         <router-view />
       </main>
+      <div class="chatbot"><Chatbot /></div>
       <footer><Footer /></footer>
     </div>
 
@@ -30,7 +31,8 @@
 import NavBar from "./components/RootComponents/NavBar.vue";
 import Footer from "./components/RootComponents/Footer.vue";
 import Logo from "./components/RootComponents/Logo.vue";
-import Sidebar from "./components/AdminComponents/Sidebar.vue";
+import Sidebar from "./components/RootComponents/Sidebar.vue";
+import Chatbot from "./components/RootComponents/Chatbot.vue";
 import io from "socket.io-client";
 import { onMounted } from "vue";
 
