@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:8080"
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: manitoupetidb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
