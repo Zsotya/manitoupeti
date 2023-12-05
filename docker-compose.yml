@@ -19,8 +19,9 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: manitoupetidb
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
+    volumes:
+      - ./manitoupetidb.sql:/docker-entrypoint-initdb.d/manitoupetidb.sql
