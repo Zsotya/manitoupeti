@@ -1,28 +1,53 @@
 version: "3"
 
 services:
-  frontend:
-    build:
-      context: ./frontend
+  mysqldb:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: manitoupetidb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysqldb
     ports:
-      - "8080:8080"
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./manitoupetidb.sql:/docker-entrypoint-initdb.d/manitoupetidb.sql
+      - $HOME/database:/var/lib/mysql
+    networks:
+      - internalnet
 
   backend:
     build:
       context: ./backend
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-
-  db:
-    image: mysql:latest
+    expose:
+      - 3000
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: manitoupetidb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      DB_HOST: "mysqldb"
+      DB_USER: "root"
+      DB_PORT: 3306
+      DB_PASSWORD: "password"
+      DB_NAME: "manitoupetidb"
+      SERVICE_TAGS: prod
+      SERVICE_NAME: nodeappservice
+    depends_on:
+      - mysqldb
+    networks:
+      - internalnet
+
+  frontend:
+    build:
+      context: ./frontend
     ports:
-      - "3306:3306"
-    volumes:
-      - ./manitoupetidb.sql:/docker-entrypoint-initdb.d/manitoupetidb.sql
+      - "8080:8080"
+    depends_on:
+      - backend
+
+networks:
+  internalnet:
+    driver: bridge
