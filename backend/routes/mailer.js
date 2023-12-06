@@ -2,13 +2,14 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const router = express.Router();
 const multer = require("multer");
+const dotenv = require("dotenv");
 
 // Feladó adatok meghatározása
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "manitoupetinoreply@gmail.com",
-    pass: "wjyi qunu cgbf qgkv",
+    user: process.env.MAILER_USER,
+    pass: process.env.MAILER_PASSWORD,
   },
 });
 
@@ -20,8 +21,8 @@ router.post("/api/contactus", (req, res) => {
 
   // Üzenet konfigurálása
   const mailOptions = {
-    from: "manitoupetinoreply@gmail.com",
-    to: "manitoupetinoreply@gmail.com",
+    from: process.env.MAILER_USER,
+    to: process.env.MAILER_USER,
     subject: `Új üzenet a Kapcsolat oldalról - ${subject}`,
     text: `Név: ${fullName}\nEmail: ${email}\n\nÜzenet:\n${message}`,
   };
@@ -87,8 +88,8 @@ router.post(
 
       // Email beállítása
       const mailOptions = {
-        from: "manitoupetinoreply@gmail.com",
-        to: "manitoupetinoreply@gmail.com",
+        from: process.env.MAILER_USER,
+        to: process.env.MAILER_USER,
         subject: `Új állásjelentkezés - ${jobName}`,
         text: `A ManitouPeti weboldalon Önnek új állásjelentkezése érkezett a ${jobName} állásra. Az ehhez tartozó adatok a következők:\n\nNév: ${fullName}\nSzületési idő: ${birthDate}\nSzületési hely: ${birthLocation}\nEmail: ${email}\nTelefonszám: ${phoneNumber}\nLakhely: ${address}\nMegpályázott munkakör: ${jobName}\n\nA jelentkezéshez csatolt önéletrajzot az email csatolmányai között tekintheti meg.\n\nManitouPeti`,
         attachments: [
@@ -136,7 +137,7 @@ router.post("/api/approvalMail", async (req, res) => {
 
     // Üzenet konfigurálása
     const mailOptions = {
-      from: "manitoupetinoreply@gmail.com",
+      from: process.env.MAILER_USER,
       to: email,
       subject: `ManitouPeti - ${bookingId}ID-jű megrendelés elfogadásra került`,
       text: `Tisztelt ${fullName},\n\nAz Ön ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó foglalását feldolgoztuk és elfogadtuk.\nA megrendelés véglegesítéséhez a következő számlaszámra kell elküldenie a meghatározott összeget:\n\nSzámlaszám: ${accountNumber}\nFizetendő összeg: ${price}Ft\n\nA fizetési határidő a jelenlegi e-mail kiküldését követő 3 nap. Kérjük, időben fizesse ki a megrendelést, ellenkező esetben a megrendelése elutasításra kerül.\n\nÜdvözlettel,\nManitouPeti csapata`,
@@ -175,7 +176,7 @@ router.post("/api/rejectalMail", async (req, res) => {
 
     // Email konfigurálása
     const mailOptions = {
-      from: "manitoupetinoreply@gmail.com",
+      from: process.env.MAILER_USER,
       to: email,
       subject: `ManitouPeti - ${bookingId}ID-jű megrendelés elutasításra került`,
       text: `Tisztelt ${fullName},\n\nSajnálattal tudatjuk Önnel, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó  megrendelése elutasításra került a menedzsment csapatunk által.\n\nAz elutasítás indoklása: ${comment}\n\nÜdvözlettel,\nManitouPeti csapata`,
@@ -207,7 +208,7 @@ router.post("/api/paidMail", async (req, res) => {
 
     // Email konfigurálása
     const mailOptions = {
-      from: "manitoupetinoreply@gmail.com",
+      from: process.env.MAILER_USER,
       to: email,
       subject: `ManitouPeti - ${bookingId}ID-jű megrendelés kifizetve`,
       text: `Tisztelt ${fullName},\n\nTájékoztatjuk, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó megrendelés kifizetése teljesült, feldolgozása megtörtént. A végrehajtással kapcsolatban munkatársunk hamarosan felveszi Önnel a kapcsolatot.\n\nÜdvözlettel,\nManitouPeti csapata`,
@@ -239,7 +240,7 @@ router.post("/api/expiredMail", async (req, res) => {
 
     // Email konfigurálása
     const mailOptions = {
-      from: "manitoupetinoreply@gmail.com",
+      from: process.env.MAILER_USER,
       to: email,
       subject: `ManitouPeti - ${bookingId}ID-jű megrendelés fizetés nem történt meg`,
       text: `Tisztelt ${fullName},\n\nTájékoztatjuk, hogy a ${bookingId}ID-vel rendelkező ${formattedStartDate} - ${formattedEndDate} időintervallumra vonatkozó megrendelés elutasításra került, mivel a korábbi levelünkben meghatározott számlaszámra nem érkezett Öntől fizetés.\nKérjük, az erre való tekintettel legyen szíves már nem fizetni a szolgáltatásért.\n\nÜdvözlettel,\nManitouPeti csapata`,
