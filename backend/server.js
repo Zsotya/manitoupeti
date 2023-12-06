@@ -21,7 +21,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend/public")));
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 // Scheduler elindítása
 scheduler.scheduleBookingExpirationCheck();

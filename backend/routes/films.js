@@ -8,7 +8,7 @@ const path = require("path");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Mivel nincs error, az első arg-nak null-t adunk
-    cb(null, path.join(__dirname, "../../frontend/public/images"));
+    cb(null, path.join(__dirname, "../images"));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
