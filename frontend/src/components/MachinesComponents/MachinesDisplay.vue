@@ -2,7 +2,10 @@
   <div class="machines-display" :class="{ 'dark-mode': darkMode }">
     <div class="machines-item">
       <div class="image-container">
-        <img :src="machine.image_url" alt="Machine Image" />
+        <img
+          :src="'http://localhost:3000' + machine.image_url"
+          alt="Machine Image"
+        />
       </div>
       <div class="machine-details">
         <div class="machine-name">{{ machine.machine_name }}</div>

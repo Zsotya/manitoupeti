@@ -25,7 +25,7 @@
             <td>{{ paragraph.content_en }}</td>
             <td class="image-container">
               <img
-                :src="paragraph.image_url"
+                :src="'http://localhost:3000' + paragraph.image_url"
                 alt="paragraph.image_url"
                 class="thumbnail"
               />

@@ -2,7 +2,10 @@
   <div class="machine-detail" :class="{ 'dark-mode': darkMode }">
     <div class="machine-info">
       <div class="machine-image">
-        <img :src="props.machine.image_url" alt="Machine Image" />
+        <img
+          :src="'http://localhost:3000' + props.machine.image_url"
+          alt="Machine Image"
+        />
       </div>
       <div class="machine-properties">
         <h1 class="machine-name">{{ props.machine.machine_name }}</h1>

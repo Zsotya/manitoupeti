@@ -35,7 +35,7 @@
             <td>{{ machine.price_per_day }}Ft</td>
             <td class="image-container">
               <img
-                :src="machine.image_url"
+                :src="'http://localhost:3000' + machine.image_url"
                 alt="machine.image_url"
                 class="thumbnail"
               />

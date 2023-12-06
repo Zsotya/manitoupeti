@@ -6,7 +6,7 @@
       :class="{ flipped: film.isFlipped }"
     >
       <div class="film-front">
-        <img :src="film.image_url" alt="Film Image" />
+        <img :src="'http://localhost:3000' + film.image_url" alt="Film Image" />
         <h3>{{ film["title_" + $i18n.locale] }}</h3>
       </div>
       <div class="film-back">

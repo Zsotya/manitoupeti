@@ -25,7 +25,7 @@
             <td>{{ film.description_en }}</td>
             <td class="image-container">
               <img
-                :src="film.image_url"
+                :src="'http://localhost:3000' + film.image_url"
                 alt="film.image_url"
                 class="thumbnail"
               />
