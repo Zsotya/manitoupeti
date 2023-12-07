@@ -18,6 +18,15 @@ services:
       - ./manitoupetidb.sql:/docker-entrypoint-initdb.d/manitoupetidb.sql
     networks:
       - internalnet
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -u user --password=password",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   backend:
     build:
@@ -35,7 +44,8 @@ services:
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
     networks:
       - internalnet
 
