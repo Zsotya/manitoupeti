@@ -93,12 +93,17 @@ const logout = () => {
 
 .company-name h3 {
   color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .nav-link {
   color: #ffffff;
   display: flex;
   align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .router-link-active {
@@ -111,10 +116,12 @@ const logout = () => {
 
 .nav-link i {
   width: 1.25rem;
+  margin-right: 10px;
 }
 
 .logout {
   position: absolute;
   bottom: 10px;
+  width: 100%;
 }
 </style>
