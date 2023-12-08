@@ -136,7 +136,7 @@ onMounted(async () => {
     image: data.image_url,
   };
 
-  imagePreviewUrl.value = machineData.value.image;
+  imagePreviewUrl.value = "http://localhost:3000" + machineData.value.image;
 });
 
 // Képfeltöltés, előnézet kezelése

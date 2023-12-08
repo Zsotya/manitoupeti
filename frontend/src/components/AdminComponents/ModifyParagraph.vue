@@ -82,7 +82,7 @@ onMounted(async () => {
     image: data.image_url,
   };
 
-  imagePreviewUrl.value = paragraphData.value.image;
+  imagePreviewUrl.value = "http://localhost:3000" + paragraphData.value.image;
 });
 
 // Képfeltöltés, előnézet kezelése
