@@ -3,7 +3,7 @@
     <div class="booking-form">
       <h1>{{ $t("machinesBooking") }}</h1>
 
-      <!-- Dátum range kiválasztása (vue datepicker) -->
+      <!-- Időintervallum kiválasztása -->
       <form @submit.prevent="submitBooking">
         <DatePicker
           v-model="date"
@@ -89,20 +89,26 @@ import { useStore } from "vuex";
 import axios from "axios";
 import io from "socket.io-client";
 
+// Dark mode
+const store = useStore();
+const darkMode = computed(() => store.getters.isDarkMode);
+
 // WebSocket
 const socket = io("http://localhost:3000");
 
 const props = defineProps(["machine"]);
 const date = ref([new Date(), null]);
 
-// Date picker format
-
+// Datepicker formátum
 const startDate = ref();
 const endDate = ref();
+const message = ref("");
+
 const customFormat = (date) => {
   const formatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
   startDate.value = date[0];
   endDate.value = date[1];
+  const language = store.state.language;
 
   if (startDate.value && endDate.value) {
     const formattedStartDate = startDate.value.toLocaleDateString(
@@ -113,14 +119,21 @@ const customFormat = (date) => {
       "hu-HU",
       formatOptions
     );
-    return `A választott időintervallum: ${formattedStartDate} - ${formattedEndDate}`;
+    message.value =
+      language === "hu"
+        ? `A választott időintervallum: ${formattedStartDate} - ${formattedEndDate}`
+        : `The selected date range: ${formattedStartDate} - ${formattedEndDate}`;
+  } else {
+    message.value =
+      language === "hu"
+        ? "Válasszon időintervallumot..."
+        : "Please select date range...";
   }
 
-  return "Válasszon időintervallumot...";
+  return message.value;
 };
 
-// Total price calculation
-
+// Végösszeg kiszámítása
 const totalPrice = computed(() => {
   const startDay = date.value ? date.value[0] : null;
   const endDay = date.value ? date.value[1] : null;
@@ -133,10 +146,9 @@ const totalPrice = computed(() => {
   return 0;
 });
 
-// POST request preparation
+/* POST kérés előkészítése */
 
 // Form elemek
-
 const last_name = ref("");
 const first_name = ref("");
 const email = ref("");
@@ -144,7 +156,6 @@ const phone_number = ref("");
 const location = ref("");
 
 // Kulcs-érték párok meghatározása
-
 const prepareBookingData = () => {
   return {
     machine_id: props.machine.id,
@@ -162,7 +173,6 @@ const prepareBookingData = () => {
 };
 
 // Foglalás elküldése
-
 const submitBooking = async () => {
   const bookingData = prepareBookingData();
   try {
@@ -186,7 +196,6 @@ const submitBooking = async () => {
 
 // Paid, azaz kifizetett (garantáltan foglalt) foglalások lekérdezése
 // Ezzel visszakapunk egy tömböt az összes "Paid" státuszú foglalással
-
 const paidBookings = ref([]);
 const machineId = ref(props.machine.id);
 
@@ -203,7 +212,6 @@ async function fetchAndSetPaidBookings() {
 
 // Ha simán ${props.machine.id}-t kapna a GET request, hamarabb lenne elküldve, minthogy megkapja az ID-t, ezért undefined lenne a response
 // Ennek kiküszöbölésére használunk watch-ot
-
 watch(
   () => props.machine.id,
   (newMachineId, oldMachineId) => {
@@ -215,7 +223,6 @@ watch(
 );
 
 // Ha mégis elérhető lenne az oldal inicializálásakor a props.machine.id, akkor fusson le a GET request
-
 onMounted(() => {
   if (machineId.value !== undefined) {
     fetchAndSetPaidBookings();
@@ -226,7 +233,6 @@ onMounted(() => {
 });
 
 // Azoknak a dátumoknak a letiltása, amik már garantáltan foglaltak ("Paid" státusz)
-
 const disabledDates = computed(() => {
   const disabledDateRange = [];
 
@@ -243,10 +249,6 @@ const disabledDates = computed(() => {
   }
   return disabledDateRange;
 });
-
-// Dark mode
-const store = useStore();
-const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
@@ -256,6 +258,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   padding: 10px 0px 40px 0px;
   transition: background-color 0.5s, color 0.5s;
 }
+
 .booking-form {
   width: 100%;
   max-width: 500px;
