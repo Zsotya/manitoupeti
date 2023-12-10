@@ -91,6 +91,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import io from "socket.io-client";
+
+// WebSocket
+const socket = io("http://localhost:3000");
 
 // Adatok fetchelése
 const pendingBookings = ref([]);
@@ -108,6 +112,9 @@ async function fetchData() {
 
 onMounted(() => {
   fetchData();
+  socket.on("bookingsUpdated", () => {
+    fetchData();
+  });
 });
 
 // Időintervallum YYYY-MM-DD formátumra formázás (ebben az esetben az óra,perc irreleváns)
