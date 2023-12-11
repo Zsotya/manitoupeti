@@ -194,11 +194,13 @@ const openApprovePopup = (bookingId) => {
   isApproveOpen.value = true;
 };
 
+// Ablak bezárása
 const closeApprove = () => {
   approveBookingId.value = null;
   isApproveOpen.value = false;
 };
 
+// Megrendelés elfogadása
 const approveBooking = async (bookingId) => {
   try {
     // Foglalás releváns adatainak tárolása

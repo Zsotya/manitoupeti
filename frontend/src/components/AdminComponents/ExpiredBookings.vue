@@ -31,7 +31,7 @@
             <td>{{ booking.price }}Ft</td>
             <td>{{ formatDate(booking.updated_at) }}</td>
             <td class="actions-buttons">
-              <button class="paid-button" @click="markAsPaid(booking.id)">
+              <button class="paid-button" @click="openPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
               <button class="expired-button" @click="archive(booking.id)">
@@ -41,6 +41,20 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Fizetettnek jelölés ablak -->
+    <div class="overlay" v-if="isPaidOpen">
+      <div class="popup">
+        <div class="message">
+          Biztos fizetettnek szeretnéd megjelölni a megrendelést?
+        </div>
+        <div class="buttons">
+          <button class="confirm-button" @click="markAsPaid(paidBookingId)">
+            Igen
+          </button>
+          <button class="cancel-button" @click="closePaid">Nem</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -102,8 +116,26 @@ const formatDate = (modifiedDate) => {
   return date.toLocaleString("hu-HU", options);
 };
 
-// Funkciógombok
-// Fizetve
+/* Funkciógombok */
+/* Fizetve */
+
+// Inicializálás
+const isPaidOpen = ref(false);
+const paidBookingId = ref(null);
+
+// Ablak megnyitása
+const openPaid = (bookingId) => {
+  paidBookingId.value = bookingId;
+  isPaidOpen.value = true;
+};
+
+// Ablak bezárása
+const closePaid = () => {
+  paidBookingId.value = null;
+  isPaidOpen.value = false;
+};
+
+// Megjelölés fizetettnek
 const markAsPaid = async (bookingId) => {
   try {
     // Foglalás releváns adatainak tárolása
@@ -145,6 +177,8 @@ const markAsPaid = async (bookingId) => {
     }
   } catch (error) {
     console.error("Fizetett státusz megjelölése közbeni hiba:", error);
+  } finally {
+    closePaid();
   }
 };
 
@@ -265,5 +299,52 @@ th {
 
 .expired-button:hover {
   background-color: rgb(130, 14, 14);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: #ffffff;
+  padding: 50px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.message {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 10px 20px;
+  margin: 0 14px;
+  font-size: 16px;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  background-color: lightgray;
 }
 </style>

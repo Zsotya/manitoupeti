@@ -31,7 +31,7 @@
             <td>{{ booking.price }}Ft</td>
             <td>{{ formatDate(booking.updated_at) }}</td>
             <td class="actions-buttons">
-              <button class="paid-button" @click="markAsPaid(booking.id)">
+              <button class="paid-button" @click="openPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
               <button class="reject-button" @click="openReject(booking.id)">
@@ -42,9 +42,23 @@
         </tbody>
       </table>
     </div>
+    <!-- Fizetettnek jelölés ablak -->
+    <div class="overlay" v-if="isPaidOpen">
+      <div class="popup">
+        <div class="message">
+          Biztos fizetettnek szeretnéd megjelölni a megrendelést?
+        </div>
+        <div class="buttons">
+          <button class="confirm-button" @click="markAsPaid(paidBookingId)">
+            Igen
+          </button>
+          <button class="cancel-button" @click="closePaid">Nem</button>
+        </div>
+      </div>
+    </div>
     <!-- Elutasítás ablak -->
     <div v-if="isRejectOpen" class="overlay">
-      <div class="reject-popup">
+      <div class="popup">
         <div class="content">
           <div class="message">
             Biztos elutasítod a {{ selectedRejectBooking.id }} ID-vel ellátott
@@ -58,12 +72,12 @@
           ></textarea>
           <div class="buttons">
             <button
-              class="accept-reject"
+              class="confirm-button"
               @click="rejectBooking(selectedRejectBooking.id)"
             >
               Elutasítás
             </button>
-            <button class="cancel-reject" @click="closeReject">Mégse</button>
+            <button class="cancel-button" @click="closeReject">Mégse</button>
           </div>
         </div>
       </div>
@@ -128,9 +142,26 @@ const formatDate = (modifiedDate) => {
   return date.toLocaleString("hu-HU", options);
 };
 
-// Funkciógombok
+/* Funkciógombok */
+/* Fizetve */
 
-// Fizetve
+// Inicializálás
+const isPaidOpen = ref(false);
+const paidBookingId = ref(null);
+
+// Ablak megnyitása
+const openPaid = (bookingId) => {
+  paidBookingId.value = bookingId;
+  isPaidOpen.value = true;
+};
+
+// Ablak bezárása
+const closePaid = () => {
+  paidBookingId.value = null;
+  isPaidOpen.value = false;
+};
+
+// Megjelölés fizetettnek
 const markAsPaid = async (bookingId) => {
   try {
     // Foglalás releváns adatainak tárolása
@@ -174,6 +205,8 @@ const markAsPaid = async (bookingId) => {
     }
   } catch (error) {
     console.error("Fizetett státusz megjelölése közbeni hiba:", error);
+  } finally {
+    closePaid();
   }
 };
 
@@ -334,7 +367,7 @@ th {
   align-items: center;
 }
 
-.reject-popup {
+.popup {
   background-color: #ffffff;
   padding: 50px;
   text-align: center;
@@ -363,8 +396,8 @@ th {
   justify-content: center;
 }
 
-.accept-reject,
-.cancel-reject {
+.confirm-button,
+.cancel-button {
   padding: 10px 20px;
   margin: 0 14px;
   font-size: 16px;
@@ -374,8 +407,8 @@ th {
   transition: background-color 0.3s;
 }
 
-.accept-reject:hover,
-.cancel-reject:hover {
+.confirm-button:hover,
+.cancel-button:hover {
   background-color: lightgray;
 }
 </style>
