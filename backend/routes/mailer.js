@@ -2,7 +2,6 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const router = express.Router();
 const multer = require("multer");
-const dotenv = require("dotenv");
 
 // Feladó adatok meghatározása
 const transporter = nodemailer.createTransport({

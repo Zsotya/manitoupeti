@@ -67,15 +67,15 @@ app.use(paidBookingsRoutes);
 app.use(activeBookings);
 
 // WebSocket setup
-io.on("connection", (socket) => {
-  console.log("A user connected");
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
-});
 app.set("io", io);
+// io.on("connection", (socket) => {
+//   console.log("A user connected");
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected");
+//   });
+// });
 
 // Start the server
 server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`A szerver elindult a ${port} porton`);
 });
