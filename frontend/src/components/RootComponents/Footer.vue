@@ -15,9 +15,9 @@
       <div class="footer-item">
         <div class="contacts">{{ $t("footerContact") }}</div>
         <div class="phone-numbers">
-          <div>+123 456 789</div>
-          <div>+987 654 321</div>
-          <div>+567 890 123</div>
+          <div>+36 30 214-1070</div>
+          <div>+36 30 969-0126</div>
+          <div>+36 30 286-8982</div>
         </div>
         <div class="email-addresses">
           <div>manitoupeti@me.hu</div>
@@ -27,9 +27,15 @@
       <div class="footer-item">
         <div class="socials">{{ $t("footerSocials") }}</div>
         <div class="social-links">
-          <a href="https://www.facebook.com/">Facebook</a>
-          <a href="https://www.instagram.com/">Instagram</a>
-          <a href="https://www.linkedin.com/">LinkedIn</a>
+          <a href="https://www.facebook.com/orfibt" target="_blank">Facebook</a>
+          <a href="https://www.instagram.com/manitoupeti/" target="_blank"
+            >Instagram</a
+          >
+          <a
+            href="http://kosarasemelogep.hu/?fbclid=IwAR3j1vUbb51Nzmo8tWZi4aidcySxkwXIVpPERn1Xu8ezo68eCjiQddexq4M"
+            target="_blank"
+            >Őr-Fi Bt.</a
+          >
         </div>
       </div>
       <div class="break-2"></div>
