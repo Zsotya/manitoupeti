@@ -33,7 +33,7 @@
             <td class="actions-buttons">
               <button
                 class="approve-button"
-                @click="approveBooking(booking.id)"
+                @click="openApprovePopup(booking.id)"
               >
                 <i class="fas fa-check"></i>Jóváhagyás
               </button>
@@ -50,6 +50,21 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Elfogadás ablak -->
+    <div class="overlay" v-if="isApproveOpen">
+      <div class="popup">
+        <div class="message">Biztos el szeretnéd fogadni a megrendelést?</div>
+        <div class="buttons">
+          <button
+            class="confirm-button"
+            @click="approveBooking(approveBookingId)"
+          >
+            Igen
+          </button>
+          <button class="cancel-button" @click="closeApprove">Nem</button>
+        </div>
+      </div>
     </div>
     <!-- Ár módosító ablak -->
     <div v-if="isModifyPriceOpen" class="overlay">
@@ -166,9 +181,24 @@ const formatDate = (updatedDate) => {
   return date.toLocaleString("hu-HU", options);
 };
 
-// Funkciógombok
+/* Funkciógombok */
 
-// Elfogadás
+/* Elfogadás */
+// Inicializálás
+const approveBookingId = ref(null);
+const isApproveOpen = ref(false);
+
+// Ablak megnyitása
+const openApprovePopup = (bookingId) => {
+  approveBookingId.value = bookingId;
+  isApproveOpen.value = true;
+};
+
+const closeApprove = () => {
+  approveBookingId.value = null;
+  isApproveOpen.value = false;
+};
+
 const approveBooking = async (bookingId) => {
   try {
     // Foglalás releváns adatainak tárolása
@@ -216,10 +246,12 @@ const approveBooking = async (bookingId) => {
     }
   } catch (error) {
     console.error("Elfogadási hiba:", error);
+  } finally {
+    closeApprove();
   }
 };
 
-// Elutasítás
+/* Elutasítás */
 // Komment ablak inicializálása "bezártnak", adatok inicializálása
 const isRejectOpen = ref(false);
 const rejectComment = ref("");
@@ -292,7 +324,7 @@ const rejectBooking = async () => {
   }
 };
 
-// Ár módosítás
+/* Ár módosítás */
 // Módosító ablak inicializálása "bezártként", adatok inicializálása
 const isModifyPriceOpen = ref(false);
 const newPrice = ref("");
