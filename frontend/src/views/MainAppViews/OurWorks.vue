@@ -27,7 +27,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/films");
     films.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok lekérdezése közben:", error);
   }
 }
 
@@ -40,7 +40,9 @@ onMounted(() => {
 .films-wrap {
   background-color: #e8e6e6;
   transition: background-color 0.5s;
+  padding-bottom: 30px;
 }
+
 .our-works {
   display: flex;
   flex-wrap: wrap;

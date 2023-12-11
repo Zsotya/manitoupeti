@@ -45,7 +45,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   height: 420px;
   perspective: 1000px;
   cursor: pointer;
-  margin: 0px 0px 40px 0px;
+  margin: 0px 10px 40px 10px;
   transition: transform 0.3s;
   border-radius: 8px;
 }
@@ -125,7 +125,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 /* Laptop nézet */
 @media screen and (max-width: 1024px) {
   .film-card {
-    margin: 15px 0;
+    margin: 15px 10px;
     width: 340px;
     height: 320px;
   }
@@ -138,6 +138,15 @@ const darkMode = computed(() => store.getters.isDarkMode);
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 6.5px 8px 7px rgba(0, 0, 0, 0.75);
+  }
+
+  .film-back h3 {
+    font-size: 24px;
+  }
+
+  .film-back p {
+    font-size: 18px;
+    padding-left: 4px;
   }
 }
 
