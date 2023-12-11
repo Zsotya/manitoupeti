@@ -170,6 +170,8 @@ router.put("/api/machines/:id", upload.single("image"), (req, res) => {
 });
 
 // Nehézgép törlése - DELETE
+// Megjegyzés: Csak olyan nehézgép törölhető, amire nincs historikus foglalás létrehozva (az id-jével nem szerepel rekort a bookings és archive_bookings táblában)
+// Terv: soft-delete megoldás, azaz egy "deleted" oszlop hozzáadása a machines táblához. Ennek igaz értéke alapján jelenítené meg az adatokat a frontend
 router.delete("/api/machines/:id", (req, res) => {
   // Azonosító meghatározása
   const machineId = req.params.id;

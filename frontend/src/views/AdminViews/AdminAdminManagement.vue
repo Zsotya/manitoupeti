@@ -22,7 +22,7 @@
               <button class="modify-button">
                 <i class="fas fa-edit"></i>Módosítás
               </button>
-              <button class="delete-button" @click="deleteAdmin(admin.id)">
+              <button class="delete-button" @click="openDeletePopup(admin.id)">
                 <i class="fas fa-trash"></i>
                 Törlés
               </button>
@@ -36,6 +36,18 @@
         <i class="fas fa-plus"></i>Új admin létrehozása
       </button>
     </router-link>
+  </div>
+  <!-- Törlés megerősítés ablak -->
+  <div class="overlay" v-if="popupOpen">
+    <div class="delete-popup">
+      <div class="message">Biztos törölni szeretnéd?</div>
+      <div class="buttons">
+        <button class="accept-delete" @click="deleteAdmin(deleteItemId)">
+          Igen
+        </button>
+        <button class="cancel-delete" @click="cancelDelete">Nem</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,7 +89,26 @@ const deleteAdmin = async (adminId) => {
     admins.value = admins.value.filter((admin) => admin.id !== adminId);
   } catch (error) {
     console.error("Hiba az admin törlése közben:", error);
+  } finally {
+    cancelDelete();
   }
+};
+
+/* Törlés megerősítés */
+// Adatok inicializálása
+const popupOpen = ref(false);
+const deleteItemId = ref(null);
+
+// Ablak megnyitása
+const openDeletePopup = (adminId) => {
+  deleteItemId.value = adminId;
+  popupOpen.value = true;
+};
+
+// Ablak bezárása, azonosító alaphelyzetbe állítása
+const cancelDelete = () => {
+  deleteItemId.value = null;
+  popupOpen.value = false;
 };
 </script>
 
@@ -171,5 +202,52 @@ th {
 
 .fa-plus {
   padding-right: 5px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-popup {
+  background-color: #ffffff;
+  padding: 50px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.message {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.accept-delete,
+.cancel-delete {
+  padding: 10px 20px;
+  margin: 0 14px;
+  font-size: 16px;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.accept-delete:hover,
+.cancel-delete:hover {
+  background-color: lightgray;
 }
 </style>
