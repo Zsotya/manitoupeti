@@ -34,7 +34,7 @@
               <button class="paid-button" @click="openPaid(booking.id)">
                 <i class="fas fa-check"></i>Fizetve
               </button>
-              <button class="expired-button" @click="archive(booking.id)">
+              <button class="expired-button" @click="openArchive(booking.id)">
                 <i class="fas fa-times"></i>Archiválás
               </button>
             </td>
@@ -53,6 +53,18 @@
             Igen
           </button>
           <button class="cancel-button" @click="closePaid">Nem</button>
+        </div>
+      </div>
+    </div>
+    <!-- Archiválás ablak -->
+    <div class="overlay" v-if="isArchiveOpen">
+      <div class="popup">
+        <div class="message">Biztos archiválni szeretnéd a megrendelést?</div>
+        <div class="buttons">
+          <button class="confirm-button" @click="archive(archiveBookingId)">
+            Igen
+          </button>
+          <button class="cancel-button" @click="closeArchive">Nem</button>
         </div>
       </div>
     </div>
@@ -182,7 +194,24 @@ const markAsPaid = async (bookingId) => {
   }
 };
 
-// Lejárt
+/* Archiválás gomb */
+// Inicializálás
+const isArchiveOpen = ref(false);
+const archiveBookingId = ref(null);
+
+// Archiválás ablak megnyitása
+const openArchive = (bookingId) => {
+  archiveBookingId.value = bookingId;
+  isArchiveOpen.value = true;
+};
+
+// Archiválás ablak bezárása
+const closeArchive = () => {
+  archiveBookingId.value = null;
+  isArchiveOpen.value = false;
+};
+
+// Archiválás
 const archive = async (bookingId) => {
   try {
     // Foglalás releváns adatainak tárolása
@@ -200,7 +229,7 @@ const archive = async (bookingId) => {
       console.log("Foglalás sikeresen archiválva!");
       // Email küldés
       const emailResponse = await axios.post(
-        "http://localhost:3000/api/paidMail",
+        "http://localhost:3000/api/expiredMail",
         {
           bookingId,
           first_name,
@@ -226,6 +255,8 @@ const archive = async (bookingId) => {
     }
   } catch (error) {
     console.error("Hiba a foglalás archiválása közben:", error);
+  } finally {
+    closeArchive();
   }
 };
 </script>
