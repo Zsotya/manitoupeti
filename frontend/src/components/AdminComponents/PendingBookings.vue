@@ -52,26 +52,37 @@
       </table>
     </div>
     <!-- Ár módosító ablak -->
-    <div v-if="isModifyPriceOpen" class="modify-price-popup">
-      <div class="content">
-        <h3>
-          {{ selectedModifyBooking.id }} ID-vel ellátott foglalás árának
-          módosítása
-        </h3>
-        <p>Jelenlegi ár: {{ selectedModifyBooking.price }}Ft</p>
-        <input
-          v-model="newPrice"
-          placeholder="Új ár (Ft)"
-          type="text"
-          id="newPrice"
-        />Ft
-        <button @click="modifyPrice">Módosítás</button>
-        <button @click="closeModifyPrice">Mégse</button>
+    <div v-if="isModifyPriceOpen" class="overlay">
+      <div class="popup">
+        <div class="content">
+          <div class="message">
+            {{ selectedModifyBooking.id }} ID-vel ellátott foglalás árának
+            módosítása
+          </div>
+          <div class="current-price">
+            Jelenlegi ár: {{ selectedModifyBooking.price }}Ft
+          </div>
+          <input
+            v-model="newPrice"
+            placeholder="Új ár (Ft)"
+            type="text"
+            id="newPrice"
+            class="price-input"
+          />Ft
+          <div class="buttons">
+            <button @click="modifyPrice" class="confirm-button">
+              Módosítás
+            </button>
+            <button @click="closeModifyPrice" class="cancel-button">
+              Mégse
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Elutasítás ablak -->
     <div v-if="isRejectOpen" class="overlay">
-      <div class="reject-popup">
+      <div class="popup">
         <div class="content">
           <div class="message">
             Biztos elutasítod a {{ selectedRejectBooking.id }} ID-vel ellátott
@@ -85,12 +96,12 @@
           ></textarea>
           <div class="buttons">
             <button
-              class="accept-reject"
+              class="confirm-button"
               @click="rejectBooking(selectedRejectBooking.id)"
             >
               Elutasítás
             </button>
-            <button class="cancel-reject" @click="closeReject">Mégse</button>
+            <button class="cancel-button" @click="closeReject">Mégse</button>
           </div>
         </div>
       </div>
@@ -421,7 +432,7 @@ th {
   align-items: center;
 }
 
-.reject-popup {
+.popup {
   background-color: #ffffff;
   padding: 50px;
   text-align: center;
@@ -445,13 +456,21 @@ th {
   resize: vertical;
 }
 
+.price-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
 }
 
-.accept-reject,
-.cancel-reject {
+.confirm-button,
+.cancel-button {
   padding: 10px 20px;
   margin: 0 14px;
   font-size: 16px;
@@ -461,8 +480,8 @@ th {
   transition: background-color 0.3s;
 }
 
-.accept-reject:hover,
-.cancel-reject:hover {
+.confirm-button:hover,
+.cancel-button:hover {
   background-color: lightgray;
 }
 </style>
