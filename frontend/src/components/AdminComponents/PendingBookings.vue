@@ -70,19 +70,29 @@
       </div>
     </div>
     <!-- Elutasítás ablak -->
-    <div v-if="isRejectOpen" class="reject-popup">
-      <div class="content">
-        <h3>
-          {{ selectedRejectBooking.id }} ID-vel ellátott foglalás elutasítása
-        </h3>
-        <textarea
-          v-model="rejectComment"
-          placeholder="Megjegyzés hozzáadása..."
-        ></textarea>
-        <button @click="rejectBooking(selectedRejectBooking.id)">
-          Elutasítás
-        </button>
-        <button @click="closeReject">Mégse</button>
+    <div v-if="isRejectOpen" class="overlay">
+      <div class="reject-popup">
+        <div class="content">
+          <div class="message">
+            Biztos elutasítod a {{ selectedRejectBooking.id }} ID-vel ellátott
+            megrendelést?
+          </div>
+          <div class="reject-comment">Elutasítás indoklása:</div>
+          <textarea
+            v-model="rejectComment"
+            placeholder="Megjegyzés hozzáadása..."
+            class="comment-input"
+          ></textarea>
+          <div class="buttons">
+            <button
+              class="accept-reject"
+              @click="rejectBooking(selectedRejectBooking.id)"
+            >
+              Elutasítás
+            </button>
+            <button class="cancel-reject" @click="closeReject">Mégse</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -397,5 +407,62 @@ th {
 
 .modify-price-button:hover {
   background-color: #0056b3;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reject-popup {
+  background-color: #ffffff;
+  padding: 50px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.message {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.accept-reject,
+.cancel-reject {
+  padding: 10px 20px;
+  margin: 0 14px;
+  font-size: 16px;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.accept-reject:hover,
+.cancel-reject:hover {
+  background-color: lightgray;
 }
 </style>
