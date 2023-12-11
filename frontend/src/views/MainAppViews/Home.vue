@@ -31,7 +31,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/paragraphs");
     paragraphs.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok lekérdezése közben:", error);
   }
 }
 

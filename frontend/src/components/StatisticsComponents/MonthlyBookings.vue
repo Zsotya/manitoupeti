@@ -73,7 +73,7 @@ const fetchData = async () => {
     generateChartData();
     calculateYearlyBookings();
   } catch (err) {
-    console.log("Error fetching data:", err);
+    console.log("Hiba az adatok lekérdezése közben:", err);
   }
 };
 

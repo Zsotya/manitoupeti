@@ -247,7 +247,7 @@ async function fetchData() {
     }
     // Egyéb hibakódok esetén
     else {
-      console.error("Error fetching data:", error);
+      console.error("Hiba az adatok lekérdezése közben:", error);
     }
   }
 }

@@ -16,11 +16,12 @@ function isTokenExpired(token) {
 // JWT token dekódolása, elemzés
 function parseToken(token) {
   try {
+    // Base64 formátummá formázás
     const [, payload] = token.split(".");
     const base64 = payload.replace("-", "+").replace("_", "/");
     return JSON.parse(atob(base64));
   } catch (error) {
-    console.error("Error parsing token:", error);
+    console.error("Hiba a token elemzése közben:", error);
     return null;
   }
 }

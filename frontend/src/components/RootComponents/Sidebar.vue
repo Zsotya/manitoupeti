@@ -24,6 +24,7 @@
 import router from "@/router";
 import authService from "@/services/authService";
 
+// Útvonalak meghatározása
 const links = [
   {
     path: "/admin/dashboard",
@@ -75,6 +76,7 @@ const links = [
   },
 ];
 
+// Kijelentkezés
 const logout = () => {
   authService.logoutUser();
   router.push("/admin");

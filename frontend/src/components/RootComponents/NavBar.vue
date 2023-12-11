@@ -113,6 +113,7 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
+// Útvonalak meghatározása
 const routes = [
   { path: "/", label: "homeLabel" },
   { path: "/bemutatkozas", label: "aboutLabel" },
@@ -123,7 +124,6 @@ const routes = [
 ];
 
 // Dark mode
-
 const darkMode = computed(() => store.getters.isDarkMode);
 const toggleDarkMode = () => {
   store.dispatch("toggleDarkMode");
@@ -395,7 +395,6 @@ a {
 }
 
 /* Mobil menü stílus */
-
 .mobile-menu {
   display: none; /* 768px+ képernyőknél ne jelenjen meg */
   list-style: none;

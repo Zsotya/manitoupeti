@@ -64,7 +64,7 @@ const fetchData = async () => {
     generateChartData();
     calculateYearlyRevenues();
   } catch (err) {
-    console.log("Error fetching data:", err);
+    console.log("Hiba az adatok lekérdezése közben:", err);
   }
 };
 

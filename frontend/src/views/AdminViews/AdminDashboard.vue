@@ -80,7 +80,7 @@ const fetchBookingCounts = async () => {
     );
     bookingCounts.value = response.data;
   } catch (error) {
-    console.error("Error fetching booking counts:", error);
+    console.error("Hiba a megrendelési darabszámok lekérdezése közben:", error);
   }
 };
 
@@ -91,7 +91,7 @@ const fetchActivePaidBookings = async () => {
     );
     paidBookings.value = response.data;
   } catch (error) {
-    console.error("Error fetching paid bookings:", error);
+    console.error("Hiba a fizetett megrendelések lekérdezése közben:", error);
   }
 };
 

@@ -28,10 +28,12 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
+// Adatok inicializálása
 const username = ref("");
 const password = ref("");
 const router = useRouter();
 
+// Bejelentkezési kísérlet
 const login = async () => {
   try {
     const response = await axios.post(
@@ -41,6 +43,7 @@ const login = async () => {
         password: password.value,
       }
     );
+    // Sikeres bejelentkezés
     if (response.data.authenticated) {
       localStorage.setItem("token", response.data.token);
       if (response.data.is_main_admin === 1) {
@@ -49,10 +52,13 @@ const login = async () => {
         localStorage.setItem("isMainAdmin", "false");
       }
       router.push("/admin/dashboard");
-    } else {
-      console.log("Ejnye bejnye, csúnya betörő");
+    }
+    // Sikertelen bejelentkezés
+    else {
+      console.log("Hibás bejelentkezési adatok. Kérjük, próbálja újra.");
     }
   } catch (error) {
+    // Hibakezelés
     console.error("Hiba a bejelentkezéskor:", error);
   }
 };

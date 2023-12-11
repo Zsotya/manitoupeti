@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import Chart from "chart.js/auto";
 import axios from "axios";
 
@@ -22,7 +22,7 @@ const fetchMachineData = async () => {
     );
     generatePieChart(response.data);
   } catch (err) {
-    console.log("Error fetching machine data:", err);
+    console.log("Hiba az adatok lekérdezése közben:", err);
   }
 };
 
