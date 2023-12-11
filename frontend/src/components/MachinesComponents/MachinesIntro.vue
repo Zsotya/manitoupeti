@@ -33,7 +33,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .text-wrap {
   display: flex;
   justify-content: flex-start;
-  padding: 200px 0px 0px 0px;
+  padding: 180px 0px 0px 30px;
   margin-left: 80px;
 }
 

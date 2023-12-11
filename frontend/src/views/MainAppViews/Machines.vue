@@ -116,7 +116,7 @@ async function fetchData() {
     const response = await axios.get("http://localhost:3000/api/machines");
     machines.value = response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Hiba az adatok lekérdezése közben:", error);
   }
 }
 
@@ -198,13 +198,13 @@ function resetFilters() {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 0px;
-  padding: 140px 0px 40px 0px;
+  padding: 40px 0px 60px 0px;
 }
 
 .filter-toggle {
   position: absolute;
-  top: 32px;
-  left: 50px;
+  top: 100px;
+  left: 116px;
   color: #fff;
   border: none;
   border-radius: 4px;
