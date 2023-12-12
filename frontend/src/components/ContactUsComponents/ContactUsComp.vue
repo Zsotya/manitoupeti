@@ -71,6 +71,37 @@
         <img src="@/assets/99r9c.jpg" alt="Image" />
       </div>
     </div>
+    <!-- Visszajelzés a sikeres elküldésről -->
+    <!-- Sikeres elküldés -->
+    <div v-if="isSent" class="overlay">
+      <div class="popup">
+        <div class="content">
+          <div class="popup-result">
+            {{ $t("contactUsPopupSuccess") }}
+          </div>
+        </div>
+        <div class="popup-button">
+          <button @click="cancelPopup" class="cancel-button">OK</button>
+        </div>
+      </div>
+    </div>
+    <!-- Sikertelen elküldés -->
+    <div v-if="notSent" class="overlay">
+      <div class="popup">
+        <div class="content">
+          <div class="popup-result">{{ $t("contactUsPopupError") }}</div>
+          <div v-if="notComplete" class="popup-message">
+            {{ $t("contactUsPopupFillAll") }}
+          </div>
+          <div v-if="isError" class="popup-message">
+            {{ $t("contactUsPopupServerError") }}
+          </div>
+        </div>
+        <div class="popup-button">
+          <button @click="cancelPopup" class="cancel-button">OK</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -82,6 +113,21 @@ import axios from "axios";
 /* Dark mode */
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
+
+/* Felugró ablak a sikerességről */
+// Adatok inicializálása
+const isSent = ref(false);
+const notSent = ref(true);
+const notComplete = ref(false);
+const isError = ref(true);
+
+// Ablak bezárása
+const cancelPopup = () => {
+  isSent.value = false;
+  notSent.value = false;
+  notComplete.value = false;
+  isError.value = false;
+};
 
 // Form adatok
 const lastName = ref("");
@@ -102,7 +148,8 @@ const submitForm = async () => {
       !message.value
     ) {
       // Hibakezelés, ha nincs kitöltve a form
-      console.error("Kérjük, töltsön ki minden mezőt!");
+      notSent.value = true;
+      notComplete.value = true;
       return;
     }
     // Form elküldése backendnek
@@ -113,9 +160,8 @@ const submitForm = async () => {
       subject: subject.value,
       message: message.value,
     });
-    console.log(response.data);
     // Siker esetkezelés
-    alert("Email sikeresen elküldve!");
+    isSent.value = true;
 
     // Értékek resetelése
     lastName.value = "";
@@ -124,6 +170,8 @@ const submitForm = async () => {
     subject.value = "";
     message.value = "";
   } catch (error) {
+    notSent.value = true;
+    isError.value = true;
     console.error("Hiba az üzenet elküldésekor:", error.message);
   }
 };
@@ -277,6 +325,59 @@ label {
   transition: box-shadow 0.7s;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: #dfdfdf;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: border 0.3s;
+}
+
+.popup-result {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.popup-message {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.popup-button {
+  display: flex;
+  justify-content: center;
+}
+
+.cancel-button {
+  padding: 10px 20px;
+  margin: 0 14px;
+  font-size: 16px;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: lightgray;
+}
+
 /* Dark mode */
 .contact-us.dark-mode {
   background-color: #1a1a1a;
@@ -307,6 +408,15 @@ label {
 
 .contact-us.dark-mode .showcase-img img {
   box-shadow: 2px 0px 20px rgba(255, 255, 255, 0.8);
+}
+
+.contact-us.dark-mode .popup {
+  background-color: #1a1a1a;
+  border: 1px solid white;
+}
+
+.contact-us.dark-mode .cancel-button {
+  border-color: black;
 }
 
 /* Laptop nézet */
@@ -419,6 +529,22 @@ label {
 
   .submit {
     max-width: 220px;
+  }
+
+  .popup {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .popup-result {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .popup-message {
+    font-size: 18px;
+    margin-bottom: 18px;
+    font-weight: bold;
   }
 }
 </style>
