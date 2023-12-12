@@ -117,9 +117,9 @@ const darkMode = computed(() => store.getters.isDarkMode);
 /* Felugró ablak a sikerességről */
 // Adatok inicializálása
 const isSent = ref(false);
-const notSent = ref(true);
+const notSent = ref(false);
 const notComplete = ref(false);
-const isError = ref(true);
+const isError = ref(false);
 
 // Ablak bezárása
 const cancelPopup = () => {
