@@ -75,8 +75,38 @@
             {{ $t("machinesFormInform") }}
           </p>
         </div>
-        <button type="submit">{{ $t("machinesFormSubmit") }}</button>
+        <button class="submit-button" type="submit">
+          {{ $t("machinesFormSubmit") }}
+        </button>
       </form>
+    </div>
+    <!-- Visszajelzés a sikeres megrendelésről -->
+    <!-- Sikeres megrendelés -->
+    <div v-if="isSent" class="overlay">
+      <div class="popup">
+        <div class="content">
+          <div class="popup-result">
+            {{ $t("bookingFormPopupSuccess") }}
+          </div>
+        </div>
+        <div class="popup-button">
+          <button @click="cancelPopup" class="cancel-button">OK</button>
+        </div>
+      </div>
+    </div>
+    <!-- Sikertelen megrendelés -->
+    <div v-if="notSent" class="overlay">
+      <div class="popup">
+        <div class="content">
+          <div class="popup-result">{{ $t("bookingFormPopupError") }}</div>
+          <div v-if="isError" class="popup-message">
+            {{ $t("popupServerError") }}
+          </div>
+        </div>
+        <div class="popup-button">
+          <button @click="cancelPopup" class="cancel-button">OK</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -172,16 +202,30 @@ const prepareBookingData = () => {
   };
 };
 
-// Foglalás elküldése
+/* Felugró ablak */
+const isSent = ref(true);
+const notSent = ref(false);
+const isError = ref(false);
+
+// Ablak bezárása
+const cancelPopup = () => {
+  isSent.value = false;
+  notSent.value = false;
+  isError.value = false;
+};
+
+/* Foglalás elküldése */
 const submitBooking = async () => {
   const bookingData = prepareBookingData();
   try {
+    // POST kérés elküldése
     const response = await axios.post(
       "http://localhost:3000/api/bookings",
       bookingData
     );
+    // Sikeres elküldés esetén adatok visszaállítása kezdeti helyzetbe, felugró ablak megjelenítése
     if (response.status === 201) {
-      console.log("Booking added successfully");
+      isSent.value = true;
       last_name.value = "";
       first_name.value = "";
       email.value = "";
@@ -190,7 +234,10 @@ const submitBooking = async () => {
       date.value = [new Date(), null];
     }
   } catch (error) {
-    console.error("Error while adding a booking:", error);
+    // Hibakezelés
+    notSent.value = true;
+    isError.value = true;
+    console.error("Hiba a megrendelés létrehozásakor:", error);
   }
 };
 
@@ -206,7 +253,7 @@ async function fetchAndSetPaidBookings() {
     );
     paidBookings.value = response.data;
   } catch (error) {
-    console.log("Error fetching/setting data:", error);
+    console.log("Hiba az adatok lekérdezése közben:", error);
   }
 }
 
@@ -310,7 +357,7 @@ const disabledDates = computed(() => {
   color: red;
 }
 
-button {
+.submit-button {
   display: block;
   width: 100%;
   padding: 10px;
@@ -323,8 +370,64 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.submit-button:hover {
   background-color: #0056b3;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.popup {
+  background-color: #dfdfdf;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: border 0.3s;
+}
+
+.popup-result {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.popup-message {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.popup-button {
+  display: flex;
+  justify-content: center;
+}
+
+.cancel-button {
+  padding: 10px 20px;
+  margin: 0 14px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: lightgray;
 }
 
 /* Dark mode */
@@ -344,15 +447,59 @@ button:hover {
   color: white;
 }
 
-.form-wrap.dark-mode button {
+.form-wrap.dark-mode .submit-button {
   background-color: #0056b3;
 }
 
-.form-wrap.dark-mode button:hover {
+.form-wrap.dark-mode .submit-button:hover {
   background-color: #007bff;
 }
 
 .dp__theme_dark {
   --dp-border-color: white;
+}
+
+.form-wrap.dark-mode .popup {
+  background-color: #1a1a1a;
+  border: 1px solid white;
+}
+
+.form-wrap.dark-mode .cancel-button {
+  border-color: black;
+}
+
+.form-wrap.dark-mode .cancel-button {
+  background-color: #b94a50;
+  color: #1a1a1a;
+}
+
+.form-wrap.dark-mode .cancel-button:hover {
+  background-color: #d55b61;
+  color: #1a1a1a;
+  border: 1px solid red;
+}
+
+/* Mobilnézet */
+@media screen and (max-width: 496px) {
+  .form-wrap {
+    padding: 0px;
+    padding: 10px 20px 40px 20px;
+  }
+
+  .popup {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .popup-result {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .popup-message {
+    font-size: 18px;
+    margin-bottom: 18px;
+    font-weight: bold;
+  }
 }
 </style>

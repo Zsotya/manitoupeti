@@ -94,7 +94,7 @@
             {{ $t("contactUsPopupFillAll") }}
           </div>
           <div v-if="isError" class="popup-message">
-            {{ $t("contactUsPopupServerError") }}
+            {{ $t("popupServerError") }}
           </div>
         </div>
         <div class="popup-button">
