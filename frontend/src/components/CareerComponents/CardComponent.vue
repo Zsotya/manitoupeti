@@ -2,11 +2,13 @@
   <div class="career-card" :class="{ 'dark-mode': darkMode }">
     <div class="card-content">
       <div class="card-text-part">
-        <div class="card-title">{{ job["jobname_" + $i18n.locale] }}</div>
-        <div class="job-time-icon">
-          <i class="fa-regular fa-clock"></i>
+        <div class="header-part">
+          <div class="card-title">{{ job["jobname_" + $i18n.locale] }}</div>
+          <div class="job-time-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+          <div class="job-time">{{ job["jobtime_" + $i18n.locale] }}</div>
         </div>
-        <div class="job-time">{{ job["jobtime_" + $i18n.locale] }}</div>
         <div class="card-text-content">
           {{ job["jobdescription_" + $i18n.locale] }}
         </div>
@@ -118,6 +120,10 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 /* Mobil nézet */
 @media screen and (max-width: 496px) {
+  .header-part {
+    text-align: center;
+  }
+
   .career-card {
     width: 69vw;
     height: 54vh;

@@ -299,7 +299,7 @@ button:hover {
 @media screen and (max-width: 1024px) {
   .filter-toggle {
     top: 80px;
-    left: 6px;
+    left: 10px;
   }
 
   .filter-content {
@@ -324,6 +324,7 @@ button:hover {
     display: flex;
     width: 100%;
     justify-content: center;
+    left: 0px;
   }
 
   .filter-content {
@@ -338,6 +339,11 @@ button:hover {
 
 /* Mobil nézet */
 @media screen and (max-width: 496px) {
+  .machines-container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   .filter-section {
     width: 240px;
     left: -240px;

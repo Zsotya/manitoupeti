@@ -70,9 +70,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 @media screen and (max-width: 1024px) {
   .text-wrap {
     margin-left: 60px;
-  }
-  .text-intro {
-    padding: 100px 0px 0px 0px;
+    padding-top: 120px;
   }
 
   .small-title {
@@ -93,7 +91,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 @media screen and (max-width: 768px) {
   .text-wrap {
     margin: 0;
-    padding-top: 200px;
+    padding-top: 120px;
     width: 100%;
     /* margin: 0px 40px 0px 40px; */
     flex-wrap: wrap;

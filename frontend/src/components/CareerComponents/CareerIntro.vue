@@ -28,7 +28,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .text-part {
   display: flex;
   flex-direction: column;
-  padding-top: 240px;
+  padding-top: 160px;
   width: 100%;
 }
 
@@ -48,6 +48,9 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 /* Tablet nézet */
 @media screen and (max-width: 768px) {
+  .text-part {
+    padding-top: 120px;
+  }
   .career-cards-container {
     margin: 0;
   }

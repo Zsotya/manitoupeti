@@ -418,7 +418,8 @@ a {
   display: none; /* 768px+ képernyőknél ne jelenjen meg */
   background-color: rgba(0, 0, 0, 0);
   border: none;
-  padding: 10px 0px 0px 10px;
+  margin: 20px 0px 0px 20px;
+  transition: color 0.3s;
 }
 
 /* Laptop nézet */
@@ -479,5 +480,9 @@ a {
 
 .dark-mode .buttons {
   background-color: rgba(0, 0, 0, 0.45);
+}
+
+.dark-mode .hamburger-icon {
+  color: #efefef;
 }
 </style>

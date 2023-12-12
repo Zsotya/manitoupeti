@@ -189,7 +189,7 @@ const submitForm = async () => {
 .text-parts {
   display: flex;
   flex-direction: column;
-  margin: 260px 0px 0px 60px;
+  margin: 160px 0px 0px 60px;
 }
 
 .small-title {
@@ -426,7 +426,7 @@ label {
   }
   .text-parts {
     text-align: center;
-    margin: 200px 0px 0px 0px;
+    margin: 150px 0px 0px 0px;
   }
 
   .big-content {
@@ -461,6 +461,9 @@ label {
 
 /* Tablet nézet */
 @media screen and (max-width: 768px) {
+  .text-parts {
+    margin-top: 100px;
+  }
   .big-content {
     font-size: 48px;
   }
@@ -499,7 +502,7 @@ label {
 @media screen and (max-width: 496px) {
   .text-parts {
     text-align: center;
-    margin: 200px 10px 0px 10px;
+    margin: 110px 10px 0px 10px;
   }
   .big-content {
     font-size: 36px;
