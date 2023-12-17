@@ -203,7 +203,7 @@ const prepareBookingData = () => {
 };
 
 /* Felugró ablak */
-const isSent = ref(true);
+const isSent = ref(false);
 const notSent = ref(false);
 const isError = ref(false);
 
