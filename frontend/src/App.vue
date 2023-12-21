@@ -3,13 +3,23 @@
     <!-- MAIN APP PART -->
 
     <div v-if="$route.meta.isMainApp">
-      <header><NavBar /></header>
+      <!-- Tartalom átugró "láthatatlan" gombok -->
+      <div class="skip-links">
+        <a class="skip-link" href="#main-content">{{ $t("skipNavigation") }}</a>
+        <a class="skip-link" href="#footer">{{ $t("skipToFooter") }}</a>
+      </div>
+      <!-- Fejléc -->
+      <header>
+        <NavBar />
+      </header>
       <!-- <section><Logo /></section> -->
-      <main class="main-content">
+      <!-- Főtartalom -->
+      <main class="main-content" id="main-content">
         <router-view />
       </main>
       <div class="chatbot"><Chatbot /></div>
-      <footer><Footer /></footer>
+      <!-- Lábjegyzék -->
+      <footer id="footer"><Footer /></footer>
     </div>
 
     <!-- ADMIN LOGIN PART -->
@@ -62,5 +72,25 @@ onMounted(() => {
 .admin-content {
   width: 100%;
   margin-left: 250px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  z-index: 5;
+  translate: 0 -100%;
+  transition: translate 200ms ease-in-out;
+}
+
+.skip-link:focus {
+  translate: 0;
 }
 </style>
