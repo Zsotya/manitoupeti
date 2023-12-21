@@ -90,6 +90,15 @@ const routes = [
     component: NotFound,
     meta: { isMainApp: true, isAdminApp: false },
   },
+  // Redirect from old application's landing
+  {
+    path: "/index.php/",
+    redirect: "/",
+  },
+  {
+    path: "/index.php/:lang/",
+    redirect: "/",
+  },
   /* ADMIN APPLICATION */
   // Login Page
   {
