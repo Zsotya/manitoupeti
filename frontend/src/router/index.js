@@ -39,6 +39,7 @@ import ModifyFilm from "../components/AdminComponents/ModifyFilm.vue";
 
 // Services
 import authService from "@/services/authService";
+import i18n from "@/main";
 
 /* Router paths */
 const routes = [
@@ -46,47 +47,56 @@ const routes = [
 
   {
     path: "/",
+    name: "Home",
     component: Home,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/bemutatkozas",
+    name: "AboutUs",
     component: AboutUs,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/munkaink",
+    name: "OurWorks",
     component: OurWorks,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/berelheto-gepeink",
+    name: "Machines",
     component: Machines,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/berelheto-gepeink/:id",
+    name: "MachineDetail",
     component: MachineDetail,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/elerhetoseg",
+    name: "ContactUs",
     component: ContactUs,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/karrier",
+    name: "Career",
     component: Career,
     meta: { isMainApp: true, isAdminApp: false },
   },
   {
     path: "/karrier/:id",
+    name: "CareerDetail",
     component: CareerDetail,
     meta: { isMainApp: true, isAdminApp: false },
   },
   // 404 Page
   {
     path: "/:pathMatch(.*)*",
+    name: "NotFound",
     component: NotFound,
     meta: { isMainApp: true, isAdminApp: false },
   },
@@ -103,6 +113,7 @@ const routes = [
   // Login Page
   {
     path: "/admin",
+    name: "Bejelentkezés",
     component: Admin,
     meta: { isMainApp: false, isAdminApp: false, isAdminLogin: true },
     beforeEnter: (to, from, next) => {
@@ -117,6 +128,7 @@ const routes = [
   // Admin Main Pages
   {
     path: "/admin/dashboard",
+    name: "Irányítópult",
     component: AdminDashboard,
     meta: {
       isMainApp: false,
@@ -126,6 +138,7 @@ const routes = [
   },
   {
     path: "/admin/bookings",
+    name: "Megrendelések",
     component: AdminBookings,
     meta: {
       isMainApp: false,
@@ -135,6 +148,7 @@ const routes = [
   },
   {
     path: "/admin/statistics",
+    name: "Statisztika",
     component: AdminStatistics,
     meta: {
       isMainApp: false,
@@ -144,6 +158,7 @@ const routes = [
   },
   {
     path: "/admin/paragraph-management",
+    name: "Paragrafus menedzsment",
     component: AdminParagraph,
     meta: {
       isMainApp: false,
@@ -153,6 +168,7 @@ const routes = [
   },
   {
     path: "/admin/ourfilms-management",
+    name: "Munkáink menedzsment",
     component: AdminOurFilms,
     meta: {
       isMainApp: false,
@@ -162,6 +178,7 @@ const routes = [
   },
   {
     path: "/admin/machines-management",
+    name: "Gépeink menedzsment",
     component: AdminMachines,
     meta: {
       isMainApp: false,
@@ -171,6 +188,7 @@ const routes = [
   },
   {
     path: "/admin/career-management",
+    name: "Karrier menedzsment",
     component: AdminCareer,
     meta: {
       isMainApp: false,
@@ -180,6 +198,7 @@ const routes = [
   },
   {
     path: "/admin/admin-management",
+    name: "Adminisztrátor menedzsment",
     component: AdminAdminManagement,
     meta: {
       isMainApp: false,
@@ -191,6 +210,7 @@ const routes = [
   // Admin - Creation Pages
   {
     path: "/admin/paragraph-management/createparagraph",
+    name: "Új paragrafus",
     component: CreateParagraph,
     meta: {
       isMainApp: false,
@@ -200,6 +220,7 @@ const routes = [
   },
   {
     path: "/admin/ourfilms-management/createfilm",
+    name: "Új film",
     component: CreateFilm,
     meta: {
       isMainApp: false,
@@ -209,6 +230,7 @@ const routes = [
   },
   {
     path: "/admin/machines-management/createmachine",
+    name: "Új nehézgép",
     component: CreateMachine,
     meta: {
       isMainApp: false,
@@ -218,6 +240,7 @@ const routes = [
   },
   {
     path: "/admin/career-management/createjob",
+    name: "Új állás",
     component: CreateJob,
     meta: {
       isMainApp: false,
@@ -227,6 +250,7 @@ const routes = [
   },
   {
     path: "/admin/admin-management/createadmin",
+    name: "Új adminisztrátor",
     component: CreateAdmin,
     meta: {
       isMainApp: false,
@@ -238,6 +262,7 @@ const routes = [
   // Admin - Modification Pages
   {
     path: "/admin/machines-management/:id",
+    name: "Nehézgép módosítás",
     component: ModifyMachine,
     meta: {
       isMainApp: false,
@@ -247,6 +272,7 @@ const routes = [
   },
   {
     path: "/admin/paragraph-management/:id",
+    name: "Paragrafus módosítás",
     component: ModifyParagraph,
     meta: {
       isMainApp: false,
@@ -256,6 +282,7 @@ const routes = [
   },
   {
     path: "/admin/career-management/:id",
+    name: "Állás módosítás",
     component: ModifyJob,
     meta: {
       isMainApp: false,
@@ -265,6 +292,7 @@ const routes = [
   },
   {
     path: "/admin/ourfilms-management/:id",
+    name: "Film módosítás",
     component: ModifyFilm,
     meta: {
       isMainApp: false,
@@ -297,6 +325,19 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+// Cím beállítása minden oldalnak
+router.beforeEach((to, from, next) => {
+  if (to.meta.isMainApp) {
+    const pageTitle = i18n.global.t(`titles.${to.name}`) || "ManitouPeti";
+    document.title = `ManitouPeti - ${pageTitle}`;
+  } else if (to.meta.isAdminLogin || to.meta.isAdminApp) {
+    document.title = `ManitouPeti - ${to.name}`;
+  } else {
+    document.title = "ManitouPeti";
+  }
+  next();
 });
 
 export default router;

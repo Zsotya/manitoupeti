@@ -1,4 +1,15 @@
 {
+  "titles": {
+    "Home": "Home",
+    "AboutUs": "About Us",
+    "OurWorks": "Our Works",
+    "Machines": "Machines",
+    "MachineDetail": "Machine Details",
+    "ContactUs": "Contact Us",
+    "Career": "Career",
+    "CareerDetail": "Career Details",
+    "NotFound": "Page Not Found"
+  },
   "homeLabel": "Home",
   "aboutLabel": "About Us",
   "ourWorksLabel": "Our Works",

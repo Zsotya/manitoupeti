@@ -1,4 +1,15 @@
 {
+  "titles": {
+    "Home": "Főoldal",
+    "AboutUs": "Bemutatkozás",
+    "OurWorks": "Munkáink",
+    "Machines": "Bérelhető gépeink",
+    "MachineDetail": "Nehézgép részletező",
+    "ContactUs": "Kapcsolat",
+    "Career": "Karrier",
+    "CareerDetail": "Állás részletező",
+    "NotFound": "Oldal nem található"
+  },
   "homeLabel": "Főoldal",
   "aboutLabel": "Bemutatkozás",
   "ourWorksLabel": "Munkáink",
