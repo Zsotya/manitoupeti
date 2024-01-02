@@ -35,8 +35,14 @@ handleConnection();
 
 // Könnyed bezárás azonnal shut helyett
 process.on("SIGINT", () => {
-  connection.end();
-  process.exit();
+  connection.end((err) => {
+    if (err) {
+      console.error("Hiba az adatbázis csatlakozás bezárása közben:", err);
+    } else {
+      console.log("Adatbázis csatlakozás bezárva.");
+      process.exit();
+    }
+  });
 });
 
 // Exportálás
