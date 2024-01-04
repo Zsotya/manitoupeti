@@ -1,17 +1,38 @@
 <template>
   <div class="landing-section">
-    <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image" />
-    <div class="text-parts">
-      <p class="big-text">{{ $t("homeBigText") }}</p>
-      <p class="medium-text">
-        {{ $t("homeMediumText") }}
-      </p>
-      <p class="small-text">- ManitouPeti</p>
+    <div class="content-container">
+      <Transition name="fade" appear v-if="show">
+        <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image"
+      /></Transition>
+      <Transition name="fade" v-if="show">
+        <div class="text-parts" v-if="showText">
+          <p class="big-text">{{ $t("homeBigText") }}</p>
+          <p class="medium-text">
+            {{ $t("homeMediumText") }}
+          </p>
+          <p class="small-text">- ManitouPeti</p>
+        </div></Transition
+      >
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+
+/* Animáció változók inicializálása */
+const show = ref(false);
+const showText = ref(false);
+
+/* Animáció */
+onMounted(() => {
+  show.value = true;
+  // Szöveg késleltetett megjelenítése
+  setTimeout(() => {
+    showText.value = true;
+  }, 500);
+});
+</script>
 
 <style scoped>
 .landing-section {
@@ -61,6 +82,21 @@
 .small-text {
   font-size: 1.875rem;
   margin: 0;
+}
+
+/* Animációk */
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-enter-active {
+  transition: all 1s;
 }
 
 /* Közepes desktop méret */
