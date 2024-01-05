@@ -4,7 +4,7 @@
       <Transition name="fade" appear v-if="show">
         <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image"
       /></Transition>
-      <Transition name="fade" v-if="show">
+      <Transition name="swim" v-if="show">
         <div class="text-parts" v-if="showText">
           <p class="big-text">{{ $t("homeBigText") }}</p>
           <p class="medium-text">
@@ -87,15 +87,27 @@ onMounted(() => {
 /* Animációk */
 .fade-enter-from {
   opacity: 0;
-  transform: translateY(30px);
 }
 
 .fade-enter-to {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .fade-enter-active {
+  transition: all 1s;
+}
+
+.swim-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.swim-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.swim-enter-active {
   transition: all 1s;
 }
 
