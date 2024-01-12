@@ -1,18 +1,18 @@
 <template>
   <div
-    class="paragraph-section"
+    class="aboutus-section"
     :class="{ 'reverse-order': order === 0, 'dark-mode': darkMode }"
   >
     <div class="text-part">
-      <div class="paragraph-title">
-        {{ paragraph["title_" + $i18n.locale] }}
+      <div class="aboutus-title">
+        {{ item["title_" + $i18n.locale] }}
       </div>
-      <div class="paragraph-content">
-        {{ paragraph["content_" + $i18n.locale] }}
+      <div class="aboutus-content">
+        {{ item["content_" + $i18n.locale] }}
       </div>
     </div>
     <div class="image-container">
-      <img :src="paragraph.imageSrc" alt="image" />
+      <img :src="'http://localhost:3000' + item.image_url" alt="Image" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 // Adatok meghatározása
-const { paragraph, order } = defineProps(["paragraph", "order"]);
+const { item, order } = defineProps(["item", "order"]);
 
 /* Dark mode */
 const store = useStore();
@@ -30,7 +30,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 </script>
 
 <style scoped>
-.paragraph-section {
+.aboutus-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,14 +46,14 @@ const darkMode = computed(() => store.getters.isDarkMode);
   flex-wrap: wrap;
 }
 
-.paragraph-title {
+.aboutus-title {
   display: flex;
   font-size: 1.875rem;
   max-width: 30ch;
   flex-wrap: wrap;
 }
 
-.paragraph-content {
+.aboutus-content {
   font-size: 1.1rem;
   line-height: 1.5;
   max-width: 60ch;
@@ -97,11 +97,11 @@ const darkMode = computed(() => store.getters.isDarkMode);
     width: 25rem;
     height: 28rem;
   }
-  .paragraph-content {
+  .aboutus-content {
     font-size: 1rem;
   }
 
-  .paragraph-title {
+  .aboutus-title {
     font-size: 1.6rem;
   }
 }
@@ -114,11 +114,11 @@ const darkMode = computed(() => store.getters.isDarkMode);
   .reverse-order .text-part {
     padding-right: 0px;
   }
-  .paragraph-title {
+  .aboutus-title {
     font-size: 1.5rem;
   }
 
-  .paragraph-content {
+  .aboutus-content {
     max-width: 50ch;
   }
 
@@ -130,7 +130,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 /* Tablet nézet, mobil nézet */
 @media screen and (max-width: 768px) {
-  .paragraph-section {
+  .aboutus-section {
     flex-direction: column;
   }
 
@@ -139,12 +139,12 @@ const darkMode = computed(() => store.getters.isDarkMode);
     padding-bottom: 1.5rem;
   }
 
-  .paragraph-title {
+  .aboutus-title {
     justify-content: center;
     max-width: 60ch;
   }
 
-  .paragraph-content {
+  .aboutus-content {
     max-width: 76ch;
   }
 
@@ -166,7 +166,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 /* Külön mobilnézet nem szükséges */
 
 /* Dark mode */
-.paragraph-section.dark-mode {
+.aboutus-section.dark-mode {
   background-color: #1a1a1a;
   color: #ffffff;
 }

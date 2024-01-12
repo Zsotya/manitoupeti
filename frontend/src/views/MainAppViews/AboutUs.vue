@@ -2,9 +2,9 @@
   <section>
     <AboutUsIntro />
     <AboutUsParagraph
-      v-for="(paragraph, index) in paragraphs"
-      :key="paragraphs.id"
-      :paragraph="paragraph"
+      v-for="(item, index) in aboutus"
+      :key="aboutus.id"
+      :item="item"
       :order="calculateOrder(index)"
     />
   </section>
@@ -13,63 +13,26 @@
 <script setup>
 import AboutUsIntro from "@/components/AboutUsComponents/AboutUsIntro.vue";
 import AboutUsParagraph from "@/components/AboutUsComponents/AboutUsParagraph.vue";
+import axios from "axios";
+import { ref, onMounted } from "vue";
+
+// Adatok fetchelése
+const aboutus = ref([]);
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/aboutus");
+    aboutus.value = response.data;
+  } catch (error) {
+    console.error("Hiba az adatok lekérdezése közben:", error);
+  }
+}
+
+onMounted(() => {
+  fetchData();
+});
 
 // Páratlan indexű esetén kép jobb oldalt, szöveg bal oldalt. Páratlan esetén fordítva (reverse-order)
 const calculateOrder = (index) => {
   return index % 2 === 0 ? 1 : 0;
 };
-
-// Adatok
-const paragraphs = [
-  {
-    id: 1,
-    title_hu: "Hőszigetelési múltunk",
-    title_en: "Our thermal insulation past",
-    content_hu:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    content_en:
-      "LoremEN, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    imageSrc: require("@/assets/41.jpg"),
-  },
-  {
-    id: 2,
-    title_hu: "Filmes kezdetek",
-    title_en: "Beginnings in films",
-    content_hu:
-      "Korem, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    content_en:
-      "KoremEN, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    imageSrc: require("@/assets/41.jpg"),
-  },
-  {
-    id: 3,
-    title_hu: "A jelen...",
-    title_en: "The present...",
-    content_hu:
-      "Forem, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    content_en:
-      "ForemEN, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    imageSrc: require("@/assets/41.jpg"),
-  },
-  {
-    id: 4,
-    title_hu: "Kilátásaink a jövőről",
-    title_en: "Our prospects on the future",
-    content_hu:
-      "Sorem, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    content_en:
-      "SoremEN, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    imageSrc: require("@/assets/41.jpg"),
-  },
-  {
-    id: 5,
-    title_hu: "Tardi Péter - A ManitouPeti arca",
-    title_en: "Peter Tardi - The face of ManitouPeti",
-    content_hu:
-      "Porem, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    content_en:
-      "PoremEN, ipsum dolor sit amet consectetur adipisicing elit. Illo aut totam sapiente labore soluta modi est quisquam ipsam ad earum. Quaerat voluptate maxime unde sed, ipsa animi sunt repellendus nulla?",
-    imageSrc: require("@/assets/41.jpg"),
-  },
-];
 </script>
