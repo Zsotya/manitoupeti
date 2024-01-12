@@ -28,6 +28,7 @@ import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
 // Creation pages
 import CreateParagraph from "../components/AdminComponents/CreateParagraph.vue";
+import CreateAboutus from "../components/AdminComponents/CreateAboutus.vue";
 import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 import CreateMachine from "../components/AdminComponents/CreateMachine.vue";
 import CreateJob from "../components/AdminComponents/CreateJob.vue";
@@ -35,6 +36,7 @@ import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
 // Modification pages
 import ModifyMachine from "../components/AdminComponents/ModifyMachine.vue";
 import ModifyParagraph from "../components/AdminComponents/ModifyParagraph.vue";
+import ModifyAboutus from "../components/AdminComponents/ModifyAboutus.vue";
 import ModifyJob from "../components/AdminComponents/ModifyJob.vue";
 import ModifyFilm from "../components/AdminComponents/ModifyFilm.vue";
 
@@ -230,6 +232,16 @@ const routes = [
     },
   },
   {
+    path: "/admin/aboutus-management/createaboutus",
+    name: "Új bemutatkozás elem",
+    component: CreateAboutus,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
     path: "/admin/ourfilms-management/createfilm",
     name: "Új film",
     component: CreateFilm,
@@ -285,6 +297,16 @@ const routes = [
     path: "/admin/paragraph-management/:id",
     name: "Paragrafus módosítás",
     component: ModifyParagraph,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/aboutus-management/:id",
+    name: "Bemutatkozás elem módosítás",
+    component: ModifyAboutus,
     meta: {
       isMainApp: false,
       isAdminApp: true,
