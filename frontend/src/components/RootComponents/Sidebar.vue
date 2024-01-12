@@ -51,6 +51,12 @@ const links = [
     show: true,
   },
   {
+    path: "/admin/aboutus-management",
+    label: "Bemutatkozás Menedzsment",
+    iconClass: "fas fa-id-card mr-2",
+    show: true,
+  },
+  {
     path: "/admin/ourfilms-management",
     label: "Munkáink Menedzsment",
     iconClass: "fas fa-film mr-2",
