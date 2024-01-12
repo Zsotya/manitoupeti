@@ -29,6 +29,7 @@ scheduler.scheduleBookingExpirationCheck();
 /* Imports */
 // Management imports
 const paragraphsRoutes = require("./routes/paragraphs");
+const aboutusRoutes = require("./routes/aboutus");
 const filmsRoutes = require("./routes/films");
 const machinesRoutes = require("./routes/machines");
 const jobsRoutes = require("./routes/jobs");
@@ -49,6 +50,7 @@ const activeBookings = require("./routes/bookings/activeBookings");
 /* Routes usage */
 // Management routes
 app.use(paragraphsRoutes);
+app.use(aboutusRoutes);
 app.use(filmsRoutes);
 app.use(machinesRoutes);
 app.use(jobsRoutes);
