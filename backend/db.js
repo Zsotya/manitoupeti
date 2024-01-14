@@ -36,12 +36,19 @@ function handleConnection() {
 }
 
 // Keep-alive mechanizmus
-cron.schedule("* */10 * * * *", async () => {
+cron.schedule("*/10 * * * *", async () => {
   try {
     const [rows, fields] = await connection.promise().query("SELECT 1");
-    console.log("Keep-alive lekérdezés sikeresen végrehajtva.");
+    const currentDate = new Date().toLocaleString();
+    console.log(
+      `[${currentDate}] Keep-alive lekérdezés sikeresen végrehajtva.`
+    );
   } catch (error) {
-    console.error("Hiba a keep-alive lekérdezés végrehajtása során:", error);
+    const currentDate = new Date().toLocaleString();
+    console.error(
+      `[${currentDate}] Hiba a keep-alive lekérdezés végrehajtása során:`,
+      error
+    );
   }
 });
 
