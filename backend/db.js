@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
+const cron = require("node-cron");
 
 dotenv.config();
 const connection = createConnection();
@@ -33,6 +34,16 @@ function handleConnection() {
     }
   });
 }
+
+// Keep-alive mechanizmus
+cron.schedule("* */10 * * * *", async () => {
+  try {
+    const [rows, fields] = await connection.promise().query("SELECT 1");
+    console.log("Keep-alive lekérdezés sikeresen végrehajtva.");
+  } catch (error) {
+    console.error("Hiba a keep-alive lekérdezés végrehajtása során:", error);
+  }
+});
 
 // Kezdeti csatlakozás
 handleConnection();
