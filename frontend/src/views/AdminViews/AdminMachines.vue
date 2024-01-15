@@ -11,12 +11,10 @@
             <th>Nehézgép neve</th>
             <th>Max magasság</th>
             <th>Max teherbírás</th>
-            <th>Van talp</th>
-            <th>Talpak száma</th>
-            <th>Van kosár</th>
-            <th>Van villa</th>
-            <th>Távirányítható</th>
-            <th>Napi ár</th>
+            <th>Van kosár?</th>
+            <th>Van villa?</th>
+            <th>Van Rotohead?</th>
+            <th>Van csörlő?</th>
             <th>Kép</th>
             <th>Műveletek</th>
           </tr>
@@ -27,12 +25,10 @@
             <td>{{ machine.machine_name }}</td>
             <td>{{ machine.max_height }}m</td>
             <td>{{ machine.max_weight }}kg</td>
-            <td>{{ machine.has_sole ? "Igen" : "Nem" }}</td>
-            <td>{{ machine.sole_count }}</td>
             <td>{{ machine.has_basket ? "Igen" : "Nem" }}</td>
             <td>{{ machine.has_fork ? "Igen" : "Nem" }}</td>
-            <td>{{ machine.is_remote ? "Igen" : "Nem" }}</td>
-            <td>{{ machine.price_per_day }}Ft</td>
+            <td>{{ machine.has_rotohead ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.has_winch ? "Igen" : "Nem" }}</td>
             <td class="image-container">
               <img
                 :src="'http://localhost:3000' + machine.image_url"
