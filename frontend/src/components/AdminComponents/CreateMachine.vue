@@ -18,20 +18,6 @@
         <input v-model="machineData.max_weight" required /> kg
       </div>
       <div class="form-group">
-        <label for="has_sole">Van talp?</label>
-        <div class="styled-select">
-          <select v-model="machineData.has_sole" @change="handleSoleChange">
-            <option value="Yes">Igen</option>
-            <option value="No">Nem</option>
-          </select>
-          <i class="fas fa-caret-down"></i>
-        </div>
-      </div>
-      <div class="form-group" v-if="machineData.has_sole === 'Yes'">
-        <label for="sole_count">Talpak száma</label>
-        <input v-model="machineData.sole_count" required /> db
-      </div>
-      <div class="form-group">
         <label for="has_basket">Van kosár?</label>
         <div class="styled-select">
           <select v-model="machineData.has_basket">
@@ -50,17 +36,22 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="is_remote">Távirányítható?</label>
+        <label for="has_fork">Van Rotohead?</label>
         <div class="styled-select">
-          <select v-model="machineData.is_remote">
+          <select v-model="machineData.has_rotohead">
             <option value="Yes">Igen</option>
             <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
         </div>
       </div>
       <div class="form-group">
-        <label for="price_per_day">Napi ár</label>
-        <input v-model="machineData.price_per_day" required /> Ft
+        <label for="has_fork">Van csörlő?</label>
+        <div class="styled-select">
+          <select v-model="machineData.has_winch">
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option></select
+          ><i class="fas fa-caret-down"></i>
+        </div>
       </div>
 
       <!-- Kép feltöltés -->
@@ -102,12 +93,10 @@ const machineData = ref({
   machine_name: "",
   max_height: "",
   max_weight: "",
-  has_sole: "Yes",
-  sole_count: "",
   has_basket: "Yes",
   has_fork: "Yes",
-  is_remote: "Yes",
-  price_per_day: "",
+  has_rotohead: "Yes",
+  has_winch: "Yes",
 });
 
 const imageFile = ref(null);
@@ -119,15 +108,13 @@ const createMachine = async () => {
   formData.append("machine_name", machineData.value.machine_name);
   formData.append("max_height", machineData.value.max_height);
   formData.append("max_weight", machineData.value.max_weight);
-  formData.append("has_sole", machineData.value.has_sole === "Yes" ? 1 : 0);
-  formData.append(
-    "sole_count",
-    machineData.value.has_sole === "Yes" ? machineData.value.sole_count : 0
-  );
   formData.append("has_basket", machineData.value.has_basket === "Yes" ? 1 : 0);
   formData.append("has_fork", machineData.value.has_fork === "Yes" ? 1 : 0);
-  formData.append("is_remote", machineData.value.is_remote === "Yes" ? 1 : 0);
-  formData.append("price_per_day", machineData.value.price_per_day);
+  formData.append(
+    "has_rotohead",
+    machineData.value.has_rotohead === "Yes" ? 1 : 0
+  );
+  formData.append("has_winch", machineData.value.has_winch === "Yes" ? 1 : 0);
   formData.append("image", imageFile.value);
   try {
     // POST request küldése
