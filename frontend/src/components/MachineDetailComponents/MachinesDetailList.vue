@@ -24,10 +24,10 @@
           <span class="label">{{ $t("machinesFork") }}</span>
         </div>
         <div class="property" v-if="props.machine.has_rotohead">
-          <span class="label">ROTOHED</span>
+          <span class="label">Rotohead</span>
         </div>
         <div class="property" v-if="props.machine.has_winch">
-          <span class="label">CSÖRLŐ</span>
+          <span class="label">{{ $t("machinesWinch") }}</span>
         </div>
       </div>
     </div>

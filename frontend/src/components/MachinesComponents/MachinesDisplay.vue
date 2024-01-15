@@ -29,7 +29,7 @@
               <span class="label">Rotohead</span>
             </div>
             <div class="feature" v-if="machine.has_winch">
-              <span class="label">Csörlő</span>
+              <span class="label">{{ $t("machinesWinch") }}</span>
             </div>
           </div>
           <div class="button-container">

@@ -78,7 +78,9 @@
             />
           </div>
           <div class="filter-input">
-            <label class="filter-label" for="hasWinchFilter">Csörlő:</label>
+            <label class="filter-label" for="hasWinchFilter"
+              >{{ $t("machinesWinch") }}:</label
+            >
             <input
               type="checkbox"
               v-model="filters.hasWinch"
@@ -91,7 +93,9 @@
             </button>
           </div>
           <div class="cancel-button">
-            <button @click="toggleFilterSection()">Bezárás</button>
+            <button @click="toggleFilterSection()">
+              {{ $t("machinesClose") }}
+            </button>
           </div>
         </div>
       </div>
@@ -197,6 +201,7 @@ function resetFilters() {
   justify-content: space-evenly;
   gap: 0px;
   padding: 40px 0px 60px 0px;
+  margin: 0px 50px 0px 50px;
 }
 
 .filter-toggle {
@@ -316,6 +321,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0px;
   }
 
   .filter-toggle {
