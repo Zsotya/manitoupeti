@@ -71,7 +71,7 @@ onMounted(() => {
   max-width: 100%;
   border: 1px solid #000000;
   padding: 20px;
-  margin: 20px 0;
+  margin: 20px 30px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -89,7 +89,7 @@ onMounted(() => {
   margin-bottom: 10px;
   width: 100%;
   max-width: 320px;
-  height: auto;
+  height: 550px;
 }
 
 .image-container {
@@ -182,20 +182,14 @@ button:hover {
 }
 
 /* Tablet nézet */
-@media screen and (max-width: 768px) {
-  .machines-display {
-    max-width: 50%;
-  }
-}
+/* @media screen and (max-width: 768px) {
+} */
 
 /* Mobil nézet */
 @media screen and (max-width: 496px) {
-  .machines-display {
-    max-width: 100%;
-  }
-
   .machines-item {
     max-width: 240px;
+    height: 480px;
   }
 }
 

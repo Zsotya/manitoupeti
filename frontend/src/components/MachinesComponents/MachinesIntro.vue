@@ -35,6 +35,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   justify-content: flex-start;
   padding: 180px 0px 0px 30px;
   margin-left: 80px;
+  margin-right: 20px;
 }
 
 .text-intro {
@@ -103,6 +104,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
+    margin: 0px 20px 0px 20px;
   }
   .small-title {
     font-size: 20px;
