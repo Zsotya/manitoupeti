@@ -26,10 +26,10 @@
               <span class="label">{{ $t("machinesFork") }}</span>
             </div>
             <div class="feature" v-if="machine.has_rotohead">
-              <span class="label">ROTOHEDECSKE</span>
+              <span class="label">Rotohead</span>
             </div>
             <div class="feature" v-if="machine.has_winch">
-              <span class="label">CSÖRLŐCSKE</span>
+              <span class="label">Csörlő</span>
             </div>
           </div>
           <div class="button-container">

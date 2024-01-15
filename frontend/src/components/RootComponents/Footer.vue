@@ -5,36 +5,27 @@
       <div class="footer-item">
         <div class="name">ManitouPeti</div>
         <div class="location-container">
-          <div class="location">
-            2890 Tata,
-            <div class="break"></div>
-            {{ $t("footerLake") }}
-          </div>
+          <div class="location">Hungary</div>
         </div>
       </div>
       <div class="footer-item">
         <div class="contacts">{{ $t("footerContact") }}</div>
         <div class="phone-numbers">
           <div>+36 30 214-1070</div>
-          <div>+36 30 969-0126</div>
-          <div>+36 30 286-8982</div>
         </div>
         <div class="email-addresses">
-          <div>manitoupeti@me.hu</div>
-          <div>orfibt@me.hu</div>
+          <div>peti@manitoupeti.com</div>
+          <div>orfibt@me.com</div>
         </div>
       </div>
       <div class="footer-item">
         <div class="socials">{{ $t("footerSocials") }}</div>
         <div class="social-links">
-          <a href="https://www.facebook.com/orfibt" target="_blank">Facebook</a>
+          <a href="https://www.facebook.com/manitoupeti" target="_blank"
+            >Facebook</a
+          >
           <a href="https://www.instagram.com/manitoupeti/" target="_blank"
             >Instagram</a
-          >
-          <a
-            href="http://kosarasemelogep.hu/?fbclid=IwAR3j1vUbb51Nzmo8tWZi4aidcySxkwXIVpPERn1Xu8ezo68eCjiQddexq4M"
-            target="_blank"
-            >Őr-Fi Bt.</a
           >
         </div>
       </div>
@@ -55,13 +46,13 @@
           >
           <router-link to="/berelheto-gepeink" class="quote-button"
             ><span class="button-content">{{
-              $t("machinesQuotation")
+              $t("footerMachines")
             }}</span></router-link
           >
         </div>
       </div>
     </div>
-    <div class="copyright">© 2023 ManitouPeti - GoodFriend's Company</div>
+    <div class="copyright">© 2024 ManitouPeti - Goodfriend Investment</div>
   </footer>
 </template>
 
