@@ -2,9 +2,14 @@
   <div class="page-container" :class="{ 'dark-mode': darkMode }">
     <section><OurWorksIntro /></section>
     <section class="films-wrap">
-      <section class="our-works">
-        <OurWorksFilms v-for="film in films" :key="film.id" :film="film" />
-      </section>
+      <Transition name="initialFade" appear v-if="show">
+        <section class="our-works">
+          <OurWorksFilms
+            v-for="film in films"
+            :key="film.id"
+            :film="film"
+          /></section
+      ></Transition>
     </section>
   </div>
 </template>
@@ -20,6 +25,9 @@ import { useStore } from "vuex";
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
 
+/* Animáció változó */
+const show = ref(false);
+
 // Adatok fetchelése
 const films = ref([]);
 async function fetchData() {
@@ -33,6 +41,9 @@ async function fetchData() {
 
 onMounted(() => {
   fetchData();
+  setInterval(() => {
+    show.value = true;
+  }, 500);
 });
 </script>
 
@@ -41,6 +52,7 @@ onMounted(() => {
   background-color: #e8e6e6;
   transition: background-color 0.5s;
   padding-bottom: 30px;
+  min-height: 80vh;
 }
 
 .our-works {
@@ -48,6 +60,19 @@ onMounted(() => {
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-top: 20px;
+}
+
+/* Animáció */
+.initialFade-enter-active {
+  transition: all 2s;
+}
+
+.initialFade-enter-from {
+  opacity: 0;
+}
+
+.initialFade-enter-to {
+  opacity: 1;
 }
 
 @media screen and (max-width: 1024px) {

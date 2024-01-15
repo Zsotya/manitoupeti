@@ -308,7 +308,7 @@ button:hover {
 
 /* Animációk */
 .initialFade-enter-active {
-  transition: all 3s;
+  transition: all 2s;
 }
 
 .initialFade-enter-from {

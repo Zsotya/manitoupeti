@@ -1,26 +1,34 @@
 <template>
   <div class="page-format" :class="{ 'dark-mode': darkMode }">
-    <div class="text-wrap">
-      <div class="text-intro">
-        <div class="small-title">{{ $t("ourWorksSmallTitle") }}</div>
-        <div class="big-text">
-          {{ $t("ourWorksBigText") }}
+    <Transition name="textFade" appear v-if="show">
+      <div class="text-wrap">
+        <div class="text-intro">
+          <div class="small-title">{{ $t("ourWorksSmallTitle") }}</div>
+          <div class="big-text">
+            {{ $t("ourWorksBigText") }}
+          </div>
+          <div class="small-text">
+            {{ $t("ourWorksSmallText") }}
+          </div>
         </div>
-        <div class="small-text">
-          {{ $t("ourWorksSmallText") }}
-        </div>
-      </div>
-    </div>
+      </div></Transition
+    >
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 
 /* Dark mode */
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
+
+/* Animáció */
+const show = ref(false);
+onMounted(() => {
+  show.value = true;
+});
 </script>
 
 <style scoped>
@@ -64,6 +72,21 @@ const darkMode = computed(() => store.getters.isDarkMode);
   font-size: 18px;
   width: 100%;
   flex-wrap: wrap;
+}
+
+/* Animációk */
+.textFade-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.textFade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.textFade-enter-active {
+  transition: all 1.5s;
 }
 
 /* Laptop nézet */
