@@ -1,72 +1,50 @@
 <template>
-  <div class="machines-display" :class="{ 'dark-mode': darkMode }">
-    <div class="machines-item">
-      <div class="image-container">
-        <img
-          :src="'http://localhost:3000' + machine.image_url"
-          alt="Machine Image"
-        />
-      </div>
-      <div class="machine-details">
-        <div class="machine-name">{{ machine.machine_name }}</div>
-        <div class="machine-description">
-          <div class="feature">
-            <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
-            <span class="value">{{ machine.max_height }}m</span>
+  <Transition name="fade" appear v-if="show">
+    <div class="machines-display" :class="{ 'dark-mode': darkMode }">
+      <div class="machines-item">
+        <div class="image-container">
+          <img
+            :src="'http://localhost:3000' + machine.image_url"
+            alt="Machine Image"
+          />
+        </div>
+        <div class="machine-details">
+          <div class="machine-name">{{ machine.machine_name }}</div>
+          <div class="machine-description">
+            <div class="feature">
+              <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
+              <span class="value">{{ machine.max_height }}m</span>
+            </div>
+            <div class="feature">
+              <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
+              <span class="value">{{ machine.max_weight }}kg</span>
+            </div>
+            <div class="feature" v-if="machine.has_basket">
+              <span class="label">{{ $t("machinesBasket") }}</span>
+            </div>
+            <div class="feature" v-if="machine.has_fork">
+              <span class="label">{{ $t("machinesFork") }}</span>
+            </div>
+            <div class="feature" v-if="machine.has_rotohead">
+              <span class="label">ROTOHEDECSKE</span>
+            </div>
+            <div class="feature" v-if="machine.has_winch">
+              <span class="label">CSÖRLŐCSKE</span>
+            </div>
           </div>
-          <div class="feature">
-            <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
-            <span class="value">{{ machine.max_weight }}kg</span>
-          </div>
-          <div class="feature">
-            <span class="label">{{ $t("machinesSole") }}:</span>
-            <span class="value">{{
-              machine.has_sole
-                ? $t("machinesCommonYes")
-                : $t("machinesCommonNo")
-            }}</span>
-          </div>
-          <div class="feature" v-if="machine.has_sole">
-            <span class="label">{{ $t("machinesSoleCount") }}:</span>
-            <span class="value">{{ machine.sole_count }}</span>
-          </div>
-          <div class="feature">
-            <span class="label">{{ $t("machinesBasket") }}:</span>
-            <span class="value">{{
-              machine.has_basket
-                ? $t("machinesCommonYes")
-                : $t("machinesCommonNo")
-            }}</span>
-          </div>
-          <div class="feature">
-            <span class="label">{{ $t("machinesFork") }}:</span>
-            <span class="value">{{
-              machine.has_fork
-                ? $t("machinesCommonYes")
-                : $t("machinesCommonNo")
-            }}</span>
-          </div>
-          <div class="feature">
-            <span class="label">{{ $t("machinesRemote") }}:</span>
-            <span class="value">{{
-              machine.is_remote
-                ? $t("machinesCommonYes")
-                : $t("machinesCommonNo")
-            }}</span>
+          <div class="button-container">
+            <router-link :to="`/berelheto-gepeink/${machine.id}`">
+              <button>{{ $t("machinesData") }}</button>
+            </router-link>
           </div>
         </div>
-        <div class="button-container">
-          <router-link :to="`/berelheto-gepeink/${machine.id}`">
-            <button>{{ $t("machinesQuotation") }}</button>
-          </router-link>
-        </div>
       </div>
-    </div>
-  </div>
+    </div></Transition
+  >
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
 
 /* Dark mode */
@@ -75,6 +53,14 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 // Adatok importálása
 const { machine } = defineProps(["machine"]);
+
+// Animáció változó
+const show = ref(false);
+
+/* Animációk */
+onMounted(() => {
+  show.value = true;
+});
 </script>
 
 <style scoped>
@@ -168,6 +154,31 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Animációk */
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: all 1s;
 }
 
 /* Tablet nézet */

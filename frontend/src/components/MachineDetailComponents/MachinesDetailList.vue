@@ -17,39 +17,17 @@
           <span class="label">{{ $t("machinesDetailMaxLoadCapacity") }}</span>
           <span class="value">{{ props.machine.max_weight }}kg</span>
         </div>
-        <div class="property">
-          <span class="label">{{ $t("machinesSole") }}:</span>
-          <span class="value">{{
-            machine.has_sole ? $t("machinesCommonYes") : $t("machinesCommonNo")
-          }}</span>
+        <div class="property" v-if="props.machine.has_basket">
+          <span class="label">{{ $t("machinesBasket") }}</span>
         </div>
-        <div class="property" v-if="props.machine.has_sole">
-          <span class="label">{{ $t("machinesSoleCount") }}:</span>
-          <span class="value">{{ props.machine.sole_count }}</span>
+        <div class="property" v-if="props.machine.has_fork">
+          <span class="label">{{ $t("machinesFork") }}</span>
         </div>
-        <div class="property">
-          <span class="label">{{ $t("machinesBasket") }}:</span>
-          <span class="value">{{
-            machine.has_basket
-              ? $t("machinesCommonYes")
-              : $t("machinesCommonNo")
-          }}</span>
+        <div class="property" v-if="props.machine.has_rotohead">
+          <span class="label">ROTOHED</span>
         </div>
-        <div class="property">
-          <span class="label">{{ $t("machinesFork") }}:</span>
-          <span class="value">{{
-            machine.has_fork ? $t("machinesCommonYes") : $t("machinesCommonNo")
-          }}</span>
-        </div>
-        <div class="property">
-          <span class="label">{{ $t("machinesRemote") }}:</span>
-          <span class="value">{{
-            machine.is_remote ? $t("machinesCommonYes") : $t("machinesCommonNo")
-          }}</span>
-        </div>
-        <div class="property">
-          <span class="label">{{ $t("machinesPricePerDay") }}:</span>
-          <span class="value">{{ props.machine.price_per_day }}Ft</span>
+        <div class="property" v-if="props.machine.has_winch">
+          <span class="label">CSÖRLŐ</span>
         </div>
       </div>
     </div>
