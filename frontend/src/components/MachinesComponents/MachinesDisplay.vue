@@ -1,50 +1,48 @@
 <template>
-  <Transition name="fade" appear v-if="show">
-    <div class="machines-display" :class="{ 'dark-mode': darkMode }">
-      <div class="machines-item">
-        <div class="image-container">
-          <img
-            :src="'http://localhost:3000' + machine.image_url"
-            alt="Machine Image"
-          />
+  <div class="machines-display" :class="{ 'dark-mode': darkMode }">
+    <div class="machines-item">
+      <div class="image-container">
+        <img
+          :src="'http://localhost:3000' + machine.image_url"
+          alt="Machine Image"
+        />
+      </div>
+      <div class="machine-details">
+        <div class="machine-name">{{ machine.machine_name }}</div>
+        <div class="machine-description">
+          <div class="feature">
+            <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
+            <span class="value">{{ machine.max_height }}m</span>
+          </div>
+          <div class="feature">
+            <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
+            <span class="value">{{ machine.max_weight }}kg</span>
+          </div>
+          <div class="feature" v-if="machine.has_basket">
+            <span class="label">{{ $t("machinesBasket") }}</span>
+          </div>
+          <div class="feature" v-if="machine.has_fork">
+            <span class="label">{{ $t("machinesFork") }}</span>
+          </div>
+          <div class="feature" v-if="machine.has_rotohead">
+            <span class="label">Rotohead</span>
+          </div>
+          <div class="feature" v-if="machine.has_winch">
+            <span class="label">{{ $t("machinesWinch") }}</span>
+          </div>
         </div>
-        <div class="machine-details">
-          <div class="machine-name">{{ machine.machine_name }}</div>
-          <div class="machine-description">
-            <div class="feature">
-              <span class="label">{{ $t("machinesMaxWorkingHeight") }}:</span>
-              <span class="value">{{ machine.max_height }}m</span>
-            </div>
-            <div class="feature">
-              <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
-              <span class="value">{{ machine.max_weight }}kg</span>
-            </div>
-            <div class="feature" v-if="machine.has_basket">
-              <span class="label">{{ $t("machinesBasket") }}</span>
-            </div>
-            <div class="feature" v-if="machine.has_fork">
-              <span class="label">{{ $t("machinesFork") }}</span>
-            </div>
-            <div class="feature" v-if="machine.has_rotohead">
-              <span class="label">Rotohead</span>
-            </div>
-            <div class="feature" v-if="machine.has_winch">
-              <span class="label">{{ $t("machinesWinch") }}</span>
-            </div>
-          </div>
-          <div class="button-container">
-            <router-link :to="`/berelheto-gepeink/${machine.id}`">
-              <button>{{ $t("machinesData") }}</button>
-            </router-link>
-          </div>
+        <div class="button-container">
+          <router-link :to="`/berelheto-gepeink/${machine.id}`">
+            <button>{{ $t("machinesData") }}</button>
+          </router-link>
         </div>
       </div>
-    </div></Transition
-  >
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 /* Dark mode */
@@ -53,14 +51,6 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 // Adatok importálása
 const { machine } = defineProps(["machine"]);
-
-// Animáció változó
-const show = ref(false);
-
-/* Animációk */
-onMounted(() => {
-  show.value = true;
-});
 </script>
 
 <style scoped>
@@ -99,6 +89,7 @@ onMounted(() => {
 .image-container img {
   max-width: 100%;
   height: auto;
+  max-height: 350px;
 }
 
 .machine-details {
@@ -154,31 +145,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-/* Animációk */
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-enter-active {
-  transition: all 1s;
-}
-
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-leave-active {
-  transition: all 1s;
 }
 
 /* Tablet nézet */

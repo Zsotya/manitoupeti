@@ -10,13 +10,16 @@
       </div>
       <!-- Emelőgép kártyák -->
       <div class="content">
-        <div class="machines-container">
-          <MachinesDisplay
-            v-for="machine in filteredMachines"
-            :key="machine.id"
-            :machine="machine"
-          />
-        </div>
+        <Transition name="initialFade" appear v-if="show">
+          <div class="machines-container">
+            <TransitionGroup name="fade">
+              <MachinesDisplay
+                v-for="(machine, index) in filteredMachines"
+                :key="machine.id"
+                :machine="machine"
+                :index="index"
+            /></TransitionGroup></div
+        ></Transition>
       </div>
       <!-- Szűrés ablak -->
       <div class="filter-section" :class="{ open: showFilterSection }">
@@ -110,8 +113,9 @@ import { ref, onMounted, reactive, computed } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
 
-// Adatok fetchelése
+// Adatok fetchelése, inicializálás
 const machines = ref([]);
+const show = ref(false);
 
 async function fetchData() {
   try {
@@ -124,6 +128,9 @@ async function fetchData() {
 
 onMounted(() => {
   fetchData();
+  setInterval(() => {
+    show.value = true;
+  }, 500);
 });
 
 // Dark mode
@@ -298,6 +305,35 @@ button:hover {
 .escape button {
   padding: 6px 8px;
 }
+
+/* Animációk */
+.initialFade-enter-active {
+  transition: all 3s;
+}
+
+.initialFade-enter-from {
+  opacity: 0;
+}
+
+.initialFade-enter-to {
+  opacity: 1;
+}
+
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  position: absolute;
+}
+
 /* Laptop nézet */
 @media screen and (max-width: 1024px) {
   .filter-toggle {
