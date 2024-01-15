@@ -67,12 +67,10 @@ router.post("/api/machines", upload.single("image"), (req, res) => {
     machine_name,
     max_height,
     max_weight,
-    has_sole,
-    sole_count,
     has_basket,
     has_fork,
-    is_remote,
-    price_per_day,
+    has_rotohead,
+    has_winch,
   } = req.body;
 
   const imageFile = req.file;
@@ -84,19 +82,17 @@ router.post("/api/machines", upload.single("image"), (req, res) => {
   // Beszúrás adatbázisba
   const imageUrl = `/images/${imageFile.filename}`;
   const sql =
-    "INSERT INTO machines (machine_name, max_height, max_weight, has_sole, sole_count, has_basket, has_fork, is_remote, price_per_day, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO machines (machine_name, max_height, max_weight, has_basket, has_fork, has_rotohead, has_winch, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   db.query(
     sql,
     [
       machine_name,
       max_height,
       max_weight,
-      has_sole,
-      sole_count,
       has_basket,
       has_fork,
-      is_remote,
-      price_per_day,
+      has_rotohead,
+      has_winch,
       imageUrl,
     ],
     // Hibakezelés
@@ -120,12 +116,10 @@ router.put("/api/machines/:id", upload.single("image"), (req, res) => {
     machine_name,
     max_height,
     max_weight,
-    has_sole,
-    sole_count,
     has_basket,
     has_fork,
-    is_remote,
-    price_per_day,
+    has_rotohead,
+    has_winch,
     image,
   } = req.body;
   const imageFile = req.file;
@@ -140,17 +134,15 @@ router.put("/api/machines/:id", upload.single("image"), (req, res) => {
 
   // Adatok frissítése az adatbázisban
   const sql =
-    "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_sole=?, sole_count=?, has_basket=?, has_fork=?, is_remote=?, price_per_day=?, image_url=? WHERE id=?";
+    "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_basket=?, has_fork=?, has_rotohead=?, has_winch=?, image_url=? WHERE id=?";
   const values = [
     machine_name,
     max_height,
     max_weight,
-    has_sole,
-    sole_count,
     has_basket,
     has_fork,
-    is_remote,
-    price_per_day,
+    has_rotohead,
+    has_winch,
     imageUrl,
     machineId,
   ];
