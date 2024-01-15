@@ -48,16 +48,6 @@
             />
           </div>
           <div class="filter-input">
-            <label class="filter-label" for="hasSoleFilter"
-              >{{ $t("machinesSole") }}:</label
-            >
-            <input
-              type="checkbox"
-              v-model="filters.hasSole"
-              id="hasSoleFilter"
-            />
-          </div>
-          <div class="filter-input">
             <label class="filter-label" for="hasBasketFilter"
               >{{ $t("machinesBasket") }}:</label
             >
@@ -78,13 +68,21 @@
             />
           </div>
           <div class="filter-input">
-            <label class="filter-label" for="isRemoteFilter"
-              >{{ $t("machinesRemote") }}:</label
+            <label class="filter-label" for="hasRotoheadFilter"
+              >Rotohead:</label
             >
             <input
               type="checkbox"
-              v-model="filters.isRemote"
-              id="isRemoteFilter"
+              v-model="filters.hasRotohead"
+              id="hasRotoheadFilter"
+            />
+          </div>
+          <div class="filter-input">
+            <label class="filter-label" for="hasWinchFilter">Csörlő:</label>
+            <input
+              type="checkbox"
+              v-model="filters.hasWinch"
+              id="hasWinchFilter"
             />
           </div>
           <div class="filter-button">
@@ -140,10 +138,10 @@ function toggleFilterSection() {
 const filters = reactive({
   requiredHeight: null,
   requiredWeight: null,
-  hasSole: false,
   hasBasket: false,
   hasFork: false,
-  isRemote: false,
+  hasRotohead: false,
+  hasWinch: false,
 });
 
 // Szűrők alkalmazása
@@ -161,16 +159,16 @@ const filteredMachines = computed(() => {
     ) {
       return false;
     }
-    if (filters.hasSole && !machine.has_sole) {
-      return false;
-    }
     if (filters.hasBasket && !machine.has_basket) {
       return false;
     }
     if (filters.hasFork && !machine.has_fork) {
       return false;
     }
-    if (filters.isRemote && !machine.is_remote) {
+    if (filters.hasRotohead && !machine.has_rotohead) {
+      return false;
+    }
+    if (filters.hasWinch && !machine.has_winch) {
       return false;
     }
     // Ha mindnek megfelel, listázás
