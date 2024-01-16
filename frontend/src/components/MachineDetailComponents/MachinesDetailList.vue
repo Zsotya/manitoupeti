@@ -29,6 +29,16 @@
         <div class="property" v-if="props.machine.has_winch">
           <span class="label">{{ $t("machinesWinch") }}</span>
         </div>
+        <div class="property" v-if="props.machine.pdf_url">
+          <span class="label"
+            ><a
+              :href="'http://localhost:3000' + props.machine.pdf_url"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ $t("machinesPDF") }}</a
+            ></span
+          >
+        </div>
       </div>
     </div>
   </div>
