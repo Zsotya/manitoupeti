@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="has_fork">Van Rotohead?</label>
+        <label for="has_rotohead">Van Rotohead?</label>
         <div class="styled-select">
           <select v-model="machineData.has_rotohead">
             <option value="Yes">Igen</option>
@@ -45,13 +45,39 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="has_fork">Van csörlő?</label>
+        <label for="has_winch">Van csörlő?</label>
         <div class="styled-select">
           <select v-model="machineData.has_winch">
             <option value="Yes">Igen</option>
             <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
         </div>
+      </div>
+
+      <!-- PDF feltöltés lehetőség -->
+      <div class="form-group">
+        <label for="upload_pdf">Szeretnél PDF-et feltölteni?</label>
+        <div class="styled-select">
+          <select v-model="machineData.upload_pdf">
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option>
+          </select>
+          <i class="fas fa-caret-down"></i>
+        </div>
+      </div>
+
+      <!-- PDF fájlfeltöltés -->
+      <div v-if="machineData.upload_pdf === 'Yes'" class="form-group">
+        <label for="pdf" class="file-input-label">
+          <span v-if="!pdfFile">PDF feltöltése</span>
+          <span v-else>PDF módosítása</span>
+        </label>
+        <input type="file" id="pdf" accept=".pdf" @change="handlePdfUpload" />
+      </div>
+
+      <!-- Kiválasztott PDF megjelenítése -->
+      <div v-if="pdfFile" class="selected-pdf">
+        Kiválasztott PDF: {{ pdfFile.name }}
       </div>
 
       <!-- Kép feltöltés -->
@@ -97,8 +123,10 @@ const machineData = ref({
   has_fork: "Yes",
   has_rotohead: "Yes",
   has_winch: "Yes",
+  upload_pdf: "No",
 });
 
+const pdfFile = ref(null);
 const imageFile = ref(null);
 const imagePreviewUrl = ref(null);
 
@@ -116,6 +144,9 @@ const createMachine = async () => {
   );
   formData.append("has_winch", machineData.value.has_winch === "Yes" ? 1 : 0);
   formData.append("image", imageFile.value);
+  if (machineData.value.upload_pdf === "Yes") {
+    formData.append("pdf", pdfFile.value);
+  }
   try {
     // POST request küldése
     const response = await axios.post(
@@ -148,6 +179,12 @@ const handleImageUpload = (event) => {
   } else {
     imagePreviewUrl.value = null;
   }
+};
+
+// PDF feltöltés kezelés
+const handlePdfUpload = (event) => {
+  const file = event.target.files[0];
+  pdfFile.value = file;
 };
 </script>
 

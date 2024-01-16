@@ -65,16 +65,6 @@
             <input type="text" id="location" v-model="location" required />
           </div>
         </div>
-
-        <!-- Végösszeg kiszámolása -->
-        <div class="total-price">
-          <p>{{ $t("machinesFormPrice") }}: {{ totalPrice }} Ft</p>
-        </div>
-        <div class="price-note" v-if="date && date[0] && date[1]">
-          <p>
-            {{ $t("machinesFormInform") }}
-          </p>
-        </div>
         <button class="submit-button" type="submit">
           {{ $t("machinesFormSubmit") }}
         </button>
@@ -162,19 +152,6 @@ const customFormat = (date) => {
 
   return message.value;
 };
-
-// Végösszeg kiszámítása
-const totalPrice = computed(() => {
-  const startDay = date.value ? date.value[0] : null;
-  const endDay = date.value ? date.value[1] : null;
-  if (startDay && endDay) {
-    const daysDifference = Math.ceil(
-      (endDay - startDay + 1) / (1000 * 60 * 60 * 24)
-    );
-    return daysDifference * props.machine.price_per_day;
-  }
-  return 0;
-});
 
 /* POST kérés előkészítése */
 
@@ -344,23 +321,11 @@ const disabledDates = computed(() => {
   transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
-.total-price p {
-  text-align: center;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
-.price-note {
-  padding-bottom: 10px;
-  font-size: 16px;
-  line-height: 1.1;
-  color: red;
-}
-
 .submit-button {
   display: block;
   width: 100%;
   padding: 10px;
+  margin-top: 60px;
   background-color: #007bff;
   color: #fff;
   border: none;

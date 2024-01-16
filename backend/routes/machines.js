@@ -7,13 +7,22 @@ const path = require("path");
 // Multer konfigurálása
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../images"));
+    // Vizsgálás, hogy a fájl pdf vagy kép
+    const folder = file.fieldname === "pdf" ? "pdfs" : "images";
+    cb(null, path.join(__dirname, `../${folder}`));
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname);
+    // PDF fájl neve legyen dátum + eredeti név
+    if (file.fieldname === "pdf") {
+      cb(null, file.originalname);
+    } else {
+      // Képfájl esetén egyedi név generálás
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      cb(null, uniqueSuffix + "-" + file.originalname);
+    }
   },
 });
+
 const upload = multer({ storage: storage });
 
 /* REQUESTEK KEZELÉSE */
@@ -61,31 +70,12 @@ router.get("/api/machines/:id", (req, res) => {
 });
 
 // Új nehézgép létrehozása - POST
-router.post("/api/machines", upload.single("image"), (req, res) => {
-  // Értékek meghatározása
-  const {
-    machine_name,
-    max_height,
-    max_weight,
-    has_basket,
-    has_fork,
-    has_rotohead,
-    has_winch,
-  } = req.body;
-
-  const imageFile = req.file;
-  if (!imageFile) {
-    res.status(400).json({ error: "Képfájl megadása kötelező!" });
-    return;
-  }
-
-  // Beszúrás adatbázisba
-  const imageUrl = `/images/${imageFile.filename}`;
-  const sql =
-    "INSERT INTO machines (machine_name, max_height, max_weight, has_basket, has_fork, has_rotohead, has_winch, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  db.query(
-    sql,
-    [
+router.post(
+  "/api/machines",
+  upload.fields([{ name: "image" }, { name: "pdf" }]),
+  (req, res) => {
+    // Értékek meghatározása
+    const {
       machine_name,
       max_height,
       max_weight,
@@ -93,19 +83,57 @@ router.post("/api/machines", upload.single("image"), (req, res) => {
       has_fork,
       has_rotohead,
       has_winch,
-      imageUrl,
-    ],
-    // Hibakezelés
-    (err, result) => {
-      if (err) {
-        console.error("Hiba az adatbázisba beszúrás közben:", err);
-        res.status(500).json({ error: "Adatbázis hiba" });
-        return;
-      }
-      res.status(201).json({ message: "Nehézgép sikeresen létrehozva" });
+    } = req.body;
+
+    const imageFile = req.files["image"] ? req.files["image"][0] : null;
+    const pdfFile = req.files["pdf"] ? req.files["pdf"][0] : null;
+
+    // Képfájl ellenőrzése
+    if (!imageFile) {
+      res.status(400).json({ error: "Képfájl megadása kötelező!" });
+      return;
     }
-  );
-});
+
+    // PDF fájl ellenőrzése
+    if (
+      pdfFile &&
+      path.extname(pdfFile.originalname).toLowerCase() !== ".pdf"
+    ) {
+      res.status(400).json({ error: "Érvénytelen PDF fájlformátum!" });
+      return;
+    }
+
+    // Beszúrás adatbázisba
+    const imageUrl = `/images/${imageFile.filename}`;
+    const pdfUrl = pdfFile ? `/pdfs/${pdfFile.filename}` : null;
+
+    const sql =
+      "INSERT INTO machines (machine_name, max_height, max_weight, has_basket, has_fork, has_rotohead, has_winch, image_url, pdf_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(
+      sql,
+      [
+        machine_name,
+        max_height,
+        max_weight,
+        has_basket,
+        has_fork,
+        has_rotohead,
+        has_winch,
+        imageUrl,
+        pdfUrl,
+      ],
+      // Hibakezelés
+      (err, result) => {
+        if (err) {
+          console.error("Hiba az adatbázisba beszúrás közben:", err);
+          res.status(500).json({ error: "Adatbázis hiba" });
+          return;
+        }
+        res.status(201).json({ message: "Nehézgép sikeresen létrehozva" });
+      }
+    );
+  }
+);
 
 // Nehézgép módosítása - PUT
 router.put("/api/machines/:id", upload.single("image"), (req, res) => {
