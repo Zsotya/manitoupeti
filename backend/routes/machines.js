@@ -136,58 +136,74 @@ router.post(
 );
 
 // Nehézgép módosítása - PUT
-router.put("/api/machines/:id", upload.single("image"), (req, res) => {
-  // Azonosító meghatározása
-  const machineId = req.params.id;
-  // Értékek meghatározása
-  const {
-    machine_name,
-    max_height,
-    max_weight,
-    has_basket,
-    has_fork,
-    has_rotohead,
-    has_winch,
-    image,
-  } = req.body;
-  const imageFile = req.file;
-  let imageUrl = "";
+router.put(
+  "/api/machines/:id",
+  upload.fields([{ name: "image" }, { name: "pdf" }]),
+  (req, res) => {
+    // Azonosító meghatározása
+    const machineId = req.params.id;
+    // Értékek meghatározása
+    const {
+      machine_name,
+      max_height,
+      max_weight,
+      has_basket,
+      has_fork,
+      has_rotohead,
+      has_winch,
+      image,
+    } = req.body;
 
-  // Amennyiben került új fájl megadásra
-  if (imageFile) {
-    imageUrl = `/images/${imageFile.filename}`;
-  } else {
-    imageUrl = image; // Ha nincs fájl, akkor a korábbi URL-t kapja
-  }
+    const imageFile = req.files["image"] ? req.files["image"][0] : null;
+    const pdfFile = req.files["pdf"] ? req.files["pdf"][0] : null;
 
-  // Adatok frissítése az adatbázisban
-  const sql =
-    "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_basket=?, has_fork=?, has_rotohead=?, has_winch=?, image_url=? WHERE id=?";
-  const values = [
-    machine_name,
-    max_height,
-    max_weight,
-    has_basket,
-    has_fork,
-    has_rotohead,
-    has_winch,
-    imageUrl,
-    machineId,
-  ];
-  db.query(
-    sql,
-    values,
-    // Hibakezelés
-    (err, result) => {
-      if (err) {
-        console.error("Hiba az adatbázis frissítésekor:", err);
-        res.status(500).json({ error: "Adatbázis hiba" });
-        return;
-      }
-      res.status(200).json({ message: "Nehézgép sikeresen frissíítve" });
+    let imageUrl = "";
+    let pdfUrl = "";
+
+    // Amennyiben került új fájl megadásra
+    if (imageFile) {
+      imageUrl = `/images/${imageFile.filename}`;
+    } else {
+      imageUrl = image; // Ha nincs fájl, akkor a korábbi URL-t kapja
     }
-  );
-});
+
+    // Amennyiben került új PDF fájl megadásra
+    if (pdfFile) {
+      pdfUrl = `/pdfs/${pdfFile.filename}`;
+    } else {
+      pdfUrl = req.body.pdf; // Ha nincs új PDF fájl, akkor a korábbi URL-t kapja
+    }
+
+    // Adatok frissítése az adatbázisban
+    const sql =
+      "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_basket=?, has_fork=?, has_rotohead=?, has_winch=?, image_url=?, pdf_url=? WHERE id=?";
+    const values = [
+      machine_name,
+      max_height,
+      max_weight,
+      has_basket,
+      has_fork,
+      has_rotohead,
+      has_winch,
+      imageUrl,
+      pdfUrl,
+      machineId,
+    ];
+    db.query(
+      sql,
+      values,
+      // Hibakezelés
+      (err, result) => {
+        if (err) {
+          console.error("Hiba az adatbázis frissítésekor:", err);
+          res.status(500).json({ error: "Adatbázis hiba" });
+          return;
+        }
+        res.status(200).json({ message: "Nehézgép sikeresen frissíítve" });
+      }
+    );
+  }
+);
 
 // Nehézgép törlése - DELETE
 // Megjegyzés: Csak olyan nehézgép törölhető, amire nincs historikus foglalás létrehozva (az id-jével nem szerepel rekort a bookings és archive_bookings táblában)

@@ -3,6 +3,7 @@
     <div class="title">
       <h2>Nehézgép adatainak módosítása</h2>
     </div>
+
     <!-- Adatmódosítás form -->
     <form @submit.prevent="modifyMachine">
       <div class="form-group">
@@ -57,6 +58,38 @@
           <i class="fas fa-caret-down"></i>
         </div>
       </div>
+
+      <!-- PDF feltöltés lehetőség -->
+      <div class="form-group">
+        <label for="upload_pdf"
+          >Szeretnél PDF-et feltölteni/meglévő PDF-et módosítani?</label
+        >
+        <div class="styled-select">
+          <select v-model="machineData.upload_pdf">
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option>
+          </select>
+          <i class="fas fa-caret-down"></i>
+        </div>
+      </div>
+
+      <!-- PDF fájlfeltöltés -->
+      <div v-if="machineData.upload_pdf === 'Yes'" class="form-group">
+        <label for="pdf" class="file-input-label">
+          <span v-if="!pdfName">PDF feltöltése</span>
+          <span v-else>PDF módosítása</span>
+        </label>
+        <input type="file" id="pdf" accept=".pdf" @change="handlePdfUpload" />
+      </div>
+
+      <!-- Kiválasztott PDF megjelenítése -->
+      <div
+        v-if="pdfName && machineData.upload_pdf === 'Yes'"
+        class="selected-pdf"
+      >
+        Kiválasztott PDF: {{ pdfName }}
+      </div>
+
       <!-- Képfeltöltés, képmódosítás -->
       <div class="form-group">
         <label for="image" class="file-input-label"
@@ -70,10 +103,12 @@
           @change="handleImageUpload"
         />
       </div>
+
       <!-- Kép előnézet -->
       <div class="image-preview" v-if="imagePreviewUrl">
         <img :src="imagePreviewUrl" alt="Image Preview" />
       </div>
+
       <!-- Véglegesítés gomb -->
       <div class="form-group">
         <button type="submit">Nehézgép módosítása</button>
@@ -99,9 +134,13 @@ const machineData = ref({
   has_fork: "",
   has_rotohead: "",
   has_winch: "",
+  upload_pdf: "",
+  pdf: null,
   image: null,
 });
 
+const pdfFile = ref(null);
+const pdfName = ref(null);
 const imageFile = ref(null);
 const imagePreviewUrl = ref(null);
 
@@ -121,9 +160,11 @@ onMounted(async () => {
     has_fork: data.has_fork ? "Yes" : "No",
     has_rotohead: data.has_rotohead ? "Yes" : "No",
     has_winch: data.has_winch ? "Yes" : "No",
+    upload_pdf: data.pdf_url ? "Yes" : "No",
+    pdf: data.pdf_url,
     image: data.image_url,
   };
-
+  pdfName.value = machineData.value.pdf;
   imagePreviewUrl.value = "http://localhost:3000" + machineData.value.image;
 });
 
@@ -140,6 +181,13 @@ const handleImageUpload = (event) => {
   } else {
     imagePreviewUrl.value = machineData.value.image;
   }
+};
+
+// PDF feltöltés kezelés
+const handlePdfUpload = (event) => {
+  const file = event.target.files[0];
+  pdfFile.value = file;
+  pdfName.value = file ? file.name : machineData.value.pdf;
 };
 
 // Módosítás
@@ -160,6 +208,11 @@ const modifyMachine = async () => {
     formData.append("image", imageFile.value);
   } else {
     formData.append("image", machineData.value.image); // Ha nem került új fájl kiválasztásra, akkor a régi URL-t kapja
+  }
+  if (pdfFile.value) {
+    formData.append("pdf", pdfFile.value);
+  } else {
+    formData.append("pdf", machineData.value.pdf);
   }
   // PUT request küldése
   try {
