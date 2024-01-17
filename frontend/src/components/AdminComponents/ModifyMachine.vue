@@ -90,6 +90,16 @@
         Kiválasztott PDF: {{ pdfName }}
       </div>
 
+      <!-- PDF törlése checkbox -->
+      <div class="form-group" v-if="machineData.upload_pdf === 'Yes'">
+        <label for="remove_pdf">PDF eltávolítása</label>
+        <input
+          type="checkbox"
+          id="remove_pdf"
+          v-model="machineData.remove_pdf"
+        />
+      </div>
+
       <!-- Képfeltöltés, képmódosítás -->
       <div class="form-group">
         <label for="image" class="file-input-label"
@@ -135,6 +145,7 @@ const machineData = ref({
   has_rotohead: "",
   has_winch: "",
   upload_pdf: "",
+  remove_pdf: false,
   pdf: null,
   image: null,
 });
@@ -204,16 +215,22 @@ const modifyMachine = async () => {
     machineData.value.has_rotohead === "Yes" ? 1 : 0
   );
   formData.append("has_winch", machineData.value.has_winch === "Yes" ? 1 : 0);
+
   if (imageFile.value) {
     formData.append("image", imageFile.value);
   } else {
     formData.append("image", machineData.value.image); // Ha nem került új fájl kiválasztásra, akkor a régi URL-t kapja
   }
-  if (pdfFile.value) {
+
+  if (machineData.value.remove_pdf) {
+    // PDF null-ra állítás adatbázisban
+    formData.append("pdf", "null");
+  } else if (pdfFile.value) {
     formData.append("pdf", pdfFile.value);
   } else {
-    formData.append("pdf", machineData.value.pdf);
+    formData.append("pdf", machineData.value.pdf); // Ha nem került új fájl kiválasztásra, akkor a régi URL-t kapja
   }
+
   // PUT request küldése
   try {
     const machineId = route.params.id;

@@ -169,9 +169,9 @@ router.put(
 
     // Amennyiben került új PDF fájl megadásra
     if (pdfFile) {
-      pdfUrl = `/pdfs/${pdfFile.filename}`;
+      pdfUrl = pdfFile.filename !== "null" ? `/pdfs/${pdfFile.filename}` : null;
     } else {
-      pdfUrl = req.body.pdf; // Ha nincs új PDF fájl, akkor a korábbi URL-t kapja
+      pdfUrl = req.body.pdf === "null" ? null : req.body.pdf;
     }
 
     // Adatok frissítése az adatbázisban
