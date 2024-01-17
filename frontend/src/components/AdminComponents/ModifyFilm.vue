@@ -133,7 +133,7 @@ const modifyFilm = async () => {
 </script>
 
 <style scoped>
-.modify-paragraph {
+.modify-film {
   width: 100%;
   margin: 0 auto;
   padding: 20px;

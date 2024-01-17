@@ -19,9 +19,6 @@
             <td>{{ admin.username }}</td>
             <td>{{ admin.full_name }}</td>
             <td class="actions-buttons">
-              <button class="modify-button">
-                <i class="fas fa-edit"></i>Módosítás
-              </button>
               <button class="delete-button" @click="openDeletePopup(admin.id)">
                 <i class="fas fa-trash"></i>
                 Törlés
@@ -158,7 +155,6 @@ th {
   border-left: none;
 }
 
-.modify-button,
 .delete-button {
   padding: 8px;
   color: #fff;
@@ -170,16 +166,8 @@ th {
   gap: 4px;
 }
 
-.modify-button {
-  background-color: #007bff;
-}
-
 .delete-button {
   background-color: red;
-}
-
-.modify-button:hover {
-  background-color: #0056b3;
 }
 
 .delete-button:hover {
