@@ -36,12 +36,23 @@
                 class="thumbnail"
               />
             </td>
+            <!-- Művelet gombok -->
             <td class="actions-buttons">
+              <!-- Módosítás gomb -->
               <router-link :to="`/admin/machines-management/${machine.id}`">
                 <button class="modify-button">
                   <i class="fas fa-edit"></i>Módosítás
                 </button></router-link
               >
+
+              <!-- Képgaléria gomb -->
+              <router-link
+                :to="`/admin/machines-management/${machine.id}/gallery`"
+              >
+                <button><i class="fas fa-camera"></i>Képgaléria</button>
+              </router-link>
+
+              <!-- Törlés gomb -->
               <button
                 class="delete-button"
                 @click="openDeletePopup(machine.id)"

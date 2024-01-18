@@ -39,6 +39,8 @@ import ModifyParagraph from "../components/AdminComponents/ModifyParagraph.vue";
 import ModifyAboutus from "../components/AdminComponents/ModifyAboutus.vue";
 import ModifyJob from "../components/AdminComponents/ModifyJob.vue";
 import ModifyFilm from "../components/AdminComponents/ModifyFilm.vue";
+// Machines gallery
+import MachineGallery from "../components/AdminComponents/MachineGallery.vue";
 
 // Services
 import authService from "@/services/authService";
@@ -327,6 +329,16 @@ const routes = [
     path: "/admin/ourfilms-management/:id",
     name: "Film módosítás",
     component: ModifyFilm,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/machines-management/:id/gallery",
+    name: "Nehézgép galéria",
+    component: MachineGallery,
     meta: {
       isMainApp: false,
       isAdminApp: true,
