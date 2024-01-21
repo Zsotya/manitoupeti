@@ -2,7 +2,10 @@
   <section class="machines-detail-list-container">
     <MachinesDetailList :machine="machine" />
   </section>
-  <section class="full-calendar-container"><FullCalendar /></section>
+  <!-- <section class="full-calendar-container"><FullCalendar /></section> -->
+  <section class="machines-gallery-container">
+    <MachinesGalleryCarousel />
+  </section>
   <section class="booking-form-container">
     <BookingForm :machine="machine" />
   </section>
@@ -11,6 +14,7 @@
 <script setup>
 import MachinesDetailList from "@/components/MachineDetailComponents/MachinesDetailList.vue";
 import FullCalendar from "@/components/MachineDetailComponents/FullCalendar.vue";
+import MachinesGalleryCarousel from "@/components/MachineDetailComponents/MachinesGalleryCarousel.vue";
 import BookingForm from "@/components/MachineDetailComponents/BookingForm.vue";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
