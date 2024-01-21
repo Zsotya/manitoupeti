@@ -6,13 +6,13 @@
         <div class="twocontainer">
           <li>
             <div class="milestone">
-              <div class="number">10+</div>
+              <div class="number">20+</div>
               <div class="text">{{ $t("homeExperience") }}</div>
             </div>
           </li>
           <li>
             <div class="milestone">
-              <div class="number">300+</div>
+              <div class="number">90+</div>
               <div class="text">{{ $t("homeProjects") }}</div>
             </div>
           </li>
@@ -21,14 +21,14 @@
         <div class="twocontainer">
           <li>
             <div class="milestone">
-              <div class="number">12</div>
-              <div class="text">{{ $t("homeOperators") }}</div>
+              <div class="number">20+</div>
+              <div class="text">{{ $t("homeMachines") }}</div>
             </div>
           </li>
           <li>
             <div class="milestone">
-              <div class="number">30+</div>
-              <div class="text">{{ $t("homeEmployer") }}</div>
+              <div class="number">∞</div>
+              <div class="text">{{ $t("homeProfessionalism") }}</div>
             </div>
           </li>
         </div>
