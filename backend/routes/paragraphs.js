@@ -61,31 +61,34 @@ router.get("/api/paragraphs/:id", (req, res) => {
   );
 });
 
-// Új paragraph létrehozása - POST
+// Új paragrafus létrehozása - POST
 router.post("/api/paragraphs", upload.single("image"), (req, res) => {
   // Értékek meghatározása
   const { title_hu, title_en, content_hu, content_en } = req.body;
-
   const imageFile = req.file;
+  // Hiányzó képfájl
   if (!imageFile) {
     res.status(400).json({ error: "Képfájl megadása kötelező!" });
     return;
   }
 
-  // Beszúrás adatbázisba
+  /* Beszúrás adatbázisba */
+  // Kép címének meghatározása
   const imageUrl = `/images/${imageFile.filename}`;
+  // Lekérdezés
   const sql =
     "INSERT INTO paragraphs (title_hu, title_en, content_hu, content_en, image_url) VALUES (?, ?, ?, ?, ?)";
   db.query(
     sql,
     [title_hu, title_en, content_hu, content_en, imageUrl],
-    // Hibakezelés
-    (err, result) => {
+    (err, res) => {
+      // Hibakezelés
       if (err) {
         console.error("Hiba az adatbázisba beszúrás közben:", err);
         res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
+      // Sikeres létrehozás esetén válasz a kliensnek
       res.status(201).json({ message: "Paragrafus sikeresen létrehozva" });
     }
   );
