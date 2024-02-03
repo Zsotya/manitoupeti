@@ -8,13 +8,18 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nehézgép neve</th>
+            <th>Név</th>
             <th>Max magasság</th>
             <th>Max teherbírás</th>
-            <th>Van kosár?</th>
-            <th>Van villa?</th>
-            <th>Van Rotohead?</th>
-            <th>Van csörlő?</th>
+            <th>Magasság</th>
+            <th>Szélesség</th>
+            <th>Hosszúság</th>
+            <th>Önsúly</th>
+            <th>Rotohead</th>
+            <th>Villa</th>
+            <th>Villahosszabbító</th>
+            <th>Kosár</th>
+            <th>Csörlő</th>
             <th>Kép</th>
             <th>Műveletek</th>
           </tr>
@@ -25,9 +30,14 @@
             <td>{{ machine.machine_name }}</td>
             <td>{{ machine.max_height }}m</td>
             <td>{{ machine.max_weight }}kg</td>
-            <td>{{ machine.has_basket ? "Igen" : "Nem" }}</td>
-            <td>{{ machine.has_fork ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.height }}mm</td>
+            <td>{{ machine.width }}mm</td>
+            <td>{{ machine.length }}mm</td>
+            <td>{{ machine.weight }}kg</td>
             <td>{{ machine.has_rotohead ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.has_fork ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.has_forkextension ? "Igen" : "Nem" }}</td>
+            <td>{{ machine.has_basket ? "Igen" : "Nem" }}</td>
             <td>{{ machine.has_winch ? "Igen" : "Nem" }}</td>
             <td class="image-container">
               <img
