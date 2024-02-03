@@ -28,7 +28,7 @@
           <li>
             <div class="milestone">
               <div class="number">∞</div>
-              <div class="text">{{ $t("homeProfessionalism") }}</div>
+              <div class="text">{{ $t("homeVocation") }}</div>
             </div>
           </li>
         </div>
