@@ -98,17 +98,21 @@ const { machine } = defineProps(["machine"]);
   text-align: center;
   margin-bottom: 10px;
   width: 400px;
-  height: 730px;
+  height: 800px;
 }
 
 .image-container {
   width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-container img {
   max-width: 100%;
   height: auto;
-  max-height: 350px;
+  max-height: 400px;
 }
 
 .machine-details {
@@ -179,11 +183,16 @@ button:hover {
 
   .machines-item {
     max-width: 240px;
-    height: 630px;
+    height: 740px;
+  }
+
+  .image-container {
+    height: auto;
+    height: 350px;
   }
 
   .image-container img {
-    max-height: 250px;
+    max-height: 350px;
   }
 }
 
