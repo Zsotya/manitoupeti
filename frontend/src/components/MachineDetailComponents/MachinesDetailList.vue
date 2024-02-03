@@ -10,7 +10,7 @@
       <div class="machine-properties">
         <h1 class="machine-name">{{ props.machine.machine_name }}</h1>
         <div class="property">
-          <span class="label">{{ $t("machinesDetailMaxWorkingHeight") }}:</span>
+          <span class="label">{{ $t("machinesDetailMaxWorkingHeight") }}</span>
           <span class="value">{{ props.machine.max_height }}m</span>
         </div>
         <div class="property">
@@ -34,19 +34,33 @@
           <span class="value">{{ machine.weight }}kg</span>
         </div>
         <div class="property" v-if="props.machine.has_rotohead">
-          <span class="label">Rotohead</span>
+          <span class="label"><i class="fas fa-check"></i> Rotohead</span>
+          <span class="value">{{ $t("machinesOptional") }}</span>
         </div>
         <div class="property" v-if="props.machine.has_fork">
-          <span class="label">{{ $t("machinesFork") }}</span>
+          <span class="label"
+            ><i class="fas fa-check"></i> {{ $t("machinesFork") }}</span
+          >
+          <span class="value">{{ $t("machinesOptional") }}</span>
         </div>
         <div class="property" v-if="machine.has_forkextension">
-          <span class="label">{{ $t("machinesFork") }}</span>
+          <span class="label"
+            ><i class="fas fa-check"></i>
+            {{ $t("machinesForkExtension") }}</span
+          >
+          <span class="value">{{ $t("machinesOptional") }}</span>
         </div>
         <div class="property" v-if="props.machine.has_basket">
-          <span class="label">{{ $t("machinesBasket") }}</span>
+          <span class="label"
+            ><i class="fas fa-check"></i> {{ $t("machinesBasket") }}</span
+          >
+          <span class="value">{{ $t("machinesOptional") }}</span>
         </div>
         <div class="property" v-if="props.machine.has_winch">
-          <span class="label">{{ $t("machinesWinch") }}</span>
+          <span class="label"
+            ><i class="fas fa-check"></i> {{ $t("machinesWinch") }}</span
+          >
+          <span class="value">{{ $t("machinesOptional") }}</span>
         </div>
         <div class="property" v-if="props.machine.pdf_url">
           <span class="label"
@@ -189,6 +203,10 @@ const darkMode = computed(() => store.getters.isDarkMode);
   .property {
     flex-direction: column;
     text-align: center;
+  }
+
+  .machine-properties {
+    width: 100%;
   }
 }
 

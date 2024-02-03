@@ -52,6 +52,7 @@
   "machinesWinch": "Winch",
   "machinesPDF": "Download data sheet",
   "machinesData": "Data sheet",
+  "machinesOptional": "Optional, can be requested",
   "machinesFiltering": "Filters...",
   "machinesFilterOptions": "Filter options",
   "machinesFiltersRemove": "Remove filters",

@@ -52,6 +52,7 @@
   "machinesWinch": "Csörlő",
   "machinesPDF": "Adatlap letöltése",
   "machinesData": "Adatlap",
+  "machinesOptional": "Opcionális, kérhető",
   "machinesFiltering": "Szűrés...",
   "machinesFilterOptions": "Szűrés beállítások",
   "machinesFiltersRemove": "Szűrők törlése",

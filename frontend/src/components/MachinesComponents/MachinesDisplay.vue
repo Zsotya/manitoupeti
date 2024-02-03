@@ -35,19 +35,27 @@
             <span class="value">{{ machine.weight }}kg</span>
           </div>
           <div class="feature" v-if="machine.has_rotohead">
-            <span class="label">Rotohead</span>
+            <span class="label"><i class="fas fa-check"></i> Rotohead</span>
           </div>
           <div class="feature" v-if="machine.has_fork">
-            <span class="label">{{ $t("machinesFork") }}</span>
+            <span class="label"
+              ><i class="fas fa-check"></i> {{ $t("machinesFork") }}</span
+            >
           </div>
           <div class="feature" v-if="machine.has_forkextension">
-            <span class="label">{{ $t("machinesFork") }}</span>
+            <span class="label"
+              ><i class="fas fa-check"></i> {{ $t("machinesFork") }}</span
+            >
           </div>
           <div class="feature" v-if="machine.has_basket">
-            <span class="label">{{ $t("machinesBasket") }}</span>
+            <span class="label"
+              ><i class="fas fa-check"></i> {{ $t("machinesBasket") }}</span
+            >
           </div>
           <div class="feature" v-if="machine.has_winch">
-            <span class="label">{{ $t("machinesWinch") }}</span>
+            <span class="label"
+              ><i class="fas fa-check"></i> {{ $t("machinesWinch") }}</span
+            >
           </div>
         </div>
         <div class="button-container">
