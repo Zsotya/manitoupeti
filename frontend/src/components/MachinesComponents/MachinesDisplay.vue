@@ -93,12 +93,12 @@ const { machine } = defineProps(["machine"]);
 
 .machines-item {
   display: flex;
+  position: relative;
   flex-direction: column;
   text-align: center;
   margin-bottom: 10px;
-  width: 100%;
-  max-width: 320px;
-  height: 550px;
+  width: 400px;
+  height: 730px;
 }
 
 .image-container {
@@ -146,7 +146,8 @@ const { machine } = defineProps(["machine"]);
 }
 
 .button-container {
-  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
   text-align: center;
   align-self: center;
 }
@@ -172,9 +173,17 @@ button:hover {
 
 /* Mobil nézet */
 @media screen and (max-width: 496px) {
+  .machines-display {
+    margin: 20px 0px;
+  }
+
   .machines-item {
     max-width: 240px;
-    height: 480px;
+    height: 630px;
+  }
+
+  .image-container img {
+    max-height: 250px;
   }
 }
 
