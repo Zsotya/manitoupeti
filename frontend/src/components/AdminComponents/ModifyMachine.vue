@@ -11,15 +11,31 @@
         <input v-model="machineData.machine_name" required />
       </div>
       <div class="form-group">
-        <label for="machine_name">Max Magasság</label>
+        <label for="max_height">Max Magasság</label>
         <input v-model="machineData.max_height" required />
       </div>
       <div class="form-group">
-        <label for="machine_name">Max Teherbírás</label>
+        <label for="max_weight">Max Teherbírás</label>
         <input v-model="machineData.max_weight" required />
       </div>
       <div class="form-group">
-        <label for="machine_name">Van kosár?</label>
+        <label for="height">Magasság</label>
+        <input v-model="machineData.height" required />
+      </div>
+      <div class="form-group">
+        <label for="width">Szélesség</label>
+        <input v-model="machineData.width" required />
+      </div>
+      <div class="form-group">
+        <label for="length">Hosszúság</label>
+        <input v-model="machineData.length" required />
+      </div>
+      <div class="form-group">
+        <label for="weight">Önsúly</label>
+        <input v-model="machineData.weight" required />
+      </div>
+      <div class="form-group">
+        <label for="has_basket">Van kosár?</label>
         <div class="styled-select">
           <select v-model="machineData.has_basket">
             <option value="Yes">Igen</option>
@@ -29,7 +45,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="machine_name">Van villa?</label>
+        <label for="has_fork">Van villa?</label>
         <div class="styled-select">
           <select v-model="machineData.has_fork">
             <option value="Yes">Igen</option>
@@ -39,7 +55,17 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="machine_name">Van Rotohead?</label>
+        <label for="has_forkextension">Van villahosszabbító?</label>
+        <div class="styled-select">
+          <select v-model="machineData.has_forkextension">
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option>
+          </select>
+          <i class="fas fa-caret-down"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="has_rotohead">Van Rotohead?</label>
         <div class="styled-select">
           <select v-model="machineData.has_rotohead">
             <option value="Yes">Igen</option>
@@ -49,7 +75,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="machine_name">Van csörlő?</label>
+        <label for="has_winch">Van csörlő?</label>
         <div class="styled-select">
           <select v-model="machineData.has_winch">
             <option value="Yes">Igen</option>
@@ -140,8 +166,13 @@ const machineData = ref({
   machine_name: "",
   max_height: "",
   max_weight: "",
+  height: "",
+  width: "",
+  length: "",
+  weight: "",
   has_basket: "",
   has_fork: "",
+  has_forkextension: "",
   has_rotohead: "",
   has_winch: "",
   upload_pdf: "",
@@ -167,8 +198,13 @@ onMounted(async () => {
     machine_name: data.machine_name,
     max_height: data.max_height,
     max_weight: data.max_weight,
+    height: data.height,
+    width: data.width,
+    length: data.length,
+    weight: data.weight,
     has_basket: data.has_basket ? "Yes" : "No",
     has_fork: data.has_fork ? "Yes" : "No",
+    has_forkextension: data.has_forkextension ? "Yes" : "No",
     has_rotohead: data.has_rotohead ? "Yes" : "No",
     has_winch: data.has_winch ? "Yes" : "No",
     upload_pdf: data.pdf_url ? "Yes" : "No",
@@ -208,8 +244,16 @@ const modifyMachine = async () => {
   formData.append("machine_name", machineData.value.machine_name);
   formData.append("max_height", machineData.value.max_height);
   formData.append("max_weight", machineData.value.max_weight);
+  formData.append("height", machineData.value.height);
+  formData.append("width", machineData.value.width);
+  formData.append("length", machineData.value.length);
+  formData.append("weight", machineData.value.weight);
   formData.append("has_basket", machineData.value.has_basket === "Yes" ? 1 : 0);
   formData.append("has_fork", machineData.value.has_fork === "Yes" ? 1 : 0);
+  formData.append(
+    "has_forkextension",
+    machineData.value.has_forkextension === "Yes" ? 1 : 0
+  );
   formData.append(
     "has_rotohead",
     machineData.value.has_rotohead === "Yes" ? 1 : 0

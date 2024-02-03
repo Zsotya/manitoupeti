@@ -157,8 +157,13 @@ router.put(
       machine_name,
       max_height,
       max_weight,
+      height,
+      width,
+      length,
+      weight,
       has_basket,
       has_fork,
+      has_forkextension,
       has_rotohead,
       has_winch,
       image,
@@ -186,13 +191,18 @@ router.put(
 
     // Adatok frissítése az adatbázisban
     const sql =
-      "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, has_basket=?, has_fork=?, has_rotohead=?, has_winch=?, image_url=?, pdf_url=? WHERE id=?";
+      "UPDATE machines SET machine_name=?, max_height=?, max_weight=?, height=?, width=?, length=?, weight=?, has_basket=?, has_fork=?, has_forkextension=?, has_rotohead=?, has_winch=?, image_url=?, pdf_url=? WHERE id=?";
     const values = [
       machine_name,
       max_height,
       max_weight,
+      height,
+      width,
+      length,
+      weight,
       has_basket,
       has_fork,
+      has_forkextension,
       has_rotohead,
       has_winch,
       imageUrl,
