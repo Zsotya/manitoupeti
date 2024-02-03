@@ -18,6 +18,22 @@
         <input v-model="machineData.max_weight" required /> kg
       </div>
       <div class="form-group">
+        <label for="height">Magasság</label>
+        <input v-model="machineData.height" required /> mm
+      </div>
+      <div class="form-group">
+        <label for="width">Szélesség</label>
+        <input v-model="machineData.width" required /> mm
+      </div>
+      <div class="form-group">
+        <label for="length">Hosszúság</label>
+        <input v-model="machineData.length" required /> mm
+      </div>
+      <div class="form-group">
+        <label for="weight">Önsúly</label>
+        <input v-model="machineData.weight" required /> kg
+      </div>
+      <div class="form-group">
         <label for="has_basket">Van kosár?</label>
         <div class="styled-select">
           <select v-model="machineData.has_basket">
@@ -30,6 +46,15 @@
         <label for="has_fork">Van villa?</label>
         <div class="styled-select">
           <select v-model="machineData.has_fork">
+            <option value="Yes">Igen</option>
+            <option value="No">Nem</option></select
+          ><i class="fas fa-caret-down"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="has_forkextension">Van villahosszabbító?</label>
+        <div class="styled-select">
+          <select v-model="machineData.has_forkextension">
             <option value="Yes">Igen</option>
             <option value="No">Nem</option></select
           ><i class="fas fa-caret-down"></i>
@@ -119,8 +144,13 @@ const machineData = ref({
   machine_name: "",
   max_height: "",
   max_weight: "",
+  height: "",
+  width: "",
+  length: "",
+  weight: "",
   has_basket: "Yes",
   has_fork: "Yes",
+  has_forkextension: "Yes",
   has_rotohead: "Yes",
   has_winch: "Yes",
   upload_pdf: "No",
@@ -136,8 +166,16 @@ const createMachine = async () => {
   formData.append("machine_name", machineData.value.machine_name);
   formData.append("max_height", machineData.value.max_height);
   formData.append("max_weight", machineData.value.max_weight);
+  formData.append("height", machineData.value.height);
+  formData.append("width", machineData.value.width);
+  formData.append("length", machineData.value.length);
+  formData.append("weight", machineData.value.weight);
   formData.append("has_basket", machineData.value.has_basket === "Yes" ? 1 : 0);
   formData.append("has_fork", machineData.value.has_fork === "Yes" ? 1 : 0);
+  formData.append(
+    "has_forkextension",
+    machineData.value.has_forkextension === "Yes" ? 1 : 0
+  );
   formData.append(
     "has_rotohead",
     machineData.value.has_rotohead === "Yes" ? 1 : 0

@@ -79,8 +79,13 @@ router.post(
       machine_name,
       max_height,
       max_weight,
+      height,
+      width,
+      length,
+      weight,
       has_basket,
       has_fork,
+      has_forkextension,
       has_rotohead,
       has_winch,
     } = req.body;
@@ -108,15 +113,20 @@ router.post(
     const pdfUrl = pdfFile ? `/pdfs/${pdfFile.filename}` : null;
 
     const sql =
-      "INSERT INTO machines (machine_name, max_height, max_weight, has_basket, has_fork, has_rotohead, has_winch, image_url, pdf_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO machines (machine_name, max_height, max_weight, height, width, length, weight, has_basket, has_fork, has_forkextension, has_rotohead, has_winch, image_url, pdf_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     db.query(
       sql,
       [
         machine_name,
         max_height,
         max_weight,
+        height,
+        width,
+        length,
+        weight,
         has_basket,
         has_fork,
+        has_forkextension,
         has_rotohead,
         has_winch,
         imageUrl,
