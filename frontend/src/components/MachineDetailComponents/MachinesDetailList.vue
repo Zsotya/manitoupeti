@@ -17,14 +17,33 @@
           <span class="label">{{ $t("machinesDetailMaxLoadCapacity") }}</span>
           <span class="value">{{ props.machine.max_weight }}kg</span>
         </div>
-        <div class="property" v-if="props.machine.has_basket">
-          <span class="label">{{ $t("machinesBasket") }}</span>
+        <div class="property">
+          <span class="label">{{ $t("machinesHeight") }}</span>
+          <span class="value">{{ machine.height }}mm</span>
+        </div>
+        <div class="property">
+          <span class="label">{{ $t("machinesWidth") }}</span>
+          <span class="value">{{ machine.width }}mm</span>
+        </div>
+        <div class="property">
+          <span class="label">{{ $t("machinesLength") }}</span>
+          <span class="value">{{ machine.length }}mm</span>
+        </div>
+        <div class="property">
+          <span class="label">{{ $t("machinesWeight") }}</span>
+          <span class="value">{{ machine.weight }}kg</span>
+        </div>
+        <div class="property" v-if="props.machine.has_rotohead">
+          <span class="label">Rotohead</span>
         </div>
         <div class="property" v-if="props.machine.has_fork">
           <span class="label">{{ $t("machinesFork") }}</span>
         </div>
-        <div class="property" v-if="props.machine.has_rotohead">
-          <span class="label">Rotohead</span>
+        <div class="property" v-if="machine.has_forkextension">
+          <span class="label">{{ $t("machinesFork") }}</span>
+        </div>
+        <div class="property" v-if="props.machine.has_basket">
+          <span class="label">{{ $t("machinesBasket") }}</span>
         </div>
         <div class="property" v-if="props.machine.has_winch">
           <span class="label">{{ $t("machinesWinch") }}</span>
@@ -35,7 +54,8 @@
               :href="'http://localhost:3000' + props.machine.pdf_url"
               target="_blank"
               rel="noopener noreferrer"
-              >{{ $t("machinesPDF") }}</a
+              class="pdf-link"
+              ><i class="fas fa-file-pdf"></i>{{ $t("machinesPDF") }}</a
             ></span
           >
         </div>
@@ -144,6 +164,15 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .property:hover .label,
 .property:hover .value {
   color: #ff6633;
+}
+
+.pdf-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.fa-file-pdf {
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 768px) {

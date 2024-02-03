@@ -18,14 +18,33 @@
             <span class="label">{{ $t("machinesMaxLoadCapacity") }}:</span>
             <span class="value">{{ machine.max_weight }}kg</span>
           </div>
-          <div class="feature" v-if="machine.has_basket">
-            <span class="label">{{ $t("machinesBasket") }}</span>
+          <div class="feature">
+            <span class="label">{{ $t("machinesHeight") }}:</span>
+            <span class="value">{{ machine.height }}mm</span>
+          </div>
+          <div class="feature">
+            <span class="label">{{ $t("machinesWidth") }}:</span>
+            <span class="value">{{ machine.width }}mm</span>
+          </div>
+          <div class="feature">
+            <span class="label">{{ $t("machinesLength") }}:</span>
+            <span class="value">{{ machine.length }}mm</span>
+          </div>
+          <div class="feature">
+            <span class="label">{{ $t("machinesWeight") }}:</span>
+            <span class="value">{{ machine.weight }}kg</span>
+          </div>
+          <div class="feature" v-if="machine.has_rotohead">
+            <span class="label">Rotohead</span>
           </div>
           <div class="feature" v-if="machine.has_fork">
             <span class="label">{{ $t("machinesFork") }}</span>
           </div>
-          <div class="feature" v-if="machine.has_rotohead">
-            <span class="label">Rotohead</span>
+          <div class="feature" v-if="machine.has_forkextension">
+            <span class="label">{{ $t("machinesFork") }}</span>
+          </div>
+          <div class="feature" v-if="machine.has_basket">
+            <span class="label">{{ $t("machinesBasket") }}</span>
           </div>
           <div class="feature" v-if="machine.has_winch">
             <span class="label">{{ $t("machinesWinch") }}</span>
