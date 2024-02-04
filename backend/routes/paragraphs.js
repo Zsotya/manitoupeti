@@ -23,7 +23,7 @@ const upload = multer({ storage: storage });
 router.get("/api/paragraphs", (req, res) => {
   // Lekérdezés
   db.query(
-    "SELECT * FROM paragraphs",
+    "SELECT * FROM paragraphs ORDER BY `order` ASC",
     // Hibakezelés
     (err, results) => {
       if (err) {
@@ -152,6 +152,39 @@ router.delete("/api/paragraphs/:id", (req, res) => {
         return;
       }
       res.json({ message: "Paragrafus sikeresen törölve" });
+    }
+  );
+});
+
+// Sorrend módosítása - PUT
+router.put("/api/paragraphs/:paragraphId/changeOrder", (req, res) => {
+  const paragraphId = req.params.paragraphId;
+  const { newOrder } = req.body;
+
+  // Validálás
+  if (isNaN(newOrder) || newOrder < 1) {
+    res.status(400).json({ error: "Hibás paraméter" });
+    return;
+  }
+
+  // Adatbázis módosítás
+  db.query(
+    "UPDATE paragraphs SET `order` = ? WHERE id = ?",
+    [newOrder, paragraphId],
+    (updateErr) => {
+      // Hibakezelés
+      if (updateErr) {
+        console.error(
+          "Hiba a paragrafus sorrendjének módosítása közben:",
+          updateErr
+        );
+        res
+          .status(500)
+          .json({ error: "Adatbázis hiba:", details: updateErr.message });
+        return;
+      }
+      // Sikeres módosítás
+      res.status(201).json({ message: "Sorrendmódosítás sikeres" });
     }
   );
 });

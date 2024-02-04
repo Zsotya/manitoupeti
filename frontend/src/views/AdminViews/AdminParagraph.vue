@@ -13,6 +13,7 @@
             <th>Tartalom (HU)</th>
             <th>Tartalom (EN)</th>
             <th>Kép</th>
+            <th>Sorszám</th>
             <th>Műveletek</th>
           </tr>
         </thead>
@@ -30,12 +31,16 @@
                 class="thumbnail"
               />
             </td>
+            <td>{{ paragraph.order }}</td>
             <td class="actions-buttons">
+              <!-- Módosítás gomb -->
               <router-link :to="`/admin/paragraph-management/${paragraph.id}`">
                 <button class="modify-button">
                   <i class="fas fa-edit"></i>Módosítás
                 </button></router-link
               >
+
+              <!-- Törlés gomb -->
               <button
                 class="delete-button"
                 @click="openDeletePopup(paragraph.id)"
@@ -43,6 +48,22 @@
                 <i class="fas fa-trash"></i>
                 Törlés
               </button>
+
+              <!-- Sorszám váltó gombok -->
+              <div class="order-button-container">
+                <button
+                  class="action-button up-button"
+                  @click="changeOrder(paragraph.id, 'up')"
+                >
+                  <i class="fas fa-arrow-up"></i>
+                </button>
+                <button
+                  class="action-button down-button"
+                  @click="changeOrder(paragraph.id, 'down')"
+                >
+                  <i class="fas fa-arrow-down"></i>
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -129,6 +150,47 @@ const cancelDelete = () => {
   deleteItemId.value = null;
   popupOpen.value = false;
 };
+
+// Sorrend módosítása
+const changeOrder = async (paragraphId, direction) => {
+  // Paragrafus index megkeresés
+  const index = paragraphs.value.findIndex(
+    (paragraph) => paragraph.id === paragraphId
+  );
+
+  // Index validálása
+  if (index === -1) {
+    console.error("Paragrafus nem található a lokális tárhelyen");
+    return;
+  }
+
+  // Lokális sorrend módosítása, új sorszám kiszámítása
+  const updatedParagraphs = [...paragraphs.value];
+  const paragraphToMove = updatedParagraphs[index];
+  const newOrder =
+    direction === "up" ? paragraphToMove.order - 1 : paragraphToMove.order + 1;
+
+  // Sorszám legkisebb értékének beállítása
+  const minOrder = 1;
+  if (newOrder < minOrder) {
+    alert(`Az új sorszám nem lehet ${minOrder}-nél kisebb!`);
+  }
+
+  // Sorrend módosítás adatbázisban
+  try {
+    await axios.put(
+      `http://localhost:3000/api/paragraphs/${paragraphId}/changeOrder`,
+      {
+        newOrder,
+      }
+    );
+    fetchData();
+  } catch (error) {
+    // Hibakeresés
+    console.error("Hiba a paragrafus sorrendjének módosítása közben:", error);
+    alert("Sorrend módosítás sikertelen. Kérem, próbálja újra később.");
+  }
+};
 </script>
 
 <style scoped>
@@ -212,6 +274,34 @@ th {
 
 .delete-button:hover {
   background-color: rgb(130, 14, 14);
+}
+
+.order-button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.action-button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #297fb8;
+}
+
+.up-button {
+  background-color: #2ecc71;
+}
+
+.down-button {
+  background-color: #e67e22;
 }
 
 .add-button {
