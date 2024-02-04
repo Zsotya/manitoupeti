@@ -104,11 +104,30 @@ const modifyJob = async () => {
   try {
     // Azonosító meghatározása
     const jobId = route.params.id;
+
+    // Értékek meghatározása
+    const {
+      jobname_hu,
+      jobname_en,
+      jobdescription_hu,
+      jobdescription_en,
+      jobtime_hu,
+      jobtime_en,
+    } = jobData.value;
+
     // PUT request küldése
     const response = await axios.put(
       `http://localhost:3000/api/jobs/${jobId}`,
-      jobData
+      {
+        jobname_hu,
+        jobname_en,
+        jobdescription_hu,
+        jobdescription_en,
+        jobtime_hu,
+        jobtime_en,
+      }
     );
+
     // Sikeres küldés esetén navigálás
     router.push("/admin/career-management");
   } catch (error) {
