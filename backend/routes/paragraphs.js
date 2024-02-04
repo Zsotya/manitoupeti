@@ -72,24 +72,38 @@ router.post("/api/paragraphs", upload.single("image"), (req, res) => {
     return;
   }
 
-  /* Beszúrás adatbázisba */
   // Kép címének meghatározása
   const imageUrl = `/images/${imageFile.filename}`;
-  // Lekérdezés
-  const sql =
-    "INSERT INTO paragraphs (title_hu, title_en, content_hu, content_en, image_url) VALUES (?, ?, ?, ?, ?)";
+
+  /* Beszúrás adatbázisba */
+  // A legnagyobb sorszám megkeresése
   db.query(
-    sql,
-    [title_hu, title_en, content_hu, content_en, imageUrl],
-    (err, res) => {
-      // Hibakezelés
+    "SELECT MAX(`order`) as maxOrder FROM paragraphs",
+    (err, results) => {
       if (err) {
-        console.error("Hiba az adatbázisba beszúrás közben:", err);
+        console.error("Hiba a maximum kiszámítása közben: ", err);
         res.status(500).json({ error: "Adatbázis hiba" });
         return;
       }
-      // Sikeres létrehozás esetén válasz a kliensnek
-      res.status(201).json({ message: "Paragrafus sikeresen létrehozva" });
+
+      const newOrder = results[0]?.maxOrder + 1 || null;
+      // Lekérdezés
+      const sql =
+        "INSERT INTO paragraphs (title_hu, title_en, content_hu, content_en, image_url, `order`) VALUES (?, ?, ?, ?, ?, ?)";
+      db.query(
+        sql,
+        [title_hu, title_en, content_hu, content_en, imageUrl, newOrder],
+        (err, queryResult) => {
+          // Hibakezelés
+          if (err) {
+            console.error("Hiba az adatbázisba beszúrás közben:", err);
+            res.status(500).json({ error: "Adatbázis hiba" });
+            return;
+          }
+          // Sikeres létrehozás esetén válasz a kliensnek
+          res.status(201).json({ message: "Paragrafus sikeresen létrehozva" });
+        }
+      );
     }
   );
 });
