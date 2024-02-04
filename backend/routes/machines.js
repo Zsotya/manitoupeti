@@ -31,7 +31,7 @@ const upload = multer({ storage: storage });
 router.get("/api/machines", (req, res) => {
   // Lekérdezés
   db.query(
-    "SELECT * FROM machines",
+    "SELECT * FROM machines ORDER BY `order` ASC",
     // Hibakezelés
     (err, results) => {
       if (err) {
@@ -243,6 +243,36 @@ router.delete("/api/machines/:id", (req, res) => {
         return;
       }
       res.json({ message: "Nehézgép sikeresen törölve" });
+    }
+  );
+});
+
+// Sorrend módosítása - PUT
+router.put("/api/machines/:machineId/changeOrder", (req, res) => {
+  const machineId = req.params.machineId;
+  const { newOrder } = req.body;
+
+  // Validálás
+  if (isNaN(newOrder) || newOrder < 1) {
+    res.status(400).json({ error: "Hibás paraméter" });
+    return;
+  }
+
+  // Adatbázis módosítás
+  db.query(
+    "UPDATE machines SET `order` = ? WHERE id = ?",
+    [newOrder, machineId],
+    (updateErr) => {
+      // Hibakezelés
+      if (updateErr) {
+        console.error("Hiba a gép sorrendjének módosítása közben:", updateErr);
+        res
+          .status(500)
+          .json({ error: "Adatbázis hiba:", details: updateErr.message });
+        return;
+      }
+      // Sikeres módosítás
+      res.status(201).json({ message: "Sorrendmódosítás sikeres" });
     }
   );
 });
