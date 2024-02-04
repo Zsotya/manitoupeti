@@ -44,7 +44,8 @@
           </div>
           <div class="feature" v-if="machine.has_forkextension">
             <span class="label"
-              ><i class="fas fa-check"></i> {{ $t("machinesFork") }}</span
+              ><i class="fas fa-check"></i>
+              {{ $t("machinesForkExtension") }}</span
             >
           </div>
           <div class="feature" v-if="machine.has_basket">
