@@ -7,18 +7,47 @@
     <div class="title-container">
       <div class="title">Nehézgép galéria</div>
     </div>
-    <div class="gallery mySwiper">
+    <div class="gallery-container">
       <Swiper
-        :modules="[EffectFade, Pagination, Autoplay, Navigation]"
-        :grabCursor="true"
+        class="main-swiper"
+        :modules="[Pagination, Navigation]"
+        :thumbs="{ swiper: thumbsSwiper }"
         :navigation="true"
         :pagination="{
           clickable: true,
         }"
-        effect="fade"
+        :slidesPerView="1"
+        :spaceBetween="10"
+        :loop="true"
+        :watchSlidesProgress="true"
       >
-        <SwiperSlide v-for="image in images">
-          <img :src="'http://localhost:3000' + image.image_url" alt="" />
+        <SwiperSlide v-for="image in images" :key="image.id">
+          <img
+            class="main-image"
+            :src="'http://localhost:3000' + image.image_url"
+            alt=""
+          />
+        </SwiperSlide>
+      </Swiper>
+      <Swiper
+        v-if="isWideViewport"
+        @swiper="setThumbsSwiper"
+        class="thumbnail-swiper"
+        direction="vertical"
+        :modules="[FreeMode, Navigation, Pagination, Thumbs, Mousewheel]"
+        :freeMode="true"
+        :slidesPerView="5"
+        :spaceBetween="10"
+        :mousewheel="true"
+        :loop="true"
+        :watchSlidesProgress="true"
+      >
+        <SwiperSlide v-for="image in images" :key="image.id">
+          <img
+            class="thumbnail-image"
+            :src="'http://localhost:3000' + image.image_url"
+            alt=""
+          />
         </SwiperSlide>
       </Swiper>
     </div>
@@ -26,12 +55,26 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { EffectFade, Pagination, Navigation, Autoplay } from "swiper/modules";
 import axios from "axios";
+import SwiperCore from "swiper/core";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import {
+  Pagination,
+  Navigation,
+  Thumbs,
+  FreeMode,
+  Mousewheel,
+} from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/thumbs";
+
+SwiperCore.use([Thumbs]);
 
 // Dark mode
 const store = useStore();
@@ -55,17 +98,32 @@ const fetchData = async () => {
   }
 };
 
+const isWideViewport = ref(window.innerWidth > 768);
+
+const handleResize = () => {
+  isWideViewport.value = window.innerWidth > 768;
+};
+
 onMounted(() => {
   fetchData();
+  window.addEventListener("resize", handleResize);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+const thumbsSwiper = ref(null);
+
+const setThumbsSwiper = (swiper) => {
+  thumbsSwiper.value = swiper;
+};
 </script>
 
 <style scoped>
-@import "swiper/css";
-
+@import "@/swiper.css";
 .page-container {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: #e8e6e6;
   transition: background-color 0.5s;
 }
@@ -82,19 +140,51 @@ onMounted(() => {
   transition: color 0.3s;
 }
 
-.swiper {
+.gallery-container {
   display: flex;
-  align-items: center;
-  width: 750px;
-  height: 750px;
-  overflow: visible;
+}
+
+.main-swiper {
+  max-width: 50%;
+  height: 80vh;
+  overflow: hidden;
+  margin-right: 30px;
+}
+
+.thumbnail-swiper {
+  height: 80vh;
+  width: 180px;
+  margin-left: 30px;
+}
+
+.thumbnail-swiper .swiper-slide {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.thumbnail-swiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.thumbnail-image:hover {
+  border-color: #fff;
+  transition: all 0.3s;
 }
 
 .swiper-slide img {
-  width: 100%;
+  width: 99.9%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: contain;
   border: 1px solid #444;
   border-radius: 20px;
   transition: border 0.5s;
@@ -102,17 +192,21 @@ onMounted(() => {
 
 /* Tablet nézet */
 @media screen and (max-width: 768px) {
-  .swiper {
-    width: 450px;
-    height: 450px;
+  .gallery-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-swiper {
+    margin: 0;
+    max-width: 89%;
   }
 }
 
-/* Mobil nézet */
+/* Mobilnézet */
 @media screen and (max-width: 496px) {
   .swiper {
-    width: 320px;
-    height: 320px;
+    height: 50vh;
   }
 }
 
