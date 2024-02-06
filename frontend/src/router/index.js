@@ -19,11 +19,11 @@ import NotFound from "../views/MainAppViews/NotFound.vue";
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
 import AdminParagraph from "../views/AdminViews/AdminParagraph.vue";
-import AdminAboutUs from "../views/AdminViews/AdminAboutUs.vue";
 import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
+// import AdminAboutUs from "../views/AdminViews/AdminAboutUs.vue";
 // import AdminBookings from "../views/AdminViews/AdminBookings.vue";
 // import AdminStatistics from "../views/AdminViews/AdminStatistics.vue";
 
@@ -174,16 +174,16 @@ const routes = [
       requireAuth: true,
     },
   },
-  {
-    path: "/admin/aboutus-management",
-    name: "Bemutatkozás menedzsment",
-    component: AdminAboutUs,
-    meta: {
-      isMainApp: false,
-      isAdminApp: true,
-      requireAuth: true,
-    },
-  },
+  // {
+  //   path: "/admin/aboutus-management",
+  //   name: "Bemutatkozás menedzsment",
+  //   component: AdminAboutUs,
+  //   meta: {
+  //     isMainApp: false,
+  //     isAdminApp: true,
+  //     requireAuth: true,
+  //   },
+  // },
   {
     path: "/admin/ourfilms-management",
     name: "Munkáink menedzsment",
