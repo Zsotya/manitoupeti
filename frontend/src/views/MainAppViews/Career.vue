@@ -42,6 +42,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .career-cards-container {
   background-color: #e8e6e6;
   transition: background-color 0.5s;
+  min-height: 60vh;
 }
 
 .career-cards {
