@@ -21,7 +21,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
   background-color: #e8e6e6;
   display: flex;
   flex-direction: column;
-  padding-left: 90px;
+  padding-left: 180px;
   transition: background-color 0.5s, color 0.5s;
 }
 

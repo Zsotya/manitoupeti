@@ -46,9 +46,9 @@ const darkMode = computed(() => store.getters.isDarkMode);
 
 .career-cards {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 30px 40px 80px 30px;
+  flex-direction: column;
+  padding-top: 50px;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {

@@ -9,14 +9,18 @@
           </div>
           <div class="job-time">{{ job["jobtime_" + $i18n.locale] }}</div>
         </div>
-        <div class="card-text-content">
-          {{ job["jobdescription_" + $i18n.locale] }}
+        <div class="card-text-container">
+          <div class="card-text-content">
+            {{ job["jobdescription_" + $i18n.locale] }}
+          </div>
         </div>
       </div>
     </div>
-    <router-link :to="`/karrier/${job.id}`">
-      <button class="apply-button">{{ $t("careerApply") }}</button></router-link
-    >
+    <div class="button-container">
+      <router-link :to="`/karrier/${job.id}`">
+        <button class="apply-button">{{ $t("careerApply") }}</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -36,15 +40,14 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .career-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
   border: 1px solid transparent;
-  width: 410px;
-  height: 460px;
-  margin-bottom: 20px;
+  width: 80vw;
+  height: auto;
+  margin-bottom: 40px;
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  background-color: #edcca3;
+  background-color: #eee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: 0.15s, background-color 0.5s, color 0.5s, box-shadow 0.7s;
 }
@@ -55,16 +58,18 @@ const darkMode = computed(() => store.getters.isDarkMode);
   transition: box-shadow 0.15s, transform 0.3s;
 }
 
+.header-part {
+  margin: 40px 0px 20px 40px;
+}
+
 .card-title {
-  font-size: 24px;
-  margin-bottom: 4px;
-  margin-top: 60px;
+  font-size: 32px;
   background-color: #333333;
   -webkit-background-clip: text;
   background-clip: text;
   color: #444;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.5s, color 0.5s, text-shadow 0.7s;
+  line-height: 1.4;
 }
 
 .job-time-icon {
@@ -72,24 +77,28 @@ const darkMode = computed(() => store.getters.isDarkMode);
   align-items: center;
   vertical-align: middle;
   margin-right: 6px;
-  color: #222;
+  color: #000000;
 }
 
 .job-time {
   display: inline-block;
-  margin-bottom: 24px;
-  font-size: 16px;
-  color: #222;
+  font-size: 18px;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.card-text-part {
+  max-width: 100%;
 }
 
 .card-text-content {
-  font-size: 18px;
-  width: 30ch;
-  text-align: left;
-  margin-bottom: 16px;
-  word-wrap: break-word;
+  font-size: 24px;
+  max-width: 90%;
+  margin-left: 40px;
+  margin-right: 40px;
   text-align: justify;
-  color: #222;
+  color: #000000;
+  line-height: 1.3;
 }
 
 .job-time-icon,
@@ -98,15 +107,17 @@ const darkMode = computed(() => store.getters.isDarkMode);
   transition: color 0.5s;
 }
 
+.button-container {
+  margin: 30px 0px 40px 40px;
+}
+
 .apply-button {
-  position: relative;
   background-color: #007bff;
   color: #fff;
-  padding: 24px 80px;
+  padding: 18px 64px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  bottom: 50px;
   font-weight: 600;
   font-size: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -118,33 +129,51 @@ const darkMode = computed(() => store.getters.isDarkMode);
   transform: scale(1.05);
 }
 
-/* Mobil nézet */
-@media screen and (max-width: 496px) {
+/* Tablet nézet */
+@media screen and (max-width: 768px) {
   .header-part {
     text-align: center;
+    margin: 40px 0px;
+  }
+
+  .button-container {
+    text-align: center;
+    margin: 30px 0px 40px;
+  }
+
+  .apply-button {
+    padding: 18px 40px;
+  }
+}
+
+/* Mobil nézet */
+@media screen and (max-width: 496px) {
+  .card-title {
+    font-size: 24px;
+  }
+
+  .job-time {
+    font-size: 16px;
   }
 
   .career-card {
-    width: 69vw;
-    height: 54vh;
     margin-left: 10px;
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;
   }
+
   .card-text-content {
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  .apply-button {
-    padding: 20px 20px;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
 /* Dark mode */
 .career-card.dark-mode {
-  background-color: #364048;
-  border: 1px solid #4d5d6d;
+  background-color: #252525;
+  border: 1px solid #969696;
   box-shadow: 1px 2px 8px rgba(255, 255, 255, 0.4);
 }
 
@@ -157,7 +186,7 @@ const darkMode = computed(() => store.getters.isDarkMode);
 .career-card.dark-mode .job-time-icon,
 .career-card.dark-mode .job-time,
 .career-card.dark-mode .card-text-content {
-  color: #ccc;
+  color: #dddddd;
 }
 
 .career-card.dark-mode .apply-button {
