@@ -116,11 +116,11 @@ const store = useStore();
 // Útvonalak meghatározása
 const routes = [
   { path: "/", label: "homeLabel" },
-  { path: "/bemutatkozas", label: "aboutLabel" },
   { path: "/munkaink", label: "ourWorksLabel" },
   { path: "/berelheto-gepeink", label: "machinesLabel" },
   { path: "/elerhetoseg", label: "contactUsLabel" },
   { path: "/karrier", label: "careerLabel" },
+  // { path: "/bemutatkozas", label: "aboutLabel" },
 ];
 
 // Dark mode

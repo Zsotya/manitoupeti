@@ -30,19 +30,19 @@ scheduler.scheduleBookingExpirationCheck();
 /* Imports */
 // Management imports
 const paragraphsRoutes = require("./routes/paragraphs");
-const aboutusRoutes = require("./routes/aboutus");
 const filmsRoutes = require("./routes/films");
 const machinesRoutes = require("./routes/machines");
 const machinesGalleryRoutes = require("./routes/machinesGallery");
 const jobsRoutes = require("./routes/jobs");
 const adminsRoutes = require("./routes/admins");
+// const aboutusRoutes = require("./routes/aboutus");
 
 // Services imports
 const authenticationRoutes = require("./routes/authentication");
 const mailerRoutes = require("./routes/mailer");
-const statisticsRoutes = require("./routes/statistics");
+// const statisticsRoutes = require("./routes/statistics");
 
-// Bookings imports
+/* Bookings imports */
 const bookingsRoutes = require("./routes/bookings/bookings");
 const pendingBookingsRoutes = require("./routes/bookings/pendingBookingsMachine");
 const approvedBookingsRoutes = require("./routes/bookings/approvedBookingsMachine");
@@ -50,21 +50,21 @@ const paidBookingsRoutes = require("./routes/bookings/paidBookingsMachine");
 const activeBookings = require("./routes/bookings/activeBookings");
 
 /* Routes usage */
-// Management routes
+/* Management routes */
 app.use(paragraphsRoutes);
-app.use(aboutusRoutes);
 app.use(filmsRoutes);
 app.use(machinesRoutes);
 app.use(machinesGalleryRoutes);
 app.use(jobsRoutes);
 app.use(adminsRoutes);
+// app.use(aboutusRoutes);
 
-// Services routes
+/* Services routes */
 app.use(authenticationRoutes);
 app.use(mailerRoutes);
-app.use(statisticsRoutes);
+// app.use(statisticsRoutes);
 
-// Bookings routes
+/* Bookings routes */
 app.use(bookingsRoutes);
 app.use(pendingBookingsRoutes);
 app.use(approvedBookingsRoutes);
@@ -73,12 +73,6 @@ app.use(activeBookings);
 
 // WebSocket setup
 app.set("io", io);
-// io.on("connection", (socket) => {
-//   console.log("A user connected");
-//   socket.on("disconnect", () => {
-//     console.log("User disconnected");
-//   });
-// });
 
 // Start the server
 server.listen(port, () => {

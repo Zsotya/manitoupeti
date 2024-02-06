@@ -32,18 +32,18 @@ const links = [
     iconClass: "fas fa-home mr-2",
     show: true,
   },
-  {
-    path: "/admin/bookings",
-    label: "Megrendelések",
-    iconClass: "far fa-calendar-alt mr-2",
-    show: true,
-  },
-  {
-    path: "/admin/statistics",
-    label: "Statisztika",
-    iconClass: "fas fa-chart-bar mr-2",
-    show: true,
-  },
+  // {
+  //   path: "/admin/bookings",
+  //   label: "Megrendelések",
+  //   iconClass: "far fa-calendar-alt mr-2",
+  //   show: true,
+  // },
+  // {
+  //   path: "/admin/statistics",
+  //   label: "Statisztika",
+  //   iconClass: "fas fa-chart-bar mr-2",
+  //   show: true,
+  // },
   {
     path: "/admin/paragraph-management",
     label: "Paragrafus Menedzsment",

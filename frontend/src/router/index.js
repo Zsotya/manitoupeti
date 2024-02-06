@@ -5,7 +5,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 /* Main application */
 import Home from "../views/MainAppViews/Home.vue";
-import AboutUs from "../views/MainAppViews/AboutUs.vue";
 import OurWorks from "../views/MainAppViews/OurWorks.vue";
 import Machines from "../views/MainAppViews/Machines.vue";
 import MachineDetail from "../views/MainAppViews/MachineDetail.vue";
@@ -13,32 +12,36 @@ import ContactUs from "../views/MainAppViews/ContactUs.vue";
 import Career from "../views/MainAppViews/Career.vue";
 import CareerDetail from "../views/MainAppViews/CareerDetail.vue";
 import NotFound from "../views/MainAppViews/NotFound.vue";
+// import AboutUs from "../views/MainAppViews/AboutUs.vue";
 
 /* Admin application */
 // Main pages
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
-import AdminBookings from "../views/AdminViews/AdminBookings.vue";
-import AdminStatistics from "../views/AdminViews/AdminStatistics.vue";
 import AdminParagraph from "../views/AdminViews/AdminParagraph.vue";
 import AdminAboutUs from "../views/AdminViews/AdminAboutUs.vue";
 import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
 import AdminAdminManagement from "../views/AdminViews/AdminAdminManagement.vue";
+// import AdminBookings from "../views/AdminViews/AdminBookings.vue";
+// import AdminStatistics from "../views/AdminViews/AdminStatistics.vue";
+
 // Creation pages
 import CreateParagraph from "../components/AdminComponents/CreateParagraph.vue";
-import CreateAboutus from "../components/AdminComponents/CreateAboutus.vue";
 import CreateFilm from "../components/AdminComponents/CreateFilm.vue";
 import CreateMachine from "../components/AdminComponents/CreateMachine.vue";
 import CreateJob from "../components/AdminComponents/CreateJob.vue";
 import CreateAdmin from "../components/AdminComponents/CreateAdmin.vue";
+// import CreateAboutus from "../components/AdminComponents/CreateAboutus.vue";
+
 // Modification pages
 import ModifyMachine from "../components/AdminComponents/ModifyMachine.vue";
 import ModifyParagraph from "../components/AdminComponents/ModifyParagraph.vue";
-import ModifyAboutus from "../components/AdminComponents/ModifyAboutus.vue";
 import ModifyJob from "../components/AdminComponents/ModifyJob.vue";
 import ModifyFilm from "../components/AdminComponents/ModifyFilm.vue";
+// import ModifyAboutus from "../components/AdminComponents/ModifyAboutus.vue";
+
 // Machines gallery
 import MachineGallery from "../components/AdminComponents/MachineGallery.vue";
 
@@ -56,12 +59,12 @@ const routes = [
     component: Home,
     meta: { isMainApp: true, isAdminApp: false },
   },
-  {
-    path: "/bemutatkozas",
-    name: "AboutUs",
-    component: AboutUs,
-    meta: { isMainApp: true, isAdminApp: false },
-  },
+  // {
+  //   path: "/bemutatkozas",
+  //   name: "AboutUs",
+  //   component: AboutUs,
+  //   meta: { isMainApp: true, isAdminApp: false },
+  // },
   {
     path: "/munkaink",
     name: "OurWorks",
@@ -141,26 +144,26 @@ const routes = [
       requireAuth: true,
     },
   },
-  {
-    path: "/admin/bookings",
-    name: "Megrendelések",
-    component: AdminBookings,
-    meta: {
-      isMainApp: false,
-      isAdminApp: true,
-      requireAuth: true,
-    },
-  },
-  {
-    path: "/admin/statistics",
-    name: "Statisztika",
-    component: AdminStatistics,
-    meta: {
-      isMainApp: false,
-      isAdminApp: true,
-      requireAuth: true,
-    },
-  },
+  // {
+  //   path: "/admin/bookings",
+  //   name: "Megrendelések",
+  //   component: AdminBookings,
+  //   meta: {
+  //     isMainApp: false,
+  //     isAdminApp: true,
+  //     requireAuth: true,
+  //   },
+  // },
+  // {
+  //   path: "/admin/statistics",
+  //   name: "Statisztika",
+  //   component: AdminStatistics,
+  //   meta: {
+  //     isMainApp: false,
+  //     isAdminApp: true,
+  //     requireAuth: true,
+  //   },
+  // },
   {
     path: "/admin/paragraph-management",
     name: "Paragrafus menedzsment",
@@ -233,16 +236,16 @@ const routes = [
       requireAuth: true,
     },
   },
-  {
-    path: "/admin/aboutus-management/createaboutus",
-    name: "Új bemutatkozás elem",
-    component: CreateAboutus,
-    meta: {
-      isMainApp: false,
-      isAdminApp: true,
-      requireAuth: true,
-    },
-  },
+  // {
+  //   path: "/admin/aboutus-management/createaboutus",
+  //   name: "Új bemutatkozás elem",
+  //   component: CreateAboutus,
+  //   meta: {
+  //     isMainApp: false,
+  //     isAdminApp: true,
+  //     requireAuth: true,
+  //   },
+  // },
   {
     path: "/admin/ourfilms-management/createfilm",
     name: "Új film",
@@ -305,16 +308,16 @@ const routes = [
       requireAuth: true,
     },
   },
-  {
-    path: "/admin/aboutus-management/:id",
-    name: "Bemutatkozás elem módosítás",
-    component: ModifyAboutus,
-    meta: {
-      isMainApp: false,
-      isAdminApp: true,
-      requireAuth: true,
-    },
-  },
+  // {
+  //   path: "/admin/aboutus-management/:id",
+  //   name: "Bemutatkozás elem módosítás",
+  //   component: ModifyAboutus,
+  //   meta: {
+  //     isMainApp: false,
+  //     isAdminApp: true,
+  //     requireAuth: true,
+  //   },
+  // },
   {
     path: "/admin/career-management/:id",
     name: "Állás módosítás",
