@@ -191,6 +191,7 @@ const handleDocumentClick = (event) => {
   display: flex;
   align-items: center;
   color: white;
+  user-select: none;
 }
 
 .fa-chevron-right,
