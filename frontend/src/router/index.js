@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 /* Main application */
 import Home from "../views/MainAppViews/Home.vue";
+import Gallery from "../views/MainAppViews/Gallery.vue";
 import OurWorks from "../views/MainAppViews/OurWorks.vue";
 import Machines from "../views/MainAppViews/Machines.vue";
 import MachineDetail from "../views/MainAppViews/MachineDetail.vue";
@@ -57,6 +58,12 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: { isMainApp: true, isAdminApp: false },
+  },
+  {
+    path: "/galeria",
+    name: "Gallery",
+    component: Gallery,
     meta: { isMainApp: true, isAdminApp: false },
   },
   // {

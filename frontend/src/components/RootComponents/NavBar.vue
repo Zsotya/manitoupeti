@@ -116,6 +116,7 @@ const store = useStore();
 // Útvonalak meghatározása
 const routes = [
   { path: "/", label: "homeLabel" },
+  { path: "/galeria", label: "galleryLabel" },
   { path: "/munkaink", label: "ourWorksLabel" },
   { path: "/berelheto-gepeink", label: "machinesLabel" },
   { path: "/elerhetoseg", label: "contactUsLabel" },

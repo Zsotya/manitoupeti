@@ -1,6 +1,7 @@
 {
   "titles": {
     "Home": "Home",
+    "Gallery": "Gallery",
     "AboutUs": "About Us",
     "OurWorks": "Our Works",
     "Machines": "Machines",
@@ -11,6 +12,7 @@
     "NotFound": "Page Not Found"
   },
   "homeLabel": "Home",
+  "galleryLabel": "Gallery",
   "aboutLabel": "About Us",
   "ourWorksLabel": "Our Works",
   "machinesLabel": "Machines",

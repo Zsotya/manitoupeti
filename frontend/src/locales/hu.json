@@ -1,6 +1,7 @@
 {
   "titles": {
     "Home": "Főoldal",
+    "Gallery": "Galéria",
     "AboutUs": "Bemutatkozás",
     "OurWorks": "Munkáink",
     "Machines": "Bérelhető gépeink",
@@ -11,6 +12,7 @@
     "NotFound": "Oldal nem található"
   },
   "homeLabel": "Főoldal",
+  "galleryLabel": "Galéria",
   "aboutLabel": "Bemutatkozás",
   "ourWorksLabel": "Munkáink",
   "machinesLabel": "Gépeink",
