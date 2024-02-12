@@ -1,17 +1,21 @@
 <template>
   <div class="page-container" :class="{ 'dark-mode': darkMode }">
     <Transition name="big-image-open">
-      <div v-if="showBigImage" class="big-image-container">
+      <div
+        v-if="showBigImage"
+        class="big-image-container"
+        :class="{ 'no-close': true }"
+      >
         <span class="photo-count"
           >{{ $t("galleryImage") }}: {{ currentIndex + 1 }} /
           {{ images.length }}</span
         >
         <img class="big-image" :src="bigImageUrl" alt="Big Image" />
-        <span @click="showPrevImage" class="arrow left"
-          ><i class="fas fa-chevron-left"></i
+        <span class="arrow left"
+          ><i @click="showPrevImage" class="fas fa-chevron-left"></i
         ></span>
-        <span @click="showNextImage" class="arrow right"
-          ><i class="fas fa-chevron-right"></i
+        <span class="arrow right"
+          ><i @click="showNextImage" class="fas fa-chevron-right"></i
         ></span>
         <span @click="closeBigImage" class="close"
           ><i class="fas fa-times"></i
@@ -98,6 +102,24 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+onMounted(() => {
+  // A menün kívüli kattintások figyelése
+  document.addEventListener("click", handleDocumentClick);
+});
+
+onBeforeUnmount(() => {
+  // A menün kívüli kattintások figyelésének törlése
+  document.removeEventListener("click", handleDocumentClick);
+});
+
+// Menün kívüli kattintás esetén menü bezárása
+const handleDocumentClick = (event) => {
+  // Gombok meghatározása, melyeken kívül bárhova kattintva a menü bezár
+  if (event.target.classList.contains("no-close")) {
+    closeBigImage();
+  }
+};
 </script>
 
 <style scoped>
@@ -165,10 +187,31 @@ document.addEventListener("keydown", (e) => {
 
 .arrow {
   position: absolute;
-  top: 50%;
-  font-size: 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   color: white;
+}
+
+.fa-chevron-right,
+.fa-chevron-left {
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   cursor: pointer;
+  background-color: black;
+  color: white;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.fa-chevron-right:hover,
+.fa-chevron-left:hover {
+  background-color: white;
+  color: black;
 }
 
 .left {
@@ -185,7 +228,20 @@ document.addEventListener("keydown", (e) => {
   right: 30px;
   font-size: 24px;
   color: white;
+  background-color: black;
   cursor: pointer;
+  transition: 0.5s all;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close:hover {
+  background-color: white;
+  color: black;
 }
 
 @media (max-width: 768px) {
@@ -223,6 +279,29 @@ document.addEventListener("keydown", (e) => {
 
 .page-container.dark-mode .photo-count {
   background-color: #378339;
+}
+
+.page-container.dark-mode .fa-chevron-right,
+.page-container.dark-mode .fa-chevron-left {
+  background-color: #fff;
+  color: black;
+  transition: 0.5s all;
+}
+
+.page-container.dark-mode .fa-chevron-right:hover,
+.page-container.dark-mode .fa-chevron-left:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.page-container.dark-mode .close {
+  color: black;
+  background-color: white;
+}
+
+.page-container.dark-mode .close:hover {
+  color: white;
+  background-color: black;
 }
 
 /* Animációk */
