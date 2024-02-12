@@ -3,16 +3,13 @@
     <Transition name="textFade" appear v-if="show">
       <div class="text-wrap">
         <div class="text-intro">
-          <div class="small-title">{{ $t("machinesSmallTitle") }}</div>
+          <div class="small-title">{{ $t("gallerySmallTitle") }}</div>
           <div class="big-text">
-            {{ $t("machinesBigText") }}
-          </div>
-          <div class="small-text">
-            {{ $t("machinesSmallText") }}
+            {{ $t("galleryBigText") }}
           </div>
         </div>
-      </div></Transition
-    >
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -69,12 +66,6 @@ onMounted(() => {
   flex-wrap: wrap;
 }
 
-.small-text {
-  font-size: 18px;
-  width: 100%;
-  flex-wrap: wrap;
-}
-
 /* Animációk */
 .textFade-enter-from {
   opacity: 0;
@@ -105,10 +96,6 @@ onMounted(() => {
   .big-text {
     font-size: 46px;
   }
-
-  .small-text {
-    font-size: 18px;
-  }
 }
 
 /* Tablet nézet */
@@ -118,13 +105,15 @@ onMounted(() => {
     padding-top: 150px;
     padding-left: 0px;
     width: 100%;
+    /* margin: 0px 40px 0px 40px; */
     justify-content: center;
     align-items: center;
-    /* margin: 0px 40px 0px 40px; */
     flex-wrap: wrap;
   }
   .text-intro {
     margin: 0;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     text-align: center;
     margin: 0px 20px 0px 20px;
@@ -135,9 +124,6 @@ onMounted(() => {
   .big-text {
     font-size: 40px;
   }
-  .small-text {
-    font-size: 18px;
-  }
 }
 
 /* Mobil nézet */
@@ -147,9 +133,6 @@ onMounted(() => {
   }
   .big-text {
     font-size: 32px;
-  }
-  .small-text {
-    font-size: 17px;
   }
 }
 

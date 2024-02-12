@@ -1,5 +1,11 @@
-<template>test</template>
+<template>
+  <section>
+    <GalleryIntro />
+  </section>
+</template>
 
-<script setup></script>
+<script setup>
+import GalleryIntro from "../../components/GalleryComponents/GalleryIntro.vue";
+</script>
 
 <style scoped></style>
