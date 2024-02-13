@@ -57,8 +57,8 @@ const darkMode = computed(() => store.getters.isDarkMode);
 }
 
 .image-side img {
-  width: 45rem;
-  height: 48rem;
+  max-width: 45rem;
+  height: auto;
   object-fit: cover;
 }
 
@@ -73,24 +73,24 @@ const darkMode = computed(() => store.getters.isDarkMode);
 /* Közepes desktop nézet */
 @media screen and (max-width: 1600px) {
   .image-side img {
-    width: 40rem;
-    height: 43rem;
+    max-width: 40rem;
+    height: auto;
   }
 }
 
 /* Kisebb desktop nézet */
 @media screen and (max-width: 1440px) {
   .image-side img {
-    width: 31rem;
-    height: 34rem;
+    max-width: 31rem;
+    height: auto;
   }
 }
 
 /* Kicsi desktop nézet */
 @media screen and (max-width: 1280px) {
   .image-side img {
-    width: 25rem;
-    height: 28rem;
+    max-width: 25rem;
+    height: auto;
   }
   .text-side p {
     font-size: 1rem;
@@ -118,8 +118,8 @@ const darkMode = computed(() => store.getters.isDarkMode);
   }
 
   .image-side img {
-    width: 24rem;
-    height: 26rem;
+    max-width: 24rem;
+    height: auto;
   }
 }
 
