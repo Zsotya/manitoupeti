@@ -250,14 +250,28 @@ const handleDocumentClick = (event) => {
     height: 150px;
     width: 150px;
   }
+
+  .big-image {
+    max-width: 95vw;
+  }
+
+  .fa-chevron-right,
+  .fa-chevron-left {
+    width: 28px;
+    height: 28px;
+    font-size: 18px;
+  }
+
+  .left {
+    left: 20px;
+  }
+
+  .right {
+    right: 20px;
+  }
 }
 
 @media (max-width: 496px) {
-  .thumbnail img {
-    height: 120px;
-    width: 120px;
-  }
-
   .left {
     left: 15px;
   }
