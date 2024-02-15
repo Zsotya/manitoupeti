@@ -4,9 +4,7 @@
       <div class="text-wrap">
         <div class="text-intro">
           <div class="small-title">{{ $t("gallerySmallTitle") }}</div>
-          <div class="big-text">
-            {{ $t("galleryBigText") }}
-          </div>
+          <div class="big-text">Powered by ManitouPeti</div>
         </div>
       </div>
     </Transition>

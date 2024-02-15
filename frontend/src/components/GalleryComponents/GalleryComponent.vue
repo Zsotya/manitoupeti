@@ -11,11 +11,11 @@
           {{ images.length }}</span
         >
         <img class="big-image" :src="bigImageUrl" alt="Big Image" />
-        <span class="arrow left"
-          ><i @click="showPrevImage" class="fas fa-chevron-left"></i
+        <span class="arrow left" @click="showPrevImage"
+          ><i class="fas fa-chevron-left"></i
         ></span>
-        <span class="arrow right"
-          ><i @click="showNextImage" class="fas fa-chevron-right"></i
+        <span class="arrow right" @click="showNextImage"
+          ><i class="fas fa-chevron-right"></i
         ></span>
         <span @click="closeBigImage" class="close"
           ><i class="fas fa-times"></i
@@ -25,9 +25,10 @@
     <div class="thumbnail-container">
       <div
         class="thumbnail"
-        v-for="(image, index) in images"
+        v-for="(image, index) in visibleImages"
         :key="index"
         @click="openBigImage(index)"
+        ref="thumbnail"
       >
         <img :src="image" alt="Thumbnail" />
       </div>
@@ -43,7 +44,104 @@ import { useStore } from "vuex";
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
 
+// Képek meghatározása
 const images = ref([
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
+  "https://dummyimage.com/400x300/000/fff",
+  "https://dummyimage.com/300x400/111/fff",
+  "https://dummyimage.com/350x250/222/fff",
+  "https://dummyimage.com/250x350/333/fff",
+  "https://dummyimage.com/500x200/444/fff",
+  "https://dummyimage.com/200x500/555/fff",
+  "https://dummyimage.com/450x300/666/fff",
+  "https://dummyimage.com/300x450/777/fff",
+  "https://dummyimage.com/1920x1080/888/fff",
+  "https://dummyimage.com/600x400/999/fff",
+  "https://dummyimage.com/350x350/000/fff",
+  "https://dummyimage.com/200x200/111/fff",
+  "https://dummyimage.com/400x600/222/fff",
+  "https://dummyimage.com/1080x1920/333/fff",
+  "https://dummyimage.com/450x450/444/fff",
+  "https://dummyimage.com/3840x2160/444/fff",
   "https://dummyimage.com/400x300/000/fff",
   "https://dummyimage.com/300x400/111/fff",
   "https://dummyimage.com/350x250/222/fff",
@@ -62,9 +160,13 @@ const images = ref([
   "https://dummyimage.com/3840x2160/444/fff",
 ]);
 
+// Adatok inicializálása
 const showBigImage = ref(false);
 const bigImageUrl = ref(null);
 const currentIndex = ref(null);
+const loadThreshold = 30;
+const visibleImages = ref(images.value.slice(0, loadThreshold));
+const lastThumbnail = ref();
 
 // Kép megnyitás
 const openBigImage = (index) => {
@@ -103,23 +205,69 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-onMounted(() => {
-  // A menün kívüli kattintások figyelése
-  document.addEventListener("click", handleDocumentClick);
-});
-
-onBeforeUnmount(() => {
-  // A menün kívüli kattintások figyelésének törlése
-  document.removeEventListener("click", handleDocumentClick);
-});
-
-// Menün kívüli kattintás esetén menü bezárása
+// Képen kívüli kattintás esetén kép bezárás
 const handleDocumentClick = (event) => {
   // Gombok meghatározása, melyeken kívül bárhova kattintva a menü bezár
   if (event.target.classList.contains("no-close")) {
     closeBigImage();
   }
 };
+
+// Thumbnail vizsgálás lazy-loadhoz
+const observeLastThumbnail = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.target === lastThumbnail.value) {
+          loadMoreImages();
+        }
+      });
+    },
+    {
+      threshold: 0.75,
+    }
+  );
+
+  if (lastThumbnail.value) {
+    observer.observe(lastThumbnail.value);
+  }
+};
+
+// Új kép adag betöltés
+const loadMoreImages = () => {
+  if (visibleImages.value.length >= images.value.length) {
+    return;
+  }
+  const startIndex = visibleImages.value.length;
+  const endIndex = startIndex + loadThreshold;
+  const newImages = images.value.slice(startIndex, endIndex);
+  visibleImages.value = [...visibleImages.value, ...newImages];
+
+  lastThumbnail.value = document.querySelector(
+    ".thumbnail-container .thumbnail:last-child"
+  );
+
+  observeLastThumbnail();
+};
+
+// Oldal betöltéskor inicializálás
+onMounted(() => {
+  // Képen kívüli kattintások figyelése
+  document.addEventListener("click", handleDocumentClick);
+
+  // Lazy-load
+  visibleImages.value = images.value.slice(0, loadThreshold);
+  lastThumbnail.value = document.querySelector(
+    ".thumbnail-container .thumbnail:last-child"
+  );
+  observeLastThumbnail();
+});
+
+// Oldal bezáráskor eltávolítás
+onBeforeUnmount(() => {
+  // Képen kívül történő kattintás törlése
+  document.removeEventListener("click", handleDocumentClick);
+});
 </script>
 
 <style scoped>
