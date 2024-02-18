@@ -10,7 +10,11 @@
           >{{ $t("galleryImage") }}: {{ currentIndex + 1 }} /
           {{ images.length }}</span
         >
-        <img class="big-image" :src="bigImageUrl" alt="Big Image" />
+        <img
+          class="big-image"
+          :src="'http://localhost:3000' + bigImageUrl"
+          alt="Big Image"
+        />
         <span class="arrow left" @click="showPrevImage"
           ><i class="fas fa-chevron-left"></i
         ></span>
@@ -30,135 +34,35 @@
         @click="openBigImage(index)"
         ref="thumbnail"
       >
-        <img :src="image" alt="Thumbnail" />
+        <img
+          :src="'http://localhost:3000' + image.thumbnail_url"
+          alt="Thumbnail"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, computed, ref } from "vue";
+import { onMounted, onBeforeUnmount, computed, ref, nextTick } from "vue";
 import { useStore } from "vuex";
+import axios from "axios";
 
 /* Dark mode */
 const store = useStore();
 const darkMode = computed(() => store.getters.isDarkMode);
 
 // Képek meghatározása
-const images = ref([
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-  "https://dummyimage.com/400x300/000/fff",
-  "https://dummyimage.com/300x400/111/fff",
-  "https://dummyimage.com/350x250/222/fff",
-  "https://dummyimage.com/250x350/333/fff",
-  "https://dummyimage.com/500x200/444/fff",
-  "https://dummyimage.com/200x500/555/fff",
-  "https://dummyimage.com/450x300/666/fff",
-  "https://dummyimage.com/300x450/777/fff",
-  "https://dummyimage.com/1920x1080/888/fff",
-  "https://dummyimage.com/600x400/999/fff",
-  "https://dummyimage.com/350x350/000/fff",
-  "https://dummyimage.com/200x200/111/fff",
-  "https://dummyimage.com/400x600/222/fff",
-  "https://dummyimage.com/1080x1920/333/fff",
-  "https://dummyimage.com/450x450/444/fff",
-  "https://dummyimage.com/3840x2160/444/fff",
-]);
+const images = ref([]);
+
+async function fetchData() {
+  try {
+    const response = await axios.get("http://localhost:3000/api/gallery");
+    images.value = response.data;
+  } catch (error) {
+    console.error("Hiba az adatok lekérdezése közben:", error);
+  }
+}
 
 // Adatok inicializálása
 const showBigImage = ref(false);
@@ -172,7 +76,7 @@ const lastThumbnail = ref();
 const openBigImage = (index) => {
   showBigImage.value = true;
   currentIndex.value = index;
-  bigImageUrl.value = images.value[index];
+  bigImageUrl.value = images.value[index].big_image_url;
 };
 
 // Kép bezárás
@@ -183,13 +87,13 @@ const closeBigImage = () => {
 // Navigáció a képek között
 const showNextImage = () => {
   currentIndex.value = (currentIndex.value + 1) % images.value.length;
-  bigImageUrl.value = images.value[currentIndex.value];
+  bigImageUrl.value = images.value[currentIndex.value].big_image_url;
 };
 
 const showPrevImage = () => {
   currentIndex.value =
     (currentIndex.value - 1 + images.value.length) % images.value.length;
-  bigImageUrl.value = images.value[currentIndex.value];
+  bigImageUrl.value = images.value[currentIndex.value].big_image_url;
 };
 
 // Billentyűzettel navigálás, bezárás
@@ -228,9 +132,14 @@ const observeLastThumbnail = () => {
     }
   );
 
-  if (lastThumbnail.value) {
-    observer.observe(lastThumbnail.value);
-  }
+  nextTick(() => {
+    const thumbnails = document.querySelectorAll(
+      ".thumbnail-container .thumbnail"
+    );
+    thumbnails.forEach((thumbnail) => {
+      observer.observe(thumbnail);
+    });
+  });
 };
 
 // Új kép adag betöltés
@@ -250,17 +159,26 @@ const loadMoreImages = () => {
   observeLastThumbnail();
 };
 
+const initializeLastThumbnail = () => {
+  nextTick(() => {
+    lastThumbnail.value = document.querySelector(
+      ".thumbnail-container .thumbnail:last-child"
+    );
+  });
+};
+
 // Oldal betöltéskor inicializálás
 onMounted(() => {
   // Képen kívüli kattintások figyelése
   document.addEventListener("click", handleDocumentClick);
 
-  // Lazy-load
-  visibleImages.value = images.value.slice(0, loadThreshold);
-  lastThumbnail.value = document.querySelector(
-    ".thumbnail-container .thumbnail:last-child"
-  );
-  observeLastThumbnail();
+  // Képek lekérdezése
+  fetchData().then(() => {
+    // Lazy-load
+    visibleImages.value = images.value.slice(0, loadThreshold);
+    initializeLastThumbnail();
+    observeLastThumbnail();
+  });
 });
 
 // Oldal bezáráskor eltávolítás
