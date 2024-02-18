@@ -45,7 +45,7 @@ router.get("/api/gallery", (req, res) => {
 // Új képek feltöltése - POST
 router.post(
   "/api/gallery/upload",
-  upload.array("images", 10),
+  upload.array("images", 50),
   async (req, res) => {
     // Fájlok inicializálása
     const files = req.files;
