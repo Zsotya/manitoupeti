@@ -50,6 +50,12 @@ const links = [
     iconClass: "fas fa-book mr-2",
     show: true,
   },
+  {
+    path: "/admin/gallery-management",
+    label: "Galéria Menedzsment",
+    iconClass: "fas fa-images mr-2",
+    show: true,
+  },
   // {
   //   path: "/admin/aboutus-management",
   //   label: "Bemutatkozás Menedzsment",

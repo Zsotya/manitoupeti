@@ -22,6 +22,8 @@ app.use(
 );
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/thumbnails", express.static(path.join(__dirname, "/thumbnails")));
+app.use("/bigimages", express.static(path.join(__dirname, "/bigimages")));
 app.use("/pdfs", express.static(path.join(__dirname, "pdfs")));
 
 // Scheduler elindítása
@@ -30,6 +32,7 @@ scheduler.scheduleBookingExpirationCheck();
 /* Imports */
 // Management imports
 const paragraphsRoutes = require("./routes/paragraphs");
+const galleryRoutes = require("./routes/gallery");
 const filmsRoutes = require("./routes/films");
 const machinesRoutes = require("./routes/machines");
 const machinesGalleryRoutes = require("./routes/machinesGallery");
@@ -52,6 +55,7 @@ const activeBookings = require("./routes/bookings/activeBookings");
 /* Routes usage */
 /* Management routes */
 app.use(paragraphsRoutes);
+app.use(galleryRoutes);
 app.use(filmsRoutes);
 app.use(machinesRoutes);
 app.use(machinesGalleryRoutes);

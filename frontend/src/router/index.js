@@ -20,6 +20,7 @@ import NotFound from "../views/MainAppViews/NotFound.vue";
 import Admin from "../views/AdminViews/Admin.vue";
 import AdminDashboard from "../views/AdminViews/AdminDashboard.vue";
 import AdminParagraph from "../views/AdminViews/AdminParagraph.vue";
+import AdminGalleryManagement from "../views/AdminViews/AdminGalleryManagement.vue";
 import AdminOurFilms from "../views/AdminViews/AdminOurFilms.vue";
 import AdminMachines from "../views/AdminViews/AdminMachines.vue";
 import AdminCareer from "../views/AdminViews/AdminCareer.vue";
@@ -175,6 +176,16 @@ const routes = [
     path: "/admin/paragraph-management",
     name: "Paragrafus menedzsment",
     component: AdminParagraph,
+    meta: {
+      isMainApp: false,
+      isAdminApp: true,
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/admin/gallery-management",
+    name: "Galéria menedzsment",
+    component: AdminGalleryManagement,
     meta: {
       isMainApp: false,
       isAdminApp: true,
