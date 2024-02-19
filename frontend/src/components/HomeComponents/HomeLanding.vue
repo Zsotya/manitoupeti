@@ -2,7 +2,11 @@
   <div class="landing-section">
     <div class="content-container">
       <Transition name="fade" appear v-if="show">
-        <img class="landing-image" src="@/assets/41.jpg" alt="Landing Image"
+        <img
+          class="landing-image"
+          src="@/assets/41.jpg"
+          alt="Landing Image"
+          @load="onImageLoad"
       /></Transition>
       <Transition name="swim" v-if="show">
         <div class="text-parts" v-if="showText">
@@ -26,11 +30,18 @@ const showText = ref(false);
 
 /* Animáció */
 onMounted(() => {
-  show.value = true;
-  // Szöveg késleltetett megjelenítése
-  setTimeout(() => {
-    showText.value = true;
-  }, 500);
+  // Kép betöltés megvárása
+  const image = new Image();
+  image.src = require("@/assets/41.jpg");
+  // Ha betölt, animáció megkezdése
+  image.onload = () => {
+    show.value = true;
+
+    // Szöveg későbbi animált megjelenítése
+    setTimeout(() => {
+      showText.value = true;
+    }, 500);
+  };
 });
 </script>
 
