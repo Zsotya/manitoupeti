@@ -5,6 +5,7 @@
         :modules="[EffectCoverflow, Pagination, Autoplay]"
         :grabCursor="true"
         :pagination="true"
+        :lazy="true"
         effect="coverflow"
         :coverflow-effect="{
           stretch: 30,

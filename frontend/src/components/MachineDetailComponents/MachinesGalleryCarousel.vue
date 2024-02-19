@@ -20,6 +20,7 @@
         :spaceBetween="10"
         :loop="true"
         :watchSlidesProgress="true"
+        :lazy="true"
       >
         <SwiperSlide v-for="image in images" :key="image.id">
           <img
