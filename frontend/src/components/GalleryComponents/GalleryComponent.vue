@@ -10,7 +10,14 @@
           >{{ $t("galleryImage") }}: {{ currentIndex + 1 }} /
           {{ images.length }}</span
         >
+        <!-- Töltés ikon, ha a kép még nem renderelt -->
+        <div v-if="loading" class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          Loading...
+        </div>
+        <!-- Kép megjelenítés, ha már renderelve van -->
         <img
+          v-else
           class="big-image"
           :src="'http://localhost:3000' + bigImageUrl"
           alt="Big Image"
@@ -71,12 +78,15 @@ const currentIndex = ref(null);
 const loadThreshold = 30;
 const visibleImages = ref(images.value.slice(0, loadThreshold));
 const lastThumbnail = ref();
+const loading = ref(false);
 
 // Kép megnyitás
-const openBigImage = (index) => {
+const openBigImage = async (index) => {
   showBigImage.value = true;
   currentIndex.value = index;
   bigImageUrl.value = images.value[index].big_image_url;
+
+  await loadImage(bigImageUrl.value);
 };
 
 // Kép bezárás
@@ -85,15 +95,40 @@ const closeBigImage = () => {
 };
 
 // Navigáció a képek között
-const showNextImage = () => {
+const showNextImage = async () => {
   currentIndex.value = (currentIndex.value + 1) % images.value.length;
   bigImageUrl.value = images.value[currentIndex.value].big_image_url;
+
+  await loadImage(bigImageUrl.value);
 };
 
-const showPrevImage = () => {
+const showPrevImage = async () => {
   currentIndex.value =
     (currentIndex.value - 1 + images.value.length) % images.value.length;
   bigImageUrl.value = images.value[currentIndex.value].big_image_url;
+
+  await loadImage(bigImageUrl.value);
+};
+
+// Töltést kezelés
+const loadImage = async (imageUrl) => {
+  loading.value = true;
+
+  // Vizsgálás, hogy már cachelve van-e a kép
+  const image = new Image();
+  image.src = "http://localhost:3000" + imageUrl;
+
+  if (image.complete) {
+    // Ha cachelve van, töltés befejezés
+    loading.value = false;
+  } else {
+    // Nincs cachelve -> Várakozás a betöltésre
+    await new Promise((resolve) => {
+      image.onload = resolve;
+      image.onerror = resolve;
+    });
+    loading.value = false;
+  }
 };
 
 // Billentyűzettel navigálás, bezárás
@@ -244,6 +279,15 @@ onBeforeUnmount(() => {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 10;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  height: 100%;
 }
 
 .big-image {
