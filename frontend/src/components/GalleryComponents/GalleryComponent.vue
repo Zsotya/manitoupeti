@@ -224,12 +224,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.page-container {
-  background-color: #e8e6e6;
-  transition: background-color 0.5s, color 0.5s;
-  min-height: 60vh;
-}
-
 .thumbnail-container {
   display: flex;
   flex-wrap: wrap;
@@ -398,11 +392,6 @@ onBeforeUnmount(() => {
 }
 
 /* Dark mode */
-.page-container.dark-mode {
-  background-color: #1a1a1a;
-  color: white;
-}
-
 .page-container.dark-mode .photo-count {
   background-color: #378339;
 }
